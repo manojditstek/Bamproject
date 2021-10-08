@@ -1,0 +1,97 @@
+@font-face {
+    font-family: 'interblack';
+    src: url('../fonts/inter-black-webfont.woff2') format('woff2'),
+         url('../fonts/inter-black-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  
+  }
+  @font-face {
+    font-family: 'interbold';
+    src: url('../fonts/inter-bold-webfont.woff2') format('woff2'),
+         url('../fonts/inter-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  
+  }
+  @font-face {
+    font-family: 'interbold_italic';
+    src: url('../fonts/inter-bolditalic-webfont.woff2') format('woff2'),
+         url('../fonts/inter-bolditalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  
+  }
+  @font-face {
+    font-family: 'interextra_bold';
+    src: url('../fonts/inter-extrabold-webfont.woff2') format('woff2'),
+         url('../fonts/inter-extrabold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  
+  }
+  @font-face {
+    font-family: 'interextra_bold_italic';
+    src: url('../fonts/inter-extrabolditalic-webfont.woff2') format('woff2'),
+         url('../fonts/inter-extrabolditalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  
+  }
+  @font-face {
+    font-family: 'interitalic';
+    src: url('../fonts/inter-italic-webfont.woff2') format('woff2'),
+         url('../fonts/inter-italic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  
+  }
+
+@font-face {
+    font-family: 'interlight_beta';
+    src: url('../fonts/inter-light-beta-webfont.woff2') format('woff2'),
+         url('../fonts/inter-light-beta-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+  @font-face {
+    font-family: 'intermedium';
+    src: url('../fonts/inter-medium-webfont.woff2') format('woff2'),
+         url('../fonts/inter-medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  
+  }
+  @font-face {
+    font-family: 'intermedium_italic';
+    src: url('../fonts/inter-mediumitalic-webfont.woff2') format('woff2'),
+         url('../fonts/inter-mediumitalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  
+  }
+  @font-face {
+    font-family: 'interregular';
+    src: url('../fonts/inter-regular-webfont.woff2') format('woff2'),
+         url('../fonts/inter-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  
+  }
+  @font-face {
+    font-family: 'intersemi_bold';
+    src: url('../fonts/inter-semibold-webfont.woff2') format('woff2'),
+         url('../fonts/inter-semibold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  
+  }
+  @font-face {
+    font-family: 'intersemi_bold_italic';
+    src: url('../fonts/inter-semibolditalic-webfont.woff2') format('woff2'),
+         url('../fonts/inter-semibolditalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  
+  }
