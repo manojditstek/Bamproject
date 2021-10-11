@@ -27,12 +27,12 @@
             </div>
         </div>
         <div class="collapseArrow">
-            <img src="@/assets/images/white-icon.svg" width="8" alt="image" />
+            <img src="assets/images/white-icon.svg" width="8" alt="image" />
         </div>
     </div>
     <div v-show="showTicket" class="singleEventWrap">
         <TimeSlot :timeSlot="timeSlot" v-for="timeSlot in event ? event.timeslot : ''" :key="timeSlot.id" />
-        <Tickets :ticket="ticket" v-for="ticket in event ? event.ticket_config : ''" :key="ticket.id" />
+        <Tickets :ticket="ticket" v-for="ticket in event ? event.ticketConfig: ''" :key="ticket.id" />
     </div>
 </div>
 <!-- end  -->
@@ -40,12 +40,12 @@
 
 <script>
 import moment from "moment";
-import Tickets from "./Tickets.vue";
+import Tickets from "../singleEvent/timeSlots/ticketList/Tickets.vue";
 import {
     useStore
 } from "vuex";
-import TimeSlot from "./TimeSlot.vue";
-import VenuAddress from "./VenueAddress.vue";
+import TimeSlot from "../singleEvent/timeSlots/TimeSlot.vue";
+import VenuAddress from "../singleEvent/venuAddress/VenueAddress.vue"
 import {
     ref,
     computed
@@ -71,10 +71,10 @@ export default {
         const eventDate = ref(null);
         const recurringEventDate = ref(null);
         const showTicket = ref(false);
-        eventDate.value = moment(props.event.start_at)
+        eventDate.value = moment(props.event.startAt)
             .format("ddd DD MMM YY HH:mm a")
             .split(" ");
-        recurringEventDate.value = moment(props.event.start_at).format(
+        recurringEventDate.value = moment(props.event.startAt).format(
             "MM/DD/YYYY "
         );
         const totalPrice = computed(() => {

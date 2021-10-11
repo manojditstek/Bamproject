@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="collapseArrow">
-          <img src="/img/white-icon.svg" width="8" alt="image" />
+          <img src="assets/images/white-icon.svg" width="8" alt="image" />
         </div>
       </div>
       <div class="cardWrapper d-flex single">
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="collapseArrow">
-          <img src="/img/white-icon.svg" width="8" alt="image" />
+          <img src="assets/images/white-icon.svg" width="8" alt="image" />
         </div>
       </div>
       <div class="cardWrapper d-flex recurring">
@@ -60,7 +60,7 @@
           </div>
         </div>
         <div class="collapseArrow">
-          <img src="/img/white-icon.svg" width="8" alt="image" />
+          <img src="assets/images/white-icon.svg" width="8" alt="image" />
         </div>
       </div>
       <div class="cardWrapper d-flex">
@@ -79,7 +79,7 @@
           </div>
         </div>
         <div class="collapseArrow">
-          <img src="/img/white-icon.svg" width="8" alt="image" />
+          <img src="assets/images/white-icon.svg" width="8" alt="image" />
         </div>
       </div>
     </div>
@@ -121,7 +121,7 @@
           </div>
         </div>
         <div class="collapseArrow">
-          <img src="/img/white-icon.svg" width="8" alt="image" />
+          <img src="assets/images/white-icon.svg" width="8" alt="image" />
         </div>
       </div>
       <div class="cardWrapper d-flex">
@@ -140,7 +140,7 @@
           </div>
         </div>
         <div class="collapseArrow">
-          <img src="/img/white-icon.svg" width="8" alt="image" />
+          <img src="assets/images/white-icon.svg" width="8" alt="image" />
         </div>
       </div>
       <div class="cardWrapper d-flex">
@@ -159,7 +159,7 @@
           </div>
         </div>
         <div class="collapseArrow">
-          <img src="/img/white-icon.svg" width="8" alt="image" />
+          <img src="assets/images/white-icon.svg" width="8" alt="image" />
         </div>
       </div>
     </div>
@@ -189,7 +189,7 @@
           <h2>08:00 am – 10:00 am</h2>
         </div>
         <div class="collapseArrow">
-          <img src="/img/white-icon.svg" width="8" alt="image" />
+          <img src="assets/images/white-icon.svg" width="8" alt="image" />
         </div>
       </div>
       <div class="cardWrapper d-flex">
@@ -197,7 +197,7 @@
           <h2>10:00 am – 12:00 am</h2>
         </div>
         <div class="collapseArrow">
-          <img src="/img/white-icon.svg" width="8" alt="image" />
+          <img src="assets/images/white-icon.svg" width="8" alt="image" />
         </div>
       </div>
       <div class="cardWrapper d-flex">
@@ -205,7 +205,7 @@
           <h2>12:00 am – 14:00 am</h2>
         </div>
         <div class="collapseArrow">
-          <img src="/img/white-icon.svg" width="8" alt="image" />
+          <img src="assets/images/white-icon.svg" width="8" alt="image" />
         </div>
       </div>
       <div class="cardWrapper d-flex">
@@ -213,7 +213,7 @@
           <h2>14:00 am – 16:00 am</h2>
         </div>
         <div class="collapseArrow">
-          <img src="/img/white-icon.svg" width="8" alt="image" />
+          <img src="assets/images/white-icon.svg" width="8" alt="image" />
         </div>
       </div>
     </div>
@@ -249,7 +249,7 @@
             <p>incl. fees</p>
           </div>
           <div class="collapseArrow lightBg">
-            <img src="/img/black-arrow.svg" width="15" alt="image" />
+            <img src="img/black-arrow.svg" width="15" alt="image" />
           </div>
         </div>
         <div v-show="toggleButton" class="toggleList">
@@ -282,7 +282,7 @@
             <p>incl. fees</p>
           </div>
           <div class="collapseArrow lightBg">
-            <img src="/img/black-arrow.svg" width="15" alt="image" />
+            <img src="img/black-arrow.svg" width="15" alt="image" />
           </div>
         </div>
         <div v-show="toggleButton" class="toggleList">
@@ -315,7 +315,7 @@
             <p>incl. fees</p>
           </div>
           <div class="collapseArrow lightBg">
-            <img src="/img/black-arrow.svg" width="15" alt="image" />
+            <img src="img/black-arrow.svg" width="15" alt="image" />
           </div>
         </div>
         <div v-show="toggleButton" class="toggleList">
@@ -348,7 +348,7 @@
             <p>incl. fees</p>
           </div>
           <div class="collapseArrow lightBg">
-            <img src="/img/black-arrow.svg" width="15" alt="image" />
+            <img src="img/black-arrow.svg" width="15" alt="image" />
           </div>
         </div>
         <div v-show="toggleButton" class="toggleList">
@@ -440,7 +440,7 @@
           <div class="priceWrap">38,00 EUR</div>
         </div>
         <div class="collapseArrow redBg">
-          <img src="/img/close-icon.svg" width="10" alt="image" />
+          <img src="img/close-icon.svg" width="10" alt="image" />
         </div>
       </div>
         <div class="ticketCategory d-flex">
@@ -453,7 +453,7 @@
           <div class="priceWrap">38,00 EUR</div>
         </div>
         <div class="collapseArrow redBg">
-          <img src="/img/close-icon.svg" width="10" alt="image" />
+          <img src="img/close-icon.svg" width="10" alt="image" />
         </div>
       </div>
     </div>

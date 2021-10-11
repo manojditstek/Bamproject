@@ -2,11 +2,11 @@
 <div class="ticketToggle ">
     <div class="cardWrapper d-flex" :class="toggleButton?'active':''"  @click="toggleButton=!toggleButton">
         <div class="detailsCol">
-            <h2>{{ticket?ticket.name:'Ticket Not Found!'}} : 0.00 - {{ticket?(ticket.face_value).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
+            <h2>{{ticket?ticket.name:'Ticket Not Found!'}} : 0.00 - {{ticket?(ticket.faceValue).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
             <p>incl. fees</p>
         </div>
         <div class="collapseArrow lightBg">
-            <img src="../assets/images/black-arrow.svg" width="15" alt="image">
+             <i class="fa fa-angle-right"></i>
         </div>
     </div>
     <div v-show="toggleButton" class="toggleList">

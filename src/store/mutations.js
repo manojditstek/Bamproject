@@ -89,13 +89,13 @@ const getItemQtyCart = (cartItems, item) => {
 
 // This block of code used for get single item price 
 const getItemTotalPrice = (item) => {
-  return item.quantity * item.face_value;
+  return item.quantity * item.faceValue;
 }
 
 // This block of code calculate total price 
 export const totalPrice = (state) => {
   state.cart.itemTotalAmount = state.cart.cartItems.reduce((total, next) => {
-    return total + (next.quantity * next.face_value)
+    return total + (next.quantity * next.faceValue)
   }, 0)
 }
 

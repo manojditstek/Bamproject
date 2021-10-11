@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="collapseArrow redBg" @click="removeFromCart(item)">
-            <img src="@/assets/images/close-icon.svg" width="10" alt="image">
+            <img src="assets/images/close-icon.svg" width="10" alt="image">
         </div>
     </div>
 </div>

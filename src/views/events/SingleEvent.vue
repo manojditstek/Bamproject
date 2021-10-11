@@ -15,27 +15,18 @@
             <EventDateFormat :eventDate="singleEvent?singleEvent.start_at:''" />
         </div>
         <div class="detailsCol">
-            <!-- <p>08:30 pm - 11:30 pm</p> -->
             <h2>{{singleEvent.name}}</h2>
             <VenuAddress :venue_id="singleEvent.venue_id" />
         </div>
     </div>
 </div>
-<div class="cardBodyWrapper" v-if="singleEvent.timeslot.length>0">
-    <div v-if="loaderStatus" class="loader">
-        <div class="loaderWrapper">
-            <img src="@/assets/images/loading-buffering.gif" alt="Image">
-        </div>
-    </div>
-     <TimeSlot :timeSlot="timeSlot" :ticket="timeSlot.ticket_config? timeSlot.ticket_config.id:''" v-for="timeSlot in singleEvent ? singleEvent.timeslot : ''" :key="timeSlot.id"  @click="timeSlot()"/>
+<div class="cardBodyWrapper" v-if="singleEvent.timeslot?singleEvent.timeslot.length>0:''">
+     <Loader />
+     <TimeSlot :timeSlot="timeSlot" :tickets="singleEvent?singleEvent:''" v-for="timeSlot in singleEvent ? singleEvent.timeslot : ''" :key="timeSlot.id"  @click="timeSlot()"/>
 </div>
 <div v-else class="cardBodyWrapper">
-    <div v-if="loaderStatus" class="loader">
-        <div class="loaderWrapper">
-            <img src="@/assets/images/loading-buffering.gif" alt="Image">
-        </div>
-    </div>
-    <Tickets :ticket="ticket" v-for="ticket in singleEvent ? singleEvent.ticket_config : ''" :key="ticket.id" />
+    <Loader />
+    <Tickets :ticket="ticket" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
 </div>
 
 <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
@@ -47,9 +38,9 @@
 </template>
 
 <script>
-import {
-    useRouter
-} from "vue-router";
+// import {
+//     useRouter
+// } from "vue-router";
 
 import {
     useStore
@@ -58,11 +49,13 @@ import moment from "moment";
 import {
     computed
 } from '@vue/reactivity';
-import VenuAddress from "../components/VenueAddress.vue"
-import EventDateFormat from "../components/EventDate.vue";
-import Tickets from "../components/Tickets.vue"
-import TotalTicketCalculation from "../components/TotalTicketCalculation.vue"
-import TimeSlot from "../components/TimeSlot.vue"
+import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress.vue"
+import EventDateFormat from "../../components/singleEvent/EventDate.vue";
+import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets.vue"
+import TotalTicketCalculation from "../../components/cartModule/TotalTicketCalculation.vue"
+import TimeSlot from "../../components/singleEvent/timeSlots/TimeSlot.vue"
+import Loader from '../../components/loader/Loader.vue';
+
 export default {
     name: 'SingleEvent',
     components: {
@@ -70,13 +63,12 @@ export default {
         EventDateFormat,
         Tickets,
         TotalTicketCalculation,
-        TimeSlot
+        TimeSlot,
+        Loader
     },
 
     setup() {
-        const router = useRouter();
         const store = useStore();
-
         function timeSlot() {
             // router.push({
             //     path: '/single-event-ticket-category'
@@ -108,7 +100,12 @@ export default {
     methods: {
         dateFormat(value) {
             return moment(value).format("MM/DD/YYYY ");
+        },
+        
+        timeFormat(value) {
+            return moment(value).format(" HH:mm a");
         }
+    
     },
 
 }

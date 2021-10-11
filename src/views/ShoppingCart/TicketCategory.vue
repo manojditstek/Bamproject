@@ -31,7 +31,7 @@
             <p>incl. fees</p>
           </div>
           <div class="collapseArrow lightBg">
-            <img src="/img/black-arrow.svg" width="15" alt="image" />
+            <img src="img/black-arrow.svg" width="15" alt="image" />
           </div>
         </div>
         <div v-show="toggleButton" class="toggleList">
@@ -64,7 +64,7 @@
             <p>incl. fees</p>
           </div>
           <div class="collapseArrow lightBg">
-            <img src="/img/black-arrow.svg" width="15" alt="image" />
+            <img src="img/black-arrow.svg" width="15" alt="image" />
           </div>
         </div>
         <div v-show="toggleButton" class="toggleList">
@@ -97,7 +97,7 @@
             <p>incl. fees</p>
           </div>
           <div class="collapseArrow lightBg">
-            <img src="/img/black-arrow.svg" width="15" alt="image" />
+            <img src="img/black-arrow.svg" width="15" alt="image" />
           </div>
         </div>
         <div v-show="toggleButton" class="toggleList">
@@ -130,7 +130,7 @@
             <p>incl. fees</p>
           </div>
           <div class="collapseArrow lightBg">
-            <img src="/img/black-arrow.svg" width="15" alt="image" />
+            <img src="img/black-arrow.svg" width="15" alt="image" />
           </div>
         </div>
         <div v-show="toggleButton" class="toggleList">

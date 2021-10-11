@@ -1,7 +1,10 @@
+@import "../css/font-awesome.min.css";
+@import "../css/fonts.css";
+@import "../css/variable.css";
+
 body{
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-weight-400);
   font-size: 0.8rem;
-  font-weight: 400;
   line-height: 1.5;
   color: #212529;
   margin:0;
@@ -12,7 +15,7 @@ body{
 }
 h1,h2,h3,h4,h5,h6{
     margin: 0;
-    font-weight: 700;
+    font-family:var(--font-weight-700);
 }
 .m-0{
     margin: 0 !important;
@@ -57,6 +60,15 @@ h1,h2,h3,h4,h5,h6{
   font-size: 24px;
   color: rgba(57, 57, 57, 1);
 }
+.header h2 a{
+  text-decoration:none;
+  color: rgba(57, 57, 57, 1);
+}
+.header h2 a i {
+  font-size: 28px;
+  margin: 0 5px 0 0;
+  color: rgba(57, 57, 57, 1);
+}
 .datePickerWrapper {
   border: 1px solid rgba(57, 57, 57, 0.2);
   padding: 3px 5px;
@@ -66,6 +78,10 @@ h1,h2,h3,h4,h5,h6{
 }
 .datePickerWrapper .datePicker {
   max-width: 180px;
+  align-items: center;
+}
+.datePickerWrapper .datePicker .w-32 {
+  max-width: 72px;
 }
 .datePickerWrapper .datePicker input {
   width: 100%;
@@ -76,14 +92,56 @@ h1,h2,h3,h4,h5,h6{
 .datePickerWrapper .datePicker input:focus {
   outline: none;
 }
-.innerWraper .cardWrapper {
+.datePickerWrapper img {
+  width: 18px;
+  margin: 0 0 0 5px;
+}
+.loader {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.2);
+}
+.loaderWrapper {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  z-index: 999;
+  position: absolute;
+  top: 40px;
+}
+.loaderWrapper img {
+  width: 40px;
+}
+.cardBodyWrapper{
+  padding: 25px 15px;
+  position: relative;
+}
+.cardBodyWrapper .cardWrapper{
+  border-radius: 9px;
+  border-bottom: 0px solid rgba(57, 57, 57, 0.2);
+  margin: 0 0 15px 0;
+}
+.cardBodyWrapper .cardWrapper.single .dateCol{
+  background-color: #ADADAD;
+}
+.cardBodyWrapper .cardWrapper.recurring .dateCol{
+  background-color: #393939;
+  color:#fff;
+}
+.innerWraper .cardWrapper{
+box-shadow:none;
+}
+.cardWrapper {
   background-color: #FBFBFB;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 5px rgb(0 0 0 / 10%);
   overflow: hidden;
   min-height: 70px;
   border-bottom: 1px solid rgba(57, 57, 57, 0.2);
 }
-.innerWraper .cardWrapper .dateCol {
+ .dateCol {
   background-color: #EEEEEE;
   padding: 10px;
   display: flex;
@@ -92,79 +150,73 @@ h1,h2,h3,h4,h5,h6{
   justify-content: center;
   min-width: 100px;
   max-width: 100px;
+  color: rgba(57, 57, 57, 1);
 }
-.innerWraper .cardWrapper .dateCol h4 {
+.dateCol h4 {
   font-size: 10px;
   text-transform: uppercase;
-  color: rgba(57, 57, 57, 1);
-  font-weight: 800;
+  font-family: var(--font-weight-800);
 }
-.innerWraper .cardWrapper .dateCol h2 {
+.dateCol h2 {
   font-size: 39px;
   line-height: 40px;
-  color: rgba(57, 57, 57, 1);
 }
-.innerWraper .cardWrapper time {
+.dateCol p {
+  line-height: normal;
+  margin: 0;
+  font-family: var(--font-weight-400);
+}
+.dateCol p.from{
+margin:5px 0 0 0;
+}
+time {
   margin: 8px 0 0;
   font-size: 12px;
-  color: rgba(57, 57, 57, 1);
-  font-weight: 400;
+  font-family: var(--font-weight-400);
 }
-.innerWraper .cardWrapper .detailsCol {
+ .detailsCol {
   width: 100%;
   padding: 10px 15px;
   flex-direction: column;
   display: flex;
   justify-content: center;
 }
-.innerWraper .cardWrapper .detailsCol h2 {
-  margin-bottom: 5px;
+.detailsCol h2 {
+  margin-bottom: 2px;
   font-size: 14px;
   color: rgba(57, 57, 57, 1);
 }
-.innerWraper .cardWrapper .detailsCol p {
+ .detailsCol p {
   margin: 0;
   font-size: 14px;
   color: rgba(57, 57, 57, 1);
   line-height: 18.2px;
-  font-weight: 400;
+  font-family: var(--font-weight-400);
 }
-.innerWraper .cardWrapper .detailsCol .priceWrap {
+.detailsCol .priceWrap {
   text-align: right;
-  font-weight: 800;
+  font-family: var(--font-weight-800);
   width: 100%;
   justify-content: space-between;
   align-items: center;
 }
-.innerWraper .cardWrapper .detailsCol .priceWrap p {
-  font-weight: 400;
+.detailsCol .priceWrap p {
+  font-family: var(--font-weight-400);
   color: rgba(57, 57, 57, 1);
   font-size: 12px;
   margin: 0;
   line-height: 18.2px;
 }
-
-.innerWraper .singleEventWrap {
-  padding: 30px 15px;
+.ticketToggle .cardWrapper{
+  margin: 0; 
 }
-.innerWraper .singleEventWrap .timeSlots{
-  background-color: #FBFBFB;
-  box-shadow: 0 6px 8px rgb(0 0 0 / 10%);
-  overflow: hidden;
-  min-height: 70px;
-  margin: 0 0 15px 0;
+.ticketToggle .cardWrapper.active {
+  border-radius: 0;
+  border-bottom: 1px solid rgba(57, 57, 57, 0.2);
 }
-.innerWraper .singleEventWrap .timeSlots .detailsCol {
-  width: 100%;
-  padding: 10px 15px;
-  flex-direction: column;
-  display: flex;
-  justify-content: center;
-}
-.innerWraper .singleEventWrap .timeSlots .detailsCol h2 {
-  margin-bottom: 5px;
-  font-size: 14px;
-  color: rgba(57, 57, 57, 1);
+.toggleList .cardWrapper {
+  margin: 0;
+  border-radius: 0;
 }
 .collapseArrow {
   background-color: #393939;
@@ -175,59 +227,6 @@ h1,h2,h3,h4,h5,h6{
   cursor: pointer;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-}
-.innerWraper .singleEventWrap .ticketToggle {
-  margin-bottom: 15px;
-  border-radius: 5px;
-  box-shadow: 0 5px 5px rgb(0 0 0 / 15%);
-  overflow: hidden;
-}
-.innerWraper .singleEventWrap .ticketToggle .cardWrapper {
-  /* background-color: #FBFBFB;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-  overflow: hidden;
-  min-height: 70px;
-  border-bottom: 1px solid rgba(57, 57, 57, 0.2); */
-  border-radius: 0px;
-  margin-bottom: 0;
-}
-.innerWraper .singleEventWrap .ticketToggle .cardWrapper .detailsCol {
-  width: 100%;
-  padding: 10px 15px;
-  flex-direction: column;
-  display: flex;
-  justify-content: center;
-}
-.innerWraper .singleEventWrap .ticketToggle .cardWrapper h2 {
-  margin-bottom: 5px;
-  font-size: 14px;
-  color: rgba(57, 57, 57, 1);
-}
-.contentWraper .singleEventWrap .ticketToggle .cardWrapper .detailsCol p {
-  font-weight: 400;
-  color: rgba(57, 57, 57, 1);
-  text-align: left;
-  font-size: 12px;
-  line-height: 18px;
-}
-.ticketToggle .cardWrapper .collapseArrow.lightBg {
-  background-color:transparent;
-  width: 40px;
-}
-.transparentBg{
-  background-color: transparent !important;
-}
-.contentWraper .cardWrapper .dateCol.darkGray {
-  background-color: #ADADAD;
-}
-.contentWraper .cardWrapper .dateCol.blackBg {
-  background-color: #393939;
-}
-.contentWraper .cardWrapper .dateCol.blackBg *{
-  color: #fff;
-}
-.contentWraper .cardWrapper .detailsCol .priceWrap .eventPrice {
-  width: 100%;
 }
 .buttonWrap {
   display: flex;
@@ -243,18 +242,12 @@ button,.button {
   padding: 6px 12px;
   border-radius: 5px;
   cursor: pointer;
-  font-weight: 800;
+  font-family: var(--font-weight-800);
   white-space: nowrap;
   text-decoration: none;
   min-width: 68px;
   letter-spacing: 1px;
-}
-.soldOutWrapper .buttonWrap button{
-  background-color: #E94B4F;
-}
-.opacity-03 {
-  opacity: 0.3;
-}
+}    
 .redBg {
   background-color: #E94B4F !important;
 }
@@ -262,13 +255,12 @@ button,.button {
 min-width: 32px;
 }
 .eventDiscountWrapper {
-  padding: 10px 15px 0;
   max-width: 500px;
   margin: 0 auto;
 }
 .eventDiscountWrapper h2 {
   font-size: 26px;
-  font-weight: 700;
+  font-family:var(--font-weight-700);
   color: rgba(57, 57, 57, 1);
   line-height: 31.2px;
 }
@@ -283,7 +275,7 @@ min-width: 32px;
   margin: 0;
   color: rgba(57, 57, 57, 1);
   line-height: 21px;
-  font-weight: 400;
+  font-family: var(--font-weight-400);
 }
 .totalAmountWrapper p {
   display: flex;
@@ -292,20 +284,23 @@ min-width: 32px;
   margin: 0;
   color: rgba(57, 57, 57, 1);
   line-height: 21px;
-  font-weight: 700;
+  font-family:var(--font-weight-700);
 }
 .totalAmountWrapper{
-  font-weight: 700;
+  font-family:var(--font-weight-700);
   padding: 5px 0;
   margin-bottom: 15px;
 }
 .ticketToggle {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   border-radius: 5px;
   box-shadow: 0 5px 5px rgba(0,0,0,0.15);
   overflow:hidden;
 }
-
+.ticketToggle .cardWrapper .collapseArrow.lightBg {
+  background-color:transparent;
+  width: 40px;
+}
 .ticketToggle .eventPrice1{
   text-align: left;
 }
@@ -328,7 +323,7 @@ min-width: 32px;
   border-radius: 0;
   padding: 0;
   min-width: 45px;
-  font-weight: 500;
+  font-family: var(--font-weight-500);
 }
 .ticketToggle .buttonWrap button {
   width: 32px;
@@ -341,7 +336,7 @@ min-width: 32px;
   border-radius: 0;
   padding: 0;
   min-width: auto;
-  font-weight: 500;
+  font-family: var(--font-weight-500);
 }
 .ticketToggle .buttonWrap .minusBtn {
   background-color: rgba(215, 215, 215, 1);
@@ -379,7 +374,7 @@ min-width: 32px;
 }
 .singleTicketTotalAmount h2 {
   font-size: 14px;
-  font-weight: 700;
+  font-family:var(--font-weight-700);
   line-height: 18.2px;
   letter-spacing: 0.1px;
 }
@@ -387,17 +382,17 @@ min-width: 32px;
   font-size: 10px;
   margin: 0;
   line-height: 13px;
-  font-weight: 600;
+  font-family:var( --font-weight-600);
   letter-spacing: 0.5px;
 
 }
-/* .singleTicketTotalAmount button {
+.singleTicketTotalAmount button {
   font-size: 16px;
   padding: 10px 15px;
-  font-weight: 700;
-} */
+  font-family:var(--font-weight-700);
+}
 .ticketWrapper{
-  padding:15px;
+  padding:25px 15px;
   border-top: 1px solid rgba(57, 57, 57, 0.3);
 }
 .ticketWrapper .ticketCategory{
@@ -409,12 +404,6 @@ min-width: 32px;
   border-radius: 5px;
 }
 .ticketWrapper .ticketCategory .dateCol{
-  background-color: #EEEEEE;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   min-width: 60px;
   max-width: 60px; 
 }
@@ -423,28 +412,8 @@ min-width: 32px;
   line-height: 26px;
   color: rgba(57, 57, 57, 1);
 }
-.ticketWrapper .ticketCategory .detailsCol{
-  width: 100%;
-  padding: 10px 15px;
-  flex-direction: column;
-  display: flex;
-  justify-content: center; 
-}
 .ticketWrapper .ticketCategory .detailsCol h2 {
   margin: 0;
-  color: rgba(57, 57, 57, 1);
-}
-.ticketWrapper .ticketCategory .detailsCol p {
-  margin: 0;
-  font-size: 14px;
-  color: rgba(57, 57, 57, 1);
-}
-.ticketWrapper .ticketCategory .detailsCol .priceWrap {
-  text-align: right;
-  font-weight: 800;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
 }
 .footerActionBtn {
   max-width: 350px;
@@ -453,16 +422,13 @@ min-width: 32px;
 .footerActionBtn .button ,.footerActionBtn button {
   background-color: rgba(57, 57, 57, 1);
   font-size: 15px;
-  text-transform: uppercase;
-  border: none;
-  color: #fff;
   padding: 12px;
   width: 100%;
   text-align: center;
   border-radius: 5px;
   min-height: 40px;
-  font-weight: 600;
-  letter-spacing: 1px;
+  font-family:var( --font-weight-600);
+  display:block;
 }
 .sloganText {
   text-align: center;
@@ -471,26 +437,17 @@ min-width: 32px;
 .sloganText p {
   font-size: 12px;
   line-height: 15.6px;
-  font-weight: 400;
+  font-family: var(--font-weight-400);
   color: rgba(57, 57, 57, 1);
   max-width:350px;
   margin:0 auto;
-}
-.contentWraper .singleEventWrap .cardWrapper .detailsCol .priceWrap p {
-  font-weight: 400;
-  color: rgba(57, 57, 57, 1);
-  text-align: left;
-}
-.contentWraper .singleEventWrap .cardWrapper .detailsCol .plusBtn button{
-  background-color: rgba(57, 57, 57, 1);
-  border:none;
 }
 .blankArray {
   margin: 0px 0 20px;
   font-size: 12px;
   color: rgba(233, 75, 79, 1);
 }
- .cardWrapper.active .collapseArrow img{
+.cardWrapper.active .collapseArrow img{
   transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
@@ -500,7 +457,6 @@ min-width: 32px;
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
 }
-
 .actionBtnPlusMinus .btnCol {
   display: flex;
   align-items: center;
@@ -514,4 +470,103 @@ min-width: 32px;
     padding: 0;
     width: 25px;
     height: 25px;
+}
+
+.innerHeading {
+  margin: 0 0 20px 0;
+}
+.innerHeading h4{
+  color: #393939;
+  font-size: 26px; 
+}
+.innerHeading p{
+  color: #393939;
+  font-style: normal;
+  font-family:var(--font-weight-400);
+  font-size:14px; 
+  margin:0;
+}
+.inputWrapper {
+  display: flex;
+  margin: 0 0 90px 0;
+  justify-content: space-between;
+}
+.inputInnerWrapper {
+  background: #FBFBFB;
+  border: 1px solid rgba(57, 57, 57, 0.2);
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 10px 10px 10px 57px;
+  width:49%;
+  position: relative;
+}
+.inputInnerWrapper:last-child {
+  margin: 0;
+}
+.inputGroup{
+  position: absolute;
+  left:10px;
+  top:0;
+}
+.inputGroup [type="radio"]:checked,.inputGroup [type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+.inputGroup [type="radio"]:checked + label,
+.inputGroup [type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+}
+.inputGroup [type="radio"]:checked + label:before,
+.inputGroup [type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    background: rgba(57, 57, 57, 0.3);
+    opacity: 0.3;
+    border: 1px solid #393939;
+}
+.inputGroup [type="radio"]:checked + label:after,
+.inputGroup [type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: #393939;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+.inputGroup [type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+.inputGroup [type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+.inputInnerWrapper h4{
+  color: #393939;
+  font-size: 14px;
+  margin: 0 0 5px 0;
+  display: block;
+}
+.inputInnerWrapper p{
+  color: #393939; 
+  font-family:var(--font-weight-400);
+  font-size:14px;
+  margin:0;
 }

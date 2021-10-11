@@ -10,33 +10,33 @@ const routes = [
   {
     path: '/shop',
     name: 'ShoppingCart',
-    component: () => import("../views/ShoppingCart.vue")
+    component: () => import("../views/ShoppingCart/ShoppingCart.vue")
   },
   {
     path: '/delivery-method',
     name: 'DeliveryMethod',
-    component: () => import("../views/ChooseDeliveryMethod.vue")
+    component: () => import("../views/deliveryMethod/ChooseDeliveryMethod.vue")
   },
   {
     path: '/user-form',
     name: 'UserForm',
-    component: () => import("../views/UserForm.vue")
+    component: () => import("../views/userDetails/UserForm.vue")
   },
   {
     path: '/single-event',
     name: 'SingleEvent',
-    component: () => import("../views/SingleEvent.vue")
+    component: () => import("../views/events/SingleEvent.vue")
   },
 
   {
     path: '/recurring-event',
     name: 'RecurringEvent',
-    component: () => import("../views/RecurringEvent.vue")
+    component: () => import("../views/events/RecurringEvent.vue")
   },
   {
     path: '/ticket-category',
     name: 'TicketCategory',
-    component: () => import("../views/TicketCategory.vue")
+    component: () => import("../views/ShoppingCart/TicketCategory.vue")
   },
   {
     path: '/payment',
@@ -44,13 +44,13 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Payment.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/payment/Payment.vue')
   },
   
 ]
 
 const router = createRouter({
-  history: createMemoryHistory(),  //createWebHashHistory(),//
+  history: createWebHashHistory(),//createMemoryHistory(),  //
   routes
 })
 

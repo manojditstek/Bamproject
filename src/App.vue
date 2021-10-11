@@ -9,6 +9,7 @@
     </div> -->
 
   <div class="contentInnerWraper">
+    
      <router-view />
   </div>
     </div>

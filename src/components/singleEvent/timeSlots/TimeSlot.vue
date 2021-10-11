@@ -1,27 +1,18 @@
 <template>
-<!-- <div class="cardWrapper d-flex" @click="timeSlot()">
-    <div class="timeSlots  d-flex" :class="toggleButton?'active':''" @click="toggleButton=!toggleButton">
-        <div class="detailsCol">
-            <h2>{{timeFormat(timeSlot.start_at)}} – {{timeFormat(timeSlot.end_at)}}</h2>
-        </div>
-        <div class="collapseArrow lightBg">
-            <img src="../assets/images/white-icon.svg" width="8" alt="image">
-        </div>
-    </div>
-    <div class="ticketToggle active" v-show="toggleButton">
-    </div>
-</div> -->
-
 <div class="cardWrapper d-flex" :class="toggleButton?'active':''" @click="toggleButton=!toggleButton">
     <div class="detailsCol">
         <h2>{{timeFormat(timeSlot.start_at)}} – {{timeFormat(timeSlot.end_at)}}</h2>
+        <h6></h6>
     </div>
     <div class="collapseArrow">
-        <img src="/img/white-icon.svg" width="8" alt="image" />
+         <i class="fa fa-angle-right"></i>
     </div>
 </div>
 <div class=" active" v-show="toggleButton">
-    <!-- <Tickets :ticket="ticket"/> -->
+    <div v-if="tickets.ticketConfig" >
+        <Tickets :ticket="ticket" v-for="ticket in tickets.ticketConfig" :key="ticket.id" />
+    </div>
+    
 </div>
 
 </template>
@@ -31,15 +22,15 @@ import moment from "moment"
 import {
     ref
 } from 'vue'
-import Tickets from './Tickets.vue'
+import Tickets from '../timeSlots/ticketList/Tickets.vue'
 export default {
   components: { 
-    //   Tickets 
+      Tickets 
       },
     name: 'TimeSlot',
     props: {
         timeSlot: Object,
-        ticket: String
+        tickets: Array
     },
     setup() {
         const toggleButton = ref(false)
