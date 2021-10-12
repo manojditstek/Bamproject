@@ -542,6 +542,9 @@ min-width: 32px;
   width:49%;
   position: relative;
 }
+.inputInnerWrapper.active {
+  border: 1px solid #393939;
+}
 .inputInnerWrapper:last-child {
   margin: 0;
 }
@@ -735,4 +738,7 @@ padding:15px 15px 15px 57px;
 }
 .inputWrapper.payment .inputInnerWrapper h4{
 margin:0;
+}
+.inputWrapper.payment .inputInnerWrapper.active{
+border:1px solid #393939;
 }
