@@ -127,6 +127,7 @@ export default {
             }
 
             if (!formErrors.value.length) {
+                //store.dispatch('createOrder', data);
                 router.push({
                     path: '/payment'
                 })

@@ -5,10 +5,9 @@ import {
     BAM
 } from 'bam-ticketing-sdk';
 const bam = new BAM("https://develop.bam.fan")
-
+ bam.useOrganizer("eventspace")
 
 export const getEvents = async ({commit}, dateRange) => {
-    await bam.useOrganizer("eventspace")
     commit('loadingStatus', true)
     await bam.event.listEvents({
             with: {
@@ -68,4 +67,28 @@ export const recurringEvent = async({commit}, id) => {
         // }
         console.log(error);
     });
+}
+
+export const createOrder = async({commit})=>{
+    commit('loadingStatus', true)
+    await bam.order.createOrder({
+        orderItem: [
+            {
+                quantity: 4,
+                ticketConfigId: 7489
+            }
+        ],
+        format: 'PDF',
+        orderContact: {
+            firstName: 'John',
+            lastName: 'Doe',
+            email: 'johndoe@bam.fan'
+        }
+        }).then((response) => {
+            console.log("events=> ",response)
+            commit('setEvents', response)
+            commit('loadingStatus', false)
+        }).catch(error => {
+            console.log(error);
+        });
 }

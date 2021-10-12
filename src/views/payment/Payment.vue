@@ -12,16 +12,16 @@
         <h4>Payment</h4>
     </div>
     <div class="inputWrapper payment">
-        <div class="inputInnerWrapper">
+        <div class="inputInnerWrapper" :class="cardMethod==true ?'active':''">
             <div class="inputGroup">
                 <input type="radio"  id="test1" :value="true" v-model="cardMethod" />
                 <label for="test1"></label>
             </div>
             <h4>Credit Card</h4>
         </div>
-        <div class="inputInnerWrapper">
+        <div class="inputInnerWrapper" :class="cardMethod==false ?'active':''">
             <div class="inputGroup">
-                <input type="radio"  id="test2" :value="false" v-model="cardMethod"  />
+                <input type="radio"  id="test2" :value="false" v-model="cardMethod" checked />
                 <label for="test2"></label>
             </div>
             <h4>EPS</h4>
