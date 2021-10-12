@@ -18,10 +18,11 @@
                         <p>Fees: € 2,50</p>
                         <p>Total: € 87,50</p>
                     </div>
+                    <p>{{perUserQuantity!=''?'Per User Limit Exceeded!':''}}</p>
                     <div class="buttonWrap d-flex">
-                        <button class="minusBtn" @click="removeFromCart()">-</button>
+                        <button class="minusBtn"  @click="removeFromCart()">-</button>
                         <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>
-                        <button class="plusBtn" @click="addToCart()">+</button>
+                        <button class="plusBtn" :disabled="perUserQuantity!=''" @click="addToCart()">+</button>
                     </div>
                 </div>
             </div>
@@ -40,7 +41,8 @@ import { useStore } from "vuex";
 export default {
     name: 'Tickets',
     props: {
-        ticket: Object
+        ticket: Object,
+        eventName:String
     },
     setup(props) {
         const toggleButton = ref(false);
@@ -49,23 +51,32 @@ export default {
             return store.state.cart.cartItems
         });
 
+        
         function addToCart(){
-            store.commit("addCartItem", props.ticket);
+            let ticket = {item:props.ticket,eventName:props.eventName};
+            store.commit("addCartItem", ticket);
         }
         function removeFromCart(){
             store.commit("removeCartItem", props.ticket);
         }
 
         let itemQuantity = computed(function(){
-            let get_ticket = cart.value.filter((item) => item.id == props.ticket.id);
+            let ticket = props.ticket;
+            let get_ticket = cart.value.filter((item) => item.id == ticket.id);
             return get_ticket[0]?.quantity;
+        })
+
+        let perUserQuantity = computed(function(){
+            let ticket = props.ticket;
+            let perUser = cart.value.filter((item) => item.quantity == ticket.ticketsPerUser);
+            return perUser;
         })
 
         return {
             toggleButton,
             itemQuantity,
             addToCart,
-            removeFromCart
+            removeFromCart,perUserQuantity
         }
     },
 

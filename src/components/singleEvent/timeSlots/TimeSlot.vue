@@ -1,7 +1,7 @@
 <template>
 <div class="cardWrapper d-flex" :class="toggleButton?'active':''" @click="toggleButton=!toggleButton">
     <div class="detailsCol">
-        <h2>{{timeFormat(timeSlot.start_at)}} – {{timeFormat(timeSlot.end_at)}}</h2>
+        <h2>{{timeFormat(timeSlot.startAt)}} – {{timeFormat(timeSlot.endAt)}}</h2>
         <h6></h6>
     </div>
     <div class="collapseArrow">
@@ -10,7 +10,7 @@
 </div>
 <div class=" active" v-show="toggleButton">
     <div v-if="tickets.ticketConfig" >
-        <Tickets :ticket="ticket" v-for="ticket in tickets.ticketConfig" :key="ticket.id" />
+        <Tickets :ticket="ticket" :eventName="eventName" v-for="ticket in tickets.ticketConfig" :key="ticket.id" />
     </div>
     
 </div>
@@ -30,7 +30,8 @@ export default {
     name: 'TimeSlot',
     props: {
         timeSlot: Object,
-        tickets: Array
+        tickets: Array,
+        eventName:String
     },
     setup() {
         const toggleButton = ref(false)

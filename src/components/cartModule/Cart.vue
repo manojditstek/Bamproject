@@ -32,7 +32,7 @@
         <div class="detailsCol">
             <h2>{{item.name}}</h2>
             <p>
-                {{event.name}}
+                {{item.eventName}}
             </p>
             <div class="priceWrap">
                 {{item.totalPrice}} {{currency}}

@@ -30,7 +30,7 @@
     <Loader />
     <div class="cardWrapper d-flex" @click="singleEvent(event.id)" v-for="event in recurringEvent?recurringEvent.occurrence:''" :key="event.id">
         <div class="dateCol">
-            <EventDateFormat :eventDate="event?event.start_at:''" />
+            <EventDateFormat :eventDate="event?event.startAt:''" />
         </div>
         <div class="detailsCol">
             <h2>{{recurringEvent?recurringEvent.name:''}}</h2>

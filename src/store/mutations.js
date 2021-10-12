@@ -31,14 +31,17 @@ const isItemInCart = (cartItems, item) => {
 }
 
 // This block of code add item in cart
-export const addCartItem = (state, item) => {
-  item.quantity = getItemQtyCart(state.cart.cartItems, item) + 1;
-  item.totalPrice = getItemTotalPrice(item);
+export const addCartItem = (state, data) => {
+  console.log("addcart=>",data.item)
+  data.item.quantity = getItemQtyCart(state.cart.cartItems, data.item) + 1;
+  data.item.totalPrice = getItemTotalPrice(data.item);
+  data.item.eventName = data.eventName;
+  // item.eventName=eventName;
   // Checking for presnce of item in the cart
-  if (isItemInCart(state.cart.cartItems, item)) {
-    updateCartItem(state, item)
+  if (isItemInCart(state.cart.cartItems, data.item)) {
+    updateCartItem(state, data.item)
   } else {
-    state.cart.cartItems.push(item);
+    state.cart.cartItems.push(data.item,);
     totalPrice(state);
     totalQuantity(state);
   }

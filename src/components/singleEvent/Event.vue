@@ -32,7 +32,7 @@
     </div>
     <div v-show="showTicket" class="singleEventWrap">
         <TimeSlot :timeSlot="timeSlot" v-for="timeSlot in event ? event.timeslot : ''" :key="timeSlot.id" />
-        <Tickets :ticket="ticket" v-for="ticket in event ? event.ticketConfig: ''" :key="ticket.id" />
+        <Tickets :ticket="ticket" :eventName="event.name" v-for="ticket in event ? event.ticketConfig: ''" :key="ticket.id" />
     </div>
 </div>
 <!-- end  -->

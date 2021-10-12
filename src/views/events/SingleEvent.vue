@@ -3,7 +3,7 @@
     <h2>
         <router-link to="/">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
-            {{singleEvent?singleEvent.name:''}}
+            {{singleEvent?lengthOfString(singleEvent.name):''}}
         </router-link>
     </h2>
     <div class="datePicker"></div>
@@ -22,11 +22,11 @@
 </div>
 <div class="cardBodyWrapper" v-if="singleEvent.timeslot?singleEvent.timeslot.length>0:''">
      <Loader />
-     <TimeSlot :timeSlot="timeSlot" :tickets="singleEvent?singleEvent:''" v-for="timeSlot in singleEvent ? singleEvent.timeslot : ''" :key="timeSlot.id"  @click="timeSlot()"/>
+     <TimeSlot :timeSlot="timeSlot" :eventName="singleEvent.name"  :tickets="singleEvent?singleEvent:''" v-for="timeSlot in singleEvent ? singleEvent.timeslot : ''" :key="timeSlot.id"  @click="timeSlot()"/>
 </div>
 <div v-else class="cardBodyWrapper">
     <Loader />
-    <Tickets :ticket="ticket" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
+    <Tickets :ticket="ticket" :eventName="singleEvent.name" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
 </div>
 
 <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
@@ -83,6 +83,8 @@ export default {
             return store.state.cart.itemsTotalQuantity;
         });
 
+        
+
         const singleEvent = computed(() => {
             return store.state.event;
         })
@@ -104,6 +106,14 @@ export default {
         
         timeFormat(value) {
             return moment(value).format(" HH:mm a");
+        },
+
+        lengthOfString(value){
+            if(value?value.length>48:''){
+                return value.substring(0,48)+ '...'
+            }else{
+                return value
+            }
         }
     
     },
