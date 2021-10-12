@@ -681,6 +681,12 @@ color:rgba(57, 57, 57, 0.2);
 .formGroup input.errorInput{
   border: 1px solid #E94B4F;
 }
+.formGroup input.errorInput~.labelInput {
+  transform: scale(.75) translateY(-39px);
+  background: #fbfbfb;
+  font-family: var(--font-family-700);
+  color: #E94B4F;
+}
 .formGroup input.active~.labelInput {
   transform: scale(.75) translateY(-39px);
   background: #fbfbfb;

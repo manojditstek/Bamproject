@@ -13,28 +13,28 @@
     </div>
     <div class="formInputs">
         <div class="formGroup">
-            <input type="text" class="form-control " :class="data.first_name?'active ':formErrors[0]?' errorInput':''" v-model.trim="data.first_name" />
+            <input type="text" class="form-control " :class="data.first_name?'active ':formErrors[0]?' errorInput':''" v-model.trim="data.first_name" @input="firstName()"  />
             <div class="labelInput">First Name</div>
-            <div class="error" v-if="!data.first_name">{{formErrors[0]}}</div>
+            <div class="error" >{{formErrors[0]}}</div>
         </div>
         <div class="formGroup">
-            <input type="text" class="form-control" :class="data.last_name?'active':formErrors[1]?' errorInput':''" v-model.trim="data.last_name" />
+            <input type="text" class="form-control" :class="data.last_name?'active':formErrors[1]?' errorInput':''" v-model.trim="data.last_name"  @input="lastName()"/>
             <div class="labelInput">Last Name</div>
-            <div v-if="!data.last_name" class="error">{{formErrors[1]}}</div>
+            <div class="error">{{formErrors[1]}}</div>
         </div>
         <div class="formGroup">
-            <input type="number" class="form-control" :class="data.phone?'active':formErrors[2]?' errorInput':''" v-model.trim="data.phone" />
+            <input type="number" class="form-control" :class="data.phone && !formErrors[2]?'active':formErrors[2]?' errorInput':''" v-model.trim="data.phone" @input="phoneNumber()"/>
             <div class="labelInput">Phone</div>
-           <div v-if="!data.phone" class="error">{{formErrors[2]}}</div>
+           <div  class="error">{{formErrors[2]}}</div>
         </div>
     </div>
     <div class="formInputs">
         <div class="formGroup">
             <label>This Email will be used for your invoice</label>
             <div class="formLabel">
-                <input type="email" class="form-control" :class="data.email?'active':formErrors[3]?' errorInput':''" v-model.trim="data.email" />
+                <input type="email" class="form-control" :class="data.email && !formErrors[3]?'active':formErrors[3]?' errorInput':''" v-model.trim="data.email" @input="emailCheck()"/>
                 <div class="labelInput">Email</div>
-                <div v-if="data.email" class="error">{{formErrors[3]}}</div>
+                <div  class="error">{{formErrors[3]}}</div>
             </div>
         </div>
         <div class="formGroup">
@@ -44,15 +44,15 @@
             </div>
             <label>Use the same as Billing Email</label>
             <div class="formLabel">
-                <input v-if="checkMail" type="email" class="form-control" :class="data.email?'active':formErrors[4]?' errorInput':''" v-model.trim="data.email" />
-                <input v-else type="email" class="form-control" :class="data.delivery_email?'active':formErrors[4]?' errorInput':''" v-model.trim="data.delivery_email" />
+                <input v-if="checkMail" type="email" class="form-control" :class="data.email && !formErrors[3]?'active':formErrors[3]?' errorInput':''" v-model.trim="data.email" />
+                <input v-else type="email" class="form-control" :class="data.delivery_email && !formErrors[4]?'active':formErrors[4]?' errorInput':''" v-model.trim="data.delivery_email" @input="deliveryMail()"/>
                 <div class="labelInput">Email</div>
-               <div v-if="!data.delivery_email" class="error">{{formErrors[4]}}</div>
+               <div  class="error">{{formErrors[4]}}</div>
             </div>
         </div>
     </div>
     <div class="footerActionBtn btns">
-        <button class="button" @click="validation()">PAY {{totalPrice}} {{currency}}</button>
+        <button class="button" @click="payMethod()">PAY {{totalPrice}} {{currency}}</button>
         <router-link to="/" class="button btnGray">Cancel</router-link>
     </div>
 </div>
@@ -100,43 +100,111 @@ export default {
         });
 
         function payMethod() {
+            if(firstName()==true && lastName()==true && phoneNumber()==true && emailCheck()==true && deliveryMail()==true){
             router.push({
                 path: '/payment'
             })
+            }
+            else{
+                return false
+            }
+            
         }
 
-        function validation() {
-              formErrors.value = [];
+        // watchEffect(()=>{
+        //     if(data.first_name && data.last_name && data.phone  && data.email && data.delivery_email){
+        //         console.log("dataObject",data)
+        //        return true
+        //     }else{
+        //         validation();
+        //     } 
+        // })
+
+        function firstName(){
+            formErrors.value = [];
             if (!data.first_name) {
                 formErrors.value[0] = "First name required.";
+            }else{
+                return true
             }
+        }
+
+        function lastName(){
+            formErrors.value = [];
             if (!data.last_name) {
                 formErrors.value[1] = "Last name required.";
+            }else{
+                return true
             }
+        }
+
+        function phoneNumber(){
+            formErrors.value = [];
             if (!data.phone) {
                 formErrors.value[2] = "Phone required.";
-            } else if (!validPhone(data.phone)) {
+            }
+            if (!validPhone(data.phone)) {
                 formErrors.value[2] = 'Valid phone number required.';
             }
-            if (!data.email) {
-                formErrors.value[3] = 'Email required.';
-            } else if (!validEmail(data.email)) {
-                formErrors.value[3] = 'Valid email required.';
+            else{
+                return true
             }
+        }
+
+        function emailCheck(){
+            formErrors.value = [];
+           if (!data.email) {
+                formErrors.value[3] = 'Email required.';
+            } if (!validEmail(data.email)) {
+                formErrors.value[3] = 'Valid email required.';
+            }else{
+
+                return true
+            } 
+        }
+
+        function deliveryMail(){
+            formErrors.value = [];
             if (!checkMail.value && !data.delivery_email) {
                 formErrors.value[4] = 'Email required.';
-            } else if (!checkMail.value && !validEmail(data.delivery_email)) {
+            } if (!checkMail.value && !validEmail(data.delivery_email)) {
                 formErrors.value[4] = 'Valid email required.';
+            }else{
+                return true
             }
 
-            if (!formErrors.value.length) {
-                //store.dispatch('createOrder', data);
-                router.push({
-                    path: '/payment'
-                })
-            }
-            return false
         }
+
+        // function validation() {
+        //       formErrors.value = [];
+        //     if (!data.first_name) {
+        //         formErrors.value[0] = "First name required.";
+        //     }
+        //     else if (!data.last_name) {
+        //         formErrors.value[1] = "Last name required.";
+        //     }
+        //     else if (!data.phone) {
+        //         formErrors.value[2] = "Phone required.";
+        //     } else if (!validPhone(data.phone)) {
+        //         formErrors.value[2] = 'Valid phone number required.';
+        //     }
+        //     else if (!data.email) {
+        //         formErrors.value[3] = 'Email required.';
+        //     } else if (!validEmail(data.email)) {
+        //         formErrors.value[3] = 'Valid email required.';
+        //     }
+        //     else if (!checkMail.value && !data.delivery_email) {
+        //         formErrors.value[4] = 'Email required.';
+        //     } else if (!checkMail.value && !validEmail(data.delivery_email)) {
+        //         formErrors.value[4] = 'Valid email required.';
+        //     }
+
+        //     else if (!formErrors.value.length) {
+
+        //         return true
+        //     }
+        //     return false
+        // }
 
         function validEmail(email) {
             var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -144,7 +212,7 @@ export default {
         }
 
         function validPhone(phone) {
-            var re = /^\s*(?:\+?(\d{1,3}))?[- (]*(\d{3})[- )]*(\d{3})[- ]*(\d{4})(?: *[x/#]{1}(\d+))?\s*$/;
+            var re = /^\s*(?:\+?(\d{1,1}))?[- (]*(\d{3})[- )]*(\d{3})[- ]*(\d{4})(?: *[x/#]{1}(\d+))?\s*$/;
             return re.test(phone);
         }
 
@@ -155,9 +223,14 @@ export default {
             totalPrice,
             currency,
             formErrors,
-            validation,
+            // validation,
             validEmail,
-            validPhone
+            validPhone,
+            firstName,
+            lastName,
+            phoneNumber,
+            emailCheck,
+            deliveryMail
         }
     },
 
