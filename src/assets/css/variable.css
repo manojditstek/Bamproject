@@ -1,8 +1,8 @@
 :root {
-    --font-weight-300:'interlight_beta';
-    --font-weight-400:'interregular';
-    --font-weight-500:'intermedium';
-    --font-weight-600:'intersemi_bold';
-    --font-weight-700:'interbold';
-    --font-weight-800:'interextra_bold';
+    --font-family-300:'interlight_beta';
+    --font-family-400:'interregular';
+    --font-family-500:'intermedium';
+    --font-family-600:'intersemi_bold';
+    --font-family-700:'interbold';
+    --font-family-800:'interextra_bold';
   }

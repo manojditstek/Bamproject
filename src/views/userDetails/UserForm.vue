@@ -13,28 +13,28 @@
     </div>
     <div class="formInputs">
         <div class="formGroup">
-            <input type="text" class="form-control" v-model.trim="data.first_name" />
+            <input type="text" class="form-control " :class="data.first_name?'active':''" v-model.trim="data.first_name" />
             <div class="labelInput">First Name</div>
-            <label>{{formErrors[0]}}</label>
+            <div class="error">{{formErrors[0]}}</div>
         </div>
         <div class="formGroup">
-            <input type="text" class="form-control" v-model.trim="data.last_name" />
+            <input type="text" class="form-control" :class="data.last_name?'active':''" v-model.trim="data.last_name" />
             <div class="labelInput">Label</div>
-            <label>{{formErrors[1]}}</label>
+            <div class="error">{{formErrors[1]}}</div>
         </div>
         <div class="formGroup">
-            <input type="number" class="form-control" v-model.trim="data.phone" />
+            <input type="number" class="form-control" :class="data.phone?'active':''" v-model.trim="data.phone" />
             <div class="labelInput">Label</div>
-            <label>{{formErrors[2]}}</label>
+           <div class="error">{{formErrors[2]}}</div>
         </div>
     </div>
     <div class="formInputs">
         <div class="formGroup">
             <label>This Email will be used for your invoice</label>
             <div class="formLabel">
-                <input type="email" class="form-control" v-model.trim="data.email" />
+                <input type="email" class="form-control" :class="data.email?'active':''" v-model.trim="data.email" />
                 <div class="labelInput">Label</div>
-                <label>{{formErrors[3]}}</label>
+                <div class="error">{{formErrors[3]}}</div>
             </div>
         </div>
         <div class="formGroup">
@@ -44,10 +44,10 @@
             </div>
             <label>Use the same as Billing Email</label>
             <div class="formLabel">
-                <input v-if="checkMail" type="email" class="form-control" v-model.trim="data.email" />
-                <input v-else type="email" class="form-control" v-model.trim="data.delivery_email" />
+                <input v-if="checkMail" type="email" class="form-control" :class="data.email?'active':''" v-model.trim="data.email" />
+                <input v-else type="email" class="form-control" :class="data.delivery_email?'active':''" v-model.trim="data.delivery_email" />
                 <div class="labelInput">Label</div>
-                <label>{{formErrors[4]}}</label>
+               <div class="error">{{formErrors[4]}}</div>
             </div>
         </div>
     </div>
@@ -56,6 +56,9 @@
         <router-link to="/" class="button btnGray">Cancel</router-link>
     </div>
 </div>
+
+
+
 </template>
 
 <script>

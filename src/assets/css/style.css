@@ -3,7 +3,7 @@
 @import "../css/variable.css";
 
 body{
-  font-family: var(--font-weight-400);
+  font-family: var(--font-family-400);
   font-size: 0.8rem;
   line-height: 1.5;
   color: #212529;
@@ -15,7 +15,7 @@ body{
 }
 h1,h2,h3,h4,h5,h6{
     margin: 0;
-    font-family:var(--font-weight-700);
+    font-family:var(--font-family-700);
 }
 .m-0{
     margin: 0 !important;
@@ -86,7 +86,7 @@ h1,h2,h3,h4,h5,h6{
 .alert p{
   color: #EEEEEE;
   font-size:12px;
-  font-family: var(--font-weight-700);
+  font-family: var(--font-family-700);
 }
 .alert p i{
  padding:0 5px 0 0;
@@ -140,6 +140,8 @@ h1,h2,h3,h4,h5,h6{
 .cardBodyWrapper{
   padding: 25px 15px;
   position: relative;
+  /* max-height: 500px;
+  overflow-y: auto; */
 }
 .cardBodyWrapper .cardWrapper{
   border-radius: 9px;
@@ -177,7 +179,7 @@ box-shadow:none;
 .dateCol h4 {
   font-size: 10px;
   text-transform: uppercase;
-  font-family: var(--font-weight-800);
+  font-family: var(--font-family-800);
 }
 .dateCol h2 {
   font-size: 39px;
@@ -186,7 +188,7 @@ box-shadow:none;
 .dateCol p {
   line-height: normal;
   margin: 0;
-  font-family: var(--font-weight-400);
+  font-family: var(--font-family-400);
 }
 .dateCol p.from{
 margin:5px 0 0 0;
@@ -194,7 +196,7 @@ margin:5px 0 0 0;
 time {
   margin: 8px 0 0;
   font-size: 12px;
-  font-family: var(--font-weight-400);
+  font-family: var(--font-family-400);
 }
  .detailsCol {
   width: 100%;
@@ -213,17 +215,17 @@ time {
   font-size: 14px;
   color: rgba(57, 57, 57, 1);
   line-height: 18.2px;
-  font-family: var(--font-weight-400);
+  font-family: var(--font-family-400);
 }
 .detailsCol .priceWrap {
   text-align: right;
-  font-family: var(--font-weight-800);
+  font-family: var(--font-family-800);
   width: 100%;
   justify-content: space-between;
   align-items: center;
 }
 .detailsCol .priceWrap p {
-  font-family: var(--font-weight-400);
+  font-family: var(--font-family-400);
   color: rgba(57, 57, 57, 1);
   font-size: 12px;
   margin: 0;
@@ -271,7 +273,7 @@ button,.button {
   padding: 6px 12px;
   border-radius: 5px;
   cursor: pointer;
-  font-family: var(--font-weight-800);
+  font-family: var(--font-family-800);
   white-space: nowrap;
   text-decoration: none;
   min-width: 68px;
@@ -289,7 +291,7 @@ min-width: 32px;
 }
 .eventDiscountWrapper h2 {
   font-size: 26px;
-  font-family:var(--font-weight-700);
+  font-family:var(--font-family-700);
   color: rgba(57, 57, 57, 1);
   line-height: 31.2px;
 }
@@ -304,7 +306,7 @@ min-width: 32px;
   margin: 0;
   color: rgba(57, 57, 57, 1);
   line-height: 21px;
-  font-family: var(--font-weight-400);
+  font-family: var(--font-family-400);
 }
 .totalAmountWrapper p {
   display: flex;
@@ -313,10 +315,10 @@ min-width: 32px;
   margin: 0;
   color: rgba(57, 57, 57, 1);
   line-height: 21px;
-  font-family:var(--font-weight-700);
+  font-family:var(--font-family-700);
 }
 .totalAmountWrapper{
-  font-family:var(--font-weight-700);
+  font-family:var(--font-family-700);
   padding: 5px 0;
   margin-bottom: 15px;
 }
@@ -352,7 +354,7 @@ min-width: 32px;
   border-radius: 0;
   padding: 0;
   min-width: 45px;
-  font-family: var(--font-weight-500);
+  font-family: var(--font-family-500);
 }
 .ticketToggle .buttonWrap button {
   width: 32px;
@@ -365,7 +367,7 @@ min-width: 32px;
   border-radius: 0;
   padding: 0;
   min-width: auto;
-  font-family: var(--font-weight-500);
+  font-family: var(--font-family-500);
 }
 .ticketToggle .buttonWrap .minusBtn {
   background-color: rgba(215, 215, 215, 1);
@@ -403,7 +405,7 @@ min-width: 32px;
 }
 .singleTicketTotalAmount h2 {
   font-size: 14px;
-  font-family:var(--font-weight-700);
+  font-family:var(--font-family-700);
   line-height: 18.2px;
   letter-spacing: 0.1px;
 }
@@ -411,14 +413,14 @@ min-width: 32px;
   font-size: 10px;
   margin: 0;
   line-height: 13px;
-  font-family:var( --font-weight-600);
+  font-family:var( --font-family-600);
   letter-spacing: 0.5px;
 
 }
 .singleTicketTotalAmount button {
   font-size: 16px;
   padding: 10px 15px;
-  font-family:var(--font-weight-700);
+  font-family:var(--font-family-700);
 }
 .ticketWrapper{
   padding:25px 15px;
@@ -462,7 +464,7 @@ min-width: 32px;
   text-align: center;
   border-radius: 5px;
   min-height: 40px;
-  font-family:var( --font-weight-600);
+  font-family:var( --font-family-600);
   display:block;
   text-transform:uppercase;
 }
@@ -478,7 +480,7 @@ min-width: 32px;
 .sloganText p {
   font-size: 12px;
   line-height: 15.6px;
-  font-family: var(--font-weight-400);
+  font-family: var(--font-family-400);
   color: rgba(57, 57, 57, 1);
   max-width:350px;
   margin:0 auto;
@@ -522,7 +524,7 @@ min-width: 32px;
 .innerHeading p{
   color: #393939;
   font-style: normal;
-  font-family:var(--font-weight-400);
+  font-family:var(--font-family-400);
   font-size:14px; 
   margin:0;
 }
@@ -606,7 +608,7 @@ min-width: 32px;
 }
 .inputInnerWrapper p{
   color: #393939; 
-  font-family:var(--font-weight-400);
+  font-family:var(--font-family-400);
   font-size:14px;
   margin:0;
 }
@@ -617,8 +619,14 @@ min-width: 32px;
 }
 .formInputs .formGroup{
   width: 49%;
-  margin: 0 0 20px 0;
+  margin: 0 0 25px 0;
   position: relative;
+}
+.formInputs .formGroup .error {
+  position: absolute;
+  color: #E94B4F;
+  font-size: 10px;
+  font-weight: 600;
 }
 .formGroup.space{
  justify-content: space-between;
@@ -628,7 +636,7 @@ min-width: 32px;
   margin: 0;
 }
 .formGroup label{
-  font-family: var(--font-weight-700);
+  font-family: var(--font-family-700);
   font-size: 14px;
   margin: 0 0 10px 0;
   display: inline-block;
@@ -659,7 +667,16 @@ color:rgba(57, 57, 57, 0.2);
 }
 .formGroup input:focus~.labelInput {
   transform: scale(.75) translateY(-39px);
-  background: #fff;
+  background: #fbfbfb;
+}
+.formGroup input.active{
+  border: 1px solid #393939;
+}
+.formGroup input.active~.labelInput {
+  transform: scale(.75) translateY(-39px);
+  background: #fbfbfb;
+  font-family: var(--font-family-700);
+  color: #393939;
 }
 .formInputs .formGroup .formLabel {
   position: relative;
