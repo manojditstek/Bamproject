@@ -13,17 +13,17 @@
     </div>
     <div class="formInputs">
         <div class="formGroup">
-            <input type="text" class="form-control " :class="data.first_name?'active ':'active errorInput'" v-model.trim="data.first_name" />
+            <input type="text" class="form-control " :class="data.first_name?'active ':formErrors[0]?' errorInput':''" v-model.trim="data.first_name" />
             <div class="labelInput">First Name</div>
             <div class="error" v-if="!data.first_name">{{formErrors[0]}}</div>
         </div>
         <div class="formGroup">
-            <input type="text" class="form-control" :class="data.last_name?'active':'active errorInput'" v-model.trim="data.last_name" />
+            <input type="text" class="form-control" :class="data.last_name?'active':formErrors[1]?' errorInput':''" v-model.trim="data.last_name" />
             <div class="labelInput">Last Name</div>
             <div v-if="!data.last_name" class="error">{{formErrors[1]}}</div>
         </div>
         <div class="formGroup">
-            <input type="number" class="form-control" :class="data.phone?'active':'active errorInput'" v-model.trim="data.phone" />
+            <input type="number" class="form-control" :class="data.phone?'active':formErrors[2]?' errorInput':''" v-model.trim="data.phone" />
             <div class="labelInput">Phone</div>
            <div v-if="!data.phone" class="error">{{formErrors[2]}}</div>
         </div>
@@ -32,7 +32,7 @@
         <div class="formGroup">
             <label>This Email will be used for your invoice</label>
             <div class="formLabel">
-                <input type="email" class="form-control" :class="data.email?'active':'active errorInput'" v-model.trim="data.email" />
+                <input type="email" class="form-control" :class="data.email?'active':formErrors[3]?' errorInput':''" v-model.trim="data.email" />
                 <div class="labelInput">Email</div>
                 <div v-if="data.email" class="error">{{formErrors[3]}}</div>
             </div>
@@ -44,8 +44,8 @@
             </div>
             <label>Use the same as Billing Email</label>
             <div class="formLabel">
-                <input v-if="checkMail" type="email" class="form-control" :class="data.email?'active':'active errorInput'" v-model.trim="data.email" />
-                <input v-else type="email" class="form-control" :class="data.delivery_email?'active':'active errorInput'" v-model.trim="data.delivery_email" />
+                <input v-if="checkMail" type="email" class="form-control" :class="data.email?'active':formErrors[4]?' errorInput':''" v-model.trim="data.email" />
+                <input v-else type="email" class="form-control" :class="data.delivery_email?'active':formErrors[4]?' errorInput':''" v-model.trim="data.delivery_email" />
                 <div class="labelInput">Email</div>
                <div v-if="!data.delivery_email" class="error">{{formErrors[4]}}</div>
             </div>
