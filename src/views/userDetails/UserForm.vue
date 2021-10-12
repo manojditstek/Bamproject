@@ -13,17 +13,17 @@
     </div>
     <div class="formInputs">
         <div class="formGroup">
-            <input type="text" class="form-control" v-model="data.first_name" />
+            <input type="text" class="form-control" v-model.trim="data.first_name" />
             <div class="labelInput">First Name</div>
             <label>{{formErrors[0]}}</label>
         </div>
         <div class="formGroup">
-            <input type="text" class="form-control" v-model="data.last_name" />
+            <input type="text" class="form-control" v-model.trim="data.last_name" />
             <div class="labelInput">Label</div>
             <label>{{formErrors[1]}}</label>
         </div>
         <div class="formGroup">
-            <input type="number" class="form-control" v-model.number="data.phone" />
+            <input type="number" class="form-control" v-model.trim="data.phone" />
             <div class="labelInput">Label</div>
             <label>{{formErrors[2]}}</label>
         </div>
@@ -32,7 +32,7 @@
         <div class="formGroup">
             <label>This Email will be used for your invoice</label>
             <div class="formLabel">
-                <input type="email" class="form-control" v-model="data.email" />
+                <input type="email" class="form-control" v-model.trim="data.email" />
                 <div class="labelInput">Label</div>
                 <label>{{formErrors[3]}}</label>
             </div>
@@ -44,8 +44,8 @@
             </div>
             <label>Use the same as Billing Email</label>
             <div class="formLabel">
-                <input v-if="checkMail" type="email" class="form-control" v-model="data.email" />
-                <input v-else type="email" class="form-control" v-model="data.delivery_email" />
+                <input v-if="checkMail" type="email" class="form-control" v-model.trim="data.email" />
+                <input v-else type="email" class="form-control" v-model.trim="data.delivery_email" />
                 <div class="labelInput">Label</div>
                 <label>{{formErrors[4]}}</label>
             </div>
@@ -62,7 +62,9 @@
 import {
     ref,
     reactive,
-    computed
+    computed,
+    watchEffect,
+    watchPostEffect
 } from "vue";
 import {
     useRouter
@@ -101,7 +103,7 @@ export default {
         }
 
         function validation() {
-            formErrors.value = [];
+              formErrors.value = [];
             if (!data.first_name) {
                 formErrors.value[0] = "First name required.";
             }

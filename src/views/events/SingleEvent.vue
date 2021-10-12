@@ -12,7 +12,7 @@
 <div class="innerWraper">
     <div class="cardWrapper d-flex">
         <div class="dateCol">
-            <EventDateFormat :eventDate="singleEvent?singleEvent.start_at:''" />
+            <EventDateFormat :eventDate="singleEvent?singleEvent.startAt:''" />
         </div>
         <div class="detailsCol">
             <h2>{{singleEvent.name}}</h2>
