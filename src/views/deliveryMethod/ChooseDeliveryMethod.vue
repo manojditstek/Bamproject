@@ -16,17 +16,17 @@
         <p>Secure digital ticket or the old-school way?</p>
     </div>
     <div class="inputWrapper">
-        <div class="inputInnerWrapper">
+        <div class="inputInnerWrapper" :class="delMethod==true ?'active':''">
             <div class="inputGroup">
-                <input type="radio" id="test1" name="delMethod" checked>
+                <input type="radio" id="test1" name="delMethod" :value="true" v-model="delMethod">
                 <label for="test1"></label>
             </div>
             <h4>BAM Tickets</h4>
             <p>Compatible with your B.A.M Wallet App. Please prepare your smartphone for the next step.</p>
         </div>
-        <div class="inputInnerWrapper">
+        <div class="inputInnerWrapper" :class="delMethod==false ?'active':''">
             <div class="inputGroup">
-                <input type="radio" id="test2" name="delMethod" checked>
+                <input type="radio" id="test2" name="delMethod" :value="false" v-model="delMethod" checked>
                 <label for="test2"></label>
             </div>
             <h4>PDF/PK PASS</h4>
@@ -41,8 +41,17 @@
 </template>
 
 <script>
-export default {
+import {
+    ref,
+} from "vue";
 
-}
+export default {
+    setup() {
+        const delMethod = ref(false);
+        return {
+            delMethod,
+        };
+    }
+};
 </script>
 

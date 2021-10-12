@@ -652,6 +652,7 @@ min-width: 32px;
   top: 50%;
   transform: translateY(-50%);
   padding: 0 5px;
+  pointer-events: none;
 }
 .form-control{
   background: #FBFBFB;
@@ -671,6 +672,8 @@ color:rgba(57, 57, 57, 0.2);
 .formGroup input:focus~.labelInput {
   transform: scale(.75) translateY(-39px);
   background: #fbfbfb;
+  font-family: var(--font-family-700);
+  color: #393939;
 }
 .formGroup input.active{
   border: 1px solid #393939;

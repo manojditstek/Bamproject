@@ -80,7 +80,7 @@ import {
 } from 'vuex';
 export default {
     setup() {
-        const cardMethod = ref();
+        const cardMethod = ref(false);
         const toggleButton = ref(false);
          const store =  useStore();
 
