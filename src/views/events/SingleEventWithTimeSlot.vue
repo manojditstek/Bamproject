@@ -1,7 +1,7 @@
 <template>
 <div class="d-flex justify-content-between align-items-end header">
     <h2>
-        <router-link to="/">
+        <router-link to="/single-event">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
             {{singleEvent?lengthOfString(singleEvent.name):''}}
         </router-link>
@@ -10,21 +10,19 @@
 </div>
 
 <div class="innerWraper">
-    <div class="cardWrapper d-flex">
+    
+    <div class="cardWrapper d-flex">      
         <div class="dateCol">
             <EventDateFormat :eventDate="singleEvent?singleEvent.startAt:''" />
         </div>
         <div class="detailsCol">
+            <p>{{timeFormat(timeSlot.startAt)}} – {{timeFormat(timeSlot.endAt)}}</p>
             <h2>{{singleEvent.name}}</h2>
             <VenuAddress :venue_id="singleEvent.venue_id" />
         </div>
     </div>
 </div>
-<div class="cardBodyWrapper" v-if="singleEvent.timeslot?singleEvent.timeslot.length>0:''">
-     <Loader />
-     <TimeSlot :timeSlot="timeSlot" :eventName="singleEvent.name" :event_id="singleEvent.id"  :tickets="singleEvent?singleEvent:''" v-for="timeSlot in singleEvent ? singleEvent.timeslot : ''" :key="timeSlot.id"  @click="timeSlot(timeSlot)"/>
-</div>
-<div v-else class="cardBodyWrapper">
+<div  class="cardBodyWrapper">
     <Loader />
     <Tickets :ticket="ticket" :eventName="singleEvent.name" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
 </div>
@@ -53,7 +51,6 @@ import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress.v
 import EventDateFormat from "../../components/singleEvent/EventDate.vue";
 import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets.vue"
 import TotalTicketCalculation from "../../components/cartModule/TotalTicketCalculation.vue"
-import TimeSlot from "../../components/singleEvent/timeSlots/TimeSlot.vue"
 import Loader from '../../components/loader/Loader.vue';
 
 export default {
@@ -63,28 +60,40 @@ export default {
         EventDateFormat,
         Tickets,
         TotalTicketCalculation,
-        TimeSlot,
         Loader
     },
 
     setup() {
         const store = useStore();
-        function timeSlot(timeslot) {
-            alert(timeslot)
-            // router.push({
-            //     path: '/single-event-with-timeslot'
-            // })
-        }
-
          const loaderStatus = computed(() => {
             return store.state.loadingStatus;
+        });
+
+        const timeSlot = computed(() => {
+            return store.state.timeSlot;
         });
 
         const totalQuantity = computed(() => {
             return store.state.cart.itemsTotalQuantity;
         });
 
+        function timeFormat(value) {
+            return moment(value).format(" HH:mm a");
+        }
+
+        function dateFormat(value) {
+            return moment(value).format("MM/DD/YYYY ");
+        }
         
+        
+
+        function lengthOfString(value){
+            if(value?value.length>48:''){
+                return value.substring(0,48)+ '...'
+            }else{
+                return value
+            }
+        }
 
         const singleEvent = computed(() => {
             return store.state.event;
@@ -94,30 +103,16 @@ export default {
             singleEvent,
             totalQuantity,
             loaderStatus,
+            timeFormat,
+            dateFormat,
+            lengthOfString
             //startDate,
             //endDate
 
         }
     },
 
-    methods: {
-        dateFormat(value) {
-            return moment(value).format("MM/DD/YYYY ");
-        },
-        
-        timeFormat(value) {
-            return moment(value).format(" HH:mm a");
-        },
-
-        lengthOfString(value){
-            if(value?value.length>48:''){
-                return value.substring(0,48)+ '...'
-            }else{
-                return value
-            }
-        }
-    
-    },
+  
 
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
-<div class="cardWrapper d-flex" :class="toggleButton?'active':''" @click="toggleButton=!toggleButton">
-    <div class="detailsCol">
+<div class="cardWrapper d-flex" :class="toggleButton?'active':''" @click="toggleButton=!toggleButton" >
+    <div class="detailsCol" @click="timeSlots(event_id,timeSlot)">
         <h2>{{timeFormat(timeSlot.startAt)}} – {{timeFormat(timeSlot.endAt)}}</h2>
         <h6></h6>
     </div>
@@ -22,7 +22,14 @@ import moment from "moment"
 import {
     ref
 } from 'vue'
+import {
+    useRouter
+} from "vue-router";
+import {
+    useStore
+} from "vuex";
 import Tickets from '../timeSlots/ticketList/Tickets.vue'
+
 export default {
   components: { 
       Tickets 
@@ -31,12 +38,24 @@ export default {
     props: {
         timeSlot: Object,
         tickets: Array,
-        eventName:String
+        eventName:String,
+        event_id:String
     },
     setup() {
         const toggleButton = ref(false)
+        const router = useRouter();
+        const store = useStore();
+
+        function timeSlots(event_id,timeSlot) {
+            store.dispatch('sigleEventWithTimeSlot',{event_id,timeSlot});
+            router.push({
+                path: '/single-event-with-time-slots'
+            })
+        }
         return {
-            toggleButton
+            toggleButton,
+            timeSlots,
+            router
         }
     },
     methods: {

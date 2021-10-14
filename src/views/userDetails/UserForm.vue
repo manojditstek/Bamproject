@@ -1,9 +1,7 @@
 <template>
 <div class="d-flex justify-content-between align-items-end">
     <div class="alert">
-        <p>
-            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> have 9:23 minutes to complete your order
-        </p>
+        <Timer />
     </div>
 </div>
 <!--step1-->
@@ -47,7 +45,7 @@
                 <input v-if="checkMail" type="email" class="form-control" :class="data.email && !formErrors[3]?'active':formErrors[3]?' errorInput':''" v-model.trim="data.email" />
                 <input v-else type="email" class="form-control" :class="data.delivery_email && !formErrors[4]?'active':formErrors[4]?' errorInput':''" v-model.trim="data.delivery_email" @input="deliveryMail()"/>
                 <div class="labelInput">Email</div>
-               <div  class="error">{{formErrors[4]}}</div>
+               <div v-if="!checkMail "  class="error">{{formErrors[4]}}</div>
             </div>
         </div>
     </div>
@@ -56,9 +54,6 @@
         <router-link to="/" class="button btnGray">Cancel</router-link>
     </div>
 </div>
-
-
-
 </template>
 
 <script>
@@ -75,8 +70,12 @@ import {
 import {
     useStore
 } from 'vuex';
+import Timer from '../../components/CountDownTimer.vue'
 export default {
     name: 'UserForm',
+    components:{
+        Timer
+    },
 
     setup() {
         const checkMail = ref(false);
@@ -111,15 +110,6 @@ export default {
             
         }
 
-        // watchEffect(()=>{
-        //     if(data.first_name && data.last_name && data.phone  && data.email && data.delivery_email){
-        //         console.log("dataObject",data)
-        //        return true
-        //     }else{
-        //         validation();
-        //     } 
-        // })
-
         function firstName(){
             formErrors.value = [];
             if (!data.first_name) {
@@ -143,7 +133,7 @@ export default {
             if (!data.phone) {
                 formErrors.value[2] = "Phone required.";
             }
-            if (!validPhone(data.phone)) {
+            else if (!validPhone(data.phone)) {
                 formErrors.value[2] = 'Valid phone number required.';
             }
             else{
@@ -155,7 +145,7 @@ export default {
             formErrors.value = [];
            if (!data.email) {
                 formErrors.value[3] = 'Email required.';
-            } if (!validEmail(data.email)) {
+            }else if (!validEmail(data.email)) {
                 formErrors.value[3] = 'Valid email required.';
             }else{
 
@@ -167,44 +157,13 @@ export default {
             formErrors.value = [];
             if (!checkMail.value && !data.delivery_email) {
                 formErrors.value[4] = 'Email required.';
-            } if (!checkMail.value && !validEmail(data.delivery_email)) {
+            } else if (!checkMail.value && !validEmail(data.delivery_email)) {
                 formErrors.value[4] = 'Valid email required.';
             }else{
                 return true
             }
 
         }
-
-        // function validation() {
-        //       formErrors.value = [];
-        //     if (!data.first_name) {
-        //         formErrors.value[0] = "First name required.";
-        //     }
-        //     else if (!data.last_name) {
-        //         formErrors.value[1] = "Last name required.";
-        //     }
-        //     else if (!data.phone) {
-        //         formErrors.value[2] = "Phone required.";
-        //     } else if (!validPhone(data.phone)) {
-        //         formErrors.value[2] = 'Valid phone number required.';
-        //     }
-        //     else if (!data.email) {
-        //         formErrors.value[3] = 'Email required.';
-        //     } else if (!validEmail(data.email)) {
-        //         formErrors.value[3] = 'Valid email required.';
-        //     }
-        //     else if (!checkMail.value && !data.delivery_email) {
-        //         formErrors.value[4] = 'Email required.';
-        //     } else if (!checkMail.value && !validEmail(data.delivery_email)) {
-        //         formErrors.value[4] = 'Valid email required.';
-        //     }
-
-        //     else if (!formErrors.value.length) {
-
-        //         return true
-        //     }
-        //     return false
-        // }
 
         function validEmail(email) {
             var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -223,7 +182,6 @@ export default {
             totalPrice,
             currency,
             formErrors,
-            // validation,
             validEmail,
             validPhone,
             firstName,

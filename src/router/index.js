@@ -29,6 +29,12 @@ const routes = [
   },
 
   {
+    path: '/single-event-with-time-slots',
+    name: 'SingleEventWithTimeSlot',
+    component: () => import("../views/events/SingleEventWithTimeSlot.vue")
+  }, 
+
+  {
     path: '/recurring-event',
     name: 'RecurringEvent',
     component: () => import("../views/events/RecurringEvent.vue")

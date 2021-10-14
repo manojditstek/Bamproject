@@ -1,3 +1,4 @@
+import router from "../router";
 // This block of code set the single event 
 export const setEvent = (state, event) => {
   state.event = event;
@@ -19,6 +20,16 @@ export const loadingStatus = (state, newLoadingState)=>{
 export const setRecurringEvent = (state, event)=>{
   state.recurringEvent = event;
 }
+
+export const setEventWithTimeSlot = (state, eventWithTimeSlot)=>{
+  state.singleEventWithTimeSlot = eventWithTimeSlot;
+}
+
+export const setTimeSlots = (state,timeSlot)=>{
+  state.timeSlot = timeSlot;
+}
+
+
 
 /* cart module  */
 // This block of code check the items in cart
@@ -107,4 +118,43 @@ export const totalQuantity = (state) => {
   state.cart.itemsTotalQuantity = state.cart.cartItems.reduce((total, next) => {
     return total + (next.quantity)
   }, 0)
+}
+
+/*end cart module */
+
+
+/* start timer*/
+export const timer = (state) => {
+  let flag=0
+  setInterval(() => {
+    if(state.timerOut>0){
+      let setTimeFormate =state.timerOut -=1000
+      state.timerDispaly=remainingTime(setTimeFormate);
+      if(flag==state.timerOut){
+        // router.go();
+        location.reload();
+      }
+    }else {
+      state.timerOut =0;
+    }
+    
+  }, 1000)
+
+}
+
+const remainingTime = (value) => {
+  return millisToMinutesAndSeconds(value);
+}
+
+const millisToMinutesAndSeconds = (millis) => {
+  var minutes = Math.floor(millis / 60000);
+  var seconds = ((millis % 60000) / 1000).toFixed(0);
+  return `${minutes}:${(seconds < 10 ? "0" : "")}${seconds}`;
+}
+
+/* end timer */
+
+// set create order
+export const setCreateOrder = (state, order) => {
+  state.createdOrder = order;
 }

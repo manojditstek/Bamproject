@@ -11,6 +11,12 @@ export default {
         itemTotalAmount:0
     },
     recurringEvent:null,
-    loadingStatus:false
+    loadingStatus:false,
+    countDownTimer : 20,
+    timerOut:2*60000,
+    timerDispaly:null,
+    createdOrder:[],
+    singleEventWithTimeSlot:null,
+    timeSlot:null
 
 }

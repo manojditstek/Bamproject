@@ -2,7 +2,7 @@
 <div class="d-flex justify-content-between align-items-end">
     <div class="alert">
         <p>
-            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> have 9:23 minutes to complete your order
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> have {{countDown}} minutes to complete your order
         </p>
     </div>
 </div>
@@ -62,7 +62,7 @@
     </div>
     </div>
     <div class="footerActionBtn btns">
-        <router-link to="/" class="button">PAY {{totalPrice}} {{currency}}</router-link>
+        <router-link to="/" class="button" @click="completeOrder">PAY {{totalPrice}} {{currency}}</router-link>
         <router-link to="/" class="button btnGray">Cancel</router-link>
     </div>
 </div>
@@ -78,24 +78,50 @@ import {
 import {
     useStore
 } from 'vuex';
+import { StripeElementCard } from '@vue-stripe/vue-stripe';
+import DataService from "../../services/DataService"
 export default {
+  name:'Payment',
+
+ components:{
+  //  StripeElementCard,
+ },
     setup() {
         const cardMethod = ref(false);
         const toggleButton = ref(false);
+        const payResp = ref(false);
+        const formErrors = ref([]);
          const store =  useStore();
 
         const totalPrice = computed(() => {
             return store.state.cart.itemTotalAmount;
         });
+         const countDown = computed(() => {
+
+            return store.state.timerDispaly;
+        })
         let currency = computed(function () {
             return store.state.currency
         });
+        
+       async function completeOrder (){
+          await DataService.paymentMethod().then((response) => {
+            payResp.value = response.data.data;
+            }).catch(error => {
+                console.log(error);
+            }); 
+        }
+
 
         return {
             toggleButton,
+            completeOrder,
             cardMethod,
             totalPrice,
-            currency
+            currency,
+            countDown,
+            formErrors,
+            payResp
         };
     }
 };
