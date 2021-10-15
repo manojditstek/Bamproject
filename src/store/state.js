@@ -13,10 +13,13 @@ export default {
     recurringEvent:null,
     loadingStatus:false,
     countDownTimer : 20,
-    timerOut:2*60000,
+    timerOut:10*60000,
     timerDispaly:null,
-    createdOrder:[],
+    createdOrder:null,
     singleEventWithTimeSlot:null,
-    timeSlot:null
+    timeSlot:null,
+    paymentInitiateIds:{},
+    downloadTicket:null,
+    downloadTicketPdf:null
 
 }

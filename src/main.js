@@ -7,6 +7,7 @@ import store from "./store";
 import i18n from './locales/i18n'
 import vueCustomElement from 'vue-custom-element'
 import '@/assets/css/style.css' //custom css file 
+import '@stripe/stripe-js'
 
 
 createApp(App).use(vueCustomElement)

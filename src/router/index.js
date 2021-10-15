@@ -47,10 +47,19 @@ const routes = [
   {
     path: '/payment',
     name: 'Payment',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/payment/Payment.vue')
+    component: () => import('../views/payment/Payment.vue')
+  },
+
+  {
+    path: '/payment-confirm',
+    name: 'PaymentConfirm',
+    component: () => import('../views/payment/PaymentConfirm.vue')
+  },
+
+  {
+    path: '/download-ticket',
+    name: 'DownloadTicket',
+    component: () => import('../views/downloadTicket/DownloadTicket.vue')
   },
   
 ]

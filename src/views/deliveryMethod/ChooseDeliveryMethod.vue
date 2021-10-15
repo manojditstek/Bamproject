@@ -34,9 +34,9 @@
         </div>
     </div>
     <div class="footerActionBtn">
-        <!-- <button @click="createOrder" class="button">CONFIRM
-        </button> -->
-        <router-link to="/user-form" class="button"><button type="button"> CONFIRM </button></router-link>
+        <button @click="createOrder" class="button">CONFIRM
+        </button>
+        <!-- <router-link to="/user-form" class="button"><button type="button"> CONFIRM </button></router-link> -->
     </div>
     
 

@@ -14,39 +14,24 @@
     <div class="inputWrapper payment">
         <div class="inputInnerWrapper" :class="payMethod=='card' ?'active':''">
             <div class="inputGroup">
-                <input type="radio" id="test1" value="card" v-model="payMethod" @click="paymentInitiate(type='Card')" />
+                <input type="radio" id="test1" value="card" v-model="payMethod" @click="paymentInitiate(type='card')" />
                 <label for="test1"></label>
             </div>
             <h4>Credit Card</h4>
         </div>
         <div class="inputInnerWrapper" :class="payMethod=='eps' ?'active':''">
             <div class="inputGroup">
-                <input type="radio" id="test2" value="eps" v-model="payMethod" @click="paymentInitiate(type='eps')"  />
+                <input type="radio" id="test2" value="eps" v-model="payMethod" @click="paymentInitiate(type='eps')" />
                 <label for="test2"></label>
             </div>
             <h4>EPS</h4>
         </div>
     </div>
     <div class="hr"></div>
-    <div class="formInputs" v-if="payMethod=='card'">
-        <!-- <div class="formGroup">
-            <input type="text" class="form-control" />
-            <div class="labelInput">First Name</div>
-        </div>
-        <div class="formGroup space">
-            <div class="formGroup">
-                <input type="text" class="form-control" placeholder="MM/JJ" />
-            </div>
-            <div class="formGroup">
-                <input type="number" class="form-control" placeholder="Prufziffer" />
-            </div>
-        </div> -->
-        <StripeElement :element="cardElement" @change="event = $event" />
-  <button @click="registerCard">Add</button>
-  <div v-if="event && event.error">{{ event.error.message }}</div>
-
+    <div v-if="payMethod=='card'">
+        <StripeElement :element="cardElement" @change="event = $event" class="stripe" />
+        <div v-if="event && event.error">{{ event.error.message }}</div>
     </div>
-
     <div v-else>
         <div class="formInputs">
             <div class="formGroup">
@@ -69,55 +54,39 @@
         <router-link to="/" class="button btnGray">Cancel</router-link>
     </div>
 </div>
-<!-- end step 1 -->
 </template>
 
 <script>
 import {
+    defineComponent,
     ref,
-    computed,
-    defineComponent
-} from "vue";
-import {
-    useStore
-} from 'vuex';
-import {
-    useRouter
-} from "vue-router";
-import DataService from "../../services/DataService"
+    computed
+} from 'vue'
 import {
     useStripe,
     StripeElement
 } from 'vue-use-stripe'
+import {
+    useRouter
+} from "vue-router";
+import {
+    useStore
+} from 'vuex';
 export default {
-    name: 'Payment',
-
     components: {
-        //  StripeElementCard,
         StripeElement
     },
     setup() {
+        const event = ref(null);
         const payMethod = ref();
-        const router = useRouter();
-         const event = ref(null)
         const store = useStore();
+        const router = useRouter();
 
-        // const cardConfig = computed(() => {
-        //     return store.state.paymentInitiateIds;
-        // });
+        const cardConfig = computed(() => {
+            console.log('cardConfig11==>', store.state.paymentInitiateIds)
+            return store.state.paymentInitiateIds;
 
-       
-
-        // const {
-        //     stripe,
-        //     elements: [cardElement],
-        // } = useStripe({
-        //     key: "cardConfig.value.payment_intent.publishable_key" || '',
-        //     elements: [{
-        //         type: 'card',
-        //         options: {}
-        //     }],
-        // })
+        });
 
         const totalPrice = computed(() => {
             return store.state.cart.itemTotalAmount;
@@ -134,43 +103,72 @@ export default {
             return store.state.createdOrder;
         })
 
+        const {
+            stripe,
+            elements: [cardElement]
+        } = useStripe({
+            key: cardConfig.value.payment_intent ? cardConfig.value.payment_intent.publishable_key : 'pk_test_guTC6Gf1mA5drZHtmEGImgC600HIXNXoTd' || '',
+            elements: [{
+                type: 'card',
+                options: {}
+            }],
+        })
+
         async function paymentInitiate(value) {
             store.dispatch('paymentInitiate', {
                 id: orderID.value.id,
                 payMethod:value
             })
 
-            router.push({
-                path: '/payment-confirm'
-            })
+            // router.push({
+            //     path: '/payment-confirm'
+            // })
 
         }
 
-        // const registerCard = () => {
-        //     if (event.value?.complete) {
-        //         // Refer to the official docs to see all the Stripe instance properties.
-        //         // E.g. https://stripe.com/docs/js/setup_intents/confirm_card_setup
-        //         return stripe.value ?.confirmCardSetup(cardConfig.value.payment_intent.client_secret, {
-        //             payment_method: {
-        //                 card: cardElement.value,
-        //             },
-        //         })
-        //     }
-        // }
+        const registerCard = async () => {
+            if (event.value ?.complete) {
+                // Refer to the official docs to see all the Stripe instance properties.
+                // E.g. https://stripe.com/docs/js/setup_intents/confirm_card_setup
+                console.log('cardConfig12secret==>', cardConfig.value.payment_intent.client_secret)
+                const response= await stripe.value?.confirmCardPayment(cardConfig.value.payment_intent.client_secret, {
+                payment_method: {
+                  card: cardElement.value,
+                },
+              });
+              if(response.paymentIntent.status=='succeeded') {
+                console.log('paymentCompleted=>',response)
+                store.dispatch('downloadTicket', {id:orderID.value.id});
+
+                router.push({
+                path: '/download-ticket'
+            })
+              }
+
+              
+
+            }
+        }
 
         return {
-            paymentInitiate,
-            // registerCard,
+          paymentInitiate,
+            event,
+            cardElement,
+            registerCard,
+            cardConfig,
             payMethod,
             totalPrice,
             currency,
             countDown,
             orderID,
-            event,
-            // cardElement,
-            // cardConfig,
-           
-        };
-    }
-};
+
+        }
+    },
+}
 </script>
+
+<style scoped>
+.stripe {
+    background-color: rgb(254, 254, 255);
+}
+</style>

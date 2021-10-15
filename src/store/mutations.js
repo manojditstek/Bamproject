@@ -158,3 +158,15 @@ const millisToMinutesAndSeconds = (millis) => {
 export const setCreateOrder = (state, order) => {
   state.createdOrder = order;
 }
+
+export const paymentInitiate = (state, resp) => {
+  state.paymentInitiateIds = resp;
+}
+
+export const downloadTicket = (state, resp)=>{
+  state.downloadTicket = resp;
+}
+
+export const downloadTicketPdf = (state, resp)=>{
+  state.downloadTicketPdf = resp;
+}

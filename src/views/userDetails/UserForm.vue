@@ -43,7 +43,7 @@
             <label>Use the same as Billing Email</label>
             <div class="formLabel">
                 <input v-if="checkMail" type="email" class="form-control" :class="data.email && !formErrors[3]?'active':formErrors[3]?' errorInput':''" v-model.trim="data.email" />
-                <input v-else type="email" class="form-control" :class="data.delivery_email && !formErrors[4]?'active':formErrors[4]?' errorInput':''" v-model.trim="data.delivery_email" @input="deliveryMail()"/>
+                <input v-else type="email" class="form-control" :class="data.billing_email && !formErrors[4]?'active':formErrors[4]?' errorInput':''" v-model.trim="data.billing_email" @input="deliveryMail()"/>
                 <div class="labelInput">Email</div>
                <div v-if="!checkMail "  class="error">{{formErrors[4]}}</div>
             </div>
@@ -87,21 +87,30 @@ export default {
             last_name: null,
             phone: null,
             email: null,
-            delivery_email: null,
+            billing_email: null,
 
         })
 
         const totalPrice = computed(() => {
             return store.state.cart.itemTotalAmount;
         });
-        let currency = computed(function () {
+        let currency = computed(()=> {
             return store.state.currency
         });
 
+        let orderID = computed(()=>{
+            return store.state.createdOrder;
+        })
+
         function payMethod() {
             if(firstName()==true && lastName()==true && phoneNumber()==true && emailCheck()==true && deliveryMail()==true){
+                console.log('orderId==>',orderID.value.id)
+                 store.dispatch('orderContact', {
+                id:orderID.value.id,
+                data
+            })
             router.push({
-                path: '/payment'
+                path: '/payment-confirm'
             })
             }
             else{
@@ -155,9 +164,9 @@ export default {
 
         function deliveryMail(){
             formErrors.value = [];
-            if (!checkMail.value && !data.delivery_email) {
+            if (!checkMail.value && !data.billing_email) {
                 formErrors.value[4] = 'Email required.';
-            } else if (!checkMail.value && !validEmail(data.delivery_email)) {
+            } else if (!checkMail.value && !validEmail(data.billing_email)) {
                 formErrors.value[4] = 'Valid email required.';
             }else{
                 return true
@@ -188,7 +197,8 @@ export default {
             lastName,
             phoneNumber,
             emailCheck,
-            deliveryMail
+            deliveryMail,
+            orderID
         }
     },
 

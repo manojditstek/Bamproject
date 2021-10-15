@@ -22,7 +22,7 @@
                     <div class="buttonWrap d-flex">
                         <button class="minusBtn"  @click="removeFromCart()">-</button>
                         <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>
-                        <button class="plusBtn" :disabled="perUserQuantity!=''" @click="addToCart()">+</button>
+                        <button class="plusBtn " :class="perUserQuantity!=''?'disabled':''" :disabled="perUserQuantity!=''" @click="addToCart()">+</button>
                     </div>
                 </div>
             </div>
