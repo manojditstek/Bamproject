@@ -242,6 +242,10 @@ time {
   margin: 0;
   border-radius: 0;
 }
+.ticketToggle .buttonWrap .plusBtn.disabled{
+  background-color: #eee!important;
+  cursor: no-drop; 
+}
 .collapseArrow {
   background-color: #393939;
   min-width: 22px;
