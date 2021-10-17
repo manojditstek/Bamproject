@@ -20,7 +20,7 @@
         </div>
         <div class="detailsCol">
             <h2>{{ event ? event.name : "" }}</h2>
-            <VenuAddress :venue_id="event.venue_id" />
+            <VenuAddress :venue_id="event.venueId" />
             <div class="priceWrap">
                 <p>from</p>
                 0.00 EUR

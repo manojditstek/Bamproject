@@ -1,5 +1,6 @@
 <template>
-<div class="d-flex justify-content-between align-items-end header">
+<div v-if="singleEventData==''">
+<div class="d-flex justify-content-between align-items-end header" >
     <h2>
         <router-link to="/">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -22,29 +23,59 @@
         <div class="detailsCol">
             <p>{{dateFormat(recurringEvent?recurringEvent.startAt:'')}} - {{dateFormat(recurringEvent?recurringEvent.endAt:'')}}</p>
             <h2>{{recurringEvent?recurringEvent.name:''}}</h2>
-            <VenuAddress :venue_id="recurringEvent?recurringEvent.venue_id:''" />
+            <VenuAddress :venue_id="recurringEvent?recurringEvent.venueId:''" />
         </div>
     </div>
 </div>
 <div class="cardBodyWrapper">
     <Loader />
-    <div class="cardWrapper d-flex" @click="singleEvent(event.id)" v-for="event in recurringEvent?recurringEvent.occurrence:''" :key="event.id">
+    <div class="cardWrapper d-flex" @click="singleEvent(event)" v-for="event in recurringEvent?recurringEvent.occurrence:''" :key="event.id">
         <div class="dateCol">
             <EventDateFormat :eventDate="event?event.startAt:''" />
         </div>
         <div class="detailsCol">
-            <h2>{{recurringEvent?recurringEvent.name:''}}</h2>
-            <VenuAddress :venue_id="event?event.venue_id:''" />
+            <h2>{{recurringEvent?recurringEvent.name:''}}::{{event.venueId}}</h2>
+            <VenuAddress :venue_id="event?event.venueId:''" />
             <div class="priceWrap">
                 <p>from</p>0.00 EUR
             </div>
         </div>
         <div class="collapseArrow">
-             <i class="fa fa-angle-right"></i>
+            <i class="fa fa-angle-right"></i>
         </div>
     </div>
-
 </div>
+</div>
+<!-- for occurrences -->
+<div v-else>
+<div class="d-flex justify-content-between align-items-end header">
+    <h2 @click="reSet">
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+            Events
+    </h2>
+</div>
+
+<div class="innerWraper">
+    <div class="cardWrapper d-flex">
+        <div class="dateCol" v-if="singleEventData==''">
+            <h2>{{recurringEvent?recurringEvent.occurrence.length:''}}</h2>
+            <h4>Events</h4>
+        </div>
+        <div class="dateCol" v-else>
+            <EventDateFormat :eventDate="singleEventData?singleEventData.startAt:''" />
+        </div>
+        <div class="detailsCol">
+            <h2>{{recurringEvent?recurringEvent.name:''}}</h2>
+            <VenuAddress :venue_id="recurringEvent?recurringEvent.venueId:''" />
+        </div>
+    </div>
+</div>
+<div  class="cardBodyWrapper">
+    <Loader />
+    <Tickets :ticket="ticket" :eventName="recurringEvent.name" v-for="ticket in singleEvent ? singleEventData.ticketConfig : ''" :key="ticket.id" />
+</div>
+</div>
+<!-- end occurrences -->
 </template>
 
 <script>
@@ -56,7 +87,8 @@ import {
 } from 'vuex';
 import moment from "moment";
 import {
-    computed
+    computed,
+    ref
 } from '@vue/reactivity';
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress.vue"
 import EventDateFormat from "../../components/singleEvent/EventDate.vue";
@@ -82,14 +114,15 @@ export default {
     setup() {
         const router = useRouter();
         const store = useStore();
-        // const startDate = ref();
-        // const endDate = ref();
+        const singleEventData = ref('')
 
-        function singleEvent(id) {
-            store.dispatch('recurringEvent', id);
-            router.push({
-                path: '/single-event'
-            })
+        function singleEvent(evntData) {
+            singleEventData.value = evntData
+            console.log("kfhgkfgjkf", singleEventData.value)
+        }
+
+         function reSet() {
+            return singleEventData.value = '';
         }
 
         const loaderStatus = computed(() => {
@@ -102,10 +135,9 @@ export default {
         return {
             singleEvent,
             recurringEvent,
-            loaderStatus
-            //startDate,
-            //endDate
-
+            loaderStatus,
+            singleEventData,
+            reSet
         }
     },
 

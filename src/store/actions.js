@@ -174,12 +174,14 @@ export const downloadTicket = async ({commit},orderID)=>{
 }
 
 
-
+import download from 'downloadjs' //
 export const downloadTicketPdf = async ({commit},data)=>{
     console.log('PDF',data)
     await DataService.downloadTicketPdf(data)
     .then((response) => {
-        commit('downloadTicketPdf', response)
+        const content = response.headers['content-type'];
+           download(response.data, 'ticket.pdf', content)
+        commit('downloadTicketPdf', response.data)
         console.log("downloadTicketPdf",response)
         commit('loadingStatus', false)
     }).catch(error => {
@@ -191,4 +193,5 @@ export const downloadTicketPdf = async ({commit},data)=>{
         console.log(error);
     });
 }
+
 

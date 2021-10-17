@@ -115,9 +115,6 @@ paymentInitiate(data) {
  });
 }
 
-
-
-
 downloadTicket(data) {
   return axios.get(`https://org1.develop.bam.fan/event/v1/order/${data.id}?with=[order_item.ticket.[sector,ticket_config,ticket_discount,ticket_holder.address],order_contact]`,
   {headers: this.authHeader()
@@ -125,9 +122,11 @@ downloadTicket(data) {
 }
 
 downloadTicketPdf(data) {
-  return axios.get(`https://org1.develop.bam.fan/event/v1/order/${data.orderId}/download_tickets/${data.tktId}`,
-  {headers: this.authHeader()
- });
+  return axios.get(`https://org1.develop.bam.fan/event/v1/order/${data.orderId}/download_tickets`,
+  {headers:this.authHeader(),responseType: 'blob',
+ }
+ 
+ );
 }
 
 
