@@ -1,12 +1,12 @@
 <template>
 <div class="ticketToggle ">
-    <div class="cardWrapper d-flex" :class="toggleButton?'active':''"  @click="toggleButton=!toggleButton">
+    <div class="cardWrapper d-flex" :class="toggleButton?'active':''" @click="toggleButton=!toggleButton">
         <div class="detailsCol">
             <h2>{{ticket?ticket.name:'Ticket Not Found!'}} : 0.00 - {{ticket?(ticket.faceValue).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
-            <p>incl. fees</p>
+            <p>incl. fees::{{timeSlotId}}</p>
         </div>
         <div class="collapseArrow lightBg">
-             <i class="fa fa-angle-right"></i>
+            <i class="fa fa-angle-right"></i>
         </div>
     </div>
     <div v-show="toggleButton" class="toggleList">
@@ -20,7 +20,7 @@
                     </div>
                     <p>{{perUserQuantity!=''?'Per User Limit Exceeded!':''}}</p>
                     <div class="buttonWrap d-flex">
-                        <button class="minusBtn"  @click="removeFromCart()">-</button>
+                        <button class="minusBtn" @click="removeFromCart()">-</button>
                         <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>
                         <button class="plusBtn " :class="perUserQuantity!=''?'disabled':''" :disabled="perUserQuantity!=''" @click="addToCart()">+</button>
                     </div>
@@ -29,7 +29,6 @@
         </div>
     </div>
 </div>
-
 </template>
 
 <script>
@@ -37,12 +36,15 @@ import {
     ref,
     computed
 } from 'vue'
-import { useStore } from "vuex";
+import {
+    useStore
+} from "vuex";
 export default {
     name: 'Tickets',
     props: {
         ticket: Object,
-        eventName:String
+        eventName: String,
+        timeSlotId:String
     },
     setup(props) {
         const toggleButton = ref(false);
@@ -51,22 +53,27 @@ export default {
             return store.state.cart.cartItems
         });
 
-        
-        function addToCart(){
-            let ticket = {item:props.ticket,eventName:props.eventName};
+        function addToCart() {
+            let ticket = {
+                item: props.ticket,
+                eventName: props.eventName,
+                timeslot_id:props.timeSlotId
+            };
+
             store.commit("addCartItem", ticket);
         }
-        function removeFromCart(){
+
+        function removeFromCart() {
             store.commit("removeCartItem", props.ticket);
         }
 
-        let itemQuantity = computed(function(){
+        let itemQuantity = computed(function () {
             let ticket = props.ticket;
             let get_ticket = cart.value.filter((item) => item.id == ticket.id);
             return get_ticket[0]?.quantity;
         })
 
-        let perUserQuantity = computed(function(){
+        let perUserQuantity = computed(function () {
             let ticket = props.ticket;
             let perUser = cart.value.filter((item) => item.quantity == ticket.ticketsPerUser);
             return perUser;
@@ -76,7 +83,8 @@ export default {
             toggleButton,
             itemQuantity,
             addToCart,
-            removeFromCart,perUserQuantity
+            removeFromCart,
+            perUserQuantity
         }
     },
 

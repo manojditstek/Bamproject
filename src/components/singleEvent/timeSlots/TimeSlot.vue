@@ -1,7 +1,7 @@
 <template>
 <div class="cardWrapper d-flex" :class="toggleButton?'active':''" @click="toggleButton=!toggleButton" >
     <div class="detailsCol" @click="timeSlots(event_id,timeSlot)">
-        <h2>{{timeFormat(timeSlot.startAt)}} – {{timeFormat(timeSlot.endAt)}}</h2>
+        <h2>{{timeFormat(timeSlot.startAt)}} – {{timeFormat(timeSlot.endAt)}} & TimeSlot Id:{{timeSlot.id}}</h2>
         <h6></h6>
     </div>
     <div class="collapseArrow">
@@ -10,7 +10,7 @@
 </div>
 <div class=" active" v-show="toggleButton">
     <div v-if="tickets.ticketConfig" >
-        <Tickets :ticket="ticket" :eventName="eventName" v-for="ticket in tickets.ticketConfig" :key="ticket.id" />
+        <Tickets :ticket="ticket" :eventName="eventName" :timeSlotId="timeSlot.id" v-for="ticket in tickets.ticketConfig" :key="ticket.id" />
     </div>
     
 </div>

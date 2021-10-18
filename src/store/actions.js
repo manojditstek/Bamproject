@@ -27,7 +27,7 @@ export const getEvent = async({commit}, id) => {
     commit('loadingStatus', true)
     await bam.event.getEvent({ id: id }).then((response) => {
         commit('setEvent', response)
-        console.log("event",response)
+        console.log("event==>",response)
         commit('loadingStatus', false)
     }).catch(error => {
         if (error.response.status == 404) {
@@ -82,6 +82,7 @@ export const getVenue = async ({commit},venue_id) => {
 export const recurringEvent = async({commit}, id) => {
     commit('loadingStatus', true)
     await bam.event.getEvent({ id: id }).then((response) => {
+        console.log("recurrinEevent==>",response)
         commit('setRecurringEvent', response)
         commit('loadingStatus', false)
     }).catch(error => {

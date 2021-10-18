@@ -47,8 +47,7 @@ export const addCartItem = (state, data) => {
   data.item.quantity = getItemQtyCart(state.cart.cartItems, data.item) + 1;
   data.item.totalPrice = getItemTotalPrice(data.item);
   data.item.eventName = data.eventName;
-  // item.eventName=eventName;
-  // Checking for presnce of item in the cart
+  data.item.timeslot_id= data.timeslot_id;
   if (isItemInCart(state.cart.cartItems, data.item)) {
     updateCartItem(state, data.item)
   } else {
