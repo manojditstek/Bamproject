@@ -28,11 +28,12 @@
         </div>
     </div>
     <div class="hr"></div>
+    <div class="stripeWrapper">
     <div v-if="payMethod=='card'">
         <StripeElement :element="cardElement" @change="event = $event" class="stripe" />
-        <div v-if="event && event.error">{{ event.error.message }}</div>
+        <div class="error-message" v-if="event && event.error">{{ event.error.message }}</div>
     </div>
-    <div v-else>
+        <div v-else>
         <div class="formInputs">
             <div class="formGroup">
                 <input type="text" class="form-control" placeholder="Account Holder Name" />
@@ -49,6 +50,8 @@
             </div>
         </div>
     </div>
+    </div>
+
     <div class="footerActionBtn btns">
         <button class="button" @click="registerCard">PAY {{totalPrice}} {{currency}}</button>
         <router-link to="/" class="button btnGray">Cancel</router-link>
