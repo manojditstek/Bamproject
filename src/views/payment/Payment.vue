@@ -19,9 +19,9 @@
             </div>
             <h4>Credit Card</h4>
         </div>
-        <div class="inputInnerWrapper" :class="payMethod=='eps' ?'active':''">
+        <div class="inputInnerWrapper" :class="payMethod=='idealBank' ?'active':''">
             <div class="inputGroup">
-                <input type="radio" id="test2" :value="'eps'" v-model="payMethod" @click="paymentInitiate(type='eps')" />
+                <input type="radio" id="test2" :value="'idealBank'" v-model="payMethod" @click="paymentInitiate(type='eps')" />
                 <label for="test2"></label>
             </div>
             <h4>EPS</h4>
@@ -34,7 +34,7 @@
         <StripeElement :element="cardElement" @change="event = $event" class="stripe" />
         <div class="error-message" v-if="event && event.error">{{ event.error.message }}</div>
     </div>
-    <div v-if="payMethod=='eps'">
+    <div v-if="payMethod=='idealBank'">
 
         <div class="stripeWrapper">
             <Loader />
@@ -51,7 +51,7 @@
                         <option value="1">HDFC Bank</option>
                         <option value="1">HDFC Bank</option>
                     </select> -->
-                    <StripeElement :element="cardElement" @change="event = $event" class="stripe" />
+                    <StripeElement :element="epsElement" @change="event = $event" class="stripe" />
                 </div>
             </div>
         </div>
@@ -115,7 +115,7 @@ export default {
 
         const {
             stripe,
-            elements: [cardElement,idealBankElement]
+            elements: [cardElement]
         } = useStripe({
             key: cardConfig.value.payment_intent ? cardConfig.value.payment_intent.publishable_key : 'pk_test_guTC6Gf1mA5drZHtmEGImgC600HIXNXoTd' || '',
             elements: [{
@@ -124,8 +124,19 @@ export default {
             }],
         })
 
+        const {
+            stripeEps,
+            elements: [epsElement]
+        } = useStripe({
+            key: cardConfig.value.payment_intent ? cardConfig.value.payment_intent.publishable_key : 'pk_test_guTC6Gf1mA5drZHtmEGImgC600HIXNXoTd' || '',
+            elements: [{
+                type: 'idealBank',
+                options: {}
+            }],
+        })
+
         async function paymentInitiate(value) {
-            payMethod.value=value
+
             store.dispatch('paymentInitiate', {
                 id: orderID.value.id,
                 payMethod: value
@@ -166,9 +177,9 @@ export default {
                 // Refer to the official docs to see all the Stripe instance properties.
                 // E.g. https://stripe.com/docs/js/setup_intents/confirm_card_setup
                 console.log('cardConfig12secret==>', cardConfig.value.payment_intent.client_secret)
-                const response = await stripe.value ?.confirmIdealPayment(cardConfig.value.payment_intent.client_secret, {
+                const response = await stripeEps.value ?.confirmIdealPayment(cardConfig.value.payment_intent.client_secret, {
                     payment_method: {
-                        ideal: idealBankElement.value,
+                        ideal: epsElement.value,
                     },
                 });
                 if (response.paymentIntent.status == 'succeeded') {
@@ -189,6 +200,7 @@ export default {
             paymentInitiate,
             event,
             cardElement,
+            epsElement,
             registerCard,
             registerBank,
             cardConfig,
