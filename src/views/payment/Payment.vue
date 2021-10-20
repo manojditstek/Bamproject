@@ -134,7 +134,7 @@ export default {
                 options: {
                     style: {
                         base: {
-                            padding: '10px 12px',
+                            // padding: '10px 12px',
                             color: '#32325d',
                             fontSize: '16px',
                             '::placeholder': {
