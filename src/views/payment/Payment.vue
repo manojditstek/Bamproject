@@ -30,14 +30,14 @@
     <div class="hr"></div>
 
     <div v-if="payMethod=='card'" class="stripeWrapper">
-        <Loader />
+        <!-- <Loader /> -->
         <StripeElement :element="cardElement" @change="event = $event" class="stripe" />
         <div class="error-message" v-if="event && event.error">{{ event.error.message }}</div>
     </div>
     <div v-if="payMethod=='idealBank'">
 
         <div class="stripeWrapper">
-            <Loader />
+            <!-- <Loader /> -->
             <div class="formInputs">
                 <div class="formGroup">
                     <input type="text" class="form-control" placeholder="Account Holder Name" />
@@ -51,7 +51,9 @@
                         <option value="1">HDFC Bank</option>
                         <option value="1">HDFC Bank</option>
                     </select> -->
-                    <StripeElement :element="epsElement" @change="event = $event" class="stripe" />
+                    <div class="stripeWrapper">
+                      <StripeElement :element="epsElement" @change="event = $event" class="stripe" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -84,7 +86,7 @@ import Loader from '../../components/loader/Loader.vue';
 export default {
     components: {
         StripeElement,
-        Loader
+        // Loader
     },
     setup() {
         const event = ref(null);

@@ -896,3 +896,9 @@ border:1px solid var(--color);
   font-size: 12px;
   margin: 0;
 }
+/* 
+::ng-deep .SelectListItem {
+  position: relative;
+  cursor: default!important;
+  padding: 8px 12px!important;
+} */
