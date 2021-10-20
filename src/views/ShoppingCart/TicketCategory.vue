@@ -1,5 +1,6 @@
 <template>
   <div class="d-flex justify-content-between align-items-end header">
+    
       <h2> <i class="fa fa-angle-left" aria-hidden="true"></i>
           Events</h2>
       <div class="datePicker"></div>

@@ -8,6 +8,7 @@
     </div>
 </div>
 <div class="cardBodyWrapper">
+    <Loader />
     <div class="eventDiscountWrapper">
         <h2>Cart</h2>
         <div class="amountWrapper">
@@ -64,11 +65,12 @@ import {
     useStore
 } from "vuex";
 import TotalTicketCalculation from "./TotalTicketCalculation.vue"
-
+import Loader from '../loader/Loader'
 export default {
     name: "Cart",
     components: {
         TotalTicketCalculation,
+        Loader
     },
     setup() {
         const store = useStore();

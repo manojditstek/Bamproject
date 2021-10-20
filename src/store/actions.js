@@ -61,22 +61,15 @@ export const sigleEventWithTimeSlot = async({commit}, data) => {
 
 
 
-export const getVenue = async ({commit},venue_id) => {
-    let bam = new BAM("https://develop.bam.fan")
-    commit('loadingStatus', true)
-    // await DataService.venueAddress(venue_id).then((response) => {
-    //     commit('setVenue', response.data.data)
-    //     commit('loadingStatus', false)
-    await bam.venue.getVenue({ id: venue_id }).then((response) => {
-        commit('setVenue', response.data.data)
-        console.log("setVenue",response)
-        commit('loadingStatus', false)
-    }).catch(error => {
-        console.log(error);
-        commit('loadingStatus', false)
-    });
-
-}
+// export const getVenue = async ({commit},venue_id) => {
+//     commit('loadingStatus', true)
+//     await bam.venue.getVenue({ id: venue_id }).then((response) => {
+//         commit('setVenue', response)
+//         commit('loadingStatus', false)
+//     }).catch(error => {
+//         commit('loadingStatus', false)
+//     });
+// }
 
 
 export const recurringEvent = async({commit}, id) => {
@@ -103,7 +96,6 @@ export const createOrder = async({commit},cartItem)=>{
     //     format:cartItem.format
     //     })
     let orderID=null;
-    let ticketID =null;
         await DataService.createOrder(cartItem).then(async(response) => {
             console.log("events=> ",response.data.data.id)
             commit('setCreateOrder', response.data.data)
@@ -111,10 +103,13 @@ export const createOrder = async({commit},cartItem)=>{
             orderID=response.data.data.id; //getting order Id for order details
             await DataService.getOrderDetails(orderID).then(async(response)=>{
                 console.log("response-getOrderDetails:=> ",response)
-                ticketID = response.data.data.order_item[0].ticket[0].id; //getting ticket Id for ticket holder
-                await DataService.ticketHolder(ticketID).then((response)=>{
-                    console.log("response-ticketHolder:=> ",response)
-                })  
+                await response.data.data.order_item.forEach((element)  => {
+                    console.log('getting ticket Id',element.ticket[0].id),
+                      DataService.ticketHolder(element.ticket[0].id).then(async(response)=>{
+                        console.log("response-ticketHolder:=> ",response)
+                    })  
+                });
+                
 
             })
             commit('loadingStatus', false)
@@ -175,7 +170,7 @@ export const downloadTicket = async ({commit},orderID)=>{
 }
 
 
-import download from 'downloadjs' //
+import download from 'downloadjs' // for ticket download 
 export const downloadTicketPdf = async ({commit},data)=>{
     console.log('PDF',data)
     await DataService.downloadTicketPdf(data)

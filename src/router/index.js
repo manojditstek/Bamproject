@@ -51,19 +51,13 @@ const routes = [
   },
 
   {
-    path: '/payment-confirm',
-    name: 'PaymentConfirm',
-    component: () => import('../views/payment/PaymentConfirm.vue')
-  },
-
-  {
     path: '/download-ticket',
     name: 'DownloadTicket',
     component: () => import('../views/downloadTicket/DownloadTicket.vue')
   },
   
 ]
-
+ 
 const router = createRouter({
   history: createMemoryHistory(),  //createWebHashHistory(),//
   routes

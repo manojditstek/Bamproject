@@ -10,6 +10,7 @@ import '@/assets/css/style.css' //custom css file
 import '@stripe/stripe-js'
 
 
+
 createApp(App).use(vueCustomElement)
 createApp(App)
     .use(router)

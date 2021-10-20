@@ -1,42 +1,51 @@
 <template>
-    <div>
-        <p>{{venueName ? venueName.name :''}}</p>
-        <p>{{venueName ? venueName.address.city :''}}</p>
-    </div>  
+<div>
+    <p>{{venueName ? venueName.name :''}}</p>
+    <p>{{venueName ? venueName.address.city :''}}</p>
+</div>
 </template>
+
 <script>
 import {
-    ref,
     watchEffect,
-    computed
+    ref,
+    ErrorCodes
 } from "vue"
-import DataService from "../../../services/DataService"
 import {
     useStore
 } from "vuex";
+import {
+    BAM
+} from 'bam-ticketing-sdk';
+
 export default {
     name: 'VenuAddress',
     props: {
         venue_id: String,
     },
 
-     setup(props) {
+    setup(props) {
         const store = useStore();
-        const venueName= ref();
-        // const venueName = computed(() => {
-        //     return store.state.venueAddress;
-        // });
-        watchEffect(async()=>{
-            await DataService.venueAddress(props.venue_id).then((response) => {
-            venueName.value = response.data.data;
-            console.log("venueAdress", response.data.data)
-            }).catch(error => {
-                console.log(error);
-            }); 
-            // await store.dispatch('getVenue',props.venue_id)
-        })
+        const venueName = ref();
+        const bam = new BAM('https://develop.bam.fan')
+        // console.log('bam end point==>',bam)
+        bam.useOrganizer('eventspace')
+        watchEffect(async () => {
+                if (props.venue_id?props.venue_id:'') {
+                    await bam.venue.getVenue({
+                        id: props.venue_id
+                    }).then((response) => {
+                        venueName.value = response
+                        store.commit('loadingStatus', false)
+                    }).catch(error => {
+                        store.commit('loadingStatus', false)
+                    });
+                }
+                })
+        
+
         return {
-          venueName,
+            venueName,
         }
     },
 }

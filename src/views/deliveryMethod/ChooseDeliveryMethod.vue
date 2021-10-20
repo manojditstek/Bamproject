@@ -11,11 +11,13 @@
 </div>
 <!---->
 <div class="cardBodyWrapper">
+    
     <div class="innerHeading">
         <h4>Delivery Methods</h4>
         <p>Secure digital ticket or the old-school way?</p>
     </div>
     <div class="inputWrapper">
+        <Loader />
         <div class="inputInnerWrapper" :class="ticketFormat=='BAM' ?'active':''">
             <div class="inputGroup">
                 <input type="radio" id="test1" name="ticketFormat" :value="'BAM'" v-model="ticketFormat" disabled>
@@ -52,7 +54,12 @@ import {
 import {
     useStore
 } from 'vuex';
+import Loader from '../../components/loader/Loader'
 export default {
+    name:'ChooseDeliveryMethod',
+    components:{
+        Loader
+    },
     setup() {
         const ticketFormat = ref('PDF');
         const store = useStore();

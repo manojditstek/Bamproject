@@ -6,6 +6,7 @@
 </div>
 <!--step1-->
 <div class="cardBodyWrapper">
+    <Loader />
     <div class="innerHeading">
         <h4>Personal Data</h4>
     </div>
@@ -71,10 +72,12 @@ import {
     useStore
 } from 'vuex';
 import Timer from '../../components/CountDownTimer.vue'
+import Loader from '../../components/loader/Loader'
 export default {
     name: 'UserForm',
     components:{
-        Timer
+        Timer,
+        Loader
     },
 
     setup() {
@@ -101,6 +104,8 @@ export default {
         let orderID = computed(()=>{
             return store.state.createdOrder;
         })
+         let payTicketType = orderID.value.order_item.filter((item)=>item.ticket[0].ticket_config.pricing_type == 'paid');
+            console.log('payTicketType=>',payTicketType)
 
         function payMethod() {
             if(firstName()==true && lastName()==true && phoneNumber()==true && emailCheck()==true && deliveryMail()==true){
@@ -109,9 +114,15 @@ export default {
                 id:orderID.value.id,
                 data
             })
-            router.push({
-                path: '/payment-confirm'
+           if(payTicketType.length>0){
+               router.push({
+                path: '/payment'
             })
+           }else{
+            router.push({
+                path: '/download-ticket'
+            })
+           }
             }
             else{
                 return false

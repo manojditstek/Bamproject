@@ -13,7 +13,7 @@
     "@vue-stripe/vue-stripe": "^4.2.5",
     "@vue/cli-plugin-eslint": "^4.5.13",
     "axios": "^0.21.4",
-    "bam-ticketing-sdk": "^0.5.3",
+    "bam-ticketing-sdk": "^0.6.0",
     "core-js": "^3.6.5",
     "downloadjs": "^1.4.7",
     "moment": "^2.29.1",

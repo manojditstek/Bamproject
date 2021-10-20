@@ -1,7 +1,7 @@
 export default {
     event:{},
     events:[],
-    venueAddress:'',
+    venueAddress:null,
     product:[],
     currency:'EUR',
     eventName:'',

@@ -36,15 +36,11 @@
 import Event from '../components/singleEvent/Event.vue'
 import TotalTicketCalculation from '../components/cartModule/TotalTicketCalculation.vue'
 import DateRangePicker from '../components/dateRangePicker/dateRangePicker.vue'
-// import moment from "moment"
-import {BAM} from 'bam-ticketing-sdk'
-import Loader  from '../components/loader/Loader.vue'
+import Loader from '../components/loader/Loader.vue'
 import {
-    ref,
     computed,
     reactive,
     watchEffect,
-    onMounted
 } from "vue";
 import {
     useStore
@@ -60,7 +56,6 @@ export default {
 
     setup() {
         const store = useStore();
-        // const events = ref();
         const date = reactive({
             range: {
                 start: '',
@@ -68,39 +63,25 @@ export default {
             }
         })
 
+        const START_DATE = new Date();
+
         const events = computed(() => {
-            return store.state.events
+            // return store.state.events; // without filter date 
+            return store.state.events.filter(s => new Date(s.startAt) >= START_DATE)
+                .sort((a, b) => new Date(a.startAt) - new Date(b.startAt)); //with filter date 
         });
-
-        // const bam = new BAM("https://develop.bam.fan")
-        // onMounted(async () => {
-        //     events.value = await bam.event
-        //         .listEvents({
-        //             with: {
-        //                 ticket_config: true,
-        //                 occurrence: true
-        //             }
-        //         });
-        //     // const events = await bam.event.getEvent({ id: 3163 });
-        //     console.log("events: ", events.value);
-        // });
-
         const totalQuantity = computed(() => {
             return store.state.cart.itemsTotalQuantity;
         });
-
-        // const event = computed(() => {
-        //     return store.state.event;
-        // });
-
+        
         const loaderStatus = computed(() => {
             return store.state.loadingStatus;
         });
 
-        watchEffect(async() => {
-            if(date.range.start!='' && date.range.end!=''){
+        watchEffect(async () => {
+            if (date.range.start != '' && date.range.end != '') {
                 await store.dispatch('getEvents', date.range);
-            }else{
+            } else {
                 await store.dispatch('getEvents', '');
             }
         });

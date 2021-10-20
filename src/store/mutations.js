@@ -41,13 +41,14 @@ const isItemInCart = (cartItems, item) => {
   return false
 }
 
+
 // This block of code add item in cart
 export const addCartItem = (state, data) => {
   console.log("addcart=>",data.item)
   data.item.quantity = getItemQtyCart(state.cart.cartItems, data.item) + 1;
   data.item.totalPrice = getItemTotalPrice(data.item);
   data.item.eventName = data.eventName;
-  data.item.timeslot_id= data.timeslot_id;
+  data.item.timeSlotId = data.timeslot_id;
   if (isItemInCart(state.cart.cartItems, data.item)) {
     updateCartItem(state, data.item)
   } else {

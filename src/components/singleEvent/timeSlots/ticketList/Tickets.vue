@@ -1,5 +1,6 @@
 <template>
 <div class="ticketToggle ">
+    <Loader />
     <div class="cardWrapper d-flex" :class="toggleButton?'active':''" @click="toggleButton=!toggleButton">
         <div class="detailsCol">
             <h2>{{ticket?ticket.name:'Ticket Not Found!'}} : 0.00 - {{ticket?(ticket.faceValue).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
@@ -39,8 +40,12 @@ import {
 import {
     useStore
 } from "vuex";
+import Loader from '../../../loader/Loader'
 export default {
     name: 'Tickets',
+    components:{
+        Loader
+    },
     props: {
         ticket: Object,
         eventName: String,
@@ -58,7 +63,7 @@ export default {
                 item: props.ticket,
                 eventName: props.eventName,
                 timeslot_id:props.timeSlotId
-            };
+            }; 
 
             store.commit("addCartItem", ticket);
         }

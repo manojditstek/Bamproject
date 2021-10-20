@@ -7,6 +7,7 @@ class DataService {
   //this method used for authorize header
   authHeader() {
     let auth = localStorage.getItem('token'); //this token comes from app.vue component
+    console.log('ttoken=>',auth)
     if (auth) {
       return {
         Authorization: 'Bearer ' + auth

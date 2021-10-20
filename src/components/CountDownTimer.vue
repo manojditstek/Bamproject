@@ -1,7 +1,7 @@
 <template>
-    <p>
-        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> have {{countDown}} minutes to complete your order
-    </p>
+<p>
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> have {{countDown}} minutes to complete your order
+</p>
 </template>
 
 <script>
@@ -24,7 +24,6 @@ export default {
             await store.dispatch('startTimer');
         })
 
-        
         return {
             countDown,
         }
