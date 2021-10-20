@@ -896,3 +896,44 @@ border:1px solid var(--color);
   font-size: 12px;
   margin: 0;
 }
+/* 
+::ng-deep .SelectListItem {
+  position: relative;
+  cursor: default!important;
+  padding: 8px 12px!important;
+} */
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  padding-right: 4rem;
+  position: relative;
+  padding: .75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+
+}
+.alert-dismissible .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: .75rem 1.25rem;
+  color: inherit;
+  padding: 10px 12px;
+}
+.alert-dismissible button.close {
+  background-color: transparent;
+  border: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.alert-dismissible .close {
+  float: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: .5;
+}
