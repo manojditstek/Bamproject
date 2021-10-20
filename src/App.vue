@@ -9,7 +9,11 @@
     </div> -->
 
     <div class="contentInnerWraper">
-        <h3 v-if="errorMsg" class="errorMsg"> {{errorMsg.message}} </h3>
+        <div v-if="errorMsg" class=" alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+             {{errorMsg.message}} 
+        </div>
+        <!-- <h3 v-if="errorMsg" class="errorMsg"> {{errorMsg.message}} </h3> -->
 
         <router-view />
     </div>
