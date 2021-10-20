@@ -9,6 +9,7 @@
     </div> -->
 
     <div class="contentInnerWraper">
+        <h3 v-if="errorMsg" class="errorMsg"> {{errorMsg.message}} </h3>
 
         <router-view />
     </div>
@@ -19,19 +20,29 @@
 import axios from "axios";
 // import SwitchLanguage from "@/views/SwitchLanguage.vue";
 import {
-    provide
+    provide,computed
 } from 'vue'
 import state from './store/index'
 import {
     BAM
 } from 'bam-ticketing-sdk';
-
+import {
+    useStore
+} from "vuex";
 export default {
     name: "app",
 
     setup() {
+         const store = useStore();
+        //provide('store', state)
 
-        provide('store', state)
+         const errorMsg = computed(() => {
+            return store.state.errorMsg;
+        });
+
+        return{
+            errorMsg
+        }
     },
     components: {
         // SwitchLanguage,
@@ -60,3 +71,9 @@ export default {
     },
 };
 </script>
+<style>
+    .errorMsg{
+        color: rgb(245, 3, 3);
+        text-align: center;
+    }
+</style>

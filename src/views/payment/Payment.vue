@@ -131,7 +131,18 @@ export default {
             key: cardConfig.value.payment_intent ? cardConfig.value.payment_intent.publishable_key : 'pk_test_guTC6Gf1mA5drZHtmEGImgC600HIXNXoTd' || '',
             elements: [{
                 type: 'idealBank',
-                options: {}
+                options: {
+                    style: {
+                        base: {
+                            padding: '10px 12px',
+                            color: '#32325d',
+                            fontSize: '16px',
+                            '::placeholder': {
+                                color: '#aab7c4'
+                            },
+                        },
+                    },
+                }
             }],
         })
 
@@ -219,4 +230,3 @@ export default {
     background-color: rgb(254, 254, 255);
 }
 </style>
- 

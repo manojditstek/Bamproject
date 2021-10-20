@@ -20,6 +20,7 @@ export const getEvents = async ({commit}, dateRange) => {
             commit('loadingStatus', false)
         }).catch(error => {
             console.log(error);
+            commit('errorMsg',error.response.data);
         });
 }
 
@@ -36,6 +37,7 @@ export const getEvent = async({commit}, id) => {
             router.push('/')
         }
         console.log(error);
+        commit('errorMsg',error.response.data);
     });
 }
 
@@ -55,6 +57,7 @@ export const sigleEventWithTimeSlot = async({commit}, data) => {
             router.push('/')
         }
         console.log(error);
+        commit('errorMsg',error.response.data);
     });
 }
 
@@ -85,6 +88,7 @@ export const recurringEvent = async({commit}, id) => {
             router.push('/')
         // }
         console.log(error);
+        commit('errorMsg',error.response.data);
     });
 }
 
@@ -115,7 +119,8 @@ export const createOrder = async({commit},cartItem)=>{
             commit('loadingStatus', false)
             router.push('/user-form')
         }).catch(error => {
-            console.log(error);
+            console.log(error.response.data.message);
+            commit('errorMsg',error.response.data);
         });
 }
 
@@ -129,6 +134,7 @@ export const orderContact = async({commit},data)=>{
             // router.push('/payment-method')
         }).catch(error => {
             console.log(error);
+            commit('errorMsg',error.response.data);
         });
 }
 
@@ -143,6 +149,7 @@ export const paymentInitiate = async({commit},data)=>{
             // router.push('/payment-method')
         }).catch(error => {
             console.log(error);
+            commit('errorMsg',error.response.data);
         });
 }
 
@@ -166,6 +173,7 @@ export const downloadTicket = async ({commit},orderID)=>{
             router.push('/')
         }
         console.log(error);
+        commit('errorMsg',error.response.data);
     });
 }
 
@@ -187,6 +195,7 @@ export const downloadTicketPdf = async ({commit},data)=>{
             router.push('/')
         }
         console.log(error);
+        commit('errorMsg',error.response.data);
     });
 }
 

@@ -170,3 +170,7 @@ export const downloadTicket = (state, resp)=>{
 export const downloadTicketPdf = (state, resp)=>{
   state.downloadTicketPdf = resp;
 }
+
+export const errorMsg = (state, resp)=>{
+  state.errorMsg = resp;
+}

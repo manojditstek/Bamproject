@@ -20,6 +20,7 @@ export default {
     timeSlot:null,
     paymentInitiateIds:{},
     downloadTicket:null,
-    downloadTicketPdf:null
+    downloadTicketPdf:null,
+    errorMsg:null
 
 }
