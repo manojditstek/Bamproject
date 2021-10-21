@@ -46,9 +46,12 @@
 </div>
 
 <div class="footerActionBtn">
-    <router-link to="/delivery-method" class="button">
+    <!-- <router-link to="/delivery-method" class="button">
             CHECKOUT
-    </router-link>
+    </router-link> -->
+    <button class="button" :class="totalQuantity==0?'disabled':''" :disabled="totalQuantity==0" @click="checkout">
+            CHECKOUT
+    </button>
 </div>
 
 <div class="sloganText ">
@@ -64,6 +67,9 @@ import {
 import {
     useStore
 } from "vuex";
+import {
+    useRouter
+} from "vue-router";
 import TotalTicketCalculation from "./TotalTicketCalculation.vue"
 import Loader from '../loader/Loader'
 export default {
@@ -74,6 +80,7 @@ export default {
     },
     setup() {
         const store = useStore();
+        const router = useRouter();
 
         let cart = computed(function () {
             return store.state.cart
@@ -103,13 +110,21 @@ export default {
             }
         }
 
+        function checkout(){
+
+            router.push({
+                        path: '/delivery-method'
+                    })
+        }
+
         return {
             cart,
             totalPrice,
             totalQuantity,
             removeFromCart,
             currency,
-            event
+            event,
+            checkout
 
         }
     }

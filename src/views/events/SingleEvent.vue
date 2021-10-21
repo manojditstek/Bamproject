@@ -70,7 +70,6 @@ export default {
     setup() {
         const store = useStore();
         function timeSlot(timeslot) {
-            alert(timeslot)
             // router.push({
             //     path: '/single-event-with-timeslot'
             // })
@@ -94,8 +93,6 @@ export default {
             singleEvent,
             totalQuantity,
             loaderStatus,
-            //startDate,
-            //endDate
 
         }
     },

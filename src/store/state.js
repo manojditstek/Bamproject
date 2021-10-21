@@ -13,7 +13,7 @@ export default {
     recurringEvent:null,
     loadingStatus:false,
     countDownTimer : 20,
-    timerOut:1000*60000,
+    timerOut:10*60000,
     timerDispaly:null,
     createdOrder:null,
     singleEventWithTimeSlot:null,

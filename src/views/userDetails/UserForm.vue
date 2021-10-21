@@ -62,8 +62,6 @@ import {
     ref,
     reactive,
     computed,
-    watchEffect,
-    watchPostEffect
 } from "vue";
 import {
     useRouter
@@ -104,12 +102,10 @@ export default {
         let orderID = computed(()=>{
             return store.state.createdOrder;
         })
-         let payTicketType = orderID.value.order_item.filter((item)=>item.ticket[0].ticket_config.pricing_type == 'paid');
-            console.log('payTicketType=>',payTicketType)
+         let payTicketType = orderID.value.order_item.filter((item)=>item.ticket[0].ticket_config.face_value>0);
 
         function payMethod() {
             if(firstName()==true && lastName()==true && phoneNumber()==true && emailCheck()==true && deliveryMail()==true){
-                console.log('orderId==>',orderID.value.id)
                  store.dispatch('orderContact', {
                 id:orderID.value.id,
                 data

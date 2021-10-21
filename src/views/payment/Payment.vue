@@ -19,9 +19,9 @@
             </div>
             <h4>Credit Card</h4>
         </div>
-        <div class="inputInnerWrapper" :class="payMethod=='idealBank' ?'active':''">
+        <div class="inputInnerWrapper" :class="payMethod=='epsBank' ?'active':''">
             <div class="inputGroup">
-                <input type="radio" id="test2" :value="'idealBank'" v-model="payMethod" @click="paymentInitiate(type='eps')" />
+                <input type="radio" id="test2" :value="'epsBank'" v-model="payMethod" @click="paymentInitiate(type='eps')" />
                 <label for="test2"></label>
             </div>
             <h4>EPS</h4>
@@ -30,29 +30,23 @@
     <div class="hr"></div>
 
     <div v-if="payMethod=='card'" class="stripeWrapper">
-        <!-- <Loader /> -->
+        <Loader />
         <StripeElement :element="cardElement" @change="event = $event" class="stripe" />
         <div class="error-message" v-if="event && event.error">{{ event.error.message }}</div>
     </div>
-    <div v-if="payMethod=='idealBank'">
+    <div v-if="payMethod=='epsBank'">
 
         <div class="stripeWrapper">
-            <!-- <Loader /> -->
+            <Loader />
             <div class="formInputs">
                 <div class="formGroup">
-                    <input type="text" class="form-control" placeholder="Account Holder Name" />
+                    <input type="text" class="form-control" placeholder="Account Holder Name" v-model.trim="name" />
                 </div>
             </div>
             <div class="formInputs">
                 <div class="formGroup w-100">
-                    <!-- <select class="form-control" placeholder="Choose Your Bank">
-                        <option value="0" selected>Choose Your Bank</option>
-                        <option value="1">HDFC Bank</option>
-                        <option value="1">HDFC Bank</option>
-                        <option value="1">HDFC Bank</option>
-                    </select> -->
                     <div class="stripeWrapper">
-                      <StripeElement :element="epsElement" @change="event = $event" class="stripe" />
+                        <StripeElement :element="epsElement" @change="event = $event" class="stripe" />
                     </div>
                 </div>
             </div>
@@ -60,7 +54,7 @@
     </div>
 
     <div class="footerActionBtn btns">
-        <button class="button" @click="registerCard">PAY {{totalPrice}} {{currency}}</button>
+        <button class="button" :class="payMethod=='epsBank'&& name==''?'disabled':''" @click="registerCard">PAY {{totalPrice}} {{currency}}</button>
         <router-link to="/" class="button btnGray">Cancel</router-link>
     </div>
 </div>
@@ -68,9 +62,9 @@
 
 <script>
 import {
-    defineComponent,
     ref,
-    computed
+    computed,
+    watchEffect
 } from 'vue'
 import {
     useStripe,
@@ -86,18 +80,17 @@ import Loader from '../../components/loader/Loader.vue';
 export default {
     components: {
         StripeElement,
-        // Loader
+        Loader
     },
     setup() {
         const event = ref(null);
-        const payMethod = ref('card');
         const store = useStore();
         const router = useRouter();
+        const name = ref('');
 
+        const payMethod = ref('card')
         const cardConfig = computed(() => {
-            console.log('cardConfig11==>', store.state.paymentInitiateIds)
             return store.state.paymentInitiateIds;
-
         });
 
         const totalPrice = computed(() => {
@@ -114,29 +107,17 @@ export default {
         let orderID = computed(() => {
             return store.state.createdOrder;
         })
-
         const {
             stripe,
-            elements: [cardElement]
+            elements: [epsElement, cardElement]
         } = useStripe({
-            key: cardConfig.value.payment_intent ? cardConfig.value.payment_intent.publishable_key : 'pk_test_guTC6Gf1mA5drZHtmEGImgC600HIXNXoTd' || '',
+            key: 'pk_test_guTC6Gf1mA5drZHtmEGImgC600HIXNXoTd',
             elements: [{
-                type: payMethod.value,
-                options: {}
-            }],
-        })
-
-        const {
-            stripeEps,
-            elements: [epsElement]
-        } = useStripe({
-            key: cardConfig.value.payment_intent ? cardConfig.value.payment_intent.publishable_key : 'pk_test_guTC6Gf1mA5drZHtmEGImgC600HIXNXoTd' || '',
-            elements: [{
-                type: 'idealBank',
+                type: 'epsBank',
                 options: {
                     style: {
                         base: {
-                            // padding: '10px 12px',
+                            padding: '8px 10px',
                             color: '#32325d',
                             fontSize: '16px',
                             '::placeholder': {
@@ -145,66 +126,76 @@ export default {
                         },
                     },
                 }
-            }],
+            }, {
+                type: 'card',
+                options: {}
+            }, ],
+
         })
 
-        async function paymentInitiate(value) {
+        watchEffect(()=>{
+            paymentInitiate('card') 
+        })
+        
 
+        async function paymentInitiate(value) {
             store.dispatch('paymentInitiate', {
                 id: orderID.value.id,
                 payMethod: value
             })
-
-            // router.push({
-            //     path: '/payment-confirm'
-            // })
-
         }
 
         const registerCard = async () => {
             if (event.value ?.complete) {
-                // Refer to the official docs to see all the Stripe instance properties.
-                // E.g. https://stripe.com/docs/js/setup_intents/confirm_card_setup
-                console.log('cardConfig12secret==>', cardConfig.value.payment_intent.client_secret)
-                const response = await stripe.value ?.confirmCardPayment(cardConfig.value.payment_intent.client_secret, {
-                    payment_method: {
-                        card: cardElement.value,
-                    },
-                });
-                if (response.paymentIntent.status == 'succeeded') {
-                    console.log('paymentCompleted=>', response)
-                    store.dispatch('downloadTicket', {
-                        id: orderID.value.id
+                /* Card payment initiated */
+                if (payMethod.value == 'card') {
+                    const response = await stripe.value ?.confirmCardPayment(cardConfig.value.payment_intent.client_secret, {
+                        payment_method: {
+                            card: cardElement.value,
+                        },
+                    }).catch(error => {
+                        store.commit('loadingStatus', false)
+                        store.commit('errorMsg', error.response);
+                        console.log("error=>", error.response);
+
                     });
+                    if (response.paymentIntent.status == 'succeeded') {
+                        console.log('paymentCompleted=>', response)
+                        store.dispatch('downloadTicket', {
+                            id: orderID.value.id
+                        });
+                        router.push({
+                            path: '/download-ticket'
+                        })
+                    }
+                } //End card 
 
-                    router.push({
-                        path: '/download-ticket'
-                    })
-                }
+                /* For EPS Bank payment */
+                else if (payMethod.value == 'epsBank') {
+                    const response = await stripe.value ?.confirmEpsPayment(cardConfig.value.payment_intent.client_secret, {
+                        payment_method: {
+                            eps: epsElement.value,
+                            billing_details: {
+                                name: name.value,
+                            },
+                        },
+                        return_url: 'http://ditstekdemo.com/bamproject/',
+                    }).catch(error => {
+                        store.commit('loadingStatus', false)
+                        store.commit('errorMsg', error.response);
+                        console.log("error=>", error.response);
 
-            }
-        }
-
-        const registerBank = async () => {
-            if (event.value ?.complete) {
-                // Refer to the official docs to see all the Stripe instance properties.
-                // E.g. https://stripe.com/docs/js/setup_intents/confirm_card_setup
-                console.log('cardConfig12secret==>', cardConfig.value.payment_intent.client_secret)
-                const response = await stripeEps.value ?.confirmIdealPayment(cardConfig.value.payment_intent.client_secret, {
-                    payment_method: {
-                        ideal: epsElement.value,
-                    },
-                });
-                if (response.paymentIntent.status == 'succeeded') {
-                    console.log('paymentCompleted=>', response)
-                    store.dispatch('downloadTicket', {
-                        id: orderID.value.id
                     });
-
-                    router.push({
-                        path: '/download-ticket'
-                    })
-                }
+                    if (response.paymentIntent.status == 'succeeded') {
+                        console.log('paymentCompleted=>', response)
+                        store.dispatch('downloadTicket', {
+                            id: orderID.value.id
+                        });
+                        router.push({
+                            path: '/download-ticket'
+                        })
+                    }
+                } // End EPS
 
             }
         }
@@ -212,16 +203,16 @@ export default {
         return {
             paymentInitiate,
             event,
+            payMethod,
             cardElement,
             epsElement,
             registerCard,
-            registerBank,
             cardConfig,
-            payMethod,
             totalPrice,
             currency,
             countDown,
             orderID,
+            name
         }
     },
 }

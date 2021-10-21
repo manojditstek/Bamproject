@@ -44,7 +44,7 @@ const isItemInCart = (cartItems, item) => {
 
 // This block of code add item in cart
 export const addCartItem = (state, data) => {
-  console.log("addcart=>",data.item)
+  // console.log("addcart=>",data.item)
   data.item.quantity = getItemQtyCart(state.cart.cartItems, data.item) + 1;
   data.item.totalPrice = getItemTotalPrice(data.item);
   data.item.eventName = data.eventName;

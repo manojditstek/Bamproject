@@ -15,7 +15,7 @@ export const getEvents = async ({commit}, dateRange) => {
                 occurrence: true
             },
         }).then((response) => {
-            console.log("events=> ",response)
+            // console.log("events=> ",response)
             commit('setEvents', response)
             commit('loadingStatus', false)
         }).catch(error => {
@@ -28,14 +28,14 @@ export const getEvent = async({commit}, id) => {
     commit('loadingStatus', true)
     await bam.event.getEvent({ id: id }).then((response) => {
         commit('setEvent', response)
-        console.log("event==>",response)
+        // console.log("event==>",response)
         commit('loadingStatus', false)
     }).catch(error => {
-        if (error.response.status == 404) {
-            commit('loadingStatus', false)
-            alert(`Data not found`);
-            router.push('/')
-        }
+        // if (error.response.status == 404) {
+        //     commit('loadingStatus', false)
+        //     alert(`Data not found`);
+        //     router.push('/')
+        // }
         console.log(error);
         commit('errorMsg',error.response.data);
     });
@@ -43,19 +43,19 @@ export const getEvent = async({commit}, id) => {
 
 
 export const sigleEventWithTimeSlot = async({commit}, data) => {
-    console.log('timeSlotsss=>',data)
+    // console.log('timeSlotsss=>',data)
     commit('loadingStatus', true)
     await bam.event.getEvent({ id: data.event_id }).then((response) => {
         commit('setEventWithTimeSlot', response)
         commit('setTimeSlots',data.timeSlot)
-        console.log("event",response)
+        // console.log("event",response)
         commit('loadingStatus', false)
     }).catch(error => {
-        if (error.response.status == 404) {
-            commit('loadingStatus', false)
-            alert(`Data not found`);
-            router.push('/')
-        }
+        // if (error.response.status == 404) {
+        //     commit('loadingStatus', false)
+        //     alert(`Data not found`);
+        //     router.push('/')
+        // }
         console.log(error);
         commit('errorMsg',error.response.data);
     });
@@ -78,7 +78,7 @@ export const sigleEventWithTimeSlot = async({commit}, data) => {
 export const recurringEvent = async({commit}, id) => {
     commit('loadingStatus', true)
     await bam.event.getEvent({ id: id }).then((response) => {
-        console.log("recurrinEevent==>",response)
+        // console.log("recurrinEevent==>",response)
         commit('setRecurringEvent', response)
         commit('loadingStatus', false)
     }).catch(error => {
@@ -93,7 +93,7 @@ export const recurringEvent = async({commit}, id) => {
 }
 
 export const createOrder = async({commit},cartItem)=>{
-    console.log('createOrderItem=>', cartItem)
+    // console.log('createOrderItem=>', cartItem)
     commit('loadingStatus', true)
     // await bam.order.createOrder({
     //     orderItem: cartItem.cartItems,
@@ -101,14 +101,14 @@ export const createOrder = async({commit},cartItem)=>{
     //     })
     let orderID=null;
         await DataService.createOrder(cartItem).then(async(response) => {
-            console.log("events=> ",response.data.data.id)
+            // console.log("events=> ",response.data.data.id)
             commit('setCreateOrder', response.data.data)
             // commit('getOrderDetails',response.data.data.id)
             orderID=response.data.data.id; //getting order Id for order details
             await DataService.getOrderDetails(orderID).then(async(response)=>{
-                console.log("response-getOrderDetails:=> ",response)
+                // console.log("response-getOrderDetails:=> ",response)
                 await response.data.data.order_item.forEach((element)  => {
-                    console.log('getting ticket Id',element.ticket[0].id),
+                    // console.log('getting ticket Id',element.ticket[0].id),
                       DataService.ticketHolder(element.ticket[0].id).then(async(response)=>{
                         console.log("response-ticketHolder:=> ",response)
                     })  
@@ -126,10 +126,10 @@ export const createOrder = async({commit},cartItem)=>{
 
 
 export const orderContact = async({commit},data)=>{
-    console.log('orderContact=>', data)
+    // console.log('orderContact=>', data)
     commit('loadingStatus', true)
         await DataService.orderContact(data).then(async(response) => {
-            console.log("orderContact=> ",response.data.data)
+            // console.log("orderContact=> ",response.data.data)
             commit('loadingStatus', false)
             // router.push('/payment-method')
         }).catch(error => {
@@ -140,7 +140,7 @@ export const orderContact = async({commit},data)=>{
 
 
 export const paymentInitiate = async({commit},data)=>{
-    console.log('paymentInitiate1=>', data)
+    // console.log('paymentInitiate1=>', data)
     commit('loadingStatus', true)
         await DataService.paymentInitiate(data).then(async(response) => {
             // console.log("paymentInitiate2=> ",response.data.data)
@@ -160,19 +160,19 @@ export const startTimer = async ({commit})=>{
 
 
 export const downloadTicket = async ({commit},orderID)=>{
-    console.log('orderIDForPayment',orderID)
+    // console.log('orderIDForPayment',orderID)
     await DataService.downloadTicket(orderID)
     .then((response) => {
         commit('downloadTicket', response)
-        console.log("downloadTicket",response)
+        // console.log("downloadTicket",response)
         commit('loadingStatus', false)
     }).catch(error => {
-        if (error.response.status == 404) {
-            commit('loadingStatus', false)
-            alert(`Data not found`);
-            router.push('/')
-        }
-        console.log(error);
+        // if (error.response.status == 404) {
+        //     commit('loadingStatus', false)
+        //     alert(`Data not found`);
+        //     router.push('/')
+        // }
+        console.log(error.response.data);
         commit('errorMsg',error.response.data);
     });
 }
@@ -180,22 +180,21 @@ export const downloadTicket = async ({commit},orderID)=>{
 
 import download from 'downloadjs' // for ticket download 
 export const downloadTicketPdf = async ({commit},data)=>{
-    console.log('PDF',data)
+    // console.log('PDF',data)
     await DataService.downloadTicketPdf(data)
     .then((response) => {
         const content = response.headers['content-type'];
            download(response.data, 'ticket.pdf', content)
         commit('downloadTicketPdf', response.data)
-        console.log("downloadTicketPdf",response)
+        // console.log("downloadTicketPdf",response)
         commit('loadingStatus', false)
     }).catch(error => {
         if (error.response.status == 404) {
             commit('loadingStatus', false)
-            alert(`Data not found`);
-            router.push('/')
+            commit('errorMsg',error.response);
         }
-        console.log(error);
-        commit('errorMsg',error.response.data);
+        console.log("error=>",error.response);
+        
     });
 }
 

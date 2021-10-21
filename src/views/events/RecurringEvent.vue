@@ -128,7 +128,6 @@ export default {
 
         function singleEvent(evntData) {
             singleEventData.value = evntData
-            console.log("kfhgkfgjkf", singleEventData.value)
         }
 
          function reSet() {

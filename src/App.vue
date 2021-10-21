@@ -10,7 +10,7 @@
 
     <div class="contentInnerWraper">
         <div v-if="errorMsg" class=" alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <button type="button" class="close" @click="closeAlert" data-dismiss="alert">&times;</button>
              {{errorMsg.message}} 
         </div>
         <!-- <h3 v-if="errorMsg" class="errorMsg"> {{errorMsg.message}} </h3> -->
@@ -24,12 +24,12 @@
 import axios from "axios";
 // import SwitchLanguage from "@/views/SwitchLanguage.vue";
 import {
-    provide,computed
+    computed
 } from 'vue'
-import state from './store/index'
-import {
-    BAM
-} from 'bam-ticketing-sdk';
+// import state from './store/index'
+// import {
+//     BAM
+// } from 'bam-ticketing-sdk';
 import {
     useStore
 } from "vuex";
@@ -44,8 +44,13 @@ export default {
             return store.state.errorMsg;
         });
 
+        function closeAlert() {
+            store.state.errorMsg = '';
+        }
+
         return{
-            errorMsg
+            errorMsg,
+            closeAlert
         }
     },
     components: {
@@ -68,16 +73,12 @@ export default {
               .post("https://develop.bam.fan/account/v1/guest/login")
               .then((response) => {
                 localStorage.setItem("token", response.data.data.token);
-                console.log(response.data.data.token);
+                // console.log(response.data.data.token);
                 return response.data;
               });
         },
     },
 };
 </script>
-<style>
-    .errorMsg{
-        color: rgb(245, 3, 3);
-        text-align: center;
-    }
+<style> 
 </style>

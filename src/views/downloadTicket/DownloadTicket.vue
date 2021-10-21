@@ -75,15 +75,6 @@
         <div class="footerActionBtn"><router-link to="/" class="button"><button type="button"> Back to Shop </button></router-link></div>
       </div>
     </div>
-
-    <!---->
-    <!-- <div v-for="ticket in tcktDetails.data.data.order_item" :key="ticket.id">
-        <div v-for="tkt in ticket.ticket" :key="tkt.id">
-            <div>Tickets:{{tkt.ticket_config.name}} - {{tkt.ticket_config.face_value}} {{tkt.ticket_config.currency}}</div>
-        </div>
-    </div>
-    <div>Total Price : {{tcktDetails.data.data.total}}</div>
-    <button @click="downloadTkt()">Download Ticket</button>-->
   </div>
 </template>
 
