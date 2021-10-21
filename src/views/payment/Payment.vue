@@ -58,12 +58,13 @@
             </div>
           </div>
         </div>
+            <div class="footerActionBtn btns">
+                <button class="button" :class="payMethod=='epsBank'&& name==''?'disabled':''" @click="registerCard">PAY {{totalPrice}} {{currency}}</button>
+                <router-link to="/" class="button btnGray">Cancel</router-link>
+           </div>
       </div>
 
-    <div class="footerActionBtn btns">
-        <button class="button" :class="payMethod=='epsBank'&& name==''?'disabled':''" @click="registerCard">PAY {{totalPrice}} {{currency}}</button>
-        <router-link to="/" class="button btnGray">Cancel</router-link>
-      </div>
+
 
 </template>
 
@@ -96,7 +97,7 @@ export default {
         const router = useRouter();
         const name = ref('');
 
-        const payMethod = ref('card')
+        const payMethod = ref()
         const cardConfig = computed(() => {
             return store.state.paymentInitiateIds;
         });
@@ -142,9 +143,7 @@ export default {
 
         })
 
-        watchEffect(()=>{
-            paymentInitiate('card') 
-        })
+      
         
 
         async function paymentInitiate(value) {

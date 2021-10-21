@@ -15,7 +15,7 @@ export const getEvents = async ({commit}, dateRange) => {
                 occurrence: true
             },
         }).then((response) => {
-            // console.log("events=> ",response)
+            console.log("events=> ",response)
             commit('setEvents', response)
             commit('loadingStatus', false)
         }).catch(error => {
@@ -26,9 +26,12 @@ export const getEvents = async ({commit}, dateRange) => {
 
 export const getEvent = async({commit}, id) => {
     commit('loadingStatus', true)
-    await bam.event.getEvent({ id: id }).then((response) => {
+    await bam.event.getEvent({
+         id: id ,
+         with:{ticket_config:['ticket_config.ticket_discount']}
+        }).then((response) => {
         commit('setEvent', response)
-        // console.log("event==>",response)
+        console.log("event==>",response)
         commit('loadingStatus', false)
     }).catch(error => {
         // if (error.response.status == 404) {
@@ -180,7 +183,7 @@ export const downloadTicket = async ({commit},orderID)=>{
 
 import download from 'downloadjs' // for ticket download 
 export const downloadTicketPdf = async ({commit},data)=>{
-    // console.log('PDF',data)
+    console.log('PDF',data)
     await DataService.downloadTicketPdf(data)
     .then((response) => {
         const content = response.headers['content-type'];

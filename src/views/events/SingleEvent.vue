@@ -26,7 +26,7 @@
 </div>
 <div v-else class="cardBodyWrapper">
     <Loader />
-    <Tickets :ticket="ticket" :eventName="singleEvent.name" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
+    <Tickets :ticket="ticket" :ticketDscount="singleEvent.ticketDiscount" :eventName="singleEvent.name" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
 </div>
 
 <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">

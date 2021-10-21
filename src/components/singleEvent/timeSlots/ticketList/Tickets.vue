@@ -4,17 +4,20 @@
     <div class="cardWrapper d-flex" :class="toggleButton?'active':''" @click="toggleButton=!toggleButton">
         <div class="detailsCol">
             <h2>{{ticket?ticket.name:'Ticket Not Found!'}} : 0.00 - {{ticket?(ticket.faceValue).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
-            <p>incl. fees::{{timeSlotId}}</p>
+            <p>incl. fees:</p>
         </div>
-         <p>{{ticket.availableTickets!='' ?'Available':'Sold Out'}}</p>
+         <div class="ticketMessage"><div class="ticketMessageInner " :class="ticket.availableTickets!='' ?'available':'soldOut'">
+             {{ticket.availableTickets!='' ?'Available':'Sold Out'}}
+        </div></div>
         <div class="collapseArrow lightBg">
             <i class="fa fa-angle-right"></i>
         </div>
     </div>
     <div v-show="toggleButton" class="toggleList">
-        <div class="cardWrapper d-flex">
-            <div class="detailsCol">
-                <h2>Discount Category: 40,00 - 60,00 EUR</h2>
+        <div v-if="ticketDscount?ticketDscount.length>0:''">
+        <div class="cardWrapper d-flex" v-for="discount in ticketDscount" :key="discount.id">
+            <div class="detailsCol" >
+                <h2>{{discount.name}}: 40,00 - 60,00 EUR</h2>
                 <div class="priceWrap d-flex">
                     <div class="eventPrice1">
                         <p>Fees: € 2,50</p>
@@ -24,7 +27,25 @@
                     <div class="buttonWrap d-flex">
                         <button class="minusBtn" @click="removeFromCart()">-</button>
                         <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>
-                        <button class="plusBtn " :class="perUserQuantity!=''?'disabled':''" :disabled="perUserQuantity!=''" @click="addToCart()">+</button>
+                        <button class="plusBtn" :class="perUserQuantity!=''||ticket.availableTickets==''?'disabled':''" :disabled="perUserQuantity!=''||ticket.availableTickets==''" @click="addToCart()">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="cardWrapper d-flex" v-else>
+            <div class="detailsCol" >
+                <!-- <h2>Discount Category: 40,00 - 60,00 EUR</h2> -->
+                <div class="priceWrap d-flex">
+                    <div class="eventPrice1">
+                        <!-- <p>Fees: € 2,50</p>
+                        <p>Total: € 87,50</p> -->
+                    </div>
+                    <p>{{perUserQuantity!=''?'Per User Limit Exceeded!':''}}</p>
+                    <div class="buttonWrap d-flex">
+                        <button class="minusBtn" @click="removeFromCart()">-</button>
+                        <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>
+                        <button class="plusBtn" :class="perUserQuantity!=''||ticket.availableTickets==''?'disabled':''" :disabled="perUserQuantity!=''||ticket.availableTickets==''" @click="addToCart()">+</button>
                     </div>
                 </div>
             </div>
@@ -50,7 +71,8 @@ export default {
     props: {
         ticket: Object,
         eventName: String,
-        timeSlotId:String
+        timeSlotId:String,
+        ticketDscount:Object
     },
     setup(props) {
         const toggleButton = ref(false);

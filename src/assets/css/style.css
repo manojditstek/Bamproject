@@ -262,6 +262,9 @@ time {
   background-color: #eee!important;
   cursor: no-drop; 
 }
+.toggleList .cardWrapper .detailsCol {
+  border-bottom: 1px solid rgba(57, 57, 57, 0.2);
+}
 .collapseArrow {
   background-color: var(--color);
   min-width: 22px;
@@ -351,6 +354,7 @@ min-width: 32px;
 .ticketToggle .cardWrapper .collapseArrow.lightBg {
   background-color:transparent;
   width: 40px;
+  margin: 0 0 0 20px;
 }
 .ticketToggle .eventPrice1{
   text-align: left;
@@ -941,4 +945,30 @@ border:1px solid var(--color);
   color: #000;
   text-shadow: 0 1px 0 #fff;
   opacity: .5;
+}
+.ticketMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ticketMessageInner {
+  border-radius: 6px;
+  font-size: 10px;
+  color: #fbfbfb;
+  text-align: center;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  width: auto;
+  line-height: normal;
+  display: inline-block;
+  white-space: nowrap;
+  padding: 6px 18px;
+  font-family: var(--font-family-800);
+}
+.ticketMessageInner.available{
+  background-color: #393939;
+}
+.ticketMessageInner.soldOut{
+  background-color: #E94B4F;
 }

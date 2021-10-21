@@ -72,7 +72,7 @@
 </div>
 <div  class="cardBodyWrapper">
     <Loader />
-    <Tickets :ticket="ticket" :eventName="recurringEvent.name" v-for="ticket in singleEvent ? singleEventData.ticketConfig : ''" :key="ticket.id" />
+    <Tickets :ticket="ticket" :ticketDscount="recurringEvent.ticketDiscount" :eventName="recurringEvent.name" v-for="ticket in singleEvent ? singleEventData.ticketConfig : ''" :key="ticket.id" />
 </div>
 <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
     <TotalTicketCalculation />

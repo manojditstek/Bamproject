@@ -3,7 +3,7 @@
     <!-- step 1 -->
     <div class="d-flex justify-content-between align-items-end header">
       <h2>
-        <router-link to="#">Label</router-link>
+        <router-link to="/">Back to Home</router-link>
       </h2>
     </div>
     <!---->
