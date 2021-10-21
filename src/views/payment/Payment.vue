@@ -1,23 +1,29 @@
 <template>
-<div class="d-flex justify-content-between align-items-end">
-    <div class="alert">
+    <div class="d-flex justify-content-between align-items-end">
+      <div class="alert">
         <p>
-            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> have {{countDown}} minutes to complete your order
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+          have {{countDown}} minutes to complete your order
         </p>
+      </div>
     </div>
-</div>
-<!--step 1-->
-<div class="cardBodyWrapper">
-    <div class="innerHeading">
+    <div class="cardBodyWrapper">
+      <div class="innerHeading">
         <h4>Payment</h4>
-    </div>
-    <div class="inputWrapper payment">
+      </div>
+      <div class="inputWrapper payment">
         <div class="inputInnerWrapper" :class="payMethod=='card' ?'active':''">
-            <div class="inputGroup">
-                <input type="radio" id="test1" :value="'card'" v-model="payMethod" @click="paymentInitiate(type='card')" />
-                <label for="test1"></label>
-            </div>
-            <h4>Credit Card</h4>
+          <div class="inputGroup">
+            <input
+              type="radio"
+              id="test1"
+              :value="'card'"
+              v-model="payMethod"
+              @click="paymentInitiate(type='card')"
+            />
+            <label for="test1"></label>
+          </div>
+          <h4>Credit Card</h4>
         </div>
         <div class="inputInnerWrapper" :class="payMethod=='epsBank' ?'active':''">
             <div class="inputGroup">
@@ -26,8 +32,8 @@
             </div>
             <h4>EPS</h4>
         </div>
-    </div>
-    <div class="hr"></div>
+      </div>
+      <div class="hr"></div>
 
     <div v-if="payMethod=='card'" class="stripeWrapper">
         <Loader />
@@ -50,14 +56,15 @@
                     </div>
                 </div>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
 
     <div class="footerActionBtn btns">
         <button class="button" :class="payMethod=='epsBank'&& name==''?'disabled':''" @click="registerCard">PAY {{totalPrice}} {{currency}}</button>
         <router-link to="/" class="button btnGray">Cancel</router-link>
-    </div>
-</div>
+      </div>
+
 </template>
 
 <script>
@@ -78,6 +85,7 @@ import {
 } from 'vuex';
 import Loader from '../../components/loader/Loader.vue';
 export default {
+
     components: {
         StripeElement,
         Loader
@@ -107,6 +115,7 @@ export default {
         let orderID = computed(() => {
             return store.state.createdOrder;
         })
+
         const {
             stripe,
             elements: [epsElement, cardElement]
@@ -143,7 +152,9 @@ export default {
                 id: orderID.value.id,
                 payMethod: value
             })
+
         }
+    
 
         const registerCard = async () => {
             if (event.value ?.complete) {
@@ -196,7 +207,6 @@ export default {
                         })
                     }
                 } // End EPS
-
             }
         }
 
@@ -214,12 +224,15 @@ export default {
             orderID,
             name
         }
-    },
-}
+      
+
+
+  }
+};
 </script>
 
 <style scoped>
 .stripe {
-    background-color: rgb(254, 254, 255);
+  background-color: rgb(254, 254, 255);
 }
 </style>
