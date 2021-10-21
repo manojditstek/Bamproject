@@ -6,6 +6,7 @@
             <h2>{{ticket?ticket.name:'Ticket Not Found!'}} : 0.00 - {{ticket?(ticket.faceValue).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
             <p>incl. fees::{{timeSlotId}}</p>
         </div>
+         <p>{{ticket.availableTickets!='' ?'Available':'Sold Out'}}</p>
         <div class="collapseArrow lightBg">
             <i class="fa fa-angle-right"></i>
         </div>
