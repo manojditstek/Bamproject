@@ -9,6 +9,7 @@ const bam = new BAM('https://develop.bam.fan')
 
 export const getEvents = async ({commit}, dateRange) => {
     commit('loadingStatus', true)
+    
     await bam.event.listEvents({
             with: {
                 ticket_config: true,
@@ -27,8 +28,7 @@ export const getEvents = async ({commit}, dateRange) => {
 export const getEvent = async({commit}, id) => {
     commit('loadingStatus', true)
     await bam.event.getEvent({
-         id: id ,
-         with:{ticket_config:['ticket_config.ticket_discount']}
+         id: id 
         }).then((response) => {
         commit('setEvent', response)
         console.log("event==>",response)
@@ -193,8 +193,10 @@ export const downloadTicketPdf = async ({commit},data)=>{
         commit('loadingStatus', false)
     }).catch(error => {
         if (error.response.status == 404) {
+            const content = error.response.headers['content-type'];
             commit('loadingStatus', false)
-            commit('errorMsg',error.response);
+            // commit('errorMsg',error.response);
+            alert(`Data not found`);
         }
         console.log("error=>",error.response);
         

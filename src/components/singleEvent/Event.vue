@@ -25,7 +25,6 @@
                 <p>from</p>
                 0.00 EUR
             </div>
-            <p>{{event.available_tickets}}</p>
         </div>
         <div class="collapseArrow">
             <img src="assets/images/white-icon.svg" width="8" alt="image" />

@@ -51,12 +51,11 @@
               <th>{{tcktDetails.total}} {{currency}}</th>
             </tr>
           </thead>
-          <tbody v-for="(ticket,i) in tcktDetails.order_item" :key="ticket.id">
-
-            <tr v-for="tkt in ticket.ticket" :key="tkt.id">
-              <td>{{++i}}</td>
-              <td >{{tkt.ticket_config.name}} <br> Discount Category</td>
-              <td>{{tkt.ticket_config.face_value}} {{tkt.ticket_config.currency}}</td>
+          <tbody v-for="(ticket) in tcktDetails.order_item" :key="ticket.id">
+            <tr >
+              <td>{{ticket.ticket.length}}</td>
+              <td >{{ticket.ticket[0].ticket_config.name}} <br> Discount Category</td>
+              <td>{{ticket.ticket[0].ticket_config.face_value}} {{ticket.ticket[0].ticket_config.currency}}</td>
             </tr>
           </tbody>
           <tfoot>

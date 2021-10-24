@@ -2,9 +2,10 @@
 <div class="singleTicketTotalAmount d-flex">
     <TotalTicketCalculation />
     <div class="labelBtn">
-        <router-link to="/" class="button">
+        <!-- <router-link to="/" class="button">
             Back
-        </router-link>
+        </router-link> -->
+        <BackButton  :message="'Back'" class="button"/>
     </div>
 </div>
 <div class="cardBodyWrapper">
@@ -70,13 +71,15 @@ import {
 import {
     useRouter
 } from "vue-router";
-import TotalTicketCalculation from "./TotalTicketCalculation.vue"
+import TotalTicketCalculation from "./TotalTicketCalculation"
 import Loader from '../loader/Loader'
+import BackButton from '../backButton/BackButton'
 export default {
     name: "Cart",
     components: {
         TotalTicketCalculation,
-        Loader
+        Loader,
+        BackButton
     },
     setup() {
         const store = useStore();
@@ -110,6 +113,8 @@ export default {
             }
         }
 
+        
+
         function checkout(){
 
             router.push({
@@ -124,7 +129,8 @@ export default {
             removeFromCart,
             currency,
             event,
-            checkout
+            checkout,
+            
 
         }
     }

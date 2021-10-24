@@ -1,23 +1,22 @@
 <template>
 <div class="d-flex justify-content-between align-items-end header">
     <h2>
-        <router-link to="/single-event">
+        <div  @click="backButton">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
             {{singleEvent?lengthOfString(singleEvent.name):''}}
-        </router-link>
+        </div>
     </h2>
     <div class="datePicker"></div>
 </div>
 
 <div class="innerWraper">
-    
     <div class="cardWrapper d-flex">      
         <div class="dateCol">
             <EventDateFormat :eventDate="singleEvent?singleEvent.startAt:''" />
         </div>
         <div class="detailsCol">
             <p>{{timeFormat(timeSlot.startAt)}} – {{timeFormat(timeSlot.endAt)}}</p>
-            <h2>{{singleEvent.name}} & TimeSlot Id:{{timeSlot.id}}</h2>
+            <h2>{{singleEvent.name}}</h2>
             <VenuAddress :venue_id="singleEvent.venueId" />
         </div>
     </div>
@@ -47,6 +46,9 @@ import moment from "moment";
 import {
     computed
 } from '@vue/reactivity';
+import {
+    useRouter
+} from "vue-router";
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress.vue"
 import EventDateFormat from "../../components/singleEvent/EventDate.vue";
 import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets.vue"
@@ -65,6 +67,7 @@ export default {
 
     setup() {
         const store = useStore();
+        const router = useRouter();
          const loaderStatus = computed(() => {
             return store.state.loadingStatus;
         });
@@ -85,7 +88,12 @@ export default {
             return moment(value).format("MM/DD/YYYY ");
         }
         
-        
+        function backButton(){
+            store.commit("backToHome");
+            router.push({
+                path: '/single-event'
+            })
+        }
 
         function lengthOfString(value){
             if(value?value.length>48:''){
@@ -105,7 +113,8 @@ export default {
             loaderStatus,
             timeFormat,
             dateFormat,
-            lengthOfString
+            lengthOfString,
+            backButton
             //startDate,
             //endDate
 

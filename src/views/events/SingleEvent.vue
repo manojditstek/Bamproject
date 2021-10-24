@@ -1,10 +1,13 @@
 <template>
 <div class="d-flex justify-content-between align-items-end header">
     <h2>
-        <router-link to="/">
+
+        <!-- <BackButton v-if="totalQuantity" :message="singleEvent?lengthOfString(singleEvent.name):''" /> -->
+        <div @click="backToHome">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
             {{singleEvent?lengthOfString(singleEvent.name):''}}
-        </router-link>
+        </div>
+
     </h2>
     <div class="datePicker"></div>
 </div>
@@ -21,8 +24,8 @@
     </div>
 </div>
 <div class="cardBodyWrapper" v-if="singleEvent.timeslot?singleEvent.timeslot.length>0:''">
-     <Loader />
-     <TimeSlot :timeSlot="timeSlot" :eventName="singleEvent.name" :event_id="singleEvent.id"  :tickets="singleEvent?singleEvent:''" v-for="timeSlot in singleEvent ? singleEvent.timeslot : ''" :key="timeSlot.id"  @click="timeSlot(timeSlot)"/>
+    <Loader />
+    <TimeSlot :timeSlot="timeSlot" :eventName="singleEvent.name" :event_id="singleEvent.id" :tickets="singleEvent?singleEvent:''" v-for="timeSlot in singleEvent ? singleEvent.timeslot : ''" :key="timeSlot.id" />
 </div>
 <div v-else class="cardBodyWrapper">
     <Loader />
@@ -35,6 +38,7 @@
         <router-link to="/shop" class="button">Cart</router-link>
     </div>
 </div>
+<!-- <div @click="chartResp">{{'ChartKey'}}</div> -->
 </template>
 
 <script>
@@ -47,15 +51,23 @@ import {
 } from 'vuex';
 import moment from "moment";
 import {
-    computed
+    computed,
+    ref
 } from '@vue/reactivity';
+import {
+    useRouter
+} from "vue-router";
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress.vue"
 import EventDateFormat from "../../components/singleEvent/EventDate.vue";
 import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets.vue"
 import TotalTicketCalculation from "../../components/cartModule/TotalTicketCalculation.vue"
 import TimeSlot from "../../components/singleEvent/timeSlots/TimeSlot.vue"
 import Loader from '../../components/loader/Loader.vue';
-
+import {
+    SeatsioClient,
+    Region
+} from 'seatsio'
+import BackButton from '../../components/backButton/BackButton.vue'
 export default {
     name: 'SingleEvent',
     components: {
@@ -64,18 +76,15 @@ export default {
         Tickets,
         TotalTicketCalculation,
         TimeSlot,
-        Loader
+        Loader,
+        // BackButton
     },
 
     setup() {
         const store = useStore();
-        function timeSlot(timeslot) {
-            // router.push({
-            //     path: '/single-event-with-timeslot'
-            // })
-        }
-
-         const loaderStatus = computed(() => {
+        const router = useRouter();
+        const chartList = ref();
+        const loaderStatus = computed(() => {
             return store.state.loadingStatus;
         });
 
@@ -83,16 +92,33 @@ export default {
             return store.state.cart.itemsTotalQuantity;
         });
 
-        
+        //seatsio testing
+        let client = new SeatsioClient(Region.EU(), '')
+        async function chartResp() {
+            console.log("chartKey=>", singleEvent.value.chartKey)
+            chartList.value = await client.charts.retrieve(singleEvent.value.chartKey);
+            console.log("chartList=>", chartList.value)
+        }
+
+        console.log("hello", chartResp)
+
+        function backToHome() {
+            store.commit("backToHome");
+            router.push({
+                path: '/'
+            })
+        }
 
         const singleEvent = computed(() => {
             return store.state.event;
         })
         return {
-            timeSlot,
             singleEvent,
             totalQuantity,
             loaderStatus,
+            chartResp,
+            chartList,
+            backToHome
 
         }
     },
@@ -101,19 +127,19 @@ export default {
         dateFormat(value) {
             return moment(value).format("MM/DD/YYYY ");
         },
-        
+
         timeFormat(value) {
             return moment(value).format(" HH:mm a");
         },
 
-        lengthOfString(value){
-            if(value?value.length>48:''){
-                return value.substring(0,48)+ '...'
-            }else{
+        lengthOfString(value) {
+            if (value ? value.length > 48 : '') {
+                return value.substring(0, 48) + '...'
+            } else {
                 return value
             }
         }
-    
+
     },
 
 }

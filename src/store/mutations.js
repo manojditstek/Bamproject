@@ -96,6 +96,13 @@ export const removeCartItemComplete = (state, item) => {
   }
 }
 
+export const backToHome = (state) =>{
+  state.cart.cartItems = [],
+  state.cart.itemsTotalQuantity=0,
+  state.cart.itemTotalAmount=0
+}
+
+
 // This block of code used for get single item  
 const getItemQtyCart = (cartItems, item) => {
   return cartItems.filter(x => x.id === item.id)[0]?.quantity || 0

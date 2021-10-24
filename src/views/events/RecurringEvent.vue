@@ -1,85 +1,91 @@
 <template>
 <div v-if="singleEventData==''">
-<div class="d-flex justify-content-between align-items-end header" >
-    <h2>
-        <router-link to="/">
+    <div class="d-flex justify-content-between align-items-end header">
+        <h2>
+            <!-- <router-link to="/">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
             {{recurringEvent?recurringEvent.name:''}}
-        </router-link>
-    </h2>
-    <div class="datePicker">
-        <div class="datePicker">
-            <DateRangePicker v-model="range" :disabled="recurringEvent?recurringEvent.length<1:''" />
-        </div>
-    </div>
-</div>
+        </router-link> -->
 
-<div class="innerWraper">
-    <div class="cardWrapper d-flex">
-        <div class="dateCol">
-            <h2>{{recurringEvent?recurringEvent.occurrence.length:''}}</h2>
-            <h4>Events</h4>
-        </div>
-        <div class="detailsCol">
-            <p>{{dateFormat(recurringEvent?recurringEvent.startAt:'')}} - {{dateFormat(recurringEvent?recurringEvent.endAt:'')}}</p>
-            <h2>{{recurringEvent?recurringEvent.name:''}}</h2>
-            <VenuAddress :venue_id="recurringEvent?recurringEvent.venueId:''" />
-        </div>
-    </div>
-</div>
-<div class="cardBodyWrapper">
-    <Loader />
-    <div class="cardWrapper d-flex" @click="singleEvent(event)" v-for="event in recurringEvent?recurringEvent.occurrence:''" :key="event.id">
-        <div class="dateCol">
-            <EventDateFormat :eventDate="event?event.startAt:''" />
-        </div>
-        <div class="detailsCol">
-            <h2>{{recurringEvent?recurringEvent.name:''}}</h2>
-            <VenuAddress :venue_id="event?event.venueId:''" />
-            <div class="priceWrap">
-                <p>from</p>0.00 EUR
+            <BackButton v-if="totalQuantity" :message="recurringEvent?recurringEvent.name:''" />
+            <div v-else @click="backToHome">
+                <i class="fa fa-angle-left" aria-hidden="true"></i>
+                {{recurringEvent?recurringEvent.name:''}}
+            </div>
+        </h2>
+        <div class="datePicker">
+            <div class="datePicker">
+                <DateRangePicker v-model="range" :disabled="recurringEvent?recurringEvent.length<1:''" />
             </div>
         </div>
-        <div class="collapseArrow">
-            <i class="fa fa-angle-right"></i>
+    </div>
+
+    <div class="innerWraper">
+        <div class="cardWrapper d-flex">
+            <div class="dateCol">
+                <h2>{{recurringEvent?recurringEvent.occurrence.length:''}}</h2>
+                <h4>Events</h4>
+            </div>
+            <div class="detailsCol">
+                <p>{{dateFormat(recurringEvent?recurringEvent.startAt:'')}} - {{dateFormat(recurringEvent?recurringEvent.endAt:'')}}</p>
+                <h2>{{recurringEvent?recurringEvent.name:''}}</h2>
+                <VenuAddress :venue_id="recurringEvent?recurringEvent.venueId:''" />
+            </div>
         </div>
     </div>
-</div>
+    <div class="cardBodyWrapper">
+        <Loader />
+        <div class="cardWrapper d-flex" @click="singleEvent(event)" v-for="event in recurringEvent?recurringEvent.occurrence:''" :key="event.id">
+            <div class="dateCol">
+                <EventDateFormat :eventDate="event?event.startAt:''" />
+            </div>
+            <div class="detailsCol">
+                <h2>{{recurringEvent?recurringEvent.name:''}}</h2>
+                <VenuAddress :venue_id="event?event.venueId:''" />
+                <div class="priceWrap">
+                    <p>from</p>0.00 EUR
+                </div>
+            </div>
+            <div class="collapseArrow">
+                <i class="fa fa-angle-right"></i>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- for occurrences -->
 <div v-else>
-<div class="d-flex justify-content-between align-items-end header">
-    <h2 @click="reSet">
+    <div class="d-flex justify-content-between align-items-end header">
+        <h2 @click="reSet">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
             {{recurringEvent?recurringEvent.name:''}}
-    </h2>
-</div>
+        </h2>
+    </div>
 
-<div class="innerWraper">
-    <div class="cardWrapper d-flex">
-        <div class="dateCol" v-if="singleEventData==''">
-            <h2>{{recurringEvent?recurringEvent.occurrence.length:''}}</h2>
-            <h4>Event</h4>
-        </div>
-        <div class="dateCol" v-else>
-            <EventDateFormat :eventDate="singleEventData?singleEventData.startAt:''" />
-        </div>
-        <div class="detailsCol">
-            <h2>{{recurringEvent?recurringEvent.name:''}}</h2>
-            <VenuAddress :venue_id="recurringEvent?recurringEvent.venueId:''" />
+    <div class="innerWraper">
+        <div class="cardWrapper d-flex">
+            <div class="dateCol" v-if="singleEventData==''">
+                <h2>{{recurringEvent?recurringEvent.occurrence.length:''}}</h2>
+                <h4>Event</h4>
+            </div>
+            <div class="dateCol" v-else>
+                <EventDateFormat :eventDate="singleEventData?singleEventData.startAt:''" />
+            </div>
+            <div class="detailsCol">
+                <h2>{{recurringEvent?recurringEvent.name:''}}</h2>
+                <VenuAddress :venue_id="recurringEvent?recurringEvent.venueId:''" />
+            </div>
         </div>
     </div>
-</div>
-<div  class="cardBodyWrapper">
-    <Loader />
-    <Tickets :ticket="ticket" :ticketDscount="recurringEvent.ticketDiscount" :eventName="recurringEvent.name" v-for="ticket in singleEvent ? singleEventData.ticketConfig : ''" :key="ticket.id" />
-</div>
-<div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
-    <TotalTicketCalculation />
-    <div class="labelBtn">
-        <router-link to="/shop" class="button">Cart</router-link>
+    <div class="cardBodyWrapper">
+        <Loader />
+        <Tickets :ticket="ticket" :ticketDscount="recurringEvent.ticketDiscount" :eventName="recurringEvent.name" v-for="ticket in singleEvent ? singleEventData.ticketConfig : ''" :key="ticket.id" />
     </div>
-</div>
+    <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
+        <TotalTicketCalculation />
+        <div class="labelBtn">
+            <router-link to="/shop" class="button">Cart</router-link>
+        </div>
+    </div>
 </div>
 <!-- end occurrences -->
 </template>
@@ -102,6 +108,7 @@ import DateRangePicker from "../../components/dateRangePicker/dateRangePicker.vu
 import Loader from '../../components/loader/Loader.vue'
 import Tickets from '../../components/singleEvent/timeSlots/ticketList/Tickets.vue'
 import TotalTicketCalculation from '../../components/cartModule/TotalTicketCalculation.vue'
+import BackButton from '../../components/backButton/BackButton.vue'
 export default {
     name: 'RecurringEvent',
     data() {
@@ -118,7 +125,8 @@ export default {
         DateRangePicker,
         Loader,
         Tickets,
-        TotalTicketCalculation
+        TotalTicketCalculation,
+        BackButton
     },
 
     setup() {
@@ -130,7 +138,8 @@ export default {
             singleEventData.value = evntData
         }
 
-         function reSet() {
+        function reSet() {
+            store.commit("backToHome");
             return singleEventData.value = '';
         }
 
@@ -146,13 +155,20 @@ export default {
             return store.state.cart.itemsTotalQuantity;
         });
 
+        function backToHome() {
+            router.push({
+                path: '/'
+            })
+        }
+
         return {
             singleEvent,
             recurringEvent,
             loaderStatus,
             singleEventData,
             reSet,
-            totalQuantity
+            totalQuantity,
+            backToHome
         }
     },
 

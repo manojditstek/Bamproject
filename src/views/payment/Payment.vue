@@ -190,13 +190,14 @@ export default {
                             },
                         },
                         return_url: 'http://ditstekdemo.com/bamproject/',
+                        
                     }).catch(error => {
                         store.commit('loadingStatus', false)
                         store.commit('errorMsg', error.response);
                         console.log("error=>", error.response);
 
                     });
-                    if (response.paymentIntent.status == 'succeeded') {
+                    if (response.paymentIntent.status == 200) {
                         console.log('paymentCompleted=>', response)
                         store.dispatch('downloadTicket', {
                             id: orderID.value.id
