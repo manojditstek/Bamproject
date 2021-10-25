@@ -1,12 +1,13 @@
 <template>
-<div class="contentWraper">
-    <!-- <div id="nav">
-      <router-link to="/">{{ $t("message.home") }}</router-link> |
-      <router-link to="/about">{{ $t("message.about") }}</router-link> |
-    </div> -->
-    <!-- <div class="text-center">
-       <switchLanguage />
-    </div> -->
+    <div class="mainWrapper">
+        <div class="contentWraper">
+            <!-- <div id="nav">
+            <router-link to="/">{{ $t("message.home") }}</router-link> |
+            <router-link to="/about">{{ $t("message.about") }}</router-link> |
+            </div> -->
+            <!-- <div class="text-center">
+            <switchLanguage />
+            </div> -->
 
     <div class="contentInnerWraper">
         <!-- <div v-if="errorMsg" class=" alert-danger alert-dismissible">
@@ -16,9 +17,10 @@
         <error-message />
        
 
-        <router-view />
+                <router-view />
+            <!-- </div> -->
+        </div>
     </div>
-</div>
 </template>
 
 <script>
