@@ -1,7 +1,7 @@
 @import "../css/font-awesome.min.css";
 @import "../css/fonts.css";
 @import "../css/variable.css";
-
+@import "../css/responsive.css";
 body{
   font-family: var(--font-family-400);
   font-size: 0.8rem;
@@ -44,6 +44,9 @@ h1,h2,h3,h4,h5,h6{
 .d-flex{
   display: flex;
 }
+.brdrtop{
+  border-top: 1px solid #D7D7D7;  
+}
 .hr {
   border-top: 1px solid rgba(57, 57, 57, 0.2);
   margin: 0 0 20px 0;
@@ -71,6 +74,9 @@ h1,h2,h3,h4,h5,h6{
   margin: 0 auto;
   width:100%;
   background-color:var(--color-white);
+}
+.mainWrapper{
+  padding: 0 15px;
 }
 .header {
   border-bottom: 1px solid #D7D7D7;
@@ -247,6 +253,16 @@ time {
   margin: 0;
   line-height: 18.2px;
 }
+.limitExceeded {
+  display: flex;
+  align-items: center;
+  padding: 0 15px 0 0;
+}
+.limitExceededInner {
+  font-size: 12px;
+  line-height: normal;
+  font-weight: bold;
+}
 .ticketToggle .cardWrapper{
   margin: 0; 
 }
@@ -354,7 +370,6 @@ min-width: 32px;
 .ticketToggle .cardWrapper .collapseArrow.lightBg {
   background-color:transparent;
   width: 40px;
-  margin: 0 0 0 20px;
 }
 .ticketToggle .eventPrice1{
   text-align: left;
@@ -364,9 +379,9 @@ min-width: 32px;
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
 }
-.ticketToggle .buttonWrap{
+/* .ticketToggle .buttonWrap{
   padding: 0;
-}
+} */
 .ticketToggle .buttonWrap span{
   width: 32px;
   height: 32px;
@@ -950,6 +965,7 @@ border:1px solid var(--color);
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 15px 0 0;
 }
 
 .ticketMessageInner {
@@ -971,4 +987,30 @@ border:1px solid var(--color);
 }
 .ticketMessageInner.soldOut{
   background-color: #E94B4F;
+}
+.ticketInfo h1 {
+  color: var(--color);
+  font-size: 26px;
+  margin: 0;
+}
+.ticketInfo p{
+  color: var(--color);
+  font-size:14px;
+  margin: 0 0 10px 0;
+}
+.ticketCategory {
+  display: flex;
+  justify-content: space-between;
+}
+.ticketCategory h2 {
+  font-size: 14px;
+}
+.ticketCategory h2 span {
+  display: block;
+  font-family: var(--font-family-300);
+}
+.ticketCategory .amount {
+  color: var(--color);
+  font-family: var(--font-family-400);
+  font-size:14px;
 }

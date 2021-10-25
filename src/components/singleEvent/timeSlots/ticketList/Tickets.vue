@@ -11,7 +11,11 @@
                 {{ticket.availableTickets!='' ?'':'Sold Out'}}
             </div>
         </div>
-        <p>{{perUserQuantity!=''?'Per User Limit Exceeded!':''}}</p>
+        <div class="limitExceeded">
+            <div class="limitExceededInner">
+            {{perUserQuantity!=''?'Per User Limit Exceeded!':''}}
+            </div>
+        </div>
         <div class="buttonWrap d-flex">
             <button class="minusBtn" @click="removeFromCart()">-</button>
             <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>
