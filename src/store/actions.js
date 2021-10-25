@@ -80,16 +80,16 @@ export const sigleEventWithTimeSlot = async ({
     });
 }
 
-export const workSpaceKey = async ({
-    commit
-}) => {
-    let response = await bam.account.getSeatsWorkspacesForOrganizer({
-        OrganizerId: 'eventspace'
-    });
-    console.log("sdfhsjkhk", response)
-    commit('workSpaceKey', response)
+// export const workSpaceKey = async ({
+//     commit
+// }) => {
+//     let response = await bam.account.getSeatsWorkspacesForOrganizer({
+//         OrganizerId: 'eventspace'
+//     });
+//     console.log("sdfhsjkhk", response)
+//     commit('workSpaceKey', response)
 
-}
+// }
 
 
 // export const getVenue = async ({commit},venue_id) => {
@@ -130,7 +130,7 @@ export const recurringEvent = async ({
 export const createOrder = async ({
     commit
 }, cartItem) => {
-    // console.log('createOrderItem=>', cartItem)
+    console.log('createOrderItem=>', cartItem)
     commit('loadingStatus', true)
     // await bam.order.createOrder({
     //     orderItem: cartItem.cartItems,

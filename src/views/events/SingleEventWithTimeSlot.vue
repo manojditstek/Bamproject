@@ -89,7 +89,7 @@ export default {
         }
         
         function backButton(){
-            store.commit("backToHome");
+            // store.commit("backToHome");
             router.push({
                 path: '/single-event'
             })

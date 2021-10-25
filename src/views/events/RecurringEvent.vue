@@ -139,7 +139,7 @@ export default {
         }
 
         function reSet() {
-            store.commit("backToHome");
+            //store.commit("backToHome");
             return singleEventData.value = '';
         }
 

@@ -9,11 +9,12 @@
     </div> -->
 
     <div class="contentInnerWraper">
-        <div v-if="errorMsg" class=" alert-danger alert-dismissible">
+        <!-- <div v-if="errorMsg" class=" alert-danger alert-dismissible">
             <button type="button" class="close" @click="closeAlert" data-dismiss="alert">&times;</button>
              {{errorMsg.message}} 
-        </div>
-        <!-- <h3 v-if="errorMsg" class="errorMsg"> {{errorMsg.message}} </h3> -->
+        </div> -->
+        <error-message />
+       
 
         <router-view />
     </div>
@@ -33,6 +34,7 @@ import {
 import {
     useStore
 } from "vuex";
+import ErrorMessage from './components/errorMessages/ErrorMessages.vue'
 export default {
     name: "app",
 
@@ -55,6 +57,7 @@ export default {
     },
     components: {
         // SwitchLanguage,
+        ErrorMessage
     },
     mounted() {
         console.log(process.env.VUE_APP_ROOT_API);

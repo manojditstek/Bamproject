@@ -14,9 +14,9 @@
         </div>
         <p>{{perUserQuantity!=''?'Per User Limit Exceeded!':''}}</p>
         <div class="buttonWrap d-flex">
-            <button class="minusBtn" @click="removeFromCart(discount)">-</button>
+            <button class="minusBtn" @click="removeFromCart()">-</button>
             <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>
-            <button class="plusBtn" :class="perUserQuantity!=''||discount.availableTickets==''?'disabled':''" :disabled="perUserQuantity!=''||discount.availableTickets==''" @click="addToCart(discount)">+</button>
+            <button class="plusBtn" :class="perUserQuantity!=''||discount.availableTickets==''?'disabled':''" :disabled="perUserQuantity!=''||discount.availableTickets==''" @click="addToCart()">+</button>
         </div>
     </div>
 </div>
@@ -52,7 +52,8 @@ export default {
 
         function addToCart() {
             let ticket = {
-                item: props.discount,
+                item: props.ticket,
+                ticketDiscount:props.discount.value,
                 eventName: props.eventName,
                 timeslot_id: props.timeSlotId
 
@@ -62,18 +63,18 @@ export default {
         }
 
         function removeFromCart() {
-            store.commit("removeCartItem", props.discount);
+            store.commit("removeCartItem", props.ticket);
 
         }
         let itemQuantity = computed(function () {
-            let discount = props.discount;
-            let get_ticket = cart.value.filter((item) => item.id == discount.id);
+            let ticket = props.ticket;
+            let get_ticket = cart.value.filter((item) => item.id == ticket.id);
             return get_ticket[0] ?.quantity;
         })
 
         let perUserQuantity = computed(function () {
-            let discount = props.discount;
-            let perUser = cart.value.filter((item) => item.quantity == discount.ticketsPerUser);
+             let ticket = props.ticket;
+            let perUser = cart.value.filter((item) => item.quantity == ticket.ticketsPerUser && item.id == ticket.id);
             return perUser;
         })
 

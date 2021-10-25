@@ -75,8 +75,10 @@ class DataService {
   createOrder(cartItem) {
     return axios.post(`https://org1.develop.bam.fan/event/v1/order`, {
       order_item: cartItem.cartItems,
-      format:cartItem.format},{
-     headers: this.authHeader()
+      format:cartItem.format
+    },
+    {
+      headers: this.authHeader()
    });
  }
 

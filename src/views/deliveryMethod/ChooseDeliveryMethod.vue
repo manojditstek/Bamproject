@@ -71,7 +71,7 @@ export default {
             let cartItems = cart.value.cartItems.map(elementKey => ({
                 ticket_config_id:elementKey.id,
                 quantity:elementKey.quantity,
-                timeslot_id:elementKey.timeslot_id
+                timeslot_id:elementKey.timeSlotId
             }));
             let format = ticketFormat.value
             store.dispatch('createOrder', {

@@ -24,7 +24,7 @@
     <div v-else>
     <div class="cardWrapper d-flex" :class="toggleButton?'active':''" @click="toggleButton=!toggleButton">
         <div class="detailsCol">
-            <h2>{{ticket?ticket.name:'Ticket Not Found!'}} : 0.00 - {{ticket?(ticket.faceValue).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
+            <h2>{{ticket?ticket.name:'Ticket Not Found!'}} :{{ticket?(ticket.faceValue).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
             <p>incl. fees:€ 0.00 </p>
         </div>
         <div class="ticketMessage">
@@ -42,11 +42,11 @@
             <i class="fa fa-angle-right"></i>
         </div>
     </div>
-    <div  v-if="ticketDscount?ticketDscount.length>0:''" v-show="toggleButton" class="toggleList">
+    <!-- <div  v-if="ticketDscount?ticketDscount.length>0:''" v-show="toggleButton" class="toggleList">
         <div v-if="ticketDscount?ticketDscount.length>0:''">
-            <TicketsWithDiscount :discount="discount" v-for="discount in ticketDscount" :key="discount.id"/>
+            <TicketsWithDiscount :ticket="ticket" :discount="discount" v-for="discount in ticketDscount" :key="discount.id"/>
         </div>
-    </div>
+    </div> -->
     </div>
 </div>
 </template>
@@ -65,7 +65,7 @@ export default {
     name: 'Tickets',
     components: {
         Loader,
-        TicketsWithDiscount
+        // TicketsWithDiscount
     },
     props: {
         ticket: Object,

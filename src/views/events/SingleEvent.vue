@@ -97,10 +97,10 @@ export default {
         //    store.dispatch('workSpaceKey')
         })
     }
-        const workSpaceKey = computed(() => {
-            return store.state.workSpaceKey;
-        });
-        console.log("workSpaceKey", workSpaceKey)
+        // const workSpaceKey = computed(() => {
+        //     return store.state.workSpaceKey;
+        // });
+        // console.log("workSpaceKey", workSpaceKey)
 
         //seatsio testing
         let client = new SeatsioClient(Region.EU(), '')
@@ -113,14 +113,14 @@ export default {
         console.log("hello", chartResp)
 
         function backToHome() {
-            store.commit("backToHome");
+            // store.commit("backToHome");
             router.push({
                 path: '/'
             })
         }
 
         const singleEvent = computed(() => {
-             store.dispatch('workSpaceKey')
+            //  store.dispatch('workSpaceKey')
             return store.state.event;
         })
         return {
@@ -130,7 +130,7 @@ export default {
             chartResp,
             chartList,
             backToHome,
-            workSpaceKey
+            // workSpaceKey
 
         }
     },

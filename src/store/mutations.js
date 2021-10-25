@@ -110,7 +110,7 @@ const getItemQtyCart = (cartItems, item) => {
 
 // This block of code used for get single item price 
 const getItemTotalPrice = (item) => {
-  return item.quantity * item.faceValue;
+  return (item.quantity * item.faceValue);
 }
 
 // This block of code calculate total price 
@@ -182,6 +182,6 @@ export const errorMsg = (state, resp)=>{
   state.errorMsg = resp;
 }
 
-export const workSpaceKey = (state, resp)=>{
-  state.workSpaceKey=resp
-}
+// export const workSpaceKey = (state, resp)=>{
+//   state.workSpaceKey=resp
+// }
