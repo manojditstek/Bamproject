@@ -37,9 +37,9 @@ export default {
     name: 'TimeSlot',
     props: {
         timeSlot: Object,
-        tickets: Array,
+        tickets: Object,
         eventName:String,
-        event_id:String
+        event_id:Number
     },
     setup() {
         const toggleButton = ref(false)

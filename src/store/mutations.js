@@ -181,3 +181,7 @@ export const downloadTicketPdf = (state, resp)=>{
 export const errorMsg = (state, resp)=>{
   state.errorMsg = resp;
 }
+
+export const workSpaceKey = (state, resp)=>{
+  state.workSpaceKey=resp
+}

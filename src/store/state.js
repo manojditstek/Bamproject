@@ -21,6 +21,7 @@ export default {
     paymentInitiateIds:{},
     downloadTicket:null,
     downloadTicketPdf:null,
-    errorMsg:null
+    errorMsg:null,
+    workSpaceKey:null
 
 }

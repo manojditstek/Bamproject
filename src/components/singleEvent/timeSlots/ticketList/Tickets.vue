@@ -17,8 +17,7 @@
             <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>
             <button class="plusBtn" :class="perUserQuantity!=''||ticket.availableTickets==''?'disabled':''" :disabled="perUserQuantity!=''||ticket.availableTickets==''" @click="addToCart()">+</button>
         </div>
-        <div class="collapseArrow lightBg" >
-            
+        <div class="collapseArrow lightBg" >   
         </div>
     </div>
 
@@ -32,6 +31,12 @@
             <div class="ticketMessageInner " :class="ticket.availableTickets!='' ?'':'soldOut'">
                 {{ticket.availableTickets!='' ?'':'Sold Out'}}
             </div>
+        </div>
+        <p>{{perUserQuantity!=''?'Per User Limit Exceeded!':''}}</p>
+        <div class="buttonWrap d-flex">
+            <button class="minusBtn" @click="removeFromCart()">-</button>
+            <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>
+            <button class="plusBtn" :class="perUserQuantity!=''||ticket.availableTickets==''?'disabled':''" :disabled="perUserQuantity!=''||ticket.availableTickets==''" @click="addToCart()">+</button>
         </div>
         <div class="collapseArrow lightBg" >
             <i class="fa fa-angle-right"></i>
@@ -65,7 +70,7 @@ export default {
     props: {
         ticket: Object,
         eventName: String,
-        timeSlotId: String,
+        timeSlotId: Number,
         ticketDscount: Object,
         eventChartKey: String
     },

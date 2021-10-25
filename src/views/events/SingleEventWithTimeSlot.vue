@@ -15,7 +15,7 @@
             <EventDateFormat :eventDate="singleEvent?singleEvent.startAt:''" />
         </div>
         <div class="detailsCol">
-            <p>{{timeFormat(timeSlot.startAt)}} – {{timeFormat(timeSlot.endAt)}}</p>
+            <p>{{timeFormat(timeSlot?timeSlot.startAt:'')}} – {{timeFormat(timeSlot?timeSlot.endAt:'')}}</p>
             <h2>{{singleEvent.name}}</h2>
             <VenuAddress :venue_id="singleEvent.venueId" />
         </div>
@@ -23,7 +23,7 @@
 </div>
 <div  class="cardBodyWrapper">
     <Loader />
-    <Tickets :ticket="ticket" :ticketDscount="singleEvent.ticketDiscount"  :timeSlotId="timeSlot.id" :eventName="singleEvent.name" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
+    <Tickets :ticket="ticket" :ticketDscount="singleEvent.ticketDiscount"  :timeSlotId="timeSlot?timeSlot.id:''" :eventName="singleEvent.name" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
 </div>
 
 <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">

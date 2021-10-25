@@ -1,4 +1,5 @@
-import { createI18n } from 'vue-i18n'
+// import { createI18n } from 'vue-i18n'
+import { createI18n } from 'vue-i18n/index'
 import English from './en'
 import Spanish from './es'
 const i18n = createI18n({

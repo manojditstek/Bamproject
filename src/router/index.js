@@ -23,6 +23,11 @@ const routes = [
     component: () => import("../views/userDetails/UserForm.vue")
   },
   {
+    path: '/user-kyc-form',
+    name: 'UserKycForm',
+    component: () => import("../views/userDetails/UserKycForm.vue")
+  },
+  {
     path: '/single-event',
     name: 'SingleEvent',
     component: () => import("../views/events/SingleEvent.vue")
@@ -59,7 +64,7 @@ const routes = [
 ]
  
 const router = createRouter({
-  history: createMemoryHistory(),  //createWebHashHistory(),//
+  history: createWebHashHistory(),//createMemoryHistory(),  //
   routes
 })
 

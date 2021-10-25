@@ -52,7 +52,7 @@ import {
 import moment from "moment";
 import {
     computed,
-    ref
+    ref,watchEffect
 } from '@vue/reactivity';
 import {
     useRouter
@@ -92,6 +92,16 @@ export default {
             return store.state.cart.itemsTotalQuantity;
         });
 
+    if(singleEvent){
+        watchEffect(()=>{
+        //    store.dispatch('workSpaceKey')
+        })
+    }
+        const workSpaceKey = computed(() => {
+            return store.state.workSpaceKey;
+        });
+        console.log("workSpaceKey", workSpaceKey)
+
         //seatsio testing
         let client = new SeatsioClient(Region.EU(), '')
         async function chartResp() {
@@ -110,6 +120,7 @@ export default {
         }
 
         const singleEvent = computed(() => {
+             store.dispatch('workSpaceKey')
             return store.state.event;
         })
         return {
@@ -118,7 +129,8 @@ export default {
             loaderStatus,
             chartResp,
             chartList,
-            backToHome
+            backToHome,
+            workSpaceKey
 
         }
     },

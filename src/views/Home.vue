@@ -28,8 +28,6 @@
         </div>
     </div>
 </div>
-<div>
-</div>
 </template>
 
 <script>
@@ -73,7 +71,7 @@ export default {
         const totalQuantity = computed(() => {
             return store.state.cart.itemsTotalQuantity;
         });
-        
+
         const loaderStatus = computed(() => {
             return store.state.loadingStatus;
         });

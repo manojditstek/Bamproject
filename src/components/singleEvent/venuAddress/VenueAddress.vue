@@ -9,7 +9,8 @@
 import {
     watchEffect,
     ref,
-    ErrorCodes
+    ErrorCodes,
+    computed
 } from "vue"
 import {
     useStore
@@ -28,8 +29,8 @@ export default {
         const store = useStore();
         const venueName = ref();
         const bam = new BAM('https://develop.bam.fan')
-        // console.log('bam end point==>',bam)
         bam.useOrganizer('eventspace')
+        // console.log('sdk end point==>', bam)
         watchEffect(async () => {
                 if (props.venue_id?props.venue_id:'') {
                     await bam.venue.getVenue({

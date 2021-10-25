@@ -18,7 +18,7 @@ import moment from "moment"
 export default {
     name: 'EventDate',
     props: {
-        eventDate: String
+        eventDate: Date
     },
 
     setup(props) {
