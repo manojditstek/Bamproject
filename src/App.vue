@@ -1,24 +1,8 @@
 <template>
     <div class="mainWrapper">
         <div class="contentWraper">
-            <!-- <div id="nav">
-            <router-link to="/">{{ $t("message.home") }}</router-link> |
-            <router-link to="/about">{{ $t("message.about") }}</router-link> |
-            </div> -->
-            <!-- <div class="text-center">
-            <switchLanguage />
-            </div> -->
-
-    <div class="contentInnerWraper">
-        <!-- <div v-if="errorMsg" class=" alert-danger alert-dismissible">
-            <button type="button" class="close" @click="closeAlert" data-dismiss="alert">&times;</button>
-             {{errorMsg.message}} 
-        </div> -->
-        <error-message />
-       
-
+                <error-message />
                 <router-view />
-            <!-- </div> -->
         </div>
     </div>
 </template>
