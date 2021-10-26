@@ -1,13 +1,12 @@
-// import { createI18n } from 'vue-i18n'
-import { createI18n } from 'vue-i18n/index'
-import English from './en'
-import Spanish from './es'
+import { createI18n } from 'vue-i18n'
+import english from './en'
+import spanish from './es'
 const i18n = createI18n({
-    locale: 'en',
+    locale: 'english',
     messages:{
-        English,
-        Spanish
+        english,
+        spanish
     },
-    fallbackLocale: 'en'
+    fallbackLocale: 'english'
 })
 export default i18n;

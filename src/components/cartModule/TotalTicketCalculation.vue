@@ -1,10 +1,10 @@
 <template>
 <div class="ticketCol">
-    <h3>Tickets</h3>
+    <h3>{{ $t('cartTemp.tickets') }}</h3>
     <h2>{{totalQuantity}}</h2>
 </div>
 <div class="ticketCol">
-    <h3>Total Amount</h3>
+    <h3>{{$t('cartTemp.total_amount')}}</h3>
     <h2>{{totalPrice}} {{currency}}</h2>
 </div>
 </template>

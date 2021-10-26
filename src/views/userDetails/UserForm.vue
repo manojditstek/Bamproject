@@ -46,7 +46,7 @@
                 <input v-if="checkMail" type="email" class="form-control" :class="data.email && !formErrors[3]?'active':formErrors[3]?' errorInput':''" v-model.trim="data.email" />
                 <input v-else type="email" class="form-control" :class="data.billing_email && !formErrors[4]?'active':formErrors[4]?' errorInput':''" v-model.trim="data.billing_email" @input="deliveryMail()"/>
                 <div class="labelInput">Email</div>
-               <div v-if="!checkMail "  class="error">{{formErrors[4]}}</div>
+               <div v-if="!checkMail" class="error">{{formErrors[4]}}</div>
             </div>
         </div>
     </div>

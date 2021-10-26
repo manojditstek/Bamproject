@@ -1,31 +1,31 @@
 <template>
-    <div class="mainWrapper">
-        <div class="contentWraper">
-            <!-- <div id="nav">
+<div class="mainWrapper">
+    <div class="contentWraper">
+        <!-- <div id="nav">
             <router-link to="/">{{ $t("message.home") }}</router-link> |
             <router-link to="/about">{{ $t("message.about") }}</router-link> |
             </div> -->
-            <!-- <div class="text-center">
+        <div class="text-center">
             <switchLanguage />
-            </div> -->
+            </div>
 
-    <div class="contentInnerWraper">
-        <!-- <div v-if="errorMsg" class=" alert-danger alert-dismissible">
+        <div class="contentInnerWraper">
+            <!-- <div v-if="errorMsg" class=" alert-danger alert-dismissible">
             <button type="button" class="close" @click="closeAlert" data-dismiss="alert">&times;</button>
              {{errorMsg.message}} 
         </div> -->
-        <error-message />
-       
+            <error-message />
 
-                <router-view />
+            <router-view />
             <!-- </div> -->
         </div>
     </div>
+</div>
 </template>
 
 <script>
 import axios from "axios";
-// import SwitchLanguage from "@/views/SwitchLanguage.vue";
+import SwitchLanguage from "./views/Localization/SwitchLanguage.vue";
 import {
     computed
 } from 'vue'
@@ -41,10 +41,10 @@ export default {
     name: "app",
 
     setup() {
-         const store = useStore();
+        const store = useStore();
         //provide('store', state)
 
-         const errorMsg = computed(() => {
+        const errorMsg = computed(() => {
             return store.state.errorMsg;
         });
 
@@ -52,13 +52,13 @@ export default {
             store.state.errorMsg = '';
         }
 
-        return{
+        return {
             errorMsg,
             closeAlert
         }
     },
     components: {
-        // SwitchLanguage,
+        SwitchLanguage,
         ErrorMessage
     },
     mounted() {
@@ -75,15 +75,16 @@ export default {
             // localStorage.setItem("token", auth.token);
 
             axios
-              .post("https://develop.bam.fan/account/v1/guest/login")
-              .then((response) => {
-                localStorage.setItem("token", response.data.data.token);
-                // console.log(response.data.data.token);
-                return response.data;
-              });
+                .post("https://develop.bam.fan/account/v1/guest/login")
+                .then((response) => {
+                    localStorage.setItem("token", response.data.data.token);
+                    // console.log(response.data.data.token);
+                    return response.data;
+                });
         },
     },
 };
 </script>
+
 <style> 
 </style>

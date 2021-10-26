@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="footerActionBtn">
-        <button @click="createOrder" class="button">CONFIRM
+        <button @click="ticketFormatSet" class="button">CONFIRM
         </button>
         <!-- <router-link to="/user-form" class="button"><button type="button"> CONFIRM </button></router-link> -->
     </div>
@@ -54,6 +54,9 @@ import {
 import {
     useStore
 } from 'vuex';
+import {
+    useRouter
+} from "vue-router";
 import Loader from '../../components/loader/Loader'
 export default {
     name:'ChooseDeliveryMethod',
@@ -63,25 +66,26 @@ export default {
     setup() {
         const ticketFormat = ref('PDF');
         const store = useStore();
+        const router = useRouter();
         let cart = computed(function () {
             return store.state.cart
         });
 
-        function createOrder() {
-            let cartItems = cart.value.cartItems.map(elementKey => ({
-                ticket_config_id:elementKey.id,
-                quantity:elementKey.quantity,
-                timeslot_id:elementKey.timeSlotId
-            }));
-            let format = ticketFormat.value
-            store.dispatch('createOrder', {
-                cartItems,
-                format
+        function ticketFormatSet() {
+            // let cartItems = cart.value.cartItems.map(elementKey => ({
+            //     ticket_config_id:elementKey.id,
+            //     quantity:elementKey.quantity,
+            //     timeslot_id:elementKey.timeSlotId
+            // }));
+            // let format = ticketFormat.value
+            store.commit('ticketFormat', ticketFormat.value)
+            router.push({
+                path: '/user-kyc-form'
             })
         }
         return {
             ticketFormat,
-            createOrder,
+            ticketFormatSet,
             cart
         };
     }

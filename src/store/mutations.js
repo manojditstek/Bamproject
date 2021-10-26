@@ -182,6 +182,11 @@ export const errorMsg = (state, resp)=>{
   state.errorMsg = resp;
 }
 
-// export const workSpaceKey = (state, resp)=>{
-//   state.workSpaceKey=resp
-// }
+export const workSpaceKey = (state, resp)=>{
+  state.workSpaceKey=resp
+}
+
+
+export const ticketFormat = (state, data)=>{
+  state.ticketFormat=data;
+}

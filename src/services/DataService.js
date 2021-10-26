@@ -59,11 +59,13 @@ class DataService {
 //    });
 //  }
 
-   tickets(event_id) {
+  tickets(event_id) {
      return http.get(`/event/v1/event/${event_id}?pick=[ticket_config]&public=true`, {
       headers: this.authHeader()
     });
   }
+
+
 
    venueAddress(venue_id) {
      return axios.get(`https://develop.bam.fan/venue/v1/venue/${venue_id}?with=address.position`, {
@@ -92,8 +94,14 @@ class DataService {
 
 
 
-ticketHolder(order_id) {
-  return axios.post(`https://org1.develop.bam.fan/event/v1/ticket/${order_id}/ticket_holder`,{first_name:'Branimir',last_name:'Malesevic',phone:'123123123'}, {
+ticketHolder(order_id,data) {
+  return axios.post(`https://org1.develop.bam.fan/event/v1/ticket/${order_id}/ticket_holder`,{
+    first_name:data.first_name,
+    last_name:data.last_name,
+    phone:data.phone,
+    email:data.email
+  },
+  {
    headers: this.authHeader()
  });
 }

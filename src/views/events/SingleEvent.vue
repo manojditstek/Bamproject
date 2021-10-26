@@ -94,13 +94,13 @@ export default {
 
     if(singleEvent){
         watchEffect(()=>{
-        //    store.dispatch('workSpaceKey')
+           store.dispatch('workSpaceKey')
         })
     }
-        // const workSpaceKey = computed(() => {
-        //     return store.state.workSpaceKey;
-        // });
-        // console.log("workSpaceKey", workSpaceKey)
+        const workSpaceKey = computed(() => {
+            return store.state.workSpaceKey;
+        });
+        console.log("workSpaceKey", workSpaceKey)
 
         //seatsio testing
         let client = new SeatsioClient(Region.EU(), '')
@@ -120,7 +120,7 @@ export default {
         }
 
         const singleEvent = computed(() => {
-            //  store.dispatch('workSpaceKey')
+             store.dispatch('workSpaceKey')
             return store.state.event;
         })
         return {

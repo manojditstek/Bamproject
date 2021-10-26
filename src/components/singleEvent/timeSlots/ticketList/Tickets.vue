@@ -11,9 +11,9 @@
                 {{ticket.availableTickets!='' ?'':'Sold Out'}}
             </div>
         </div>
-        <div class="limitExceeded">
+        <div class="limitExceeded" v-if="perUserQuantity">
             <div class="limitExceededInner">
-            {{perUserQuantity!=''?'Per User Limit Exceeded!':''}}
+            {{perUserQuantity!=''?'Limit Exceeded!':''}}
             </div>
         </div>
         <div class="buttonWrap d-flex">
@@ -21,8 +21,8 @@
             <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>
             <button class="plusBtn" :class="perUserQuantity!=''||ticket.availableTickets==''?'disabled':''" :disabled="perUserQuantity!=''||ticket.availableTickets==''" @click="addToCart()">+</button>
         </div>
-        <div class="collapseArrow lightBg" >   
-        </div>
+        <!-- <div class="collapseArrow lightBg" >   
+        </div> -->
     </div>
 
     <div v-else>
@@ -46,11 +46,11 @@
             <i class="fa fa-angle-right"></i>
         </div>
     </div>
-    <!-- <div  v-if="ticketDscount?ticketDscount.length>0:''" v-show="toggleButton" class="toggleList">
+    <div  v-if="ticketDscount?ticketDscount.length>0:''" v-show="toggleButton" class="toggleList">
         <div v-if="ticketDscount?ticketDscount.length>0:''">
             <TicketsWithDiscount :ticket="ticket" :discount="discount" v-for="discount in ticketDscount" :key="discount.id"/>
         </div>
-    </div> -->
+    </div>
     </div>
 </div>
 </template>
@@ -69,7 +69,7 @@ export default {
     name: 'Tickets',
     components: {
         Loader,
-        // TicketsWithDiscount
+        TicketsWithDiscount
     },
     props: {
         ticket: Object,
@@ -92,15 +92,12 @@ export default {
                 item: props.ticket,
                 eventName: props.eventName,
                 timeslot_id: props.timeSlotId
-
             };
-
             store.commit("addCartItem", ticket);
         }
 
         function removeFromCart() {
             store.commit("removeCartItem", props.ticket);
-
         }
         let itemQuantity = computed(function () {
             let ticket = props.ticket;

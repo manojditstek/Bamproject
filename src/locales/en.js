@@ -1,13 +1,18 @@
 const english = {
 
-    message: {
-      home:'Home',
-      about:'About',
-      calculation:'Calculation',
-      title: 'This is an example of content translation.',
-      welcome:'Welcome to Your Vue.js App',
-      about_title:'This is an about page'
-    }
+  cartTemp: {
+    cart:'Cart',
+    tickets:'Tickets',
+    fees:'Fees',
+    eur: 'EUR',
+    subtotal:'Subtotal',
+    tax:'Tax',
+    total:'Total',
+    total_amount:'Total Amount',
+    checkout:'CHECKOUT',
+    msg:'Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.',
+    back:'Back',
+  }
   
 }
 

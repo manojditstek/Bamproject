@@ -2,26 +2,23 @@
 <div class="singleTicketTotalAmount d-flex">
     <TotalTicketCalculation />
     <div class="labelBtn">
-        <!-- <router-link to="/" class="button">
-            Back
-        </router-link> -->
-        <BackButton  :message="'Back'" class="button"/>
+        <BackButton :message="'back'" class="button" />
     </div>
 </div>
 <div class="cardBodyWrapper">
     <Loader />
     <div class="eventDiscountWrapper">
-        <h2>Cart</h2>
+        <h2>{{ $t('cartTemp.cart') }}</h2>
         <div class="amountWrapper">
-            <p>{{totalQuantity}} Tickets <span>{{totalPrice}}</span></p>
-            <p>Fees <span>11,20 EUR</span></p>
+            <p>{{totalQuantity}} {{ $t('cartTemp.tickets') }} <span>{{totalPrice}}</span></p>
+            <p>{{ $t('cartTemp.fees') }} <span>0.00 {{ $t('cartTemp.eur') }}</span></p>
         </div>
         <div class="amountWrapper">
-            <p>Subtotal <span>EUR</span></p>
-            <p>Tax (20%) <span>EUR</span></p>
+            <p>{{ $t('cartTemp.subtotal') }} <span>{{ $t('cartTemp.eur') }}</span></p>
+            <p>{{ $t('cartTemp.tax') }} (0%) <span>{{ $t('cartTemp.eur') }}</span></p>
         </div>
         <div class="totalAmountWrapper ">
-            <p>Total <span>{{totalPrice}}</span></p>
+            <p>{{ $t('cartTemp.total') }} <span>{{totalPrice}}</span></p>
         </div>
     </div>
 </div>
@@ -37,7 +34,7 @@
                 {{item.eventName}}
             </p>
             <div class="priceWrap">
-                {{item.totalPrice}} {{currency}}
+                {{item.totalPrice}} {{item.currency}}
             </div>
         </div>
         <div class="collapseArrow redBg" @click="removeFromCart(item)">
@@ -47,18 +44,14 @@
 </div>
 
 <div class="footerActionBtn">
-    <!-- <router-link to="/delivery-method" class="button">
-            CHECKOUT
-    </router-link> -->
     <button class="button" :class="totalQuantity==0?'disabled':''" :disabled="totalQuantity==0" @click="checkout">
-            CHECKOUT
+        {{ $t('cartTemp.checkout') }}
     </button>
 </div>
 
 <div class="sloganText ">
-    <p>Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+    <p>{{ $t('cartTemp.msg') }}</p>
 </div>
-
 </template>
 
 <script>
@@ -113,13 +106,11 @@ export default {
             }
         }
 
-        
-
-        function checkout(){
+        function checkout() {
 
             router.push({
-                        path: '/delivery-method'
-                    })
+                path: '/delivery-method'
+            })
         }
 
         return {
@@ -130,7 +121,6 @@ export default {
             currency,
             event,
             checkout,
-            
 
         }
     }

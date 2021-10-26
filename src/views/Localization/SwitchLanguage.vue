@@ -13,7 +13,7 @@ export default {
     name: 'SwitchLocale',
     data() {
         return {
-            langs: ['en', 'es']
+            langs: ['english', 'spanish']
         }
     }
 }

@@ -1,13 +1,18 @@
 
-const punjabi = {
-    message: {
-      home:'hogar',
-      about:'sobre',
-      calculation:'cálculo',
-      title: 'Este es un ejemplo de traducción de contenido.',
-      welcome:'Bienvenido a su aplicación Vue.js',
-      about_title:'Esta es una página sobre'
-    }
+const spanish = {
+  cartTemp: {
+    cart:'Carro',
+    tickets:'Entradas',
+    fees:'Tarifa',
+    eur: 'EUR',
+    subtotal:'Total parcial',
+    tax:'Impuesto',
+    total:'Total',
+    total_amount:'Cantidad total',
+    checkout:'VERIFICAR',
+    msg:'Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.',
+    back:'atrás',
+  }
 }
 
-export default punjabi;
+export default spanish;
