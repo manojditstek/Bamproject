@@ -369,9 +369,9 @@ min-width: 32px;
   box-shadow: 0 5px 5px rgba(0,0,0,0.15);
   overflow:hidden;
 }
-.ticketToggle:last-child {
+/* .ticketToggle:last-child {
   margin-bottom: 0;
-}
+} */
 
 .ticketToggle .cardWrapper .collapseArrow.lightBg {
   background-color:transparent;
@@ -478,6 +478,8 @@ min-width: 32px;
   margin-bottom: 15px;
   min-height: 70px;
   border-radius: 5px;
+  padding: 0;
+  border-bottom: 0;
 }
 .ticketWrapper .ticketCategory .dateCol{
   min-width: 60px;
@@ -1004,25 +1006,18 @@ border:1px solid var(--color);
   font-size:14px;
   margin: 0 0 10px 0;
 }
-.ticketCategory {
+.ticketNewCategory {
   display: flex;
   justify-content: space-between;
-  padding: 0 0 10px 0;
-  margin: 0 0 20px 0;
-  border-bottom: 1px solid #D7D7D7;
 }
-.ticketCategory:last-child {
-  margin: 0;
-  border-bottom: 0;
-}
-.ticketCategory h2 {
+.ticketNewCategory h2 {
   font-size: 14px;
 }
-.ticketCategory h2 span {
+.ticketNewCategory h2 span {
   display: block;
   font-family: var(--font-family-300);
 }
-.ticketCategory .amount {
+.ticketNewCategory .amount {
   color: var(--color);
   font-family: var(--font-family-400);
   font-size:14px;

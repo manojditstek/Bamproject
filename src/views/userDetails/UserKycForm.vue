@@ -20,7 +20,7 @@
     <div class="cardBodyInner">
       <div class="cardBodyWrapper bgLight brdrtop">
           <!-- <div class="ticketCategory" v-for=" item in cart.cartItems" :key="item.id"> -->
-              <div class="ticketCategory">
+              <div class="ticketNewCategory">
               <h2>Ticket Category:<span>Discount Category:</span></h2>
               <div class="amount"></div>
           </div>
