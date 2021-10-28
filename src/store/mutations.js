@@ -190,3 +190,8 @@ export const workSpaceKey = (state, resp)=>{
 export const ticketFormat = (state, data)=>{
   state.ticketFormat=data;
 }
+
+
+export const SetOrderItem = (state, resp)=>{
+  state.SetOrderItem=resp;
+}

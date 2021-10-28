@@ -23,6 +23,7 @@ export default {
     downloadTicketPdf:null,
     errorMsg:null,
     workSpaceKey:null,
-    ticketFormat:null
+    ticketFormat:null,
+    SetOrderItem:null
 
 }

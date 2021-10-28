@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="footerActionBtn">
-        <button @click="ticketFormatSet" class="button">CONFIRM
+        <button @click="createOrder" class="button">CONFIRM
         </button>
         <!-- <router-link to="/user-form" class="button"><button type="button"> CONFIRM </button></router-link> -->
     </div>
@@ -52,11 +52,11 @@ import {
     computed
 } from "vue";
 import {
-    useStore
-} from 'vuex';
-import {
     useRouter
 } from "vue-router";
+import {
+    useStore
+} from 'vuex';
 import Loader from '../../components/loader/Loader'
 export default {
     name:'ChooseDeliveryMethod',
@@ -71,21 +71,26 @@ export default {
             return store.state.cart
         });
 
-        function ticketFormatSet() {
-            // let cartItems = cart.value.cartItems.map(elementKey => ({
-            //     ticket_config_id:elementKey.id,
-            //     quantity:elementKey.quantity,
-            //     timeslot_id:elementKey.timeSlotId
-            // }));
-            // let format = ticketFormat.value
-            store.commit('ticketFormat', ticketFormat.value)
+        function createOrder() {
+            let cartItems = cart.value.cartItems.map(elementKey => ({
+                ticket_config_id:elementKey.id,
+                quantity:elementKey.quantity,
+                timeslot_id:elementKey.timeSlotId
+            }));
+            let format = ticketFormat.value
+            store.commit('ticketFormat',ticketFormat.value)
+            store.dispatch('createOrder', {
+                cartItems,
+                format
+            })
+
             router.push({
-                path: '/user-kyc-form'
+                path: '/user-form'
             })
         }
         return {
             ticketFormat,
-            ticketFormatSet,
+            createOrder,
             cart
         };
     }

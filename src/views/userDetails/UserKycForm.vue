@@ -53,7 +53,7 @@
      <!---->
     <div class="cardBodyWrapper">
         <div class="footerActionBtn">
-            <button class="button" @click="createOrder">Next</button>
+            <button class="button" @click="ticketHolder">Next</button>
         </div>
     </div>
 
@@ -84,25 +84,15 @@ export default {
             email: null,
         })
 
-        let cart = computed(function () {
-            return store.state.cart
-        });
+        
+        const orderDetails = computed(()=>{
+            return store.SetOrderItem;
+        })
 
-        let ticketFormat = computed(function () {
-            return store.state.ticketFormat
-        });
-
-        function createOrder() {
+        function ticketHolder() {
+            console.log("orderDetails=>",orderDetails)
             if (firstName() == true && lastName() == true && phoneNumber() == true && emailCheck() == true) {
-                let cartItems = cart.value.cartItems.map(elementKey => ({
-                    ticket_config_id: elementKey.id,
-                    quantity: elementKey.quantity,
-                    timeslot_id: elementKey.timeSlotId
-                }));
-                let format = ticketFormat.value
-                store.dispatch('createOrder', {
-                    cartItems,
-                    format,
+                store.dispatch('ticketHolderInfo', {
                     data
                 })
 
@@ -169,10 +159,8 @@ export default {
             lastName,
             phoneNumber,
             emailCheck,
-            createOrder,
-            cart,
-            ticketFormat
-
+            ticketHolder,
+            orderDetails
         }
     }
 };

@@ -38,7 +38,13 @@
         <router-link to="/shop" class="button">Cart</router-link>
     </div>
 </div>
-<!-- <div @click="chartResp">{{'ChartKey'}}</div> -->
+<div @click="chartResp">{{'ChartKey'}}</div>
+<!-- <SeatsioChartManager
+    :secretKey="workSpaceKey.workspaceKey"
+    :chart="singleEvent.chartKey"
+    :mode="singleEvent.rulesetKey"
+    region="eu"
+/> -->
 </template>
 
 <script>
@@ -68,6 +74,7 @@ import {
     Region
 } from 'seatsio'
 import BackButton from '../../components/backButton/BackButton.vue'
+import { SeatsioChartManager } from '@seatsio/seatsio-react'
 export default {
     name: 'SingleEvent',
     components: {
@@ -77,13 +84,16 @@ export default {
         TotalTicketCalculation,
         TimeSlot,
         Loader,
-        // BackButton
+        // BackButton,
+        // SeatsioChartManager
+        
+
     },
 
     setup() {
         const store = useStore();
         const router = useRouter();
-        const chartList = ref();
+        // const chartList = ref();
         const loaderStatus = computed(() => {
             return store.state.loadingStatus;
         });
@@ -92,23 +102,20 @@ export default {
             return store.state.cart.itemsTotalQuantity;
         });
 
-    if(singleEvent){
-        watchEffect(()=>{
-           store.dispatch('workSpaceKey')
-        })
-    }
         const workSpaceKey = computed(() => {
             return store.state.workSpaceKey;
         });
-        console.log("workSpaceKey", workSpaceKey)
+
 
         //seatsio testing
-        let client = new SeatsioClient(Region.EU(), '')
+        
         async function chartResp() {
-            console.log("chartKey=>", singleEvent.value.chartKey)
-            chartList.value = await client.charts.retrieve(singleEvent.value.chartKey);
-            console.log("chartList=>", chartList.value)
+            console.log("Region.EU( ", Region.EU());
+            let client = new SeatsioClient(Region.EU(), workSpaceKey.value.workspaceKey) // Here passing workspaceKey 
+            let chartList = await client.charts.listFirstPage();
+            console.log("chartList=:", chartList)
         }
+        
 
         console.log("hello", chartResp)
 
@@ -120,7 +127,7 @@ export default {
         }
 
         const singleEvent = computed(() => {
-             store.dispatch('workSpaceKey')
+            store.dispatch('workSpaceKey');
             return store.state.event;
         })
         return {
@@ -128,9 +135,9 @@ export default {
             totalQuantity,
             loaderStatus,
             chartResp,
-            chartList,
+            // chartList,
             backToHome,
-            // workSpaceKey
+            workSpaceKey
 
         }
     },

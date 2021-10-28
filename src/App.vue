@@ -5,9 +5,9 @@
             <router-link to="/">{{ $t("message.home") }}</router-link> |
             <router-link to="/about">{{ $t("message.about") }}</router-link> |
             </div> -->
-        <div class="text-center">
+        <!-- <div class="text-center">
             <switchLanguage />
-            </div>
+        </div> -->
 
         <div class="contentInnerWraper">
             <!-- <div v-if="errorMsg" class=" alert-danger alert-dismissible">
@@ -26,24 +26,15 @@
 <script>
 import axios from "axios";
 import SwitchLanguage from "./views/Localization/SwitchLanguage.vue";
-import {
-    computed
-} from 'vue'
-// import state from './store/index'
-// import {
-//     BAM
-// } from 'bam-ticketing-sdk';
-import {
-    useStore
-} from "vuex";
+import {computed} from 'vue'
+import {useStore} from "vuex";
 import ErrorMessage from './components/errorMessages/ErrorMessages.vue'
+import bam from './services/bamSdk'
 export default {
     name: "app",
-
     setup() {
         const store = useStore();
         //provide('store', state)
-
         const errorMsg = computed(() => {
             return store.state.errorMsg;
         });
@@ -58,29 +49,28 @@ export default {
         }
     },
     components: {
-        SwitchLanguage,
+        // SwitchLanguage,
         ErrorMessage
     },
     mounted() {
         console.log(process.env.VUE_APP_ROOT_API);
     },
     created() {
-        this.login();
+        // this.login();
     },
     methods: {
         async login() {
-            // const bam = new BAM()
-            // let auth = await bam.auth.guestLogin()
-            // console.log('sdkAuthToken:', auth.token)
-            // localStorage.setItem("token", auth.token);
+            let auth = await bam.auth.guestLogin()
+            console.log('sdkAuthToken:', auth.token)
+            localStorage.setItem("token", auth.token);
 
-            axios
-                .post("https://develop.bam.fan/account/v1/guest/login")
-                .then((response) => {
-                    localStorage.setItem("token", response.data.data.token);
-                    // console.log(response.data.data.token);
-                    return response.data;
-                });
+            // axios
+            //     .post("https://develop.bam.fan/account/v1/guest/login")
+            //     .then((response) => {
+            //         localStorage.setItem("token", response.data.data.token);
+            //         // console.log(response.data.data.token);
+            //         return response.data;
+            //     });
         },
     },
 };

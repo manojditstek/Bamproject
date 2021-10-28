@@ -6,19 +6,9 @@
 </template>
 
 <script>
-import {
-    watchEffect,
-    ref,
-    ErrorCodes,
-    computed
-} from "vue"
-import {
-    useStore
-} from "vuex";
-import {
-    BAM
-} from 'bam-ticketing-sdk';
-
+import {watchEffect,ref} from "vue"
+import {useStore} from "vuex";
+import bam from '../../../services/bamSdk'
 export default {
     name: 'VenuAddress',
     props: {
@@ -28,9 +18,7 @@ export default {
     setup(props) {
         const store = useStore();
         const venueName = ref();
-        const bam = new BAM('https://develop.bam.fan')
-        bam.useOrganizer('eventspace')
-        // console.log('sdk end point==>', bam)
+        
         watchEffect(async () => {
                 if (props.venue_id?props.venue_id:'') {
                     await bam.venue.getVenue({
@@ -42,6 +30,7 @@ export default {
                         store.commit('loadingStatus', false)
                     });
                 }
+
                 })
         
 
