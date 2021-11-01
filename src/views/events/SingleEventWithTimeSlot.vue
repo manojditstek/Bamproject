@@ -22,39 +22,27 @@
     </div>
 </div>
 <div  class="cardBodyWrapper">
-    <Loader />
+    <!-- <Loader /> -->
     <Tickets :ticket="ticket" :ticketDscount="singleEvent.ticketDiscount"  :timeSlotId="timeSlot?timeSlot.id:''" :eventName="singleEvent.name" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
 </div>
 
 <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
     <TotalTicketCalculation />
     <div class="labelBtn">
-        <router-link to="/shop" class="button">Cart</router-link>
+        <router-link to="/shop" class="button">{{$t('common.cart')}}</router-link>
     </div>
 </div>
 </template>
 
 <script>
-// import {
-//     useRouter
-// } from "vue-router";
-
-import {
-    useStore
-} from 'vuex';
+import {useStore} from 'vuex';
 import moment from "moment";
-import {
-    computed
-} from '@vue/reactivity';
-import {
-    useRouter
-} from "vue-router";
+import {computed} from '@vue/reactivity';
+import {useRouter} from "vue-router";
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress.vue"
 import EventDateFormat from "../../components/singleEvent/EventDate.vue";
 import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets.vue"
 import TotalTicketCalculation from "../../components/cartModule/TotalTicketCalculation.vue"
-import Loader from '../../components/loader/Loader.vue';
-
 export default {
     name: 'SingleEvent',
     components: {
@@ -62,7 +50,6 @@ export default {
         EventDateFormat,
         Tickets,
         TotalTicketCalculation,
-        Loader
     },
 
     setup() {
@@ -97,7 +84,7 @@ export default {
 
         function lengthOfString(value){
             if(value?value.length>48:''){
-                return value.substring(0,48)+ '...'
+                return value.substring(0,35)+ '...'
             }else{
                 return value
             }

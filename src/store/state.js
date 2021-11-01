@@ -24,6 +24,6 @@ export default {
     errorMsg:null,
     workSpaceKey:null,
     ticketFormat:null,
-    SetOrderItem:null
+  
 
 }

@@ -4,39 +4,38 @@
     <h2>
         <router-link to="/shop">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
-            Cart
+            {{$t('common.cart')}}
         </router-link>
     </h2>
     <div class="datePicker"></div>
 </div>
 <!---->
 <div class="cardBodyWrapper">
-    
     <div class="innerHeading">
-        <h4>Delivery Methods</h4>
-        <p>Secure digital ticket or the old-school way?</p>
+        <h4>{{$t('deliveryMethod.heading')}}</h4>
+        <p>{{$t('deliveryMethod.p1')}}</p>
     </div>
     <div class="inputWrapper">
-        <Loader />
+        <!-- <Loader /> -->
         <div class="inputInnerWrapper" :class="ticketFormat=='BAM' ?'active':''">
             <div class="inputGroup">
                 <input type="radio" id="test1" name="ticketFormat" :value="'BAM'" v-model="ticketFormat" disabled>
                 <label for="test1"></label>
             </div>
-            <h4>BAM Tickets</h4>
-            <p>Compatible with your B.A.M Wallet App. Please prepare your smartphone for the next step.</p>
+            <h4>{{$t('deliveryMethod.BAMTickets')}}</h4>
+            <p>{{$t('deliveryMethod.p2')}}</p>
         </div>
         <div class="inputInnerWrapper" :class="ticketFormat=='PDF' ?'active':''">
             <div class="inputGroup">
                 <input type="radio" id="test2" name="ticketFormat" :value="'PDF'" v-model="ticketFormat" checked>
                 <label for="test2"></label>
             </div>
-            <h4>PDF/PK PASS</h4>
-            <p>Use with any iOS and Android App that supports pkpass files or print your tickets at home.</p>
+            <h4>{{$t('deliveryMethod.pdfPkPass')}}</h4>
+            <p>{{$t('deliveryMethod.p3')}}</p>
         </div>
     </div>
     <div class="footerActionBtn">
-        <button @click="createOrder" class="button">CONFIRM
+        <button @click="createOrder" class="button">{{$t('deliveryMethod.confirm')}}
         </button>
         <!-- <router-link to="/user-form" class="button"><button type="button"> CONFIRM </button></router-link> -->
     </div>
@@ -47,26 +46,16 @@
 </template>
 
 <script>
-import {
-    ref,
-    computed
-} from "vue";
-import {
-    useRouter
-} from "vue-router";
-import {
-    useStore
-} from 'vuex';
-import Loader from '../../components/loader/Loader'
+import {ref,computed} from "vue";
+import {useStore} from 'vuex';
 export default {
     name:'ChooseDeliveryMethod',
     components:{
-        Loader
+       
     },
     setup() {
         const ticketFormat = ref('PDF');
         const store = useStore();
-        const router = useRouter();
         let cart = computed(function () {
             return store.state.cart
         });
@@ -82,10 +71,6 @@ export default {
             store.dispatch('createOrder', {
                 cartItems,
                 format
-            })
-
-            router.push({
-                path: '/user-form'
             })
         }
         return {

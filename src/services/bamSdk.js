@@ -1,8 +1,11 @@
-import {BAM} from 'bam-ticketing-sdk';
+import {BAM,} from 'bam-ticketing-sdk';
 
 const bam =new BAM(process.env.VUE_APP_ROOT_API) // set base url
-    bam.authorize() //for auth 
-    bam.useOrganizer(process.env.VUE_APP_ORGANIZER_ID)// set organization  
+    async function main(){
+       await bam.authorize() //for auth 
+       await bam.useOrganizer(process.env.VUE_APP_ORGANIZER_ID)// set organization 
+    }
 
+    main();
 
 export default bam

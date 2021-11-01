@@ -1,10 +1,10 @@
 <template>
 <div class="ticketToggle ">
-    <Loader />
+    <!-- <Loader /> -->
     <div class="cardWrapper d-flex"  v-if="ticketDscount?ticketDscount.length==0:''" >
         <div class="detailsCol">
-            <h2>{{ticket?ticket.name:'Ticket Not Found!'}} : 0.00 - {{ticket?(ticket.faceValue).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
-            <p>incl. fees:€ 0.00 </p>
+            <h2>{{ticket?ticket.name:'Ticket Not Found!'}} : {{ticket?(ticket.faceValue).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
+            <p>incl. fees:€ 0.00 TIMESLOT: {{timeSlotId}} </p>
         </div>
         <div class="ticketMessage">
             <div class="ticketMessageInner " :class="ticket.availableTickets!='' ?'':'soldOut'">
@@ -19,7 +19,8 @@
         <div class="buttonWrap d-flex">
             <button class="minusBtn" @click="removeFromCart()">-</button>
             <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>
-            <button class="plusBtn" :class="perUserQuantity!=''||ticket.availableTickets==''?'disabled':''" :disabled="perUserQuantity!=''||ticket.availableTickets==''" @click="addToCart()">+</button>
+            <button class="plusBtn"  @click="addToCart()">+</button>
+            <!-- <button class="plusBtn" :class="perUserQuantity!=''||ticket.availableTickets==''?'disabled':''" :disabled="perUserQuantity!=''||ticket.availableTickets==''" @click="addToCart()">+</button> -->
         </div>
         <!-- <div class="collapseArrow lightBg" >   
         </div> -->
@@ -29,7 +30,7 @@
     <div class="cardWrapper d-flex" :class="toggleButton?'active':''" @click="toggleButton=!toggleButton">
         <div class="detailsCol">
             <h2>{{ticket?ticket.name:'Ticket Not Found!'}} :{{ticket?(ticket.faceValue).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
-            <p>incl. fees:€ 0.00 </p>
+            <p>incl. fees:€ 0.00 TIMESLOT: {{timeSlotId}}</p>
         </div>
         <div class="ticketMessage">
             <div class="ticketMessageInner " :class="ticket.availableTickets!='' ?'':'soldOut'">
@@ -56,19 +57,14 @@
 </template>
 
 <script>
-import {
-    ref,
-    computed
-} from 'vue'
-import {
-    useStore
-} from "vuex";
+import {ref, computed} from 'vue'
+import {useStore} from "vuex";
 import Loader from '../../../loader/Loader'
 import TicketsWithDiscount from '../ticketList/TicketsWithDiscount'
 export default {
     name: 'Tickets',
     components: {
-        Loader,
+        // Loader,
         TicketsWithDiscount
     },
     props: {
@@ -89,7 +85,7 @@ export default {
 
         function addToCart() {
             let ticket = {
-                item: props.ticket,
+                item: {...props.ticket},
                 eventName: props.eventName,
                 timeslot_id: props.timeSlotId
             };
@@ -97,12 +93,24 @@ export default {
         }
 
         function removeFromCart() {
-            store.commit("removeCartItem", props.ticket);
+            let ticket = {...props.ticket, timeSlotId: props.timeSlotId}
+            store.commit("removeCartItem", ticket);
         }
+
+
         let itemQuantity = computed(function () {
             let ticket = props.ticket;
-            let get_ticket = cart.value.filter((item) => item.id == ticket.id);
-            return get_ticket[0] ?.quantity;
+            let timeSlotId = props.timeSlotId
+            if(timeSlotId){
+                console.log("timeSlotId ", timeSlotId);
+                let get_ticket = cart.value.filter((item) => item.id == ticket.id && item.timeSlotId == timeSlotId);
+                console.log("get_ticket ", get_ticket);
+                return get_ticket[0] ?.quantity;
+            }else{
+                let get_ticket = cart.value.filter((item) => item.id == ticket.id);
+                return get_ticket[0] ?.quantity;
+            }
+         
         })
 
         let perUserQuantity = computed(function () {

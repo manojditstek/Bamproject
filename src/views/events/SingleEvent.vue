@@ -1,13 +1,11 @@
 <template>
 <div class="d-flex justify-content-between align-items-end header">
     <h2>
-
         <!-- <BackButton v-if="totalQuantity" :message="singleEvent?lengthOfString(singleEvent.name):''" /> -->
         <div @click="backToHome">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
             {{singleEvent?lengthOfString(singleEvent.name):''}}
         </div>
-
     </h2>
     <div class="datePicker"></div>
 </div>
@@ -24,21 +22,19 @@
     </div>
 </div>
 <div class="cardBodyWrapper" v-if="singleEvent.timeslot?singleEvent.timeslot.length>0:''">
-    <Loader />
     <TimeSlot :timeSlot="timeSlot" :eventName="singleEvent.name" :event_id="singleEvent.id" :tickets="singleEvent?singleEvent:''" v-for="timeSlot in singleEvent ? singleEvent.timeslot : ''" :key="timeSlot.id" />
 </div>
 <div v-else class="cardBodyWrapper">
-    <Loader />
     <Tickets :ticket="ticket" :ticketDscount="singleEvent.ticketDiscount" :eventName="singleEvent.name" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
 </div>
 
 <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
     <TotalTicketCalculation />
     <div class="labelBtn">
-        <router-link to="/shop" class="button">Cart</router-link>
+        <router-link to="/shop" class="button">{{$t('common.cart')}}</router-link>
     </div>
 </div>
-<div @click="chartResp">{{'ChartKey'}}</div>
+<!-- <div @click="chartResp">{{'ChartKey'}}</div> -->
 <!-- <SeatsioChartManager
     :secretKey="workSpaceKey.workspaceKey"
     :chart="singleEvent.chartKey"
@@ -48,32 +44,16 @@
 </template>
 
 <script>
-// import {
-//     useRouter
-// } from "vue-router";
-
-import {
-    useStore
-} from 'vuex';
+import {useStore} from 'vuex';
 import moment from "moment";
-import {
-    computed,
-    ref,watchEffect
-} from '@vue/reactivity';
-import {
-    useRouter
-} from "vue-router";
+import {computed} from '@vue/reactivity';
+import {useRouter} from "vue-router";
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress.vue"
 import EventDateFormat from "../../components/singleEvent/EventDate.vue";
 import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets.vue"
 import TotalTicketCalculation from "../../components/cartModule/TotalTicketCalculation.vue"
 import TimeSlot from "../../components/singleEvent/timeSlots/TimeSlot.vue"
-import Loader from '../../components/loader/Loader.vue';
-import {
-    SeatsioClient,
-    Region
-} from 'seatsio'
-import BackButton from '../../components/backButton/BackButton.vue'
+import {SeatsioClient,Region} from 'seatsio'
 import { SeatsioChartManager } from '@seatsio/seatsio-react'
 export default {
     name: 'SingleEvent',
@@ -83,11 +63,6 @@ export default {
         Tickets,
         TotalTicketCalculation,
         TimeSlot,
-        Loader,
-        // BackButton,
-        // SeatsioChartManager
-        
-
     },
 
     setup() {
@@ -115,8 +90,6 @@ export default {
             let chartList = await client.charts.listFirstPage();
             console.log("chartList=:", chartList)
         }
-        
-
         console.log("hello", chartResp)
 
         function backToHome() {
@@ -153,7 +126,7 @@ export default {
 
         lengthOfString(value) {
             if (value ? value.length > 48 : '') {
-                return value.substring(0, 48) + '...'
+                return value.substring(0, 35) + '...'
             } else {
                 return value
             }
@@ -164,6 +137,3 @@ export default {
 }
 </script>
 
-<style>
-
-</style>

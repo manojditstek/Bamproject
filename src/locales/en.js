@@ -1,4 +1,59 @@
 const english = {
+  common:{
+    pay:'PAY',
+    cancel:'Cancel',
+    back:'Back',
+    events:'Events',
+    event:'Event',
+    cart:'Cart',
+    from:'from'
+  },
+
+  home:{
+    events:'Events'
+  },
+
+  userKycForm:{
+    ticketHolderInfo:'Ticket Holder Information',
+    ticketHolderInfoDesc:'Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta consectetur vestibulum.',
+    ticketCategory:'Ticket Category:',
+    discountCategory:'Discount Category:',
+    firstName:'First Name',
+    lastName:'Last Name',
+    phone:'Phone',
+    email:'Email',
+    next:'Next'
+  },
+
+  orderContactForm:{
+    personalData:'Personal Data',
+    emailRequired:'This Email will be used for your invoice',
+    billingEmail:'Use the same as Billing Email',
+    firstName:'First Name',
+    lastName:'Last Name',
+    phone:'Phone',
+    email:'Email',
+  },
+
+  formValidation:{
+    firstName:'First name required.',
+    lastName:'Last name required.',
+    phone:'Phone required.',
+    email:'Email required.',
+    validEmail:'Valid email required.'
+  },
+
+  timer:{
+    have:'have',
+    afterHave:'minutes to complete your order',
+  },
+
+  payment:{
+    payment:'Payment',
+    creditCard:'Credit Card',
+    eps:'EPS'
+  },
+
 
   cartTemp: {
     cart:'Cart',
@@ -11,8 +66,36 @@ const english = {
     total_amount:'Total Amount',
     checkout:'CHECKOUT',
     msg:'Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.',
-    back:'Back',
-  }
+  },
+
+
+  downloadTicket:{
+    backtoHome:'Back to Home',
+    heading1:'Your tickets are in your Inbox',
+    p1:'We sent you a confirmation mail together with your tickets. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.',
+    resendEmail:'Resend Email',
+    downloadTickets:'Download Tickets',
+    eventName:'Event Name',
+    venueName:'Venue Name',
+    discountCategory:'Discount Category',
+    date:'Date: ',
+    orderID:'Order ID: ',
+    hinweis:'Hinweis',
+    p2:'Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam quis risus eget urna mollis ornare vel eu leo.',
+    backtoShop:'Back to Shop'
+  },
+
+  deliveryMethod:{
+    heading:'Delivery Methods',
+    p1:'Secure digital ticket or the old-school way?',
+    BAMTickets:'BAM Tickets',
+    p2:'Compatible with your B.A.M Wallet App. Please prepare your smartphone for the next step.',
+    pdfPkPass:'PDF/PK PASS',
+    p3:'Use with any iOS and Android App that supports pkpass files or print your tickets at home.',
+    confirm:'CONFIRM'
+
+
+  },
   
 }
 

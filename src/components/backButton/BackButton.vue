@@ -1,7 +1,7 @@
 <template>
 <div @click="backToHome" >
     <i  v-if="message!='back'" class="fa fa-angle-left" aria-hidden="true"></i>
-    {{ $t(`cartTemp.${message}`) }}
+    {{ $t(`common.${message}`) }}
 </div>
 </template>
 <script>

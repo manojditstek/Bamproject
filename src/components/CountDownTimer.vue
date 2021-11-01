@@ -1,6 +1,6 @@
 <template>
 <p>
-    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> have {{countDown}} minutes to complete your order
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{$t('timer.have')}} {{countDown}} {{$t('timer.afterHave')}}
 </p>
 </template>
 

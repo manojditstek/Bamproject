@@ -24,7 +24,7 @@
         <div class="cardWrapper d-flex">
             <div class="dateCol">
                 <h2>{{recurringEvent?recurringEvent.occurrence.length:''}}</h2>
-                <h4>Events</h4>
+                <h4>{{$t('common.events')}}</h4>
             </div>
             <div class="detailsCol">
                 <p>{{dateFormat(recurringEvent?recurringEvent.startAt:'')}} - {{dateFormat(recurringEvent?recurringEvent.endAt:'')}}</p>
@@ -34,7 +34,6 @@
         </div>
     </div>
     <div class="cardBodyWrapper">
-        <Loader />
         <div class="cardWrapper d-flex" @click="singleEvent(event)" v-for="event in recurringEvent?recurringEvent.occurrence:''" :key="event.id">
             <div class="dateCol">
                 <EventDateFormat :eventDate="event?event.startAt:''" />
@@ -43,7 +42,7 @@
                 <h2>{{recurringEvent?recurringEvent.name:''}}</h2>
                 <VenuAddress :venue_id="event?event.venueId:''" />
                 <div class="priceWrap">
-                    <p>from</p>0.00 EUR
+                    <p>{{$t('common.from')}}</p>0.00 EUR
                 </div>
             </div>
             <div class="collapseArrow">
@@ -65,7 +64,7 @@
         <div class="cardWrapper d-flex">
             <div class="dateCol" v-if="singleEventData==''">
                 <h2>{{recurringEvent?recurringEvent.occurrence.length:''}}</h2>
-                <h4>Event</h4>
+                <h4>{{$t('common.event')}}</h4>
             </div>
             <div class="dateCol" v-else>
                 <EventDateFormat :eventDate="singleEventData?singleEventData.startAt:''" />
@@ -77,13 +76,12 @@
         </div>
     </div>
     <div class="cardBodyWrapper">
-        <Loader />
         <Tickets :ticket="ticket" :ticketDscount="recurringEvent.ticketDiscount" :eventName="recurringEvent.name" v-for="ticket in singleEventData ? singleEventData.ticketConfig : ''" :key="ticket.id" />
     </div>
     <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
         <TotalTicketCalculation />
         <div class="labelBtn">
-            <router-link to="/shop" class="button">Cart</router-link>
+            <router-link to="/shop" class="button">{{$t('common.cart')}}</router-link>
         </div>
     </div>
 </div>
@@ -91,21 +89,13 @@
 </template>
 
 <script>
-import {
-    useRouter
-} from "vue-router";
-import {
-    useStore
-} from 'vuex';
+import {useRouter} from "vue-router";
+import {useStore} from 'vuex';
 import moment from "moment";
-import {
-    computed,
-    ref
-} from '@vue/reactivity';
+import {computed,ref} from '@vue/reactivity';
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress.vue"
 import EventDateFormat from "../../components/singleEvent/EventDate.vue";
 import DateRangePicker from "../../components/dateRangePicker/dateRangePicker.vue"
-import Loader from '../../components/loader/Loader.vue'
 import Tickets from '../../components/singleEvent/timeSlots/ticketList/Tickets.vue'
 import TotalTicketCalculation from '../../components/cartModule/TotalTicketCalculation.vue'
 import BackButton from '../../components/backButton/BackButton.vue'
@@ -123,7 +113,6 @@ export default {
         VenuAddress,
         EventDateFormat,
         DateRangePicker,
-        Loader,
         Tickets,
         TotalTicketCalculation,
         BackButton

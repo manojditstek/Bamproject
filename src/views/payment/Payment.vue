@@ -3,13 +3,13 @@
       <div class="alert">
         <p>
           <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-          have {{countDown}} minutes to complete your order
+          {{$t('timer.have')}} {{countDown}} {{$t('timer.afterHave')}}
         </p>
       </div>
     </div>
     <div class="cardBodyWrapper">
       <div class="innerHeading">
-        <h4>Payment</h4>
+        <h4>{{$t('payment.payment')}}</h4>
       </div>
       <div class="inputWrapper payment">
         <div class="inputInnerWrapper" :class="payMethod=='card' ?'active':''">
@@ -23,27 +23,24 @@
             />
             <label for="test1"></label>
           </div>
-          <h4>Credit Card</h4>
+          <h4>{{$t('payment.creditCard')}}</h4>
         </div>
         <div class="inputInnerWrapper" :class="payMethod=='epsBank' ?'active':''">
             <div class="inputGroup">
                 <input type="radio" id="test2" :value="'epsBank'" v-model="payMethod" @click="paymentInitiate(type='eps')" />
                 <label for="test2"></label>
             </div>
-            <h4>EPS</h4>
+            <h4>{{$t('payment.eps')}}</h4>
         </div>
       </div>
       <div class="hr"></div>
 
     <div v-if="payMethod=='card'" class="stripeWrapper">
-        <Loader />
         <StripeElement :element="cardElement" @change="event = $event" class="stripe" />
         <div class="error-message" v-if="event && event.error">{{ event.error.message }}</div>
     </div>
     <div v-if="payMethod=='epsBank'">
-
         <div class="stripeWrapper">
-            <Loader />
             <div class="formInputs">
                 <div class="formGroup">
                     <input type="text" class="form-control" placeholder="Account Holder Name" v-model.trim="name" />
@@ -59,37 +56,20 @@
           </div>
         </div>
             <div class="footerActionBtn btns">
-                <button class="button" :class="payMethod=='epsBank'&& name==''?'disabled':''" @click="registerCard">PAY {{totalPrice}} {{currency}}</button>
-                <router-link to="/" class="button btnGray">Cancel</router-link>
+                <button class="button" :class="payMethod=='epsBank'&& name==''?'disabled':''" @click="registerCard">{{$t('common.pay')}} {{totalPrice}} {{currency}}</button>
+                <router-link to="/" class="button btnGray">{{$t('common.cancel')}}</router-link>
            </div>
       </div>
-
-
-
 </template>
 
 <script>
-import {
-    ref,
-    computed,
-    watchEffect
-} from 'vue'
-import {
-    useStripe,
-    StripeElement
-} from 'vue-use-stripe'
-import {
-    useRouter
-} from "vue-router";
-import {
-    useStore
-} from 'vuex';
-import Loader from '../../components/loader/Loader.vue';
+import {ref,computed,} from 'vue'
+import {useStripe,StripeElement} from 'vue-use-stripe'
+import {useRouter} from "vue-router";
+import {useStore} from 'vuex';
 export default {
-
     components: {
         StripeElement,
-        Loader
     },
     setup() {
         const event = ref(null);
@@ -117,10 +97,7 @@ export default {
             return store.state.createdOrder;
         })
 
-        const {
-            stripe,
-            elements: [epsElement, cardElement]
-        } = useStripe({
+        const {stripe,elements: [epsElement, cardElement]} = useStripe({
             key: 'pk_test_guTC6Gf1mA5drZHtmEGImgC600HIXNXoTd',
             elements: [{
                 type: 'epsBank',
@@ -159,7 +136,7 @@ export default {
             if (event.value ?.complete) {
                 /* Card payment initiated */
                 if (payMethod.value == 'card') {
-                    const response = await stripe.value ?.confirmCardPayment(cardConfig.value.payment_intent.client_secret, {
+                    const response = await stripe.value ?.confirmCardPayment(cardConfig.value.paymentIntent.clientSecret, {
                         payment_method: {
                             card: cardElement.value,
                         },
@@ -182,7 +159,7 @@ export default {
 
                 /* For EPS Bank payment */
                 else if (payMethod.value == 'epsBank') {
-                    const response = await stripe.value ?.confirmEpsPayment(cardConfig.value.payment_intent.client_secret, {
+                    const response = await stripe.value ?.confirmEpsPayment(cardConfig.value.paymentIntent.clientSecret, {
                         payment_method: {
                             eps: epsElement.value,
                             billing_details: {
@@ -224,8 +201,6 @@ export default {
             orderID,
             name
         }
-      
-
 
   }
 };

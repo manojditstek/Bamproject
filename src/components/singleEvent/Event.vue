@@ -22,7 +22,7 @@
             <h2>{{ event ? event.name : "" }}</h2>
             <VenuAddress :venue_id="event.venueId" />
             <div class="priceWrap">
-                <p>from</p>
+                <p>{{$t('common.from')}}</p>
                 0.00 EUR
             </div>
         </div>
@@ -41,18 +41,11 @@
 <script>
 import moment from "moment";
 import Tickets from "../singleEvent/timeSlots/ticketList/Tickets.vue";
-import {
-    useStore
-} from "vuex";
+import {useStore} from "vuex";
 import TimeSlot from "../singleEvent/timeSlots/TimeSlot.vue";
 import VenuAddress from "../singleEvent/venuAddress/VenueAddress.vue"
-import {
-    ref,
-    computed
-} from "vue";
-import {
-    useRouter
-} from "vue-router";
+import {ref,computed} from "vue";
+import {useRouter} from "vue-router";
 export default {
     name: "Event",
     props: {

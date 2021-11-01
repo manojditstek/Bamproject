@@ -3,25 +3,24 @@
     <!-- step 1 -->
     <div class="d-flex justify-content-between align-items-end header">
       <h2>
-        <router-link to="/">Back to Home</router-link>
+        <router-link to="/">{{$t('downloadTicket.backtoHome')}}</router-link>
       </h2>
     </div>
     <!---->
     <div class="cardBodyWrapper bgLight">
       <div class="payDesc">
-        <h1>Your tickets are in your Inbox</h1>
-        <p>We sent you a confirmation mail together with your tickets. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
+        <h1>{{$t('downloadTicket.heading1')}}</h1>
+        <p>{{$t('downloadTicket.p1')}}</p>
         <div class="buttons">
-          <button class="button btnGreen">Resend Email</button>
-          <button class="button btnDefault" @click="downloadTkt()">Download tickets</button>
+          <button class="button btnGreen" @click="sendMail()">{{$t('downloadTicket.resendEmail')}}</button>
+          <button class="button btnDefault" @click="downloadTkt()">{{$t('downloadTicket.downloadTickets')}}</button>
         </div>
       </div>
     </div>
     <!---->
     <div class="cardBodyWrapper">
-        <Loader />
       <div class="ticketDesc">
-        <h2>Event Name</h2>
+        <h2>{{$t('downloadTicket.eventName')}}</h2>
         <div class="eventDetails">
           <div class="eventInnerDetails">
             <div class="eventIcon">
@@ -37,7 +36,7 @@
               <i class="fa fa-map-marker" aria-hidden="true"></i>
             </div>
             <div class="eventDesc">
-              <label>Venue Name</label>
+              <label>{{$t('downloadTicket.venueName')}}</label>
               <label>08:30 pm - 11:30pm</label>
             </div>
           </div>
@@ -46,32 +45,32 @@
          <table class="table">
           <thead>
             <tr>
-              <th>{{tcktDetails.order_item.length}}</th>
+              <th>{{tcktDetails.orderItem.length}}</th>
               <th></th>
               <th>{{tcktDetails.total}} {{currency}}</th>
             </tr>
           </thead>
-          <tbody v-for="(ticket) in tcktDetails.order_item" :key="ticket.id">
+          <tbody v-for="(ticket) in tcktDetails.orderItem" :key="ticket.id">
             <tr >
               <td>{{ticket.ticket.length}}</td>
-              <td >{{ticket.ticket[0].ticket_config.name}} <br> Discount Category</td>
-              <td>{{ticket.ticket[0].ticket_config.face_value}} {{ticket.ticket[0].ticket_config.currency}}</td>
+              <td >{{ticket.ticket[0].ticketConfig.name}} <br> {{$t('downloadTicket.discountCategory')}}</td>
+              <td>{{ticket.ticket[0].ticketConfig.faceValue}} {{ticket.ticket[0].ticketConfig.currency}}</td>
             </tr>
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="2">Date: {{toDayDate}}</td>
-              <td>Order ID: {{tcktDetails.id}}</td>
+              <td colspan="2">{{$t('downloadTicket.date')}} {{toDayDate}}</td>
+              <td>{{$t('downloadTicket.orderID')}} {{tcktDetails.id}}</td>
             </tr>
           </tfoot>
          </table>
 
         </div>
         <div class="ticketCartDesc">
-          <h4>Hinweis </h4> 
-          <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
+          <h4>{{$t('downloadTicket.hinweis')}} </h4> 
+          <p>{{$t('downloadTicket.p2')}} </p>
         </div>
-        <div class="footerActionBtn"><router-link to="/" class="button"><button type="button"> Back to Shop </button></router-link></div>
+        <div class="footerActionBtn"><router-link to="/" class="button"><button type="button">{{$t('downloadTicket.backtoShop')}} </button></router-link></div>
       </div>
     </div>
   </div>
@@ -81,11 +80,11 @@
 import { computed,ref } from "vue";
 import { useStore } from "vuex";
 import moment from 'moment'
-import Loader from '../../components/loader/Loader.vue'
+import bam from '../../services/bamSdk'
 export default {
   name: "DownloadTicket",
   components:{
-      Loader
+
   },
   setup() {
     const store = useStore();
@@ -108,11 +107,15 @@ export default {
         orderId: orderID.value.id
       });
     }
+    async function sendMail(){
+      await bam.order.sendOrderEmail({ id: orderID.value.id })
+    }
     return {
       tcktDetails,
       downloadTkt,
       currency,
-      toDayDate
+      toDayDate,
+      sendMail
     };
   }
 };

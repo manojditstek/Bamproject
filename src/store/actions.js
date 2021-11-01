@@ -1,7 +1,9 @@
-import DataService from "../services/DataService";
+
 import router from "../router/";
 import moment from "moment";
+import download from 'downloadjs'
 import bam from '../services/bamSdk'
+import {saveStreamToFile} from 'bam-ticketing-sdk';
 
 export const getEvents = async ({commit}, dateRange) => {
     console.log("DateRange:", dateRange)
@@ -78,9 +80,6 @@ export const sigleEventWithTimeSlot = async ({commit}, data) => {
 
 
 export const workSpaceKey = async ({commit}) => {
-    // let response = await bam.account.getSeatsWorkspacesForOrganizer({
-    //     id:'eventspace'
-    // });
     let organizer = await bam.account.getOrganizer({
         id: 'eventspace',
         fields: ['workspace']
@@ -89,17 +88,6 @@ export const workSpaceKey = async ({commit}) => {
     commit('workSpaceKey', organizer)
 
 }
-
-
-// export const getVenue = async ({commit},venue_id) => {
-//     commit('loadingStatus', true)
-//     await bam.venue.getVenue({ id: venue_id }).then((response) => {
-//         commit('setVenue', response)
-//         commit('loadingStatus', false)
-//     }).catch(error => {
-//         commit('loadingStatus', false)
-//     });
-// }
 
 export const recurringEvent = async ({commit}, id) => {
     commit('loadingStatus', true)
@@ -115,22 +103,21 @@ export const recurringEvent = async ({commit}, id) => {
     });
 }
 
+
+
+
+
 export const createOrder = async ({commit}, cartItem) => {
     console.log('createdOrderItem=>', cartItem)
     commit('loadingStatus', true)
     await bam.order.createOrder({
         orderItem: cartItem.cartItems,
-        format:cartItem.format,
-        orderContact: {
-            firstName: 'test1',
-            lastName: 'test2',
-            email: 'test@test.co',
-            phone: '1234567891',
-        }
-        }).then((response) => {
+        format:cartItem.format
+    }).then((response) => {
         commit('loadingStatus', false)
-        commit('SetOrderItem',response)
-        router.push('/user-form')
+        commit('setCreateOrder', response)
+        console.log('gettingOrderItem=>', response)
+        router.push('/user-kyc-form')
         }).catch(response => {
             console.log(response);
             commit('errorMsg', response);
@@ -139,83 +126,83 @@ export const createOrder = async ({commit}, cartItem) => {
 }
 
 export const ticketHolderInfo = async ({commit}, data) => {
+    console.log("=>",data)
     commit('loadingStatus', true)
-    await bam.order.createTicketHolder({
-        id:data.ticketID,
-        holder:{
-            firstName: 'test1',
-            lastName: 'test2',
-            email: 'test@test.co',
-            phone: '1234567891',
-        }
-    })
-    .catch(error => {
-        console.log(error);
-        commit('errorMsg', error.response.data);
+    data.orderItem.forEach(async(element,i) => {
+        await bam.order.createTicketHolder({id:element.ticket[0].id},
+            {
+                firstName: data.data.first_name[i],
+                lastName: data.data.last_name[i],
+                email: data.data.email[i],
+                phone: data.data.phone[i],
+            }
+        )
+        .then((response) => {
+            commit('loadingStatus', false)
+            commit('setTicketHolder', response)
+            router.push('/user-form')
+        }).catch(error => {
+            console.log(error);
+            commit('errorMsg', error.response.data);
+        });
+        
     });
+    
 }
 
 
 export const orderContact = async ({
     commit
 }, data) => {
+    console.log("=>=>",data);
     commit('loadingStatus', true)
-    await DataService.orderContact(data).then(async (response) => {
+    await bam.order.createOrderContact({ id: data.id }, 
+        {
+            first_name: data.data.first_name,
+            last_name: data.data.last_name,
+            phone: data.data.phone,
+            email: data.data.email,
+            billing_email: data.data.billing_email,
+        }
+    )
+    .then((response) => {
+        console.log(response);
         commit('loadingStatus', false)
-        // router.push('/payment-method')
-    }).catch(error => {
-        console.log(error);
-        commit('errorMsg', error.response.data);
+    }).catch(response => {
+        console.log(response);
+        commit('errorMsg', response);
     });
 }
 
 
 export const paymentInitiate = async ({commit}, data) => {
     commit('loadingStatus', true)
-    // await bam.payment.createPaymentIntent({
-    //     orderId: data.id,
-    //     type: data.payMethod
-    // })
-    await DataService.paymentInitiate(data)
+    await bam.payment.createPaymentIntent({
+        orderId: data.id,
+        type: data.payMethod
+    })
     .then(async (response) => {
-        // console.log("paymentInitiate2=> ",response.data.data)
-        commit('paymentInitiate', response.data.data)
+        console.log("paymentInitiate2=> ",response)
+        commit('paymentInitiate', response)
         commit('loadingStatus', false)
-        // router.push('/payment-method')
-    }).catch(error => {
-        console.log(error);
-        commit('errorMsg', error.response.data);
+    }).catch(response => {
+        console.log(response);
+        commit('errorMsg', response);
     });
 }
 
 
-export const startTimer = async ({
-    commit
-}) => {
+export const startTimer = async ({commit}) => {
     commit('timer');
 }
 
-import download from 'downloadjs' // for ticket download 
-export const downloadTicketPdf = async ({
-    commit
-}, data) => {
-    console.log('PDF', data)
-    // await DataService.downloadTicketPdf(data)
-    await bam.order.downloadTickets({ id:data.orderId })
-        .then((response) => {
-            const content = response.headers['content-type'];
-            download(response.data, 'ticket.pdf', content)
-            commit('downloadTicketPdf', response.data)
-            // console.log("downloadTicketPdf",response)
-            commit('loadingStatus', false)
-        }).catch(error => {
-            if (error.response.status == 404) {
-                const content = error.response.headers['content-type'];
-                commit('loadingStatus', false)
-                // commit('errorMsg',error.response);
-                alert(`Data not found`);
-            }
-            console.log("error=>", error.response);
 
-        });
+
+export const downloadTicketPdf = async ({commit}, data) => {
+setTimeout(async () => {
+    let ticket = await bam.order.downloadTickets({ id: data.orderId })
+    await saveStreamToFile(ticket, 'ticket.pdf');
+    // download(ticket, 'ticket.pdf');
+}, 3000)
+
 }

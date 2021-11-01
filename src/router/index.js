@@ -44,11 +44,11 @@ const routes = [
     name: 'RecurringEvent',
     component: () => import("../views/events/RecurringEvent.vue")
   },
-  {
-    path: '/ticket-category',
-    name: 'TicketCategory',
-    component: () => import("../views/ShoppingCart/TicketCategory.vue")
-  },
+  // {
+  //   path: '/ticket-category',
+  //   name: 'TicketCategory',
+  //   component: () => import("../views/ShoppingCart/TicketCategory.vue")
+  // },
   {
     path: '/payment',
     name: 'Payment',

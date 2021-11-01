@@ -128,55 +128,31 @@ export const createOrder = async ({
 }, cartItem) => {
     console.log('createOrderItem=>', cartItem)
     commit('loadingStatus', true)
-   const response = await bam.order.createOrder({
-        orderItem: cartItem.cartItems,
-        format:cartItem.format,
-        orderContact: {
-            firstName: cartItem.data.first_name,
-            lastName: cartItem.data.last_name,
-            email: cartItem.data.email,
-            phone:cartItem.data.phone
-        }
-    })
-    
     let orderID = null
-    // await DataService.createOrder(cartItem)
-    // .then(async (response) => {
-        console.log("createOrderID=> ",response.id)
-        commit('setCreateOrder', response)
-        // commit('getOrderDetails',response.data.data.id)
-        orderID = response.id; //getting order Id for order details
-        // await DataService.getOrderDetails(orderID)
+    await DataService.createOrder(cartItem)
+    .then(async (response) => {
+        console.log("createOrderID=> ",response.data.data.id)
+        commit('setCreateOrder', response.data.data)
+        commit('getOrderDetails',response.data.data.id)
+        orderID = response.data.data.id; //getting order Id for order details
+        await DataService.getOrderDetails(orderID)
         const respGetOrder = await bam.order.getOrder({id:orderID})
-        // .then(async (response) => {
+        .then(async (response) => {
             console.log("response-getOrderDetails:=> ",respGetOrder)
-            // await response.order_item.forEach((element) => {
-                // console.log('getting ticket Id',element.ticket[0].id),
-                // DataService.ticketHolder(response.order_item[0].ticket[0].id,cartItem.data)
-
-               const ticketHolder= await bam.order.createTicketHolder({
-                    id:1295,
-                    holder:{
-                        firstName: 'test1',
-                        lastName: 'test2',
-                        email: 'test@test.co',
-                        phone: '1234567891',
-                    }
+            await response.data.data.order_item.forEach((element) => {
+                console.log('getting ticket Id',element.ticket[0].id),
+                DataService.ticketHolder(response.data.data.order_item[0].ticket[0].id,cartItem.data)
+                .then(async (response) => {
+                    console.log("response-ticketHolder:=> ", response)
                 })
-
-                // console.log("response-ticketHolder:=> ", respTicketHolder)
-                // .then(async (response) => {
-                //     console.log("response-ticketHolder:=> ", response)
-                // })
-            // });
-        // })
+            });
+        })
         commit('loadingStatus', false)
-        // commit('ticketHolderInfo', ticketHolder)
-        // router.push('/user-form')
-    // }).catch(error => {
-    //     console.log(error.response.data.message);
-    //     commit('errorMsg', error.response.data);
-    // });
+        router.push('/user-form')
+    }).catch(error => {
+        console.log(error.response.data.message);
+        commit('errorMsg', error.response.data);
+    });
 }
 
 

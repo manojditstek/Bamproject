@@ -34,7 +34,7 @@ export const setTimeSlots = (state,timeSlot)=>{
 /* cart module  */
 // This block of code check the items in cart
 const isItemInCart = (cartItems, item) => {
-  let index = cartItems.findIndex(x => x.id == item.id)
+  let index = cartItems.findIndex(x => x.id === item.id && x.timeSlotId === item.timeSlotId)
   if (index > -1) {
     return true
   }
@@ -44,15 +44,22 @@ const isItemInCart = (cartItems, item) => {
 
 // This block of code add item in cart
 export const addCartItem = (state, data) => {
-  // console.log("addcart=>",data.item)
+  data.item.timeSlotId = data.timeslot_id;
   data.item.quantity = getItemQtyCart(state.cart.cartItems, data.item) + 1;
+  data.item.overAllQuantity = getOverAllQtyCart(state.cart.cartItems, data.item) + 1;
+  console.log("item", data.item.quantity, data.item.ticketsPerUser);
+  if(data.item.overAllQuantity > data.item.ticketsPerUser){
+    alert("Limit fot this ticket exceeds")
+    return 
+  }
   data.item.totalPrice = getItemTotalPrice(data.item);
   data.item.eventName = data.eventName;
-  data.item.timeSlotId = data.timeslot_id;
   if (isItemInCart(state.cart.cartItems, data.item)) {
     updateCartItem(state, data.item)
   } else {
-    state.cart.cartItems.push(data.item,);
+    data.item.discounts = [];
+    data.item.totalDiscount =0;
+    state.cart.cartItems.push(data.item);
     totalPrice(state);
     totalQuantity(state);
   }
@@ -62,7 +69,7 @@ export const addCartItem = (state, data) => {
 // This block of code update item in cart
 export const updateCartItem = (state, updatedItem) => {
   state.cart.cartItems = state.cart.cartItems.map((cartItem) => {
-    if (cartItem.id === updatedItem.id) {
+    if (cartItem.id === updatedItem.id && cartItem.timeSlotId === updatedItem.timeSlotId) {
       return updatedItem;
     }
     return cartItem;
@@ -76,7 +83,15 @@ export const removeCartItem = (state, item) => {
   if (isItemInCart(state.cart.cartItems, item)) {
     let quantity = getItemQtyCart(state.cart.cartItems, item) - 1;
     if (quantity === 0) {
-      state.cart.cartItems = state.cart.cartItems.filter(x => x.id !== item.id)
+      let cartItems = []
+      state.cart.cartItems.forEach((cartItem) => {
+        if(cartItem.id === item.id && item.timeSlotId === cartItem.timeSlotId){
+          // 
+        }else{
+          cartItems.push(cartItem)
+        }
+      })
+      state.cart.cartItems = cartItems
       totalPrice(state);
       totalQuantity(state); 
     } else {
@@ -96,6 +111,7 @@ export const removeCartItemComplete = (state, item) => {
   }
 }
 
+// cart back button 
 export const backToHome = (state) =>{
   state.cart.cartItems = [],
   state.cart.itemsTotalQuantity=0,
@@ -105,7 +121,16 @@ export const backToHome = (state) =>{
 
 // This block of code used for get single item  
 const getItemQtyCart = (cartItems, item) => {
-  return cartItems.filter(x => x.id === item.id)[0]?.quantity || 0
+  let qty = cartItems.filter(x => x.id === item.id && x.timeSlotId === item.timeSlotId)[0]?.quantity || 0
+  return qty
+}
+
+const getOverAllQtyCart = (cartItems, item) => {
+ let qty =  cartItems.filter(x => x.id === item.id).reduce((total, next)=>{
+    return total + next.quantity
+  },0);
+  console.log("getOverAllQtyCart",qty)
+  return qty
 }
 
 // This block of code used for get single item price 
@@ -189,9 +214,4 @@ export const workSpaceKey = (state, resp)=>{
 
 export const ticketFormat = (state, data)=>{
   state.ticketFormat=data;
-}
-
-
-export const SetOrderItem = (state, resp)=>{
-  state.SetOrderItem=resp;
 }
