@@ -4,7 +4,7 @@
     <div class="cardWrapper d-flex"  v-if="ticketDscount?ticketDscount.length==0:''" >
         <div class="detailsCol">
             <h2>{{ticket?ticket.name:'Ticket Not Found!'}} : {{ticket?(ticket.faceValue).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
-            <p>incl. fees:€ 0.00 TIMESLOT: {{timeSlotId}} </p>
+            <p>{{$t('common.inclFees')}} € 0.00 {{venueId}}</p>
         </div>
         <div class="ticketMessage">
             <div class="ticketMessageInner " :class="ticket.availableTickets!='' ?'':'soldOut'">
@@ -27,10 +27,10 @@
     </div>
 
     <div v-else>
-    <div class="cardWrapper d-flex" :class="toggleButton?'active':''" @click="toggleButton=!toggleButton">
+    <div class="cardWrapper d-flex" >
         <div class="detailsCol">
             <h2>{{ticket?ticket.name:'Ticket Not Found!'}} :{{ticket?(ticket.faceValue).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
-            <p>incl. fees:€ 0.00 TIMESLOT: {{timeSlotId}}</p>
+            <p>{{$t('common.inclFees')}} € 0.00 </p>
         </div>
         <div class="ticketMessage">
             <div class="ticketMessageInner " :class="ticket.availableTickets!='' ?'':'soldOut'">
@@ -41,9 +41,9 @@
         <div class="buttonWrap d-flex">
             <button class="minusBtn" @click="removeFromCart()">-</button>
             <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>
-            <button class="plusBtn" :class="perUserQuantity!=''||ticket.availableTickets==''?'disabled':''" :disabled="perUserQuantity!=''||ticket.availableTickets==''" @click="addToCart()">+</button>
+            <button class="plusBtn"  @click="addToCart()">+</button>
         </div>
-        <div class="collapseArrow lightBg" >
+        <div class="collapseArrow lightBg" :class="toggleButton?'active':''" @click="toggleButton=!toggleButton" >
             <i class="fa fa-angle-right"></i>
         </div>
     </div>
@@ -72,7 +72,10 @@ export default {
         eventName: String,
         timeSlotId: Number,
         ticketDscount: Object,
-        eventChartKey: String
+        eventChartKey: String,
+        venueId:Number,
+        startDate:Date,
+        endDate:Date
     },
 
     setup(props) {
@@ -87,7 +90,11 @@ export default {
             let ticket = {
                 item: {...props.ticket},
                 eventName: props.eventName,
-                timeslot_id: props.timeSlotId
+                timeslot_id: props.timeSlotId,
+                venueId:props.venueId,
+                startDate:props.startDate,
+                endDate:props.endDate
+
             };
             store.commit("addCartItem", ticket);
         }

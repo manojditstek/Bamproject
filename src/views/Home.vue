@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex justify-content-between align-items-end header">
-    <h2>{{ $t('home.events') }}</h2>
+    <h2>{{ $t('common.events') }}</h2>
     <div class="datePicker">
       <DateRangePicker v-model="date.range" :disabled="events.length < 1" />
     </div>
@@ -17,7 +17,7 @@
   <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
     <TotalTicketCalculation />
     <div class="labelBtn">
-      <router-link to="/shop" class="button">{{ $t('cartTemp.cart') }}</router-link>
+      <router-link to="/shop" class="button">{{ $t('common.cart') }}</router-link>
     </div>
   </div>
 

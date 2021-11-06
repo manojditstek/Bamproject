@@ -166,7 +166,8 @@ export default {
                                 name: name.value,
                             },
                         },
-                        return_url: 'http://ditstekdemo.com/bamproject/',
+                        
+                        return_url: 'http://localhost:8084/',
                         
                     }).catch(error => {
                         store.commit('loadingStatus', false)
@@ -174,7 +175,7 @@ export default {
                         console.log("error=>", error.response);
 
                     });
-                    if (response.paymentIntent.status == 200) {
+                    if (response == 200) {
                         console.log('paymentCompleted=>', response)
                         store.dispatch('downloadTicket', {
                             id: orderID.value.id
@@ -183,6 +184,7 @@ export default {
                             path: '/download-ticket'
                         })
                     }
+                    
                 } // End EPS
             }
         }

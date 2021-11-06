@@ -6,11 +6,10 @@ const english = {
     events:'Events',
     event:'Event',
     cart:'Cart',
-    from:'from'
-  },
-
-  home:{
-    events:'Events'
+    from:'from',
+    fees:'Fees:',
+    total:'Total:',
+    inclFees:'incl.fees:',
   },
 
   userKycForm:{
@@ -39,12 +38,13 @@ const english = {
     firstName:'First name required.',
     lastName:'Last name required.',
     phone:'Phone required.',
+    validPhone:'Valid phone number required.',
     email:'Email required.',
     validEmail:'Valid email required.'
   },
 
   timer:{
-    have:'have',
+    have:'Your have',
     afterHave:'minutes to complete your order',
   },
 
@@ -75,9 +75,6 @@ const english = {
     p1:'We sent you a confirmation mail together with your tickets. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.',
     resendEmail:'Resend Email',
     downloadTickets:'Download Tickets',
-    eventName:'Event Name',
-    venueName:'Venue Name',
-    discountCategory:'Discount Category',
     date:'Date: ',
     orderID:'Order ID: ',
     hinweis:'Hinweis',

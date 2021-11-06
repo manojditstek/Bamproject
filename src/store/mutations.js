@@ -44,27 +44,33 @@ const isItemInCart = (cartItems, item) => {
 
 // This block of code add item in cart
 export const addCartItem = (state, data) => {
+  console.log('items in cart',data)
+  data.item.discounts = []; //for discount
+  data.item.totalDiscount = 0; //for discount
   data.item.timeSlotId = data.timeslot_id;
   data.item.quantity = getItemQtyCart(state.cart.cartItems, data.item) + 1;
   data.item.overAllQuantity = getOverAllQtyCart(state.cart.cartItems, data.item) + 1;
-  console.log("item", data.item.quantity, data.item.ticketsPerUser);
   if(data.item.overAllQuantity > data.item.ticketsPerUser){
     alert("Limit fot this ticket exceeds")
-    return 
+    return
   }
   data.item.totalPrice = getItemTotalPrice(data.item);
   data.item.eventName = data.eventName;
+  data.item.venueId = data.venueId;
+  data.item.startDate = data.startDate,
+  data.item.endDate = data.endDate
   if (isItemInCart(state.cart.cartItems, data.item)) {
     updateCartItem(state, data.item)
   } else {
-    data.item.discounts = [];
-    data.item.totalDiscount =0;
+    data.item.discounts = []; //for discount
+    data.item.totalDiscount = 0; //for discount
     state.cart.cartItems.push(data.item);
-    totalPrice(state);
+    totalPrice(state,0);
     totalQuantity(state);
   }
 
 }
+
 
 // This block of code update item in cart
 export const updateCartItem = (state, updatedItem) => {
@@ -74,7 +80,7 @@ export const updateCartItem = (state, updatedItem) => {
     }
     return cartItem;
   })
-  totalPrice(state);
+  totalPrice(state,0);
   totalQuantity(state);
 }
 
@@ -92,10 +98,12 @@ export const removeCartItem = (state, item) => {
         }
       })
       state.cart.cartItems = cartItems
-      totalPrice(state);
+      totalPrice(state,0);
       totalQuantity(state); 
     } else {
       item.quantity = quantity
+      item.discounts = []; // for discount
+      item.totalDiscount = 0; // for discount
       updateCartItem(state, item);
       item.totalPrice = getItemTotalPrice(item);
     }
@@ -116,6 +124,7 @@ export const backToHome = (state) =>{
   state.cart.cartItems = [],
   state.cart.itemsTotalQuantity=0,
   state.cart.itemTotalAmount=0
+ 
 }
 
 
@@ -125,25 +134,29 @@ const getItemQtyCart = (cartItems, item) => {
   return qty
 }
 
+// checking per user limit for ticket booking
 const getOverAllQtyCart = (cartItems, item) => {
  let qty =  cartItems.filter(x => x.id === item.id).reduce((total, next)=>{
     return total + next.quantity
   },0);
-  console.log("getOverAllQtyCart",qty)
   return qty
 }
 
 // This block of code used for get single item price 
 const getItemTotalPrice = (item) => {
   return (item.quantity * item.faceValue);
+
 }
 
 // This block of code calculate total price 
-export const totalPrice = (state) => {
+export const totalPrice = (state,discount) => {
+
   state.cart.itemTotalAmount = state.cart.cartItems.reduce((total, next) => {
-    return total + (next.quantity * next.faceValue)
+    return total + (next.quantity * next.faceValue)-discount
   }, 0)
 }
+
+
 
 // This block of code calculate total quantity
 export const totalQuantity = (state) => {
@@ -151,6 +164,62 @@ export const totalQuantity = (state) => {
     return total + (next.quantity)
   }, 0)
 }
+
+
+
+//discount module
+
+//add discount in cart
+export const addDiscountToCart = (state, data) => {
+  state.cart.cartItems.forEach(element => {
+    data.quantity = getItemQtyDiscount(element.discounts, data) + 1;
+    // data.overAllQuantity = getOverAllQtyCart(element.discounts, data) + 1;
+    if (isItemInCart(element.discounts, data)) {
+      updateCartDiscountItem(element.discounts, data)
+    } else {
+    element.discounts.push(data);
+    element.totalDiscount=data.value;
+    totalPrice(state,data.value);
+    }
+  });  
+}
+
+
+
+const getItemQtyDiscount = (cartItems, item) => {
+  let qty = cartItems.filter(x => x.id === item.id )[0]?.quantity || 0
+  return qty
+}
+
+
+export const updateCartDiscountItem = (item, updatedItem) => {
+  item = item.map((cartItem) => {
+    if (cartItem.id === updatedItem.id) {
+      return updatedItem;
+    }
+    
+    return cartItem;
+    
+  })
+}
+
+
+export const removeDiscountToCart = (state, data) => {
+  state.cart.cartItems.forEach(element => {
+  if (isItemInCart(element.discounts, data)) {
+    let quantity = getItemQtyDiscount(element.discounts, data) - 1;
+    if (quantity === 0) {
+      element.discounts= element.discounts.filter(x => x.id !== data.id)
+      element.totalDiscount=0;
+      totalPrice(state,0);
+    } else {
+      data.quantity = quantity
+      updateCartDiscountItem(element.discounts, data);
+    }
+  }
+})
+}
+// end discount module
 
 /*end cart module */
 

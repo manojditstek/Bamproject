@@ -55,10 +55,10 @@ export const getEvent = async ({
         commit('setEvent', response)
         console.log("event==>", response)
         commit('loadingStatus', false)
-    }).catch(error => {
+    }).catch(response => {
         commit('loadingStatus', false)
-        console.log(error);
-        commit('errorMsg', error.response);
+        console.log(response);
+        commit('errorMsg', response);
     });
 }
 
@@ -71,10 +71,10 @@ export const sigleEventWithTimeSlot = async ({commit}, data) => {
         commit('setEventWithTimeSlot', response)
         commit('setTimeSlots', data.timeSlot)
         commit('loadingStatus', false)
-    }).catch(error => {
+    }).catch(response => {
         commit('loadingStatus', false)
-        console.log(error);
-        commit('errorMsg', error.response.data);
+        console.log(response);
+        commit('errorMsg', response);
     });
 }
 
@@ -94,12 +94,12 @@ export const recurringEvent = async ({commit}, id) => {
     await bam.event.getEvent({id: id}).then((response) => {
         commit('setRecurringEvent', response)
         commit('loadingStatus', false)
-    }).catch(error => {
+    }).catch(response => {
         commit('loadingStatus', false)
         alert(`Data not found`);
         router.push('/')
-        console.log(error);
-        commit('errorMsg', error.response.data);
+        console.log(response);
+        commit('errorMsg', response);
     });
 }
 
@@ -139,11 +139,11 @@ export const ticketHolderInfo = async ({commit}, data) => {
         )
         .then((response) => {
             commit('loadingStatus', false)
-            commit('setTicketHolder', response)
+            // commit('setTicketHolder', response)
             router.push('/user-form')
-        }).catch(error => {
-            console.log(error);
-            commit('errorMsg', error.response.data);
+        }).catch(response => {
+            console.log(response);
+            commit('errorMsg', response);
         });
         
     });
@@ -200,9 +200,8 @@ export const startTimer = async ({commit}) => {
 
 export const downloadTicketPdf = async ({commit}, data) => {
 setTimeout(async () => {
-    let ticket = await bam.order.downloadTickets({ id: data.orderId })
-    await saveStreamToFile(ticket, 'ticket.pdf');
-    // download(ticket, 'ticket.pdf');
+    let response = await bam.order.downloadTickets({ id: data.orderId })
+    console.log('ticketResp',response)
 }, 3000)
 
 }

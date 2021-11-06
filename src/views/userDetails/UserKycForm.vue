@@ -21,7 +21,12 @@
       <div class="cardBodyWrapper bgLight brdrtop">
           <!-- <div class="ticketCategory" v-for=" item in cart.cartItems" :key="item.id"> -->
               <div class="ticketNewCategory">
-              <h2>{{$t('userKycForm.ticketCategory')}}{{order.ticket[0].ticketConfig.name}}<span>{{$t('userKycForm.discountCategory')}}{{}}</span></h2>
+              <h2>{{$t('userKycForm.ticketCategory')}}{{order.ticket[0].ticketConfig.name}}
+                  <div v-if=" order.ticket[0].ticketDiscount">
+                      <span v-for="disc in order.ticket[0].ticketDiscount" :key="disc.id">{{$t('userKycForm.discountCategory')}}{{disc.name}}</span>
+                  </div>
+                  
+               </h2>
               <div class="amount">{{order.ticket[0].ticketConfig.faceValue}} {{order.ticket[0].ticketConfig.currency}}</div>
           </div>
       </div>

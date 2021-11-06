@@ -61,10 +61,15 @@ export default {
         });
 
         function createOrder() {
+            let ticketDiscount= null
+            cart.value.cartItems.forEach(element => {
+                ticketDiscount = element.discounts.map((item)=>{return item.id});
+            });
             let cartItems = cart.value.cartItems.map(elementKey => ({
                 ticket_config_id:elementKey.id,
                 quantity:elementKey.quantity,
-                timeslot_id:elementKey.timeSlotId
+                timeslot_id:elementKey.timeSlotId,
+                ticket_discount:ticketDiscount
             }));
             let format = ticketFormat.value
             store.commit('ticketFormat',ticketFormat.value)

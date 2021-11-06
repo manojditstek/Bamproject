@@ -4,19 +4,19 @@
     <h2>{{discount.name}}:{{discount.value}} {{'EUR'}}</h2>
     <div class="priceWrap d-flex">
         <div class="eventPrice1">
-            <p>Fees: € 0.00</p>
-            <p>Total: € 0.00</p>
+            <p>{{$t('common.fees')}} € 0.00</p>
+            <p>{{$t('common.total')}} € 0.00</p>
         </div>
         <div class="ticketMessage">
             <div class="ticketMessageInner " :class="discount.availableTickets!='' ?'':'soldOut'">
                 {{discount.availableTickets!='' ?'':'Sold Out'}}
             </div>
         </div>
-        <div>{{perUserQuantity!=''?'Limit Exceeded!':''}}</div>
-        <div class="buttonWrap d-flex">
+        <!-- <div>{{perUserQuantity!=''?'Limit Exceeded!':''}}</div> -->
+        <div class="buttonWrap d-flex" v-if="ticket.quantity>0">
             <button class="minusBtn" @click="removeFromCart()">-</button>
             <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>
-            <button class="plusBtn" :class="perUserQuantity!=''||discount.availableTickets==''?'disabled':''" :disabled="perUserQuantity!=''||discount.availableTickets==''" @click="addToCart()">+</button>
+            <button class="plusBtn" :class="ticket.quantity>=itemQuantity||ticket.availableTickets==''?'disabled':''" :disabled="ticket.quantity>=itemQuantity||ticket.availableTickets==''" @click="addToCart()">+</button>
         </div>
     </div>
 </div>
@@ -51,25 +51,45 @@ export default {
         });
 
         function addToCart() {
-            let ticket = {
-                item: props.ticket,
-                ticketDiscount:props.discount.value,
-                eventName: props.eventName,
-                timeslot_id: props.timeSlotId
+            // let ticket = {
+            //     item: {...props.ticket},
+            //     ticketDiscount:props.discount,
+            //     eventName: props.eventName,
+            //     timeslot_id: props.timeSlotId,
 
-            };
+            // };
 
-            store.commit("addCartItem", ticket);
+               store.commit("addDiscountToCart", props.discount);
         }
 
         function removeFromCart() {
-            store.commit("removeCartItem", props.ticket);
+            store.commit("removeDiscountToCart", props.discount);
 
         }
+
+        let discountTkt = computed(function(){
+            let get_ticket= cart.value.map((element) => {
+              get_ticket = element.discounts
+            })
+            console.log('hi',get_ticket)
+            return get_ticket;
+        })
+
         let itemQuantity = computed(function () {
-            let ticket = props.ticket;
-            let get_ticket = cart.value.filter((item) => item.id == ticket.id);
-            return get_ticket[0] ?.quantity;
+            let discountID = props.discount;
+            let temp = null
+            cart.value.forEach(element => {
+                temp=element.discounts;
+            });
+            console.log('temp',temp)
+            if(temp){
+            let get_ticket= temp.filter((item) => item.id===discountID.id);
+              console.log('getTicketQty',get_ticket)
+                console.log('discountID:',get_ticket[0]?.quantity)
+            
+            return get_ticket[0]?.quantity;
+            }
+            return 0
         })
 
         let perUserQuantity = computed(function () {
@@ -85,6 +105,7 @@ export default {
             removeFromCart,
             perUserQuantity,
             discountTicket,
+            discountTkt
 
         }
     },

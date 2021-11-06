@@ -24,7 +24,8 @@
         <div class="formGroup">
             <input type="number" class="form-control" :class="data.phone && !formErrors[2]?'active':formErrors[2]?' errorInput':''" v-model.trim="data.phone" @input="phoneNumber()"/>
             <div class="labelInput">{{$t('orderContactForm.phone')}}</div>
-           <div v-if="formErrors[2]" class="error">{{$t('formValidation.phone')}}</div>
+           <div v-if="formErrors[2]!='valid' && formErrors[2]" class="error">{{$t('formValidation.phone')}}</div>
+           <div v-if="formErrors[2]=='valid' && formErrors[2]" class="error">{{$t('formValidation.validPhone')}}</div>
         </div>
     </div>
     <div class="formInputs">
@@ -153,9 +154,9 @@ export default {
             if (!data.phone) {
                 formErrors.value[2] = true;
             }
-            // else if (!validPhone(data.phone)) {
-            //     formErrors.value[2] = 'Valid phone number required.';
-            // }
+            else if (!validPhone(data.phone)) {
+                formErrors.value[2] = 'valid';
+            }
             else{
                 return true
             }
@@ -189,10 +190,10 @@ export default {
             return re.test(email);
         }
 
-        // function validPhone(phone) {
-        //     var re = /^\s*(?:\+?(\d{1,1}))?[- (]*(\d{3})[- )]*(\d{3})[- ]*(\d{4})(?: *[x/#]{1}(\d+))?\s*$/;
-        //     return re.test(phone);
-        // }
+        function validPhone(phone) {
+            var re = /^\s*(?:\+?(\d{1,1}))?[- (]*(\d{3})[- )]*(\d{3})[- ]*(\d{4})(?: *[x/#]{1}(\d+))?\s*$/;
+            return re.test(phone);
+        }
 
         return {
             data,
@@ -202,7 +203,7 @@ export default {
             currency,
             formErrors,
             validEmail,
-            // validPhone,
+            validPhone,
             firstName,
             lastName,
             phoneNumber,

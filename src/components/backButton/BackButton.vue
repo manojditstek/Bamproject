@@ -21,16 +21,12 @@ message:String
         const router = useRouter();
         function backToHome(){
             if(confirm("Do you really want to back your order will be cancel?")){
-
                store.commit("backToHome");
                router.push({
                         path: '/'
                     })
-            }
-            
-            
+            }           
         }
-
         return{
             backToHome
         }

@@ -1,7 +1,7 @@
 <template>
 <div>
-    <p>{{venueName ? venueName.name :''}}</p>
-    <p>{{venueName ? venueName.address.city :''}}</p>
+    <span>{{venueName ? venueName.name :''}}</span><br/>
+    <span>{{venueName ? venueName.address.city :''}}</span>
 </div>
 </template>
 
@@ -21,13 +21,15 @@ export default {
         
         watchEffect(async () => {
                 if (props.venue_id?props.venue_id:'') {
+                    store.commit('loadingStatus', true)
                     await bam.venue.getVenue({
                         id: props.venue_id
                     }).then((response) => {
                         venueName.value = response
                         store.commit('loadingStatus', false)
-                    }).catch(error => {
+                    }).catch(response => {
                         store.commit('loadingStatus', false)
+                        store.commit('errorMsg', response);
                     });
                 }
 
