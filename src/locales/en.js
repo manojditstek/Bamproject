@@ -43,6 +43,11 @@ const english = {
     validEmail:'Valid email required.'
   },
 
+  dateRange:{
+    start:'Start Date',
+    end:'End Date'
+  },
+
   timer:{
     have:'Your have',
     afterHave:'minutes to complete your order',

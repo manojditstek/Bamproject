@@ -109,9 +109,7 @@ export default {
             let ticket = props.ticket;
             let timeSlotId = props.timeSlotId
             if(timeSlotId){
-                console.log("timeSlotId ", timeSlotId);
                 let get_ticket = cart.value.filter((item) => item.id == ticket.id && item.timeSlotId == timeSlotId);
-                console.log("get_ticket ", get_ticket);
                 return get_ticket[0] ?.quantity;
             }else{
                 let get_ticket = cart.value.filter((item) => item.id == ticket.id);

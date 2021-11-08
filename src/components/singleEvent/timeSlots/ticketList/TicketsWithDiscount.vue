@@ -51,14 +51,6 @@ export default {
         });
 
         function addToCart() {
-            // let ticket = {
-            //     item: {...props.ticket},
-            //     ticketDiscount:props.discount,
-            //     eventName: props.eventName,
-            //     timeslot_id: props.timeSlotId,
-
-            // };
-
                store.commit("addDiscountToCart", props.discount);
         }
 
@@ -71,7 +63,6 @@ export default {
             let get_ticket= cart.value.map((element) => {
               get_ticket = element.discounts
             })
-            console.log('hi',get_ticket)
             return get_ticket;
         })
 
@@ -81,12 +72,8 @@ export default {
             cart.value.forEach(element => {
                 temp=element.discounts;
             });
-            console.log('temp',temp)
             if(temp){
             let get_ticket= temp.filter((item) => item.id===discountID.id);
-              console.log('getTicketQty',get_ticket)
-                console.log('discountID:',get_ticket[0]?.quantity)
-            
             return get_ticket[0]?.quantity;
             }
             return 0

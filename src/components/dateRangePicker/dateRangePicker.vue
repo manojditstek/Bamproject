@@ -3,9 +3,9 @@
             <template v-slot="{ inputValue, togglePopover  }">
                 <div class="d-flex justify-center items-center ">
                     <div class="d-flex datePicker" @click="togglePopover({ placement: 'bottom', transition: 'none', showDelay: 0, hideDelay: 0 })">
-                        <input placeholder="Start Date" :value="inputValue.start"  class="border px-2 py-1 w-32 rounded focus:outline-none focus:border-indigo-300" />
+                        <input :placeholder="$t('dateRange.start')" :value="inputValue.start"  class="border px-2 py-1 w-32 rounded focus:outline-none focus:border-indigo-300" />
                         -
-                        <input placeholder="End Date" :value="inputValue.end"  class="border px-2 py-1 w-32 rounded focus:outline-none focus:border-indigo-300" />
+                        <input :placeholder="$t('dateRange.end')" :value="inputValue.end"  class="border px-2 py-1 w-32 rounded focus:outline-none focus:border-indigo-300" />
                         <img src="assets/images/date_icon.svg" alt="Image" >
                     </div>
                 </div>

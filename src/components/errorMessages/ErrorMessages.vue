@@ -24,10 +24,11 @@ export default {
         });
         function closeAlert() {
             store.state.errorMsg = '';
-            store.commit("backToHome");
-            router.push({
-                        path: '/'
-                    })
+            // store.commit("backToHome");
+            // router.push({
+            //             path: '/'
+            //         })
+            location.reload();
         }
         return {
             errorMsg,

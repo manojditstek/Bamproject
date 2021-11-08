@@ -72,7 +72,7 @@ import {
 import {
     useStore
 } from 'vuex';
-import Timer from '../../components/CountDownTimer.vue'
+import Timer from '../../components/setTimer.vue'
 export default {
     name: 'UserForm',
     components:{

@@ -10,7 +10,7 @@
     <div class="eventDiscountWrapper">
         <h2>{{ $t('cartTemp.cart') }}</h2>
         <div class="amountWrapper">
-            <p>{{totalQuantity}} {{ $t('cartTemp.tickets') }} <span>{{ticketPrice}} {{currency}}</span></p>
+            <p>{{totalQuantity}} {{ $t('cartTemp.tickets') }} <span>{{ticketPrice*totalQuantity}} {{currency}}</span></p>
             <p>{{ $t('cartTemp.fees') }} <span>0.00 {{ $t('cartTemp.eur') }}</span></p>
             <p v-if="ticketDiscountPrice">Discount <span>{{ ticketDiscountPrice }} {{currency}}</span></p>
         </div>

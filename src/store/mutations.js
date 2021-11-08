@@ -1,4 +1,3 @@
-import router from "../router";
 // This block of code set the single event 
 export const setEvent = (state, event) => {
   state.event = event;
@@ -32,6 +31,7 @@ export const setTimeSlots = (state,timeSlot)=>{
 
 
 /* cart module  */
+
 // This block of code check the items in cart
 const isItemInCart = (cartItems, item) => {
   let index = cartItems.findIndex(x => x.id === item.id && x.timeSlotId === item.timeSlotId)
@@ -44,7 +44,7 @@ const isItemInCart = (cartItems, item) => {
 
 // This block of code add item in cart
 export const addCartItem = (state, data) => {
-  console.log('items in cart',data)
+  // console.log('items in cart',data)
   data.item.discounts = []; //for discount
   data.item.totalDiscount = 0; //for discount
   data.item.timeSlotId = data.timeslot_id;
@@ -124,7 +124,6 @@ export const backToHome = (state) =>{
   state.cart.cartItems = [],
   state.cart.itemsTotalQuantity=0,
   state.cart.itemTotalAmount=0
- 
 }
 
 
@@ -150,7 +149,6 @@ const getItemTotalPrice = (item) => {
 
 // This block of code calculate total price 
 export const totalPrice = (state,discount) => {
-
   state.cart.itemTotalAmount = state.cart.cartItems.reduce((total, next) => {
     return total + (next.quantity * next.faceValue)-discount
   }, 0)

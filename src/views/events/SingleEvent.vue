@@ -85,10 +85,10 @@ export default {
         //seatsio testing
         
         async function chartResp() {
-            console.log("Region.EU( ", Region.EU());
+            // console.log("Region.EU( ", Region.EU());
             let client = new SeatsioClient(Region.EU(), workSpaceKey.value.workspaceKey) // Here passing workspaceKey 
             let chartList = await client.charts.listFirstPage();
-            console.log("chartList=:", chartList)
+            // console.log("chartList=:", chartList)
         }
         console.log("hello", chartResp)
 

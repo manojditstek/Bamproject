@@ -115,7 +115,7 @@ export default {
                 
                 else if(ticketID.value.orderItem.length-1==i){
                      formErrors.value.email[i] =''
-                    console.log('submitted')
+                    // console.log('submitted')
                     store.dispatch('ticketHolderInfo', {orderItem:ticketID.value.orderItem,data})
                 }   
                 else if(data.email[i]){

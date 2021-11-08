@@ -1,10 +1,11 @@
 <template>
     <div class="d-flex justify-content-between align-items-end">
       <div class="alert">
-        <p>
+        <!-- <p>
           <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
           {{$t('timer.have')}} {{countDown}} {{$t('timer.afterHave')}}
-        </p>
+        </p> -->
+        <Timer />
       </div>
     </div>
     <div class="cardBodyWrapper">
@@ -67,9 +68,11 @@ import {ref,computed,} from 'vue'
 import {useStripe,StripeElement} from 'vue-use-stripe'
 import {useRouter} from "vue-router";
 import {useStore} from 'vuex';
+import Timer from '../../components/setTimer.vue'
 export default {
     components: {
         StripeElement,
+        Timer
     },
     setup() {
         const event = ref(null);

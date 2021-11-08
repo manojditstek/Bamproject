@@ -20,8 +20,10 @@ export default {
         const countDown = computed(() => {
             return store.state.timerDispaly;
         })
-        watchEffect(async () => {
-            await store.dispatch('startTimer');
+        watchEffect(() => {
+            setTimeout(async () => {
+                await store.dispatch('startTimer');
+            },1000)
         })
 
         return {

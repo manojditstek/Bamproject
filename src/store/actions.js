@@ -6,14 +6,14 @@ import bam from '../services/bamSdk'
 import {saveStreamToFile} from 'bam-ticketing-sdk';
 
 export const getEvents = async ({commit}, dateRange) => {
-    console.log("DateRange:", dateRange)
+    // console.log("DateRange:", dateRange)
     commit('loadingStatus', true)
     let startDateFormat = '';
     let endDateFormat = '';
     startDateFormat = moment(dateRange.start,'YYYY-MM-DD').toDate();
     endDateFormat = moment(dateRange.end,'YYYY-MM-DD').toDate();
     let dateRng = [startDateFormat,endDateFormat];
-    console.log('dateRange=>',dateRng)
+    // console.log('dateRange=>',dateRng)
     if(dateRange){
         await bam.event.listEvents({
             with: {
@@ -22,6 +22,12 @@ export const getEvents = async ({commit}, dateRange) => {
             },
             start_at:dateRng,
         }).then((response) => {
+            if(response==''){
+                let msg = {message:'Event Not found !'}
+                commit('errorMsg', msg);
+            }else{
+                commit('errorMsg', null);
+            }
             commit('setEvents', response)
             commit('loadingStatus', false)
         }).catch(response => {
@@ -53,7 +59,7 @@ export const getEvent = async ({
         id: id
     }).then((response) => {
         commit('setEvent', response)
-        console.log("event==>", response)
+        // console.log("event==>", response)
         commit('loadingStatus', false)
     }).catch(response => {
         commit('loadingStatus', false)
@@ -84,7 +90,7 @@ export const workSpaceKey = async ({commit}) => {
         id: 'eventspace',
         fields: ['workspace']
     });
-    console.log("workSpaceKey", organizer)
+    // console.log("workSpaceKey", organizer)
     commit('workSpaceKey', organizer)
 
 }
@@ -116,7 +122,7 @@ export const createOrder = async ({commit}, cartItem) => {
     }).then((response) => {
         commit('loadingStatus', false)
         commit('setCreateOrder', response)
-        console.log('gettingOrderItem=>', response)
+        // console.log('gettingOrderItem=>', response)
         router.push('/user-kyc-form')
         }).catch(response => {
             console.log(response);
@@ -126,7 +132,7 @@ export const createOrder = async ({commit}, cartItem) => {
 }
 
 export const ticketHolderInfo = async ({commit}, data) => {
-    console.log("=>",data)
+    // console.log("=>",data)
     commit('loadingStatus', true)
     data.orderItem.forEach(async(element,i) => {
         await bam.order.createTicketHolder({id:element.ticket[0].id},
@@ -154,7 +160,7 @@ export const ticketHolderInfo = async ({commit}, data) => {
 export const orderContact = async ({
     commit
 }, data) => {
-    console.log("=>=>",data);
+    // console.log("=>=>",data);
     commit('loadingStatus', true)
     await bam.order.createOrderContact({ id: data.id }, 
         {
@@ -166,7 +172,7 @@ export const orderContact = async ({
         }
     )
     .then((response) => {
-        console.log(response);
+        // console.log(response);
         commit('loadingStatus', false)
     }).catch(response => {
         console.log(response);
@@ -182,7 +188,7 @@ export const paymentInitiate = async ({commit}, data) => {
         type: data.payMethod
     })
     .then(async (response) => {
-        console.log("paymentInitiate2=> ",response)
+        // console.log("paymentInitiate2=> ",response)
         commit('paymentInitiate', response)
         commit('loadingStatus', false)
     }).catch(response => {
