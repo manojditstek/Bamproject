@@ -278,6 +278,9 @@ time {
   margin: 0;
   border-radius: 0;
 }
+.toggleList .buttonWrap {
+  padding-right: 0;
+}
 .ticketToggle .buttonWrap .plusBtn.disabled{
   background-color: #eee!important;
   cursor: no-drop; 
