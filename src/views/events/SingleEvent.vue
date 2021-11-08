@@ -2,10 +2,10 @@
 <div class="d-flex justify-content-between align-items-end header">
     <h2>
         <!-- <BackButton v-if="totalQuantity" :message="singleEvent?lengthOfString(singleEvent.name):''" /> -->
-        <div @click="backToHome">
+        <a href="javascript:void(0)" @click="backToHome">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
             {{singleEvent?lengthOfString(singleEvent.name):''}}
-        </div>
+        </a>
     </h2>
     <div class="datePicker"></div>
 </div>

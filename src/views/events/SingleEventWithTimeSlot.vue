@@ -1,10 +1,10 @@
 <template>
 <div class="d-flex justify-content-between align-items-end header">
     <h2>
-        <div  @click="backButton">
+        <a href="javascript:void(0)"  @click="backButton">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
             {{singleEvent?lengthOfString(singleEvent.name):''}}
-        </div>
+        </a>
     </h2>
     <div class="datePicker"></div>
 </div>

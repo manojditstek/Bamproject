@@ -1,8 +1,8 @@
 <template>
-<div @click="backToHome" >
+<a href="javascript:void(0)" @click="backToHome" >
     <i  v-if="message!='back'" class="fa fa-angle-left" aria-hidden="true"></i>
     {{ $t(`common.${message}`) }}
-</div>
+</a>
 </template>
 <script>
 import {

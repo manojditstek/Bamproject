@@ -45,7 +45,8 @@
               <div class="formGroup">
                   <input type="number" class="form-control" :class="data.phone[i] ?'active':formErrors.phone[i]?' errorInput':''" v-model.trim="data.phone[i]" />
                   <div class="labelInput">{{$t('userKycForm.phone')}}</div>
-                  <div v-if="formErrors.phone[i]"  class="error">{{$t('formValidation.phone')}}</div>
+                  <div v-if="formErrors.phone[i]!='valid' && formErrors.phone[i]"  class="error">{{$t('formValidation.phone')}}</div>
+                  <div v-if="formErrors.phone[i]=='valid'" class="error">{{$t('formValidation.validPhone')}}</div>
               </div>
               <div class="formGroup">
                   <input type="email" class="form-control" :class="data.email[i] ?'active':formErrors.email[i]?' errorInput':''" v-model.trim="data.email[i]"  />
@@ -104,6 +105,9 @@ export default {
                 }else if(!data.phone[i]){
                     formErrors.value.last_name[i]=''
                      formErrors.value.phone[i] = true;
+                }else if (!validPhone(data.phone[i])) {
+                    formErrors.value.last_name[i] =''
+                    formErrors.value.phone[i] = 'valid';
                 }
                 else if(!data.email[i]){
                     formErrors.value.phone[i] =''

@@ -7,11 +7,11 @@
             {{recurringEvent?recurringEvent.name:''}}
         </router-link> -->
 
-            <BackButton v-if="totalQuantity" :message="recurringEvent?recurringEvent.name:''" />
-            <div v-else @click="backToHome">
+            <BackButton v-if="totalQuantity" :message="recurringEvent?lengthOfString(recurringEvent.name):''" />
+            <a href="javascript:void(0)" v-else @click="backToHome">
                 <i class="fa fa-angle-left" aria-hidden="true"></i>
-                {{recurringEvent?recurringEvent.name:''}}
-            </div>
+                {{recurringEvent?lengthOfString(recurringEvent.name):''}}
+            </a>
         </h2>
         <div class="datePicker">
             <div class="datePicker">
@@ -54,9 +54,11 @@
 <!-- for occurrences -->
 <div v-else>
     <div class="d-flex justify-content-between align-items-end header">
-        <h2 @click="reSet">
-            <i class="fa fa-angle-left" aria-hidden="true"></i>
-            {{recurringEvent?recurringEvent.name:''}}
+        <h2>
+            <a href="javascript:void(0)" @click="reSet">
+                <i class="fa fa-angle-left" aria-hidden="true"></i>
+                {{recurringEvent?lengthOfString(recurringEvent.name):''}}
+            </a>
         </h2>
     </div>
 
@@ -150,6 +152,14 @@ export default {
             })
         }
 
+        function lengthOfString(value) {
+            if (value ? value.length > 48 : '') {
+                return value.substring(0, 35) + '...'
+            } else {
+                return value
+            }
+        }
+
         return {
             singleEvent,
             recurringEvent,
@@ -157,7 +167,8 @@ export default {
             singleEventData,
             reSet,
             totalQuantity,
-            backToHome
+            backToHome,
+            lengthOfString
         }
     },
 

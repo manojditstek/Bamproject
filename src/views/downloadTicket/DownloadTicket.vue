@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-between align-items-end header">
       <h2>
         <!-- <router-link to="/">{{$t('downloadTicket.backtoHome')}}</router-link> -->
-        <div  @click="backButton">{{$t('downloadTicket.backtoHome')}}</div>
+        <a href="javascript:void(0)"  @click="backButton">{{$t('downloadTicket.backtoHome')}}</a>
       </h2>
     </div>
     <!---->

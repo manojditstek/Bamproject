@@ -1,4 +1,4 @@
-import {BAM,} from 'bam-ticketing-sdk';
+import {BAM} from 'bam-ticketing-sdk';
 
 const bam =new BAM(process.env.VUE_APP_ROOT_API) // set base url
     async function main(){

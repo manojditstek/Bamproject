@@ -1,7 +1,8 @@
 <template>
   <div class="mainWrapper">
-     <Loader />
+     
     <div class="contentWraper">
+      <Loader />
       <!-- <div class="text-center">
             <switchLanguage />
         </div> -->

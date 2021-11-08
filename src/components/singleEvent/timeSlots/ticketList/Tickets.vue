@@ -22,8 +22,6 @@
             <button class="plusBtn"  @click="addToCart()">+</button>
             <!-- <button class="plusBtn" :class="perUserQuantity!=''||ticket.availableTickets==''?'disabled':''" :disabled="perUserQuantity!=''||ticket.availableTickets==''" @click="addToCart()">+</button> -->
         </div>
-        <!-- <div class="collapseArrow lightBg" >   
-        </div> -->
     </div>
 
     <div v-else>
@@ -37,7 +35,12 @@
                 {{ticket.availableTickets!='' ?'':'Sold Out'}}
             </div>
         </div>
-        <p>{{perUserQuantity!=''?'Per User Limit Exceeded!':''}}</p>
+        
+        <div class="limitExceeded">
+            <div class="limitExceededInner">
+            {{perUserQuantity!=''?'Limit Exceeded!':''}}
+            </div>
+        </div>
         <div class="buttonWrap d-flex">
             <button class="minusBtn" @click="removeFromCart()">-</button>
             <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>
@@ -59,7 +62,7 @@
 <script>
 import {ref, computed} from 'vue'
 import {useStore} from "vuex";
-import Loader from '../../../loader/Loader'
+// import Loader from '../../../loader/Loader'
 import TicketsWithDiscount from '../ticketList/TicketsWithDiscount'
 export default {
     name: 'Tickets',
