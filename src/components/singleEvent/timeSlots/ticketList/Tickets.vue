@@ -36,7 +36,7 @@
             </div>
         </div>
         
-        <div class="limitExceeded">
+        <div v-show="ticket.availableTickets!=''" class="limitExceeded">
             <div class="limitExceededInner">
             {{perUserQuantity!=''?'Limit Exceeded!':''}}
             </div>
