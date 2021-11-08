@@ -10,7 +10,7 @@
     <div class="eventDiscountWrapper">
         <h2>{{ $t('cartTemp.cart') }}</h2>
         <div class="amountWrapper">
-            <p>{{totalQuantity}} {{ $t('cartTemp.tickets') }} <span>{{ticketPrice*totalQuantity}} {{currency}}</span></p>
+            <p>{{totalQuantity}} {{ $t('cartTemp.tickets') }} <span>{{(ticketPrice*totalQuantity).toFixed(2)}} {{currency}}</span></p>
             <p>{{ $t('cartTemp.fees') }} <span>0.00 {{ $t('cartTemp.eur') }}</span></p>
             <p v-if="ticketDiscountPrice">Discount <span>{{ ticketDiscountPrice }} {{currency}}</span></p>
         </div>
@@ -19,7 +19,7 @@
             <p>{{ $t('cartTemp.tax') }} (0%) <span>{{ $t('cartTemp.eur') }}</span></p>
         </div>
         <div class="totalAmountWrapper ">
-            <p>{{ $t('cartTemp.total') }} <span>{{totalPrice}} {{currency}}</span></p>
+            <p>{{ $t('cartTemp.total') }} <span>{{(totalPrice).toFixed(2)}} {{currency}}</span></p>
         </div>
     </div>
 </div>
@@ -35,7 +35,7 @@
                 {{disc.name}}
             </p>
             <div class="priceWrap">
-                {{item.totalPrice}} {{item.currency}}
+                {{(item.totalPrice).toFixed(2)}} {{item.currency}}
             </div>
         </div>
         <div class="collapseArrow redBg" @click="removeFromCart(item)">

@@ -3,17 +3,17 @@
     <!-- <Loader /> -->
     <div class="cardWrapper d-flex"  v-if="ticketDscount?ticketDscount.length==0:''" >
         <div class="detailsCol">
-            <h2>{{ticket?ticket.name:'Ticket Not Found!'}} : {{ticket?(ticket.faceValue).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
-            <p>{{$t('common.inclFees')}} € 0.00 {{venueId}}</p>
+            <h2>{{ticket?ticket.name:$t('common.ticketNotFound')}} : {{ticket?(ticket.faceValue).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
+            <p>{{$t('common.inclFees')}} € 0.00 </p>
         </div>
         <div class="ticketMessage">
-            <div class="ticketMessageInner " :class="ticket.availableTickets!='' ?'':'soldOut'">
+            <div class="ticketMessageInner " :class="ticket.availableTickets!='' ?'':$t('common.soldOut')">
                 {{ticket.availableTickets!='' ?'':'Sold Out'}}
             </div>
         </div>
-        <div v-show="ticket.availableTickets!=''" class="limitExceeded" v-if="perUserQuantity">
+        <div v-show="ticket.availableTickets!='' && perUserQuantity" class="limitExceeded" v-if="perUserQuantity">
             <div class="limitExceededInner">
-            {{perUserQuantity!=''?'Limit Exceeded!':''}}
+            {{perUserQuantity!=''?$t('common.userLimit'):''}}
             </div>
         </div>
         <div class="buttonWrap d-flex">
@@ -27,18 +27,18 @@
     <div v-else>
     <div class="cardWrapper d-flex" >
         <div class="detailsCol">
-            <h2>{{ticket?ticket.name:'Ticket Not Found!'}} :{{ticket?(ticket.faceValue).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
+            <h2>{{ticket?ticket.name:$t('common.ticketNotFound')}} :{{ticket?(ticket.faceValue).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
             <p>{{$t('common.inclFees')}} € 0.00 </p>
         </div>
         <div class="ticketMessage">
-            <div class="ticketMessageInner " :class="ticket.availableTickets!='' ?'':'soldOut'">
+            <div class="ticketMessageInner " :class="ticket.availableTickets!='' ?'':$t('common.soldOut')">
                 {{ticket.availableTickets!='' ?'':'Sold Out'}}
             </div>
         </div>
         
-        <div v-show="ticket.availableTickets!=''" class="limitExceeded">
+        <div v-show="ticket.availableTickets!='' && perUserQuantity" class="limitExceeded" v-if="perUserQuantity">
             <div class="limitExceededInner">
-            {{perUserQuantity!=''?'Limit Exceeded!':''}}
+            {{perUserQuantity!=''?$t('common.userLimit'):''}}
             </div>
         </div>
         <div class="buttonWrap d-flex">
@@ -83,11 +83,13 @@ export default {
 
     setup(props) {
         const toggleButton = ref(false);
-        const discountTicket = ref()
+        const discountTicket = ref();
         const store = useStore();
         let cart = computed(function () {
             return store.state.cart.cartItems
         });
+
+       
 
         function addToCart() {
             let ticket = {

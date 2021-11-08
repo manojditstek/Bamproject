@@ -5,7 +5,7 @@
 </div>
 <div class="ticketCol">
     <h3>{{$t('cartTemp.total_amount')}}</h3>
-    <h2>{{totalPrice}} {{currency}}</h2>
+    <h2>{{(totalPrice).toFixed(2)}} {{currency}}</h2>
 </div>
 </template>
 

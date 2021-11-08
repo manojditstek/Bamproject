@@ -44,6 +44,7 @@ export default {
     ErrorMessage,
     Loader
   },
+  
 };
 </script>
 

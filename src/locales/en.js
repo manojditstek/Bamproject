@@ -10,6 +10,10 @@ const english = {
     fees:'Fees:',
     total:'Total:',
     inclFees:'incl.fees:',
+    userLimit:'Per user ticket limit reached.',
+    ticketNotFound:'Ticket Not Found!',
+    soldOut:'soldOut'
+    
   },
 
   userKycForm:{

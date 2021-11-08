@@ -5,6 +5,7 @@ import download from 'downloadjs'
 import bam from '../services/bamSdk'
 import {saveStreamToFile} from 'bam-ticketing-sdk';
 
+
 export const getEvents = async ({commit}, dateRange) => {
     commit('loadingStatus', true)
     let startDateFormat = '';
@@ -210,3 +211,5 @@ setTimeout(async () => {
 }, 3000)
 
 }
+
+

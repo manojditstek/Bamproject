@@ -20,7 +20,7 @@ message:String
         const store = useStore();
         const router = useRouter();
         function backToHome(){
-            if(confirm("Do you really want to back your order will be cancel?")){
+            if(confirm("Do you want to cancel your current tickets in cart?")){
                store.commit("backToHome");
                router.push({
                         path: '/'
