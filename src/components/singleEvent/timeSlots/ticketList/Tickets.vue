@@ -11,7 +11,7 @@
                 {{ticket.availableTickets!='' ?'':'Sold Out'}}
             </div>
         </div>
-        <div class="limitExceeded" v-if="perUserQuantity">
+        <div v-show="ticket.availableTickets!=''" class="limitExceeded" v-if="perUserQuantity">
             <div class="limitExceededInner">
             {{perUserQuantity!=''?'Limit Exceeded!':''}}
             </div>
@@ -19,7 +19,7 @@
         <div class="buttonWrap d-flex">
             <button class="minusBtn" @click="removeFromCart()">-</button>
             <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>
-            <button class="plusBtn"  @click="addToCart()">+</button>
+            <button class="plusBtn" :class="ticket.availableTickets==''?'disabled':''" :disabled="ticket.availableTickets==''" @click="addToCart()">+</button>
             <!-- <button class="plusBtn" :class="perUserQuantity!=''||ticket.availableTickets==''?'disabled':''" :disabled="perUserQuantity!=''||ticket.availableTickets==''" @click="addToCart()">+</button> -->
         </div>
     </div>
@@ -44,7 +44,7 @@
         <div class="buttonWrap d-flex">
             <button class="minusBtn" @click="removeFromCart()">-</button>
             <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>
-            <button class="plusBtn"  @click="addToCart()">+</button>
+            <button class="plusBtn" :class="ticket.availableTickets==''?'disabled':''" :disabled="ticket.availableTickets==''"  @click="addToCart()">+</button>
         </div>
         <div class="collapseArrow lightBg" :class="toggleButton?'active':''" @click="toggleButton=!toggleButton" >
             <i class="fa fa-angle-right"></i>
