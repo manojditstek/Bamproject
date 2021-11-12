@@ -12,7 +12,7 @@ const english = {
     inclFees:'incl.fees:',
     userLimit:'Per user ticket limit reached.',
     ticketNotFound:'Ticket Not Found!',
-    soldOut:'soldOut'
+    soldOut:'Sold Out'
     
   },
 
@@ -42,7 +42,7 @@ const english = {
     firstName:'First name required.',
     lastName:'Last name required.',
     phone:'Phone required.',
-    validPhone:'Valid phone number required.',
+    validPhone:'Valid phone number required 10 digits.',
     email:'Email required.',
     validEmail:'Valid email required.'
   },

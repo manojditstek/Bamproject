@@ -1,3 +1,4 @@
+/* Store variable initalization */
 export default {
     event:{},
     events:[],

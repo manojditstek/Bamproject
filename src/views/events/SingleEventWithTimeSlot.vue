@@ -102,8 +102,7 @@ export default {
             dateFormat,
             lengthOfString,
             backButton
-            //startDate,
-            //endDate
+           
 
         }
     },

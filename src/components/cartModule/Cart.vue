@@ -10,13 +10,13 @@
     <div class="eventDiscountWrapper">
         <h2>{{ $t('cartTemp.cart') }}</h2>
         <div class="amountWrapper">
-            <p>{{totalQuantity}} {{ $t('cartTemp.tickets') }} <span>{{(ticketPrice*totalQuantity).toFixed(2)}} {{currency}}</span></p>
+            <p>{{totalQuantity}} {{ $t('cartTemp.tickets') }} <span>{{(ticketPrice).toFixed(2)}} {{currency}}</span></p>
             <p>{{ $t('cartTemp.fees') }} <span>0.00 {{ $t('cartTemp.eur') }}</span></p>
             <p v-if="ticketDiscountPrice">Discount <span>{{ ticketDiscountPrice }} {{currency}}</span></p>
         </div>
         <div class="amountWrapper">
-            <p>{{ $t('cartTemp.subtotal') }} <span>{{ $t('cartTemp.eur') }}</span></p>
-            <p>{{ $t('cartTemp.tax') }} (0%) <span>{{ $t('cartTemp.eur') }}</span></p>
+            <p>{{ $t('cartTemp.subtotal') }} <span>0.00 {{ $t('cartTemp.eur') }}</span></p>
+            <p>{{ $t('cartTemp.tax') }} (0%) <span>0.00 {{ $t('cartTemp.eur') }}</span></p>
         </div>
         <div class="totalAmountWrapper ">
             <p>{{ $t('cartTemp.total') }} <span>{{(totalPrice).toFixed(2)}} {{currency}}</span></p>
@@ -80,7 +80,7 @@ export default {
         let ticketPrice = computed(function(){
             let ticketPrice=0;
             cart.value.cartItems.forEach(element => {
-              ticketPrice = element.totalPrice
+              ticketPrice += element.totalPrice
             });
             return ticketPrice
         })
@@ -88,7 +88,7 @@ export default {
         let ticketDiscountPrice = computed(function(){
             let ticketPrice=0;
             cart.value.cartItems.forEach(element => {
-              ticketPrice = element.totalDiscount;
+              ticketPrice += element.totalDiscount;
             })
             return ticketPrice;
         })

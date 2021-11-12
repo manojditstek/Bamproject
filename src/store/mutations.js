@@ -1,32 +1,39 @@
-// This block of code set the single event 
-export const setEvent = (state, event) => {
-  state.event = event;
-}
-
-// This block of code set the mutltiple event
+/* This block of code set the mutltiple event */
 export const setEvents = (state, events) => {
   state.events = events;
 }
 
-export const setVenue = (state, venue)=>{
-  state.venueAddress = venue;
+/* This block of code set the single event */
+export const setEvent = (state, event) => {
+  state.event = event;
 }
 
-export const loadingStatus = (state, newLoadingState)=>{
-  state.loadingStatus = newLoadingState
-}
-
+/* This block of code set the recurring evevnt */
 export const setRecurringEvent = (state, event)=>{
   state.recurringEvent = event;
 }
 
+/* This block of code set the time slot event */
 export const setEventWithTimeSlot = (state, eventWithTimeSlot)=>{
   state.singleEventWithTimeSlot = eventWithTimeSlot;
 }
 
+/* This block of code set the time slot */
 export const setTimeSlots = (state,timeSlot)=>{
   state.timeSlot = timeSlot;
 }
+
+/* This block of code set the venue address */
+export const setVenue = (state, venue)=>{
+  state.venueAddress = venue;
+}
+
+/* This block of code set the loader status */
+export const loadingStatus = (state, newLoadingState)=>{
+  state.loadingStatus = newLoadingState
+}
+
+
 
 
 
@@ -44,9 +51,6 @@ const isItemInCart = (cartItems, item) => {
 
 // This block of code add item in cart
 export const addCartItem = (state, data) => {
-  // console.log('items in cart',data)
-  data.item.discounts = []; //for discount
-  data.item.totalDiscount = 0; //for discount
   data.item.timeSlotId = data.timeslot_id;
   data.item.quantity = getItemQtyCart(state.cart.cartItems, data.item) + 1;
   data.item.overAllQuantity = getOverAllQtyCart(state.cart.cartItems, data.item) + 1;
@@ -62,8 +66,8 @@ export const addCartItem = (state, data) => {
   if (isItemInCart(state.cart.cartItems, data.item)) {
     updateCartItem(state, data.item)
   } else {
-    data.item.discounts = []; //for discount
-    data.item.totalDiscount = 0; //for discount
+    data.item.discounts = []; 
+    data.item.totalDiscount = 0; 
     state.cart.cartItems.push(data.item);
     totalPrice(state,0);
     totalQuantity(state);
@@ -76,11 +80,13 @@ export const addCartItem = (state, data) => {
 export const updateCartItem = (state, updatedItem) => {
   state.cart.cartItems = state.cart.cartItems.map((cartItem) => {
     if (cartItem.id === updatedItem.id && cartItem.timeSlotId === updatedItem.timeSlotId) {
+      updatedItem.discounts = cartItem.discounts;
+      updatedItem.totalDiscount = cartItem.totalDiscount;
       return updatedItem;
     }
     return cartItem;
   })
-  totalPrice(state,0);
+  totalPrice(state);
   totalQuantity(state);
 }
 
@@ -98,12 +104,10 @@ export const removeCartItem = (state, item) => {
         }
       })
       state.cart.cartItems = cartItems
-      totalPrice(state,0);
+      totalPrice(state);
       totalQuantity(state); 
     } else {
       item.quantity = quantity
-      item.discounts = []; // for discount
-      item.totalDiscount = 0; // for discount
       updateCartItem(state, item);
       item.totalPrice = getItemTotalPrice(item);
     }
@@ -121,9 +125,10 @@ export const removeCartItemComplete = (state, item) => {
 
 // cart back button 
 export const backToHome = (state) =>{
-  state.cart.cartItems = [],
-  state.cart.itemsTotalQuantity=0,
-  state.cart.itemTotalAmount=0
+  state.cart.cartItems = [];
+  state.cart.itemsTotalQuantity=0;
+  state.cart.itemTotalAmount=0;
+  state.errorMsg=null;
 }
 
 
@@ -148,10 +153,17 @@ const getItemTotalPrice = (item) => {
 }
 
 // This block of code calculate total price 
-export const totalPrice = (state,discount) => {
-  state.cart.itemTotalAmount = state.cart.cartItems.reduce((total, next) => {
-    return total + (next.quantity * next.faceValue)-discount
-  }, 0)
+export const totalPrice = (state) => {
+  let itemTotalAmount = 0
+  state.cart.cartItems.forEach(element => {
+    let discountItem = 0
+    element.discounts.forEach(discount => {
+      discountItem = discountItem + discount.value;
+    })
+    element.totalDiscount = discountItem
+    itemTotalAmount = itemTotalAmount + (element.quantity * element.faceValue) - element.totalDiscount
+  })
+  state.cart.itemTotalAmount = itemTotalAmount
 }
 
 
@@ -165,31 +177,25 @@ export const totalQuantity = (state) => {
 
 
 
-//discount module
+/* discount module */
 
 //add discount in cart
 export const addDiscountToCart = (state, data) => {
+  let itemId = data.ticketId
+  let timeSlotId = data.timeSlotId
   state.cart.cartItems.forEach(element => {
-    data.quantity = getItemQtyDiscount(element.discounts, data) + 1;
+    data.discount.quantity = getItemQtyDiscount(state,element.discounts, data) + 1;
     // data.overAllQuantity = getOverAllQtyCart(element.discounts, data) + 1;
-    if (isItemInCart(element.discounts, data)) {
-      updateCartDiscountItem(element.discounts, data)
-    } else {
-    element.discounts.push(data);
-    element.totalDiscount=data.value;
-    totalPrice(state,data.value);
+    if (isItemInDiscountCart(state,element.discounts, data)) {
+      updateCartDiscountItem(element.discounts, data.discount)
+    } else if(element.id == itemId && timeSlotId === element.timeSlotId) {
+      element.discounts.push(data.discount);
+      totalPrice(state);
     }
   });  
 }
 
-
-
-const getItemQtyDiscount = (cartItems, item) => {
-  let qty = cartItems.filter(x => x.id === item.id )[0]?.quantity || 0
-  return qty
-}
-
-
+// Updating discount item
 export const updateCartDiscountItem = (item, updatedItem) => {
   item = item.map((cartItem) => {
     if (cartItem.id === updatedItem.id) {
@@ -202,20 +208,44 @@ export const updateCartDiscountItem = (item, updatedItem) => {
 }
 
 
+
 export const removeDiscountToCart = (state, data) => {
+  let itemId = data.ticketId
+  let timeSlotId = data.timeSlotId
   state.cart.cartItems.forEach(element => {
-  if (isItemInCart(element.discounts, data)) {
-    let quantity = getItemQtyDiscount(element.discounts, data) - 1;
-    if (quantity === 0) {
-      element.discounts= element.discounts.filter(x => x.id !== data.id)
-      element.totalDiscount=0;
-      totalPrice(state,0);
-    } else {
-      data.quantity = quantity
-      updateCartDiscountItem(element.discounts, data);
+    if(element.id == itemId && timeSlotId === element.timeSlotId){
+      // let quantity = getItemQtyDiscount(state,element.discounts, data) - 1;
+      element.discounts = element.discounts.filter(x => x.id !== data.discount.id)
+       updateCartDiscountItem(element.discounts, data.discount);
+      totalPrice(state);
     }
+  })
+}
+
+
+// Checking discount item in cart
+const isItemInDiscountCart = (state,discountItems, item) => {
+  console.log('discountItems',discountItems)
+  let tempId = null;
+  state.cart.cartItems.forEach(element => {
+    tempId=element.id;
+  });
+  let index = discountItems.findIndex(x => x.id === item.discount.id && tempId===item.ticketId)
+  if (index > -1) {
+    return true
   }
-})
+  return false
+}
+
+
+// Checking discount quantity
+const getItemQtyDiscount = (state,discountItems, item) => {
+  let tempId = null;
+  state.cart.cartItems.forEach(element => {
+    tempId=element.id;
+  });
+  let qty = discountItems.filter(x => x.id === item.discount.id && tempId===item.ticketId )[0]?.quantity || 0
+  return qty
 }
 // end discount module
 
@@ -241,6 +271,7 @@ export const timer = (state) => {
 
 }
 
+// Helper method for timer 
 const remainingTime = (value) => {
   return millisToMinutesAndSeconds(value);
 }
@@ -253,32 +284,32 @@ const millisToMinutesAndSeconds = (millis) => {
 
 /* end timer */
 
+
 // set create order
 export const setCreateOrder = (state, order) => {
   state.createdOrder = order;
 }
-
+// set payment data
 export const paymentInitiate = (state, resp) => {
   state.paymentInitiateIds = resp;
 }
 
-export const downloadTicket = (state, resp)=>{
-  state.downloadTicket = resp;
-}
-
+// set download ticket data
 export const downloadTicketPdf = (state, resp)=>{
   state.downloadTicketPdf = resp;
 }
 
+// set error messages
 export const errorMsg = (state, resp)=>{
   state.errorMsg = resp;
 }
 
+// set work space key
 export const workSpaceKey = (state, resp)=>{
   state.workSpaceKey=resp
 }
 
-
+// set ticket format
 export const ticketFormat = (state, data)=>{
   state.ticketFormat=data;
 }

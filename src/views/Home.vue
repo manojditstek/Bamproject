@@ -53,7 +53,6 @@ export default {
 
     const START_DATE = new Date();
     const events = computed(() => {
-      //return store.state.events; // without filter date
       return store.state.events
         .filter((s) => new Date(s.startAt) >= START_DATE)
         .sort((a, b) => new Date(a.startAt) - new Date(b.startAt)); //with filter date

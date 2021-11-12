@@ -90,13 +90,29 @@ export default {
             let chartList = await client.charts.listFirstPage();
             // console.log("chartList=:", chartList)
         }
-        console.log("hello", chartResp)
+
 
         function backToHome() {
             store.commit("backToHome");
             router.push({
                 path: '/'
             })
+        }
+
+        function dateFormat(value) {
+            return moment(value).format("MM/DD/YYYY ");
+        }
+
+        function timeFormat(value) {
+            return moment(value).format(" HH:mm a");
+        }
+
+        function lengthOfString(value) {
+            if (value ? value.length > 48 : '') {
+                return value.substring(0, 35) + '...'
+            } else {
+                return value
+            }
         }
 
         const singleEvent = computed(() => {
@@ -110,29 +126,16 @@ export default {
             chartResp,
             // chartList,
             backToHome,
-            workSpaceKey
+            workSpaceKey,
+            dateFormat,
+            timeFormat,
+            lengthOfString
+
 
         }
     },
 
-    methods: {
-        dateFormat(value) {
-            return moment(value).format("MM/DD/YYYY ");
-        },
-
-        timeFormat(value) {
-            return moment(value).format(" HH:mm a");
-        },
-
-        lengthOfString(value) {
-            if (value ? value.length > 48 : '') {
-                return value.substring(0, 35) + '...'
-            } else {
-                return value
-            }
-        }
-
-    },
+    
 
 }
 </script>

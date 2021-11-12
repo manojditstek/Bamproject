@@ -152,6 +152,10 @@ export default {
             })
         }
 
+         function dateFormat(value) {
+            return moment(value).format("MM/DD/YYYY ");
+        }
+
         function lengthOfString(value) {
             if (value ? value.length > 48 : '') {
                 return value.substring(0, 35) + '...'
@@ -168,15 +172,12 @@ export default {
             reSet,
             totalQuantity,
             backToHome,
-            lengthOfString
+            lengthOfString,
+            dateFormat
         }
     },
 
-    methods: {
-        dateFormat(value) {
-            return moment(value).format("MM/DD/YYYY ");
-        }
-    },
+   
 
 }
 </script>

@@ -1,11 +1,13 @@
-
+/* Including headers file */
 import router from "../router/";
 import moment from "moment";
-import download from 'downloadjs'
 import bam from '../services/bamSdk'
 import {saveStreamToFile} from 'bam-ticketing-sdk';
+import download from "downloadjs";
 
+/* end header */
 
+/* This method used for multiple events */
 export const getEvents = async ({commit}, dateRange) => {
     commit('loadingStatus', true)
     let startDateFormat = '';
@@ -50,9 +52,10 @@ export const getEvents = async ({commit}, dateRange) => {
             commit('loadingStatus', false)
         });
     }
-   
-}
+}/* end multiple evets */
 
+
+/* This method used for single event */
 export const getEvent = async ({
     commit
 }, id) => {
@@ -68,8 +71,9 @@ export const getEvent = async ({
         commit('errorMsg', response);
     });
 }
+//end single event
 
-
+/* This method used for single event with time slots  */
 export const sigleEventWithTimeSlot = async ({commit}, data) => {
     commit('loadingStatus', true)
     await bam.event.getEvent({
@@ -84,17 +88,20 @@ export const sigleEventWithTimeSlot = async ({commit}, data) => {
         commit('errorMsg', response);
     });
 }
+//end time slots evevnt
 
 
+/* This method used for seated event */
 export const workSpaceKey = async ({commit}) => {
     let organizer = await bam.account.getOrganizer({
         id: 'eventspace',
         fields: ['workspace']
     });
     commit('workSpaceKey', organizer)
-
 }
+// end seated event
 
+/* This method used for recurring event*/
 export const recurringEvent = async ({commit}, id) => {
     commit('loadingStatus', true)
     await bam.event.getEvent({id: id}).then((response) => {
@@ -108,13 +115,13 @@ export const recurringEvent = async ({commit}, id) => {
         commit('errorMsg', response);
     });
 }
+// end recurring event
 
 
 
-
-
+/* This method used for create order */
 export const createOrder = async ({commit}, cartItem) => {
-    console.log('createdOrderItem=>', cartItem)
+    // console.log('createdOrderItem=>', cartItem)
     commit('loadingStatus', true)
     await bam.order.createOrder({
         orderItem: cartItem.cartItems,
@@ -128,9 +135,10 @@ export const createOrder = async ({commit}, cartItem) => {
             commit('errorMsg', response);
             commit('loadingStatus', false)
         });
-    
 }
+// end create order method
 
+/* This method used for storing ticket holder information  */
 export const ticketHolderInfo = async ({commit}, data) => {
     commit('loadingStatus', true)
     data.orderItem.forEach(async(element,i) => {
@@ -149,13 +157,12 @@ export const ticketHolderInfo = async ({commit}, data) => {
             console.log(response);
             commit('errorMsg', response);
             commit('loadingStatus', false)
-        });
-        
-    });
-    
+        })
+    })
 }
+// end ticket holder information
 
-
+/* This method used for storing order contact details  */
 export const orderContact = async ({commit}, data) => {
     commit('loadingStatus', true)
     await bam.order.createOrderContact({ id: data.id }, 
@@ -175,8 +182,10 @@ export const orderContact = async ({commit}, data) => {
         commit('loadingStatus', false)
     });
 }
+// end order contact details
 
 
+/* This method used for Payment module  */
 export const paymentInitiate = async ({commit}, data) => {
     commit('loadingStatus', true)
     await bam.payment.createPaymentIntent({
@@ -192,24 +201,54 @@ export const paymentInitiate = async ({commit}, data) => {
         commit('loadingStatus', false)
     });
 }
+//end Payment module 
 
-
+/* This method used for set timer  */
 export const startTimer = async ({commit}) => {
     commit('timer');
 }
+//end set timer
 
 
-
+/* This method used for download ticket  */
 export const downloadTicketPdf = async ({commit}, data) => {
 setTimeout(async () => {
     let ticket = await bam.order.downloadTickets({ id: data.orderId })
-    console.log('ticketResp',ticket)
-    await saveStreamToFile(ticket, 'ticket0.pdf');
-    download(ticket, 'ticket1.pdf','application/octet-stream');
-    download(ticket, 'ticket2.pdf','octet-stream');
-    download(ticket, 'ticket3.pdf','application/pdf');
+    // console.log('ticketResp',ticket)
+    //saveByteArray([ticket], 'ticket.pdf'); 
+    // await saveStreamToFile(ticket, 'ticket.pdf');
+    var file = window.URL.createObjectURL(ticket);
+        var a = document.createElement("a");
+        a.href = file;
+        a.download = "ticket.pdf" || "detailPDF";
+        document.body.appendChild(a);
+        a.click();
+        // remove `a` following `Save As` dialog, 
+        // `window` regains `focus`
+        window.onfocus = function () {                     
+          document.body.removeChild(a)
+        }
 }, 3000)
-
 }
+//end download ticket
+
+/* This is helper method for downloading ticket  */
+var saveByteArray = (function () {
+    var a = document.createElement("a");
+    document.body.appendChild(a);
+    a.style = "display: none";
+    return function (data, name) {
+        var blob = new Blob([data], {type: "octet/stream"}),
+        url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = name;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    };
+}());
+//end 
+
+
+
 
 

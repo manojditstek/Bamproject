@@ -4,7 +4,7 @@
         <Timer />
     </div>
 </div>
-<!--step1-->
+
 <div class="cardBodyWrapper">
     <Loader />
     <div class="innerHeading">
@@ -61,17 +61,9 @@
 </template>
 
 <script>
-import {
-    ref,
-    reactive,
-    computed,
-} from "vue";
-import {
-    useRouter
-} from "vue-router";
-import {
-    useStore
-} from 'vuex';
+import {ref,reactive,computed,} from "vue";
+import {useRouter} from "vue-router";
+import {useStore} from 'vuex';
 import Timer from '../../components/setTimer.vue'
 export default {
     name: 'UserForm',
@@ -104,7 +96,7 @@ export default {
             return store.state.createdOrder;
         })
      
-        let payTicketType = orderID.value.orderItem.filter((item)=>item.ticket[0].ticketConfig.faceValue>0);//used for sdk
+        let payTicketType = orderID.value.orderItem.filter((item)=>item.ticket[0].ticketConfig.faceValue>0);
 
         function payMethod() {
             if(data.billing_email==null){
@@ -131,6 +123,7 @@ export default {
             
         }
 
+        /* Form validation methods */
         function firstName(){
             formErrors.value = [];
             if (!data.first_name) {
@@ -184,7 +177,9 @@ export default {
             }
 
         }
+        // end validation
 
+        /* Regx checking for email and phone */
         function validEmail(email) {
             var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(email);
@@ -194,6 +189,7 @@ export default {
             var re = /^\s*(?:\+?(\d{1,1}))?[- (]*(\d{3})[- )]*(\d{3})[- ]*(\d{4})(?: *[x/#]{1}(\d+))?\s*$/;
             return re.test(phone);
         }
+        //end regx
 
         return {
             data,

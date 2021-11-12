@@ -4,14 +4,14 @@
     <div class="cardWrapper d-flex"  v-if="ticketDscount?ticketDscount.length==0:''" >
         <div class="detailsCol">
             <h2>{{ticket?ticket.name:$t('common.ticketNotFound')}} : {{ticket?(ticket.faceValue).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
-            <p>{{$t('common.inclFees')}} € 0.00 </p>
+            <p>{{$t('common.inclFees')}} € 0.00 {{ticket.availableTickets}}</p>
         </div>
-        <div class="ticketMessage">
-            <div class="ticketMessageInner " :class="ticket.availableTickets!='' ?'':$t('common.soldOut')">
-                {{ticket.availableTickets!='' ?'':'Sold Out'}}
+        <div class="ticketMessage"  v-if="ticket.availableTickets==''">
+            <div class="ticketMessageInner " :class="ticket.availableTickets!='' ?'':'soldOut'">
+                {{ticket.availableTickets!='' ?'':$t('common.soldOut')}}
             </div>
         </div>
-        <div v-show="ticket.availableTickets!='' && perUserQuantity" class="limitExceeded" v-if="perUserQuantity">
+        <div  class="limitExceeded" v-if="perUserQuantity!=''">
             <div class="limitExceededInner">
             {{perUserQuantity!=''?$t('common.userLimit'):''}}
             </div>
@@ -19,32 +19,34 @@
         <div class="buttonWrap d-flex">
             <button class="minusBtn" @click="removeFromCart()">-</button>
             <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>
-            <button class="plusBtn" :class="ticket.availableTickets==''?'disabled':''" :disabled="ticket.availableTickets==''" @click="addToCart()">+</button>
-            <!-- <button class="plusBtn" :class="perUserQuantity!=''||ticket.availableTickets==''?'disabled':''" :disabled="perUserQuantity!=''||ticket.availableTickets==''" @click="addToCart()">+</button> -->
+            <!-- <button class="plusBtn" :class="ticket.availableTickets==''?'disabled':''" :disabled="ticket.availableTickets==''" @click="addToCart()">+</button> -->
+            <button class="plusBtn" :class="perUserQuantity!=''||ticket.availableTickets==''?'disabled':''" :disabled="perUserQuantity!=''||ticket.availableTickets==''" @click="addToCart()">+</button>
         </div>
     </div>
 
     <div v-else>
     <div class="cardWrapper d-flex" >
-        <div class="detailsCol">
+        
+        <div class="detailsCol" @click="toggleButton=!toggleButton">
             <h2>{{ticket?ticket.name:$t('common.ticketNotFound')}} :{{ticket?(ticket.faceValue).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
             <p>{{$t('common.inclFees')}} € 0.00 </p>
         </div>
-        <div class="ticketMessage">
-            <div class="ticketMessageInner " :class="ticket.availableTickets!='' ?'':$t('common.soldOut')">
-                {{ticket.availableTickets!='' ?'':'Sold Out'}}
+        <div class="ticketMessage"   v-if="ticket.availableTickets==''">
+            <div class="ticketMessageInner " :class="ticket.availableTickets!='' ?'':'soldOut'">
+                {{ticket.availableTickets!='' ?'':$t('common.soldOut')}}
             </div>
         </div>
         
-        <div v-show="ticket.availableTickets!='' && perUserQuantity" class="limitExceeded" v-if="perUserQuantity">
+        <div  class="limitExceeded" v-if="perUserQuantity!=''">
             <div class="limitExceededInner">
             {{perUserQuantity!=''?$t('common.userLimit'):''}}
             </div>
         </div>
+        
         <div class="buttonWrap d-flex">
             <button class="minusBtn" @click="removeFromCart()">-</button>
             <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>
-            <button class="plusBtn" :class="ticket.availableTickets==''?'disabled':''" :disabled="ticket.availableTickets==''"  @click="addToCart()">+</button>
+            <button class="plusBtn" :class="perUserQuantity!=''||ticket.availableTickets==''?'disabled':''" :disabled="perUserQuantity!=''||ticket.availableTickets==''"  @click="addToCart()">+</button>
         </div>
         <div class="collapseArrow lightBg" :class="toggleButton?'active':''" @click="toggleButton=!toggleButton" >
             <i class="fa fa-angle-right"></i>
@@ -76,7 +78,7 @@ export default {
         timeSlotId: Number,
         ticketDscount: Object,
         eventChartKey: String,
-        venueId:Number,
+        venueId:String,
         startDate:Date,
         endDate:Date
     },
@@ -144,4 +146,5 @@ export default {
 </script>
 
 <style>
+
 </style>

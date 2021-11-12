@@ -9,14 +9,14 @@
         </div>
         <div class="ticketMessage">
             <div class="ticketMessageInner " :class="discount.availableTickets!='' ?'':'soldOut'">
-                {{discount.availableTickets!='' ?'':'Sold Out'}}
+                {{discount.availableTickets!='' ?'':$t('common.soldOut')}}
             </div>
         </div>
         <!-- <div>{{perUserQuantity!=''?'Limit Exceeded!':''}}</div> -->
         <div class="buttonWrap d-flex" v-if="ticket.quantity>0">
             <button class="minusBtn" @click="removeFromCart()">-</button>
             <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>
-            <button class="plusBtn" :class="ticket.quantity>=itemQuantity||ticket.availableTickets==''?'disabled':''" :disabled="ticket.quantity>=itemQuantity||ticket.availableTickets==''" @click="addToCart()">+</button>
+            <button class="plusBtn" :class="itemQuantity>=1||ticket.availableTickets==''?'disabled':''" :disabled="itemQuantity>=1||ticket.availableTickets==''" @click="addToCart()">+</button>
         </div>
     </div>
 </div>
@@ -51,11 +51,21 @@ export default {
         });
 
         function addToCart() {
-               store.commit("addDiscountToCart", props.discount);
+            let data={
+                discount:props.discount,
+                ticketId:props.ticket.id,
+                timeSlotId:props.timeSlotId
+            }
+               store.commit("addDiscountToCart", data);
         }
 
         function removeFromCart() {
-            store.commit("removeDiscountToCart", props.discount);
+            let data={
+                discount:props.discount,
+                ticketId:props.ticket.id,
+                timeSlotId:props.timeSlotId
+            }
+            store.commit("removeDiscountToCart",data);
 
         }
 
@@ -68,15 +78,18 @@ export default {
 
         let itemQuantity = computed(function () {
             let discountID = props.discount;
-            let temp = null
-            cart.value.forEach(element => {
-                temp=element.discounts;
-            });
-            if(temp){
-            let get_ticket= temp.filter((item) => item.id===discountID.id);
-            return get_ticket[0]?.quantity;
-            }
-            return 0
+            let ticket = props.ticket;
+            let timeSlotId= props.timeSlotId;
+            let itemQty = null;
+            let get_ticket=null;
+            get_ticket= cart.value.map((element) => 
+            element.discounts.filter((item) => item.id===discountID.id && element.id===ticket.id && element.timeSlotId === timeSlotId));
+             get_ticket.forEach(element => {
+                element.forEach(element=>{
+                    itemQty=element.quantity
+                }) 
+            }); 
+            return itemQty 
         })
 
         let perUserQuantity = computed(function () {
