@@ -22,7 +22,7 @@
             <div v-if="formErrors[1]" class="error">{{$t('formValidation.lastName')}}</div>
         </div>
         <div class="formGroup">
-            <input type="number" class="form-control" :class="data.phone && !formErrors[2]?'active':formErrors[2]?' errorInput':''" v-model.trim="data.phone" @input="phoneNumber()"/>
+            <input type="text" class="form-control" :class="data.phone && !formErrors[2]?'active':formErrors[2]?' errorInput':''" v-model.trim="data.phone" @input="phoneNumber()"/>
             <div class="labelInput">{{$t('orderContactForm.phone')}}</div>
            <div v-if="formErrors[2]!='valid' && formErrors[2]" class="error">{{$t('formValidation.phone')}}</div>
            <div v-if="formErrors[2]=='valid' && formErrors[2]" class="error">{{$t('formValidation.validPhone')}}</div>
@@ -49,7 +49,7 @@
                 <input v-else type="email" class="form-control" :class="data.billing_email && !formErrors[4]?'active':formErrors[4]?' errorInput':''" v-model.trim="data.billing_email" @input="deliveryMail()"/>
                 <div class="labelInput">{{$t('orderContactForm.email')}}</div>
                <div v-if="!checkMail && formErrors[4]!='valid' && formErrors[4]" class="error">{{$t('formValidation.email')}}</div>
-               <div v-if="!checkMail && formErrors[4]=='valid'" class="error">{{$t('formValidation.validEmail')}}</div>
+               <div v-if="!checkMail && formErrors[4]=='valid' && formErrors[4]" class="error">{{$t('formValidation.validEmail')}}</div>
             </div>
         </div>
     </div>
@@ -99,9 +99,9 @@ export default {
         let payTicketType = orderID.value.orderItem.filter((item)=>item.ticket[0].ticketConfig.faceValue>0);
 
         function payMethod() {
-            if(data.billing_email==null){
-                data.billing_email=data.email;
-            }
+            // if(data.billing_email==null){
+            //     data.billing_email=data.email;
+            // }
             if(firstName()==true && lastName()==true && phoneNumber()==true && emailCheck()==true && deliveryMail()==true){
                  store.dispatch('orderContact', {
                 id:orderID.value.id,
@@ -186,8 +186,9 @@ export default {
         }
 
         function validPhone(phone) {
+            data.phone=phone.replace(/\D/g, '');
             var re = /^\s*(?:\+?(\d{1,1}))?[- (]*(\d{3})[- )]*(\d{3})[- ]*(\d{4})(?: *[x/#]{1}(\d+))?\s*$/;
-            return re.test(phone);
+            return re.test(data.phone);
         }
         //end regx
 

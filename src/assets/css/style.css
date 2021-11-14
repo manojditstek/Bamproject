@@ -382,6 +382,11 @@ min-width: 32px;
   background-color:transparent;
   width: 40px;
 }
+.ticketToggle .cardWrapper .collapseArrow.lightBg.active i{
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+}
 .ticketToggle .eventPrice1{
   text-align: left;
 }

@@ -12,7 +12,9 @@ const english = {
     inclFees:'incl.fees:',
     userLimit:'Per user ticket limit reached.',
     ticketNotFound:'Ticket Not Found!',
-    soldOut:'Sold Out'
+    soldOut:'Sold Out',
+    card:'This field is required.'
+
     
   },
 
@@ -39,12 +41,12 @@ const english = {
   },
 
   formValidation:{
-    firstName:'First name required.',
-    lastName:'Last name required.',
-    phone:'Phone required.',
+    firstName:'First name is required.',
+    lastName:'Last name is required.',
+    phone:'Phone number is required.',
     validPhone:'Valid phone number required 10 digits.',
-    email:'Email required.',
-    validEmail:'Valid email required.'
+    email:'Email is required.',
+    validEmail:'Valid email is required.'
   },
 
   dateRange:{

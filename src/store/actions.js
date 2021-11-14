@@ -45,6 +45,7 @@ export const getEvents = async ({commit}, dateRange) => {
             },
         }).then((response) => {
             commit('setEvents', response)
+            // console.log('',response)
             commit('loadingStatus', false)
         }).catch(response => {
             console.log(response);
@@ -121,7 +122,7 @@ export const recurringEvent = async ({commit}, id) => {
 
 /* This method used for create order */
 export const createOrder = async ({commit}, cartItem) => {
-    // console.log('createdOrderItem=>', cartItem)
+    // console.log('createdOrderItem=>', cartItem.kycLevelId)
     commit('loadingStatus', true)
     await bam.order.createOrder({
         orderItem: cartItem.cartItems,
@@ -129,7 +130,11 @@ export const createOrder = async ({commit}, cartItem) => {
     }).then((response) => {
         commit('loadingStatus', false)
         commit('setCreateOrder', response)
-        router.push('/user-kyc-form')
+        if(cartItem.kycLevelId==1){
+            router.push('/user-form')
+        }else{
+            router.push('/user-kyc-form')
+        }
         }).catch(response => {
             console.log(response);
             commit('errorMsg', response);
@@ -214,20 +219,10 @@ export const startTimer = async ({commit}) => {
 export const downloadTicketPdf = async ({commit}, data) => {
 setTimeout(async () => {
     let ticket = await bam.order.downloadTickets({ id: data.orderId })
-    // console.log('ticketResp',ticket)
-    //saveByteArray([ticket], 'ticket.pdf'); 
+    console.log('ticketResp',ticket)
+    saveByteArray([ticket], 'ticket.pdf'); 
     // await saveStreamToFile(ticket, 'ticket.pdf');
-    var file = window.URL.createObjectURL(ticket);
-        var a = document.createElement("a");
-        a.href = file;
-        a.download = "ticket.pdf" || "detailPDF";
-        document.body.appendChild(a);
-        a.click();
-        // remove `a` following `Save As` dialog, 
-        // `window` regains `focus`
-        window.onfocus = function () {                     
-          document.body.removeChild(a)
-        }
+    
 }, 3000)
 }
 //end download ticket
@@ -238,7 +233,7 @@ var saveByteArray = (function () {
     document.body.appendChild(a);
     a.style = "display: none";
     return function (data, name) {
-        var blob = new Blob([data], {type: "octet/stream"}),
+        var blob = new Blob([data], {type: "application/pdf"}),
         url = window.URL.createObjectURL(blob);
         a.href = url;
         a.download = name;

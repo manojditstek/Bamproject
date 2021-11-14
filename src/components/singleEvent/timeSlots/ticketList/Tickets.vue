@@ -4,7 +4,7 @@
     <div class="cardWrapper d-flex"  v-if="ticketDscount?ticketDscount.length==0:''" >
         <div class="detailsCol">
             <h2>{{ticket?ticket.name:$t('common.ticketNotFound')}} : {{ticket?(ticket.faceValue).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
-            <p>{{$t('common.inclFees')}} € 0.00 {{ticket.availableTickets}}</p>
+            <p>{{$t('common.inclFees')}} € 0.00 </p>
         </div>
         <div class="ticketMessage"  v-if="ticket.availableTickets==''">
             <div class="ticketMessageInner " :class="ticket.availableTickets!='' ?'':'soldOut'">

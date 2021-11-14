@@ -83,7 +83,7 @@
          <table class="table">
           <thead>
             <tr>
-              <th>{{tcktDetails.orderItem.length}}</th>
+              <th>{{totalQuantity}}</th>
               <th></th>
               <th>{{tcktDetails.total}} {{currency}}</th>
             </tr>
@@ -141,6 +141,10 @@ export default {
       return store.state.createdOrder;
     });
 
+    const totalQuantity = computed(() => {
+            return store.state.cart.itemsTotalQuantity;
+        });
+
     let cart = computed(function () {
             return store.state.cart
         });
@@ -184,7 +188,9 @@ export default {
       cart,
       backButton,
       dateFormat,
-      timeFormat
+      timeFormat,
+      totalQuantity
+      
     };
   }
 };

@@ -111,8 +111,10 @@ export default {
 
         function removeFromCart(item, complete = true) {
             if (complete) {
+                console.log('item1',item)
                 store.commit("removeCartItemComplete", item);
             } else {
+                console.log('item',item)
                 store.commit("removeCartItem", item);
             }
         }

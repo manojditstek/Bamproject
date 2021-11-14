@@ -25,6 +25,7 @@ export default {
     errorMsg:null,
     workSpaceKey:null,
     ticketFormat:null,
+    kycLevelId:null,
   
 
 }

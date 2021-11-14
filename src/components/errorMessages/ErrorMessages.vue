@@ -23,8 +23,8 @@ export default {
             return store.state.errorMsg;
         });
         function closeAlert() {
-            store.state.errorMsg = '';
-            store.commit("backToHome");
+            store.state.errorMsg = null;
+            //store.commit("backToHome");
             // router.push({
             //             path: '/'
             //         })

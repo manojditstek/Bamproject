@@ -38,6 +38,7 @@
     <div v-if="payMethod=='card'" class="stripeWrapper">
         <StripeElement :element="cardElement" @change="event = $event" class="stripe" />
         <div class="error-message" v-if="event && event.error">{{ event.error.message }}</div>
+        <div class="error-message" v-if="!event && cardField">{{ $t('common.card') }}</div>
     </div>
     <div v-if="payMethod=='epsBank'">
         <div class="stripeWrapper">
@@ -56,7 +57,7 @@
           </div>
         </div>
             <div class="footerActionBtn btns">
-                <button class="button" :class="payMethod=='epsBank'&& name==''?'disabled':''" @click="registerCard">{{$t('common.pay')}} {{(totalPrice).toFixed(2)}} {{currency}}</button>
+                <button class="button" :class="payMethod=='epsBank'&& name==''?'disabled':''" @click="submit">{{$t('common.pay')}} {{(totalPrice).toFixed(2)}} {{currency}}</button>
                 <router-link to="/" class="button btnGray">{{$t('common.cancel')}}</router-link>
            </div>
       </div>
@@ -73,6 +74,7 @@ export default {
     },
     setup() {
         const event = ref(null);
+        const cardField = ref(false);
         const store = useStore();
         const router = useRouter();
         const name = ref('');
@@ -132,9 +134,14 @@ export default {
         }
     
 
-        const registerCard = async () => {
+        const submit = async () => {
+            if(event.value==null){
+                cardField.value=true
+            }
+            console.log('EV',event.value)
             if (event.value ?.complete) {
                 /* Card payment initiated */
+                cardField.value=false
                 if (payMethod.value == 'card') {
                     const response = await stripe.value ?.confirmCardPayment(cardConfig.value.paymentIntent.clientSecret, {
                         payment_method: {
@@ -191,13 +198,14 @@ export default {
             payMethod,
             cardElement,
             epsElement,
-            registerCard,
+            submit,
             cardConfig,
             totalPrice,
             currency,
             countDown,
             orderID,
-            name
+            name,
+            cardField
         }
 
   }

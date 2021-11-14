@@ -1,6 +1,6 @@
 <template>
 <!-- This block display single event  -->
-<div @click="eventDetails(event.type,event.id)">
+<div @click="eventDetails(event.type,event.id,event.kycLevelId)">
     <div class="cardWrapper d-flex" :class="event.type == 'recurring' ? 'recurring' : ''">
         <div class="dateCol" v-if="event.type == 'single'">
             <h4>{{ eventDate ? eventDate[0] : "" }}</h4>
@@ -15,7 +15,7 @@
         <div class="dateCol" v-if="event.type == 'recurring'">
             <h2>{{ event.occurrence.length }}</h2>
             <h4>Events</h4>
-            <p class="from">{{$t('common.cart')}}</p>
+            <!-- <p class="from">{{$t('common.cart')}}</p> -->
             <p>{{ recurringEventDate }}</p>
         </div>
         <div class="detailsCol">
@@ -77,14 +77,16 @@ export default {
             return store.state.cart.itemsTotalQuantity;
         });
 
-        function eventDetails(event, id) {
+        function eventDetails(event, id,kycStatus) {
             if (event == "recurring") {
                 store.dispatch('recurringEvent', id);
+                store.commit('kycStatusLevel',kycStatus)
                 router.push({
                     path: "/recurring-event"
                 });
             } else {
                 store.dispatch('getEvent', id);
+                store.commit('kycStatusLevel',kycStatus)
                 router.push({
                     path: "/single-event"
                 });

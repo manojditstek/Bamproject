@@ -117,7 +117,7 @@ export const removeCartItem = (state, item) => {
 // This block of code remove items(total item for single category) in cart
 export const removeCartItemComplete = (state, item) => {
   if (isItemInCart(state.cart.cartItems, item)) {
-    state.cart.cartItems = state.cart.cartItems.filter(x => x.id !== item.id)
+    state.cart.cartItems = state.cart.cartItems.filter(x => x.id !==item.id||x.timeSlotId !== item.timeSlotId )
     totalPrice(state);
     totalQuantity(state);
   }
@@ -312,4 +312,7 @@ export const workSpaceKey = (state, resp)=>{
 // set ticket format
 export const ticketFormat = (state, data)=>{
   state.ticketFormat=data;
+}
+export const kycStatusLevel = (state, data)=>{
+  state.kycLevelId=data;
 }

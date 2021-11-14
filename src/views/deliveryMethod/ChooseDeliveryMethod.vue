@@ -60,6 +60,10 @@ export default {
             return store.state.cart
         });
 
+        let kycLevelId =computed(function () {
+            return store.state.kycLevelId;
+        });
+
         function createOrder() {
             let ticketDiscount= null
             cart.value.cartItems.forEach(element => {
@@ -75,13 +79,15 @@ export default {
             store.commit('ticketFormat',ticketFormat.value)
             store.dispatch('createOrder', {
                 cartItems,
-                format
+                format,
+                kycLevelId:kycLevelId.value,
             })
         }
         return {
             ticketFormat,
             createOrder,
-            cart
+            cart,
+            kycLevelId
         };
     }
 

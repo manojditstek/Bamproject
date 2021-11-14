@@ -17,14 +17,14 @@
         </div>
     </div>
     <!---->
-    <div  v-for="order in ticketID.orderItem" :key="order">
-    <div class="cardBodyInner" v-for="(ord,i) in order.ticket" :key="ord">
+    <div  v-for="(order,i) in ticketID.orderItem" :key="order">
+    <div class="cardBodyInner" v-for="(ord,j) in order.ticket" :key="ord">
       <div class="cardBodyWrapper bgLight brdrtop">
           <!-- <div class="ticketCategory" v-for=" item in cart.cartItems" :key="item.id"> -->
               <div class="ticketNewCategory">
-              <h2>{{$t('userKycForm.ticketCategory')}}{{ord.ticketConfig.name}}
+              <h2>{{$t('userKycForm.ticketCategory')}} {{ord.ticketConfig.name}}
                   <div v-if=" ord.ticketDiscount">
-                      <span v-for="disc in ord.ticketDiscount" :key="disc.id">{{$t('userKycForm.discountCategory')}}{{disc.name}}</span>
+                      <span v-for="disc in ord.ticketDiscount" :key="disc.id">{{$t('userKycForm.discountCategory')}} {{disc.name}}</span>
                   </div>
                   
                </h2>
@@ -34,26 +34,26 @@
       <div class="cardBodyWrapper">
           <div class="formInputs">
               <div class="formGroup">
-                  <input type="text" class="form-control " :class="data.first_name[i]?'active ':formErrors.first_name[i]?' errorInput':''" v-model.trim="data.first_name[i]" />
+                  <input type="text" class="form-control " :class="data.first_name[i+''+j]?'active ':formErrors.first_name[i+''+j]?' errorInput':''" v-model.trim="data.first_name[i+''+j]" @input="firstName()" />
                   <div class="labelInput">{{$t('userKycForm.firstName')}}</div>
-                  <div v-if="!data.first_name[i] && formErrors.first_name[i] " class="error">{{$t('formValidation.firstName')}}</div>
+                  <div v-if="!data.first_name[i+''+j] && formErrors.first_name[i+''+j]" class="error">{{$t('formValidation.firstName')}}</div>
               </div>
               <div class="formGroup">
-                  <input type="text" class="form-control" :class="data.last_name[i]?'active':formErrors.last_name[i]?' errorInput':''" v-model.trim="data.last_name[i]" />
+                  <input type="text" class="form-control" :class="data.last_name[i+''+j]?'active':formErrors.last_name[i+''+j]?' errorInput':''" v-model.trim="data.last_name[i+''+j]" />
                   <div class="labelInput">{{$t('userKycForm.lastName')}}</div>
-                  <div v-if="!data.last_name[i] && formErrors.last_name[i]" class="error">{{$t('formValidation.lastName')}}</div>
+                  <div v-if="!data.last_name[i+''+j] && formErrors.last_name[i+''+j]" class="error">{{$t('formValidation.lastName')}}</div>
               </div>
               <div class="formGroup">
-                  <input type="number" class="form-control" :class="data.phone[i] ?'active':formErrors.phone[i]?' errorInput':''" v-model.trim="data.phone[i]"/>
+                  <input type="text" class="form-control" :class="data.phone[i+''+j] ?'active':formErrors.phone[i+''+j]?' errorInput':''" v-model.trim="data.phone[i+''+j]"/>
                   <div class="labelInput">{{$t('userKycForm.phone')}}</div>
-                  <div v-if="formErrors.phone[i]!='valid' && formErrors.phone[i]"  class="error">{{$t('formValidation.phone')}}</div>
-                  <div v-if="formErrors.phone[i]=='valid'" class="error">{{$t('formValidation.validPhone')}}</div>
+                  <div v-if="!data.phone[i+''+j] && formErrors.phone[i+''+j]!='valid' && formErrors.phone[i+''+j]"  class="error">{{$t('formValidation.phone')}}</div>
+                  <div v-if="formErrors.phone[i+''+j]=='valid' && formErrors.email[i+''+j]" class="error">{{$t('formValidation.validPhone')}}</div>
               </div>
               <div class="formGroup">
-                  <input type="email" class="form-control" :class="data.email[i] ?'active':formErrors.email[i]?' errorInput':''" v-model.trim="data.email[i]" />
+                  <input type="email" class="form-control" :class="data.email[i+''+j] ?'active':formErrors.email[i+''+j]?' errorInput':''" v-model.trim="data.email[i+''+j]" />
                   <div class="labelInput">{{$t('userKycForm.email')}}</div>
-                  <div v-if="formErrors.email[i] !='valid' && formErrors.email[i]" class="error">{{$t('formValidation.email')}}</div>
-                   <div v-if="formErrors.email[i]=='valid'" class="error">{{$t('formValidation.validEmail')}}</div>
+                  <div v-if="!data.email[i+''+j] && formErrors.email[i+''+j] !='valid' && formErrors.email[i+''+j]" class="error">{{$t('formValidation.email')}}</div>
+                   <div v-if=" formErrors.email[i+''+j]=='valid' && formErrors.email[i+''+j]" class="error">{{$t('formValidation.validEmail')}}</div>
               </div>
           </div>
       </div>
@@ -62,7 +62,7 @@
      <!---->
     <div class="cardBodyWrapper">
         <div class="footerActionBtn">
-            <button class="button" @click="ticketHolder">{{$t('userKycForm.next')}}</button>
+            <button class="button" @click="submit()">{{$t('userKycForm.next')}}</button>
         </div>
     </div>
 
@@ -93,42 +93,40 @@ export default {
             return store.state.createdOrder;
         })
 
+        function submit(){
+            if(ticketHolder() == true){
+                store.dispatch('ticketHolderInfo', {orderItem:ticketID.value.orderItem,data})
+            }
+        }
+
         /* Validation method */
         function ticketHolder() {
+            let temp = null;
            ticketID.value.orderItem.forEach((element,i)=> {
-                if(!data.first_name[i]){
-                     formErrors.value.first_name[i] = true;
-                }else if (!data.last_name[i]) {
-                    formErrors.value.first_name[i] =''
-                    formErrors.value.last_name[i] = true;
-                }else if(!data.phone[i]){
-                    formErrors.value.last_name[i]=''
-                     formErrors.value.phone[i] = true;
-                }else if (!validPhone(data.phone[i])) {
-                    formErrors.value.last_name[i] =''
-                    formErrors.value.phone[i] = 'valid';
+               element.ticket.forEach((el,j)=>{
+                if(!data.first_name[i+''+j]){
+                     formErrors.value.first_name[i+''+j] = true;
+                } if (!data.last_name[i+''+j]) {
+                    formErrors.value.last_name[i+''+j] = true;
+                } if(!data.phone[i+''+j]){
+                     formErrors.value.phone[i+''+j] = true;
+                } else if (!validPhone(data.phone[i+''+j])) {
+                    formErrors.value.phone[i+''+j] = 'valid';
+                }if(!data.email[i+''+j]){
+                    formErrors.value.email[i+''+j] = true;
+                }else if (!validEmail(data.email[i+''+j])) {
+                    formErrors.value.email[i+''+j] = 'valid';
                 }
-                else if(!data.email[i]){
-                    formErrors.value.phone[i] =''
-                    formErrors.value.email[i] = true;
-                }else if (!validEmail(data.email[i])) {
-                    formErrors.value.phone[i] =''
-                    formErrors.value.email[i] = 'valid';
+                else{
+                   temp = element.ticket.length-1==j?true:false;
                 }
-                else if(ticketID.value.orderItem.length-1==i){
-                     formErrors.value.email[i] =''
-                    store.dispatch('ticketHolderInfo', {orderItem:ticketID.value.orderItem,data})
-                }   
-                else if(data.email[i]){
-                    formErrors.value.email[i] =''
-                    return true;
-                }else if (validEmail(data.email[i])) {
-                    formErrors.value.email[i] = '';
-                    return true;
-                }  
-            });
+                })
+            })
+             return temp;
+
         }//end validation
-        
+
+    
         /* Regx checking for email and phone */
 
          function validEmail(email) {
@@ -150,6 +148,7 @@ export default {
             ticketID,
             validEmail,
             validPhone,
+            submit,
          
            
         }
