@@ -1032,3 +1032,7 @@ border:1px solid var(--color);
   font-family: var(--font-family-400);
   font-size:14px;
 }
+
+.vc-popover-content-wrapper .vc-popover-content.direction-bottom{
+  left: -23px !important;
+}
