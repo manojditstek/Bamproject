@@ -77,6 +77,10 @@ export default {
             return store.state.cart.itemsTotalQuantity;
         });
 
+        // let minPrice = props.event.ticketConfig.reduce(function(prev, curr) {
+        //     return prev.faceValue < curr.faceValue ? prev : curr;
+        // });
+
         function eventDetails(event, id,kycStatus) {
             if (event == "recurring") {
                 store.dispatch('recurringEvent', id);
@@ -101,6 +105,7 @@ export default {
             totalQuantity,
             eventDetails,
             recurringEventDate,
+            // minPrice
         };
     },
 };
