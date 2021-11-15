@@ -14,7 +14,7 @@
         </div>
         <div class="dateCol" v-if="event.type == 'recurring'">
             <h2>{{ event.occurrence.length }}</h2>
-            <h4>Events</h4>
+            <h4>{{$t('common.events')}}</h4>
             <!-- <p class="from">{{$t('common.cart')}}</p> -->
             <p>{{ recurringEventDate }}</p>
         </div>
@@ -23,7 +23,7 @@
             <VenuAddress :venue_id="event.venueId" />
             <div class="priceWrap">
                 <p>{{$t('common.from')}}</p>
-                0.00 EUR
+                {{minPrice?(minPrice).toFixed(2):'0.00'}} {{currency?currency:'EUR'}}
             </div>
         </div>
         <div class="collapseArrow">
@@ -77,9 +77,24 @@ export default {
             return store.state.cart.itemsTotalQuantity;
         });
 
-        // let minPrice = props.event.ticketConfig.reduce(function(prev, curr) {
-        //     return prev.faceValue < curr.faceValue ? prev : curr;
-        // });
+        
+        // This method getting minimum price to display on event
+        let minPrice = 0;
+        let currency =null;
+        if(props.event.ticketConfig!=''){
+            let temp=[]
+            props.event.ticketConfig.forEach((item)=> {  
+                currency=item.currency;
+                temp.push(item.faceValue); 
+                minPrice = temp.reduce(function (prev, curnt) {
+                    return prev < curnt ? prev : curnt;
+                });
+            });
+
+        }
+        
+        
+        
 
         function eventDetails(event, id,kycStatus) {
             if (event == "recurring") {
@@ -105,7 +120,8 @@ export default {
             totalQuantity,
             eventDetails,
             recurringEventDate,
-            // minPrice
+            minPrice,
+            currency
         };
     },
 };

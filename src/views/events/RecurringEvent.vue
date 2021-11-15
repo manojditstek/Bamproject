@@ -5,7 +5,7 @@
             <!-- <router-link to="/">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
             {{recurringEvent?recurringEvent.name:''}}
-        </router-link> -->
+            </router-link> -->
 
             <BackButton v-if="totalQuantity" :message="recurringEvent?lengthOfString(recurringEvent.name):''" />
             <a href="javascript:void(0)" v-else @click="backToHome">
@@ -42,7 +42,7 @@
                 <h2>{{recurringEvent?recurringEvent.name:''}}</h2>
                 <VenuAddress :venue_id="event?event.venueId:''" />
                 <div class="priceWrap">
-                    <p>{{$t('common.from')}}</p>0.00 EUR
+                    <p>{{$t('common.from')}}</p>{{minPrice(event)}} {{currency?currency:'EUR'}}
                 </div>
             </div>
             <div class="collapseArrow">
@@ -123,10 +123,12 @@ export default {
     setup() {
         const router = useRouter();
         const store = useStore();
-        const singleEventData = ref('')
+        const singleEventData = ref('');
+         const currency = ref();
 
         function singleEvent(evntData) {
-            singleEventData.value = evntData
+            singleEventData.value = evntData;
+           
         }
 
         function reSet() {
@@ -164,6 +166,23 @@ export default {
             }
         }
 
+        // This method getting minimum price to display on event
+        function minPrice(value){
+        if(value!=''){
+            let temp=[]
+            let minPrice = 0;
+                value.ticketConfig.forEach((element)=>{
+                    currency.value=element.currency;
+                    temp.push(element.faceValue); 
+                    minPrice = temp.reduce(function (prev, curnt) {
+                    return prev < curnt ? prev : curnt;
+                })
+                
+            })
+            return minPrice.toFixed(2);
+        }
+        }
+
         return {
             singleEvent,
             recurringEvent,
@@ -173,7 +192,9 @@ export default {
             totalQuantity,
             backToHome,
             lengthOfString,
-            dateFormat
+            dateFormat,
+            minPrice,
+            currency
         }
     },
 

@@ -147,12 +147,13 @@ export const createOrder = async ({commit}, cartItem) => {
 export const ticketHolderInfo = async ({commit}, data) => {
     commit('loadingStatus', true)
     data.orderItem.forEach(async(element,i) => {
-        await bam.order.createTicketHolder({id:element.ticket[0].id},
+        element.ticket.forEach(async(item,j) => {
+        await bam.order.createTicketHolder({id:item.id},
             {
-                firstName: data.data.first_name[i],
-                lastName: data.data.last_name[i],
-                email: data.data.email[i],
-                phone: data.data.phone[i],
+                firstName: data.data.first_name[i+''+j],
+                lastName: data.data.last_name[i+''+j],
+                email: data.data.email[i+''+j],
+                phone: data.data.phone[i+''+j],
             }
         )
         .then((response) => {
@@ -163,6 +164,7 @@ export const ticketHolderInfo = async ({commit}, data) => {
             commit('errorMsg', response);
             commit('loadingStatus', false)
         })
+    })
     })
 }
 // end ticket holder information
@@ -175,8 +177,8 @@ export const orderContact = async ({commit}, data) => {
             first_name: data.data.first_name,
             last_name: data.data.last_name,
             phone: data.data.phone,
-            email: data.data.email,
-            billing_email: data.data.billing_email,
+            email: data.data.email = data.data.billing_email,
+            // billing_email: data.data.billing_email,
         }
     )
     .then((response) => {

@@ -54,8 +54,8 @@
         </div>
     </div>
     <div class="footerActionBtn btns">
-        <button class="button" @click="payMethod()">{{$t('common.pay')}}{{(totalPrice).toFixed(2)}} {{currency}}</button>
-        <router-link to="/" class="button btnGray">{{$t('common.cancel')}}</router-link>
+        <button class="button" @click="payMethod()">{{$t('common.pay')}} {{(totalPrice).toFixed(2)}} {{currency}}</button>
+        <a @click="backToHome()" class="button btnGray">{{$t('common.cancel')}}</a>
     </div>
 </div>
 </template>
@@ -99,9 +99,6 @@ export default {
         let payTicketType = orderID.value.orderItem.filter((item)=>item.ticket[0].ticketConfig.faceValue>0);
 
         function payMethod() {
-            // if(data.billing_email==null){
-            //     data.billing_email=data.email;
-            // }
             if(firstName()==true && lastName()==true && phoneNumber()==true && emailCheck()==true && deliveryMail()==true){
                  store.dispatch('orderContact', {
                 id:orderID.value.id,
@@ -192,6 +189,13 @@ export default {
         }
         //end regx
 
+        function backToHome() {
+            store.commit("backToHome");
+            // router.push({
+            //     path: '/'
+            // })
+            location.reload();
+        }
         return {
             data,
             checkMail,
@@ -206,7 +210,8 @@ export default {
             phoneNumber,
             emailCheck,
             deliveryMail,
-            orderID
+            orderID,
+            backToHome
         }
     },
 

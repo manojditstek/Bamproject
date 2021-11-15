@@ -34,7 +34,7 @@
       <div class="cardBodyWrapper">
           <div class="formInputs">
               <div class="formGroup">
-                  <input type="text" class="form-control " :class="data.first_name[i+''+j]?'active ':formErrors.first_name[i+''+j]?' errorInput':''" v-model.trim="data.first_name[i+''+j]" @input="firstName()" />
+                  <input type="text" class="form-control " :class="data.first_name[i+''+j]?'active ':formErrors.first_name[i+''+j]?' errorInput':''" v-model.trim="data.first_name[i+''+j]" />
                   <div class="labelInput">{{$t('userKycForm.firstName')}}</div>
                   <div v-if="!data.first_name[i+''+j] && formErrors.first_name[i+''+j]" class="error">{{$t('formValidation.firstName')}}</div>
               </div>
@@ -94,7 +94,9 @@ export default {
         })
 
         function submit(){
+            console.log("data",data)
             if(ticketHolder() == true){
+                
                 store.dispatch('ticketHolderInfo', {orderItem:ticketID.value.orderItem,data})
             }
         }

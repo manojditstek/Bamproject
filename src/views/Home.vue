@@ -52,6 +52,7 @@ export default {
     });
 
     const START_DATE = new Date();
+    // START_DATE.setDate(START_DATE.getDate() + 10); used for future 10 days
     const events = computed(() => {
       return store.state.events
         .filter((s) => new Date(s.startAt) >= START_DATE)

@@ -58,7 +58,7 @@
         </div>
             <div class="footerActionBtn btns">
                 <button class="button" :class="payMethod=='epsBank'&& name==''?'disabled':''" @click="submit">{{$t('common.pay')}} {{(totalPrice).toFixed(2)}} {{currency}}</button>
-                <router-link to="/" class="button btnGray">{{$t('common.cancel')}}</router-link>
+                <a @click="backToHome()" class="button btnGray">{{$t('common.cancel')}}</a>
            </div>
       </div>
 </template>
@@ -192,6 +192,15 @@ export default {
             }
         }
 
+        function backToHome() {
+            store.commit("backToHome");
+            // router.push({
+            //     path: '/'
+            // })
+
+            location.reload();
+        }
+
         return {
             paymentInitiate,
             event,
@@ -205,7 +214,8 @@ export default {
             countDown,
             orderID,
             name,
-            cardField
+            cardField,
+            backToHome
         }
 
   }
