@@ -225,7 +225,7 @@ export const removeDiscountToCart = (state, data) => {
 
 // Checking discount item in cart
 const isItemInDiscountCart = (state,discountItems, item) => {
-  console.log('discountItems',discountItems)
+  
   let tempId = null;
   state.cart.cartItems.forEach(element => {
     tempId=element.id;

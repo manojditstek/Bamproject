@@ -13,7 +13,7 @@ const english = {
     userLimit:'Per user ticket limit reached.',
     ticketNotFound:'Ticket Not Found!',
     soldOut:'Sold Out',
-    card:'This field is required.'
+    errorOnPymntField:'This field is required.'
 
     
   },

@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory ,createMemoryHistory } from 'vue-router'
+import { createRouter ,createMemoryHistory } from 'vue-router' // for url router createWebHashHistory
 import Home from '../views/Home.vue'
 
 const routes = [

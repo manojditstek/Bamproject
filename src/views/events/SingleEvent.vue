@@ -45,7 +45,7 @@
 
 <script>
 import {useStore} from 'vuex';
-import moment from "moment";
+import {dateFormat,timeFormat,lengthOfString} from "../../common/common";
 import {computed} from '@vue/reactivity';
 import {useRouter} from "vue-router";
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress.vue"
@@ -54,7 +54,7 @@ import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets.v
 import TotalTicketCalculation from "../../components/cartModule/TotalTicketCalculation.vue"
 import TimeSlot from "../../components/singleEvent/timeSlots/TimeSlot.vue"
 import {SeatsioClient,Region} from 'seatsio'
-import { SeatsioChartManager } from '@seatsio/seatsio-react'
+
 export default {
     name: 'SingleEvent',
     components: {
@@ -81,14 +81,17 @@ export default {
             return store.state.workSpaceKey;
         });
 
+        const singleEvent = computed(() => {
+            store.dispatch('workSpaceKey');
+            return store.state.event;
+        })
+
 
         //seatsio testing
         
         async function chartResp() {
-            // console.log("Region.EU( ", Region.EU());
             let client = new SeatsioClient(Region.EU(), workSpaceKey.value.workspaceKey) // Here passing workspaceKey 
-            let chartList = await client.charts.listFirstPage();
-            // console.log("chartList=:", chartList)
+            await client.charts.listFirstPage();
         }
 
 
@@ -98,27 +101,6 @@ export default {
                 path: '/'
             })
         }
-
-        function dateFormat(value) {
-            return moment(value).format("MM/DD/YYYY ");
-        }
-
-        function timeFormat(value) {
-            return moment(value).format(" HH:mm a");
-        }
-
-        function lengthOfString(value) {
-            if (value ? value.length > 48 : '') {
-                return value.substring(0, 35) + '...'
-            } else {
-                return value
-            }
-        }
-
-        const singleEvent = computed(() => {
-            store.dispatch('workSpaceKey');
-            return store.state.event;
-        })
         return {
             singleEvent,
             totalQuantity,

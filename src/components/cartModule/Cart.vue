@@ -113,7 +113,6 @@ export default {
             if (complete) {
                 store.commit("removeCartItemComplete", item);
             } else {
-                console.log('item',item)
                 store.commit("removeCartItem", item);
             }
         }

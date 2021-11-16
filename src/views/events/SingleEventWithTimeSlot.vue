@@ -36,7 +36,7 @@
 
 <script>
 import {useStore} from 'vuex';
-import moment from "moment";
+import {dateFormat,timeFormat,lengthOfString} from "../../common/common";
 import {computed} from '@vue/reactivity';
 import {useRouter} from "vue-router";
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress.vue"
@@ -67,14 +67,6 @@ export default {
             return store.state.cart.itemsTotalQuantity;
         });
 
-        function timeFormat(value) {
-            return moment(value).format(" HH:mm a");
-        }
-
-        function dateFormat(value) {
-            return moment(value).format("MM/DD/YYYY ");
-        }
-        
         function backButton(){
             // store.commit("backToHome");
             router.push({
@@ -82,13 +74,7 @@ export default {
             })
         }
 
-        function lengthOfString(value){
-            if(value?value.length>48:''){
-                return value.substring(0,35)+ '...'
-            }else{
-                return value
-            }
-        }
+        
 
         const singleEvent = computed(() => {
             return store.state.event;

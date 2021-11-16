@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import moment from "moment"
+import {timeFormat} from '../../../common/common'
 import {
     ref
 } from 'vue'
@@ -55,14 +55,11 @@ export default {
         return {
             toggleButton,
             timeSlots,
-            router
+            router,
+            timeFormat
         }
     },
-    methods: {
-        timeFormat(value) {
-            return moment(value).format(" HH:mm a");
-        }
-    },
+   
 }
 </script>
 

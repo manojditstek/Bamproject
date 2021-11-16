@@ -1,6 +1,6 @@
 <template>
 <div v-if="loaderStatus" class="loader">
-    <div class="loaderWrapper">
+    <div class="loaderWrapper ">
         <img src="assets/images/loading-buffering.gif" alt="Image">
     </div>
 </div>

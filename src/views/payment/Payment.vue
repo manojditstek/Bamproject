@@ -38,7 +38,7 @@
     <div v-if="payMethod=='card'" class="stripeWrapper">
         <StripeElement :element="cardElement" @change="event = $event" class="stripe" />
         <div class="error-message" v-if="event && event.error">{{ event.error.message }}</div>
-        <div class="error-message" v-if="!event && cardField">{{ $t('common.card') }}</div>
+        <div class="error-message" v-if="!event && cardField">{{ $t('common.errorOnPymntField') }}</div>
     </div>
     <div v-if="payMethod=='epsBank'">
         <div class="stripeWrapper">
@@ -51,6 +51,7 @@
                 <div class="formGroup w-100">
                     <div class="stripeWrapper">
                         <StripeElement :element="epsElement" @change="event = $event" class="stripe" />
+                        <div class="error-message" v-if="!event && cardField">{{ $t('common.errorOnPymntField') }}</div>
                     </div>
                 </div>
             </div>
@@ -138,7 +139,6 @@ export default {
             if(event.value==null){
                 cardField.value=true
             }
-            console.log('EV',event.value)
             if (event.value ?.complete) {
                 /* Card payment initiated */
                 cardField.value=false
@@ -173,16 +173,15 @@ export default {
                         
                         return_url: 'http://localhost:8084/',
                         
-                    }).catch(error => {
+                    })
+                    .catch(error => {
                         store.commit('loadingStatus', false)
                         store.commit('errorMsg', error.response);
                        
 
                     });
-                    if (response == 200) {
-                        store.dispatch('downloadTicket', {
-                            id: orderID.value.id
-                        });
+                    
+                    if (response.paymentIntent.status == 'succeeded') {
                         router.push({
                             path: '/download-ticket'
                         })

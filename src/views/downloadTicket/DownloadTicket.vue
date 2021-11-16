@@ -121,12 +121,13 @@
 </template>
 
 <script>
-import { computed,ref } from "vue";
-import { useStore } from "vuex";
+import { computed,ref } from "vue"
+import { useStore } from "vuex"
+import {dateFormat,timeFormat} from "../../common/common"
 import moment from 'moment'
 import bam from '../../services/bamSdk'
 import VenuAddress from '../../components/singleEvent/venuAddress/VenueAddress.vue'
-import {useRouter} from "vue-router";
+// import {useRouter} from "vue-router"
 export default {
   name: "DownloadTicket",
   components:{
@@ -134,7 +135,7 @@ export default {
   },
   setup() {
     const store = useStore();
-    const router = useRouter();
+    // const router = useRouter();
     const toDayDate = ref();
     toDayDate.value = moment().format(" DD MMM YYYY ")
     const tcktDetails = computed(() => {
@@ -170,14 +171,7 @@ export default {
            location.reload();
         }
 
-    function dateFormat(value){
-       return moment(value)
-                .format("DD MMM YYYY")
-    }
-
-    function timeFormat(value) {
-            return moment(value).format(" HH:mm a");
-        }
+   
     
     return {
       tcktDetails,

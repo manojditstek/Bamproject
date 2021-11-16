@@ -11,14 +11,10 @@ import {
 import {
     useStore
 } from "vuex";
-import {
-    useRouter
-} from "vue-router";
 export default {
     name: "ErrorMessages",
     setup() {
         const store = useStore();
-        const router = useRouter();
         const errorMsg = computed(() => {
             return store.state.errorMsg;
         });

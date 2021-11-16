@@ -7,8 +7,8 @@
             {{recurringEvent?recurringEvent.name:''}}
             </router-link> -->
 
-            <BackButton v-if="totalQuantity" :message="recurringEvent?lengthOfString(recurringEvent.name):''" />
-            <a href="javascript:void(0)" v-else @click="backToHome">
+            <!-- <BackButton v-if="totalQuantity" :message="recurringEvent?lengthOfString(recurringEvent.name):''" /> -->
+            <a href="javascript:void(0)"  @click="backToHome">
                 <i class="fa fa-angle-left" aria-hidden="true"></i>
                 {{recurringEvent?lengthOfString(recurringEvent.name):''}}
             </a>
@@ -48,6 +48,12 @@
             <div class="collapseArrow">
                 <i class="fa fa-angle-right"></i>
             </div>
+        </div>
+    </div>
+    <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
+        <TotalTicketCalculation />
+        <div class="labelBtn">
+            <router-link to="/shop" class="button">{{$t('common.cart')}}</router-link>
         </div>
     </div>
 </div>
@@ -93,14 +99,14 @@
 <script>
 import {useRouter} from "vue-router";
 import {useStore} from 'vuex';
-import moment from "moment";
+import {dateFormat,lengthOfString} from "../../common/common";
 import {computed,ref} from '@vue/reactivity';
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress.vue"
 import EventDateFormat from "../../components/singleEvent/EventDate.vue";
 import DateRangePicker from "../../components/dateRangePicker/dateRangePicker.vue"
 import Tickets from '../../components/singleEvent/timeSlots/ticketList/Tickets.vue'
 import TotalTicketCalculation from '../../components/cartModule/TotalTicketCalculation.vue'
-import BackButton from '../../components/backButton/BackButton.vue'
+// import BackButton from '../../components/backButton/BackButton.vue'
 export default {
     name: 'RecurringEvent',
     data() {
@@ -117,7 +123,7 @@ export default {
         DateRangePicker,
         Tickets,
         TotalTicketCalculation,
-        BackButton
+        // BackButton
     },
 
     setup() {
@@ -149,22 +155,13 @@ export default {
         });
 
         function backToHome() {
+            store.commit("backToHome");
             router.push({
                 path: '/'
             })
         }
 
-         function dateFormat(value) {
-            return moment(value).format("MM/DD/YYYY ");
-        }
-
-        function lengthOfString(value) {
-            if (value ? value.length > 48 : '') {
-                return value.substring(0, 35) + '...'
-            } else {
-                return value
-            }
-        }
+         
 
         // This method getting minimum price to display on event
         function minPrice(value){

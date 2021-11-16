@@ -94,7 +94,6 @@ export default {
         })
 
         function submit(){
-            console.log("data",data)
             if(ticketHolder() == true){
                 
                 store.dispatch('ticketHolderInfo', {orderItem:ticketID.value.orderItem,data})

@@ -23,15 +23,17 @@ export default {
             store.commit('loadingStatus', true)
                 if (props.venue_id?props.venue_id:'') {
                     store.commit('loadingStatus', true)
-                    await bam.venue.getVenue({
+                    try{
+                    let response = await bam.venue.getVenue({
                         id: props.venue_id
-                    }).then((response) => {
+                    })
                         venueName.value = response
                         store.commit('loadingStatus', false)
-                    }).catch(response => {
+                    }
+                    catch(error) {
                         store.commit('loadingStatus', false)
-                        store.commit('errorMsg', response);
-                    });
+                        store.commit('errorMsg', error);
+                    }
                 }
 
                 })
