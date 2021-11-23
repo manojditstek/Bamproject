@@ -5,17 +5,12 @@
 
 body {
   font-family: var(--font-family-400);
-  font-size: 0.8rem;
-  line-height: 1.5;
-  color: #212529;
   margin: 0;
-  background-color: #CBCBCB;
+  background-color: #cbcbcb;
 }
-
 * {
   box-sizing: border-box;
 }
-
 h1,
 h2,
 h3,
@@ -24,8 +19,15 @@ h5,
 h6 {
   margin: 0;
   font-family: var(--font-family-700);
+  color:var(--color);
 }
-
+p{
+color:var(--color);
+font-family: var(--font-family-400);
+}
+a{
+  color:var(--color);
+}
 .m-0 {
   margin: 0 !important;
 }
@@ -63,7 +65,7 @@ h6 {
 }
 
 .brdrtop {
-  border-top: 1px solid #D7D7D7;
+  border-top: 1px solid #d7d7d7;
 }
 
 .hr {
@@ -89,7 +91,7 @@ h6 {
   border: 1px solid var(--color) !important;
   max-width: 150px;
   width: 100%;
-  color: var(--color) !important
+  color: var(--color) !important;
 }
 
 .contentWraper {
@@ -105,26 +107,24 @@ h6 {
 }
 
 .header {
-  border-bottom: 1px solid #D7D7D7;
-  background-color: #FBFBFB;
+  border-bottom: 1px solid #d7d7d7;
+  background-color: #fbfbfb;
   padding: 15px;
   margin-bottom: 0;
 }
 
 .header h2 {
   font-size: 24px;
-  color: rgba(57, 57, 57, 1);
 }
 
 .header h2 a {
   text-decoration: none;
-  color: rgba(57, 57, 57, 1);
 }
 
 .header h2 a i {
   font-size: 28px;
   margin: 0 5px 0 0;
-  color: rgba(57, 57, 57, 1);
+  color: var(--color);
 }
 
 .alert {
@@ -136,7 +136,7 @@ h6 {
 }
 
 .alert p {
-  color: #EEEEEE;
+  color: #eeeeee;
   font-size: 12px;
   font-family: var(--font-family-700);
   margin: 0;
@@ -204,14 +204,12 @@ h6 {
 .loaderWrapper img {
   width: 40px;
 }
-
 .cardBodyWrapper {
   padding: 25px 15px;
   position: relative;
   /* max-height: 500px;
   overflow-y: auto; */
 }
-
 .cardBodyWrapper .cardWrapper {
   border-radius: 9px;
   border-bottom: 0px solid rgba(57, 57, 57, 0.2);
@@ -219,7 +217,7 @@ h6 {
 }
 
 .cardBodyWrapper .cardWrapper.single .dateCol {
-  background-color: #ADADAD;
+  background-color: #adadad;
 }
 
 .cardBodyWrapper .cardWrapper.recurring .dateCol {
@@ -232,7 +230,7 @@ h6 {
 }
 
 .cardWrapper {
-  background-color: #FBFBFB;
+  background-color: #fbfbfb;
   box-shadow: 0 6px 5px rgb(0 0 0 / 10%);
   overflow: hidden;
   min-height: 70px;
@@ -240,7 +238,7 @@ h6 {
 }
 
 .dateCol {
-  background-color: #EEEEEE;
+  background-color: #eeeeee;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -248,7 +246,6 @@ h6 {
   justify-content: center;
   min-width: 100px;
   max-width: 100px;
-  color: rgba(57, 57, 57, 1);
 }
 
 .dateCol h4 {
@@ -275,7 +272,6 @@ h6 {
 time {
   margin: 8px 0 0;
   font-size: 12px;
-  font-family: var(--font-family-400);
 }
 
 .detailsCol {
@@ -289,15 +285,12 @@ time {
 .detailsCol h2 {
   margin-bottom: 2px;
   font-size: 14px;
-  color: rgba(57, 57, 57, 1);
 }
 
 .detailsCol p {
   margin: 0;
   font-size: 14px;
-  color: rgba(57, 57, 57, 1);
   line-height: 18.2px;
-  font-family: var(--font-family-400);
 }
 
 .detailsCol .priceWrap {
@@ -309,11 +302,7 @@ time {
 }
 
 .detailsCol .priceWrap p {
-  font-family: var(--font-family-400);
-  color: rgba(57, 57, 57, 1);
   font-size: 12px;
-  margin: 0;
-  line-height: 18.2px;
 }
 
 .limitExceeded {
@@ -403,7 +392,7 @@ button,
 }
 
 .redBg {
-  background-color: #E94B4F !important;
+  background-color: #e94b4f !important;
 }
 
 .singleEventList .cardWrapper .collapseArrow.redBg {
@@ -417,8 +406,6 @@ button,
 
 .eventDiscountWrapper h2 {
   font-size: 26px;
-  font-family: var(--font-family-700);
-  color: rgba(57, 57, 57, 1);
   line-height: 31.2px;
 }
 
@@ -432,9 +419,7 @@ button,
   justify-content: space-between;
   font-size: 14px;
   margin: 0;
-  color: rgba(57, 57, 57, 1);
   line-height: 21px;
-  font-family: var(--font-family-400);
 }
 
 .totalAmountWrapper p {
@@ -442,7 +427,6 @@ button,
   justify-content: space-between;
   font-size: 14px;
   margin: 0;
-  color: rgba(57, 57, 57, 1);
   line-height: 21px;
   font-family: var(--font-family-700);
 }
@@ -529,7 +513,7 @@ button,
 }
 
 .singleTicketTotalAmount {
-  background-color: #FBFBFB;
+  background-color: #fbfbfb;
   justify-content: space-between;
   padding: 20px 20px;
   align-items: center;
@@ -544,7 +528,7 @@ button,
   content: "";
   width: 32px;
   height: 5px;
-  background-color: #D7D7D7;
+  background-color: #d7d7d7;
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
@@ -559,7 +543,7 @@ button,
 
 .singleTicketTotalAmount h2 {
   font-size: 14px;
-  font-family: var(--font-family-700);
+
   line-height: 18.2px;
   letter-spacing: 0.1px;
 }
@@ -570,7 +554,6 @@ button,
   line-height: 13px;
   font-family: var(--font-family-600);
   letter-spacing: 0.5px;
-
 }
 
 .singleTicketTotalAmount button {
@@ -585,7 +568,7 @@ button,
 }
 
 .ticketWrapper .ticketCategory {
-  background-color: #FBFBFB;
+  background-color: #fbfbfb;
   box-shadow: 0 0 5px rgb(0 0 0 / 10%);
   overflow: hidden;
   margin-bottom: 15px;
@@ -595,7 +578,8 @@ button,
   border-bottom: 0;
 }
 
-.ticketWrapper .ticketCategory .dateCol {
+.ticketWrapper .ticketCategory 
+ {
   min-width: 60px;
   max-width: 60px;
 }
@@ -603,7 +587,7 @@ button,
 .ticketWrapper .ticketCategory .dateCol h2 {
   font-size: 26px;
   line-height: 26px;
-  color: rgba(57, 57, 57, 1);
+  color: var(--color);
 }
 
 .ticketWrapper .ticketCategory .detailsCol h2 {
@@ -625,7 +609,7 @@ button,
 
 .footerActionBtn .button,
 .footerActionBtn button {
-  background-color: rgba(57, 57, 57, 1);
+  background-color: var(--color);
   font-size: 15px;
   padding: 12px;
   width: 100%;
@@ -643,7 +627,7 @@ button,
 }
 
 .btnGray {
-  background-color: #FBFBFB !important;
+  background-color: #fbfbfb !important;
   border: 1px solid rgba(57, 57, 57, 0.3);
   color: var(--color) !important;
 }
@@ -657,7 +641,7 @@ button,
   font-size: 12px;
   line-height: 15.6px;
   font-family: var(--font-family-400);
-  color: rgba(57, 57, 57, 1);
+  color: var(--color);
   max-width: 350px;
   margin: 0 auto;
 }
@@ -689,7 +673,7 @@ button,
 }
 
 .actionBtnPlusMinus .btnCol button {
-  background-color: rgba(57, 57, 57, 1);
+  background-color: var(--color);
   border: none;
   padding: 0;
   width: 25px;
@@ -720,7 +704,7 @@ button,
 }
 
 .inputInnerWrapper {
-  background: #FBFBFB;
+  background: #fbfbfb;
   border: 1px solid rgba(57, 57, 57, 0.2);
   box-sizing: border-box;
   border-radius: 8px;
@@ -730,7 +714,7 @@ button,
 }
 
 .stripeWrapper {
-  background: #FBFBFB;
+  background: #fbfbfb;
   border: 1px solid rgba(57, 57, 57, 0.2);
   box-sizing: border-box;
   border-radius: 8px;
@@ -741,7 +725,7 @@ button,
 .stripeWrapper .error-message {
   position: absolute;
   bottom: -21px;
-  color: #E94B4F;
+  color: #e94b4f;
   font-size: 10px;
 }
 
@@ -765,8 +749,8 @@ button,
   left: -9999px;
 }
 
-.inputGroup [type="radio"]:checked+label,
-.inputGroup [type="radio"]:not(:checked)+label {
+.inputGroup [type="radio"]:checked + label,
+.inputGroup [type="radio"]:not(:checked) + label {
   position: relative;
   padding-left: 28px;
   cursor: pointer;
@@ -775,9 +759,9 @@ button,
   color: #666;
 }
 
-.inputGroup [type="radio"]:checked+label:before,
-.inputGroup [type="radio"]:not(:checked)+label:before {
-  content: '';
+.inputGroup [type="radio"]:checked + label:before,
+.inputGroup [type="radio"]:not(:checked) + label:before {
+  content: "";
   position: absolute;
   left: 0;
   top: 0;
@@ -789,9 +773,9 @@ button,
   border: 1px solid var(--color);
 }
 
-.inputGroup [type="radio"]:checked+label:after,
-.inputGroup [type="radio"]:not(:checked)+label:after {
-  content: '';
+.inputGroup [type="radio"]:checked + label:after,
+.inputGroup [type="radio"]:not(:checked) + label:after {
+  content: "";
   width: 20px;
   height: 20px;
   background: var(--color);
@@ -803,13 +787,13 @@ button,
   transition: all 0.2s ease;
 }
 
-.inputGroup [type="radio"]:not(:checked)+label:after {
+.inputGroup [type="radio"]:not(:checked) + label:after {
   opacity: 0;
   -webkit-transform: scale(0);
   transform: scale(0);
 }
 
-.inputGroup [type="radio"]:checked+label:after {
+.inputGroup [type="radio"]:checked + label:after {
   opacity: 1;
   -webkit-transform: scale(1);
   transform: scale(1);
@@ -842,7 +826,7 @@ button,
 
 .formInputs .formGroup .error {
   position: absolute;
-  color: #E94B4F;
+  color: #e94b4f;
   font-size: 10px;
   font-weight: 600;
 }
@@ -875,7 +859,7 @@ button,
 }
 
 .form-control {
-  background: #FBFBFB;
+  background: #fbfbfb;
   border: 1px solid rgba(57, 57, 57, 0.2);
   border-radius: 6px;
   height: 40px;
@@ -892,8 +876,8 @@ button,
   border: 1px solid var(--color);
 }
 
-.formGroup input:focus~.labelInput {
-  transform: scale(.75) translateY(-39px);
+.formGroup input:focus ~ .labelInput {
+  transform: scale(0.75) translateY(-39px);
   background: #fbfbfb;
   font-family: var(--font-family-700);
   color: var(--color);
@@ -904,18 +888,18 @@ button,
 }
 
 .formGroup input.errorInput {
-  border: 1px solid #E94B4F;
+  border: 1px solid #e94b4f;
 }
 
-.formGroup input.errorInput~.labelInput {
-  transform: scale(.75) translateY(-39px);
+.formGroup input.errorInput ~ .labelInput {
+  transform: scale(0.75) translateY(-39px);
   background: #fbfbfb;
   font-family: var(--font-family-700);
-  color: #E94B4F;
+  color: #e94b4f;
 }
 
-.formGroup input.active~.labelInput {
-  transform: scale(.75) translateY(-39px);
+.formGroup input.active ~ .labelInput {
+  transform: scale(0.75) translateY(-39px);
   background: #fbfbfb;
   font-family: var(--font-family-700);
   color: var(--color);
@@ -946,7 +930,7 @@ button,
 }
 
 .formInputs .formGroup .checkbox label:before {
-  content: '';
+  content: "";
   -webkit-appearance: none;
   background-color: transparent;
   border: 2px solid var(--color);
@@ -960,8 +944,8 @@ button,
   border-radius: 6px;
 }
 
-.formInputs .formGroup .checkbox input:checked+label:after {
-  content: '';
+.formInputs .formGroup .checkbox input:checked + label:after {
+  content: "";
   display: block;
   position: absolute;
   top: 4px;
@@ -1008,8 +992,8 @@ button,
 }
 
 .cardBodyWrapper.bgLight {
-  background: #FBFBFB;
-  border-bottom: 1px solid #D7D7D7;
+  background: #fbfbfb;
+  border-bottom: 1px solid #d7d7d7;
 }
 
 .ticketDesc h2 {
@@ -1062,14 +1046,14 @@ button,
   border-collapse: collapse;
 }
 
-.ticketCart .table>thead {
+.ticketCart .table > thead {
   max-width: 100%;
   width: 100%;
-  background: #FBFBFB;
+  background: #fbfbfb;
 }
 
-.ticketCart .table>thead>tr>th {
-  padding: .75rem;
+.ticketCart .table > thead > tr > th {
+  padding: 0.75rem;
   vertical-align: top;
   border-top: 2px solid var(--color);
   border-bottom: 2px solid var(--color);
@@ -1078,31 +1062,31 @@ button,
   text-align: left;
 }
 
-.ticketCart .table>thead>tr>th:last-child {
+.ticketCart .table > thead > tr > th:last-child {
   text-align: right;
 }
 
-.ticketCart .table>tbody>tr>td {
-  padding: .75rem;
+.ticketCart .table > tbody > tr > td {
+  padding: 0.75rem;
   vertical-align: top;
   border-bottom: 1px solid rgba(57, 57, 57, 0.2);
   font-size: 14px;
   font-family: var(--font-family-400);
 }
 
-.ticketCart .table>tbody>tr>td:last-child {
+.ticketCart .table > tbody > tr > td:last-child {
   text-align: right;
 }
 
-.ticketCart .table>tfoot>tr>td {
-  padding: .75rem 0;
+.ticketCart .table > tfoot > tr > td {
+  padding: 0.75rem 0;
   vertical-align: top;
   border-top: 2px solid var(--color);
   font-size: 14px;
   font-family: var(--font-family-400);
 }
 
-.ticketCart .table>tfoot>tr>td:last-child {
+.ticketCart .table > tfoot > tr > td:last-child {
   text-align: right;
 }
 
@@ -1134,17 +1118,16 @@ button,
   border-color: #f5c6cb;
   padding-right: 4rem;
   position: relative;
-  padding: .75rem 1.25rem;
+  padding: 0.75rem 1.25rem;
   margin-bottom: 0;
   border: 1px solid transparent;
-
 }
 
 .alert-dismissible .close {
   position: absolute;
   top: 0;
   right: 0;
-  padding: .75rem 1.25rem;
+  padding: 0.75rem 1.25rem;
   color: inherit;
   padding: 10px 12px;
 }
@@ -1164,7 +1147,7 @@ button,
   line-height: 1;
   color: #000;
   text-shadow: 0 1px 0 #fff;
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .ticketMessage {
@@ -1179,7 +1162,7 @@ button,
   font-size: 10px;
   color: #fbfbfb;
   text-align: center;
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   width: auto;
   line-height: normal;
@@ -1194,7 +1177,7 @@ button,
 }
 
 .ticketMessageInner.soldOut {
-  background-color: #E94B4F;
+  background-color: #e94b4f;
 }
 
 .ticketInfo h1 {
