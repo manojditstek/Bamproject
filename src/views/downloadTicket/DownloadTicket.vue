@@ -1,13 +1,10 @@
 <template>
   <div>
-    <!-- step 1 -->
     <div class="d-flex justify-content-between align-items-end header">
       <h2>
-        <!-- <router-link to="/">{{$t('downloadTicket.backtoHome')}}</router-link> -->
         <a href="javascript:void(0)"  @click="backButton">{{$t('downloadTicket.backtoHome')}}</a>
       </h2>
     </div>
-    <!---->
     <div class="cardBodyWrapper bgLight">
       <div class="payDesc">
         <h1>{{$t('downloadTicket.heading1')}}</h1>
@@ -18,12 +15,10 @@
         </div>
       </div>
     </div>
-    <!---->
     <div class="cardBodyWrapper">
       <div class="ticketDesc">
         <div  >
         <h2 >{{cart.cartItems[0].eventName}} </h2>
-
         <!-- for time slot -->
         <div v-if="tcktDetails.orderItem[0].ticket[0].timeslot">
         <div v-for="ticket in tcktDetails.orderItem" :key="ticket.id">
@@ -42,17 +37,13 @@
               <i class="fa fa-map-marker" aria-hidden="true"></i>
             </div>
             <div class="eventDesc">
-              <!-- <label>venue</label>
-              <label>city</label> -->
               <VenuAddress :venue_id="cart.cartItems[0].venueId" />
             </div>
           </div>
         </div>
-        
         </div>
         </div>
         <!-- end time slot -->
-
         <!-- without time slot -->
         <div class="eventDetails" v-else>
           <div class="eventInnerDetails">
@@ -69,16 +60,12 @@
               <i class="fa fa-map-marker" aria-hidden="true"></i>
             </div>
             <div class="eventDesc">
-              <!-- <label>venue</label>
-              <label>city</label> -->
               <VenuAddress :venue_id="cart.cartItems[0].venueId" />
             </div>
           </div>
         </div>
         <!-- end without time slot -->
-
         </div>
-
         <div class="ticketCart">
          <table class="table">
           <thead>
@@ -92,11 +79,9 @@
             <tr >
               <td>{{ticket.ticket.length}}</td>
               <td >{{ticket.ticket[0].ticketConfig.name}} <br>
-
                 <div v-if="ticket.ticket[0].ticketDiscount">
                   <span v-for="disc in ticket.ticket[0].ticketDiscount" :key="disc.id"> {{disc.name}}</span>
                 </div>
-                
               </td>
               <td>{{ticket.ticket[0].ticketConfig.faceValue}} {{ticket.ticket[0].ticketConfig.currency}}</td>
             </tr>
@@ -108,7 +93,6 @@
             </tr>
           </tfoot>
          </table>
-
         </div>
         <div class="ticketCartDesc">
           <h4>{{$t('downloadTicket.hinweis')}} </h4> 
@@ -119,7 +103,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import { computed,ref } from "vue"
 import { useStore } from "vuex"
@@ -127,7 +110,6 @@ import {dateFormat,timeFormat} from "../../common/common"
 import moment from 'moment'
 import bam from '../../services/bamSdk'
 import VenuAddress from '../../components/singleEvent/venuAddress/VenueAddress.vue'
-// import {useRouter} from "vue-router"
 export default {
   name: "DownloadTicket",
   components:{
@@ -135,7 +117,6 @@ export default {
   },
   setup() {
     const store = useStore();
-    // const router = useRouter();
     const toDayDate = ref();
     toDayDate.value = moment().format(" DD MMM YYYY ")
     const tcktDetails = computed(() => {
@@ -170,9 +151,6 @@ export default {
     function backButton(){    
            location.reload();
         }
-
-   
-    
     return {
       tcktDetails,
       downloadTkt,

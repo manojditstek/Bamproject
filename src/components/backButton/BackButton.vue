@@ -5,12 +5,8 @@
 </a>
 </template>
 <script>
-import {
-    useStore
-} from "vuex";
-import {
-    useRouter
-} from "vue-router";
+import {useStore} from "vuex";
+import {useRouter} from "vue-router";
 export default ({
 name:'BackButton',
 props:{

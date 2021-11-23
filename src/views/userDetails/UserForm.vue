@@ -4,7 +4,6 @@
         <Timer />
     </div>
 </div>
-
 <div class="cardBodyWrapper">
     <Loader />
     <div class="innerHeading">
@@ -24,8 +23,8 @@
         <div class="formGroup">
             <input type="text" class="form-control" :class="data.phone && !formErrors[2]?'active':formErrors[2]?' errorInput':''" v-model.trim="data.phone" @input="phoneNumber()"/>
             <div class="labelInput">{{$t('orderContactForm.phone')}}</div>
-           <div v-if="formErrors[2]!='valid' && formErrors[2]" class="error">{{$t('formValidation.phone')}}</div>
-           <div v-if="formErrors[2]=='valid' && formErrors[2]" class="error">{{$t('formValidation.validPhone')}}</div>
+           <div v-if="formErrors[2]!='notValid' && formErrors[2]" class="error">{{$t('formValidation.phone')}}</div>
+           <div v-if="formErrors[2]=='notValid' && formErrors[2]" class="error">{{$t('formValidation.validPhone')}}</div>
         </div>
     </div>
     <div class="formInputs">
@@ -34,8 +33,8 @@
             <div class="formLabel">
                 <input type="email" class="form-control" :class="data.email && !formErrors[3]?'active':formErrors[3]?' errorInput':''" v-model.trim="data.email" @input="emailCheck()"/>
                 <div class="labelInput">{{$t('orderContactForm.email')}}</div>
-                <div v-if="formErrors[3]!='valid' && formErrors[3]" class="error">{{$t('formValidation.email')}}</div>
-                <div v-if="formErrors[3]=='valid' && formErrors[3]" class="error">{{$t('formValidation.validEmail')}}</div>
+                <div v-if="formErrors[3]!='notValid' && formErrors[3]" class="error">{{$t('formValidation.email')}}</div>
+                <div v-if="formErrors[3]=='notValid' && formErrors[3]" class="error">{{$t('formValidation.validEmail')}}</div>
             </div>
         </div>
         <div class="formGroup">
@@ -48,8 +47,8 @@
                 <input v-if="checkMail" type="email" class="form-control" :class="data.email && !formErrors[3]?'active':formErrors[3]?' errorInput':''" v-model.trim="data.email" />
                 <input v-else type="email" class="form-control" :class="data.billing_email && !formErrors[4]?'active':formErrors[4]?' errorInput':''" v-model.trim="data.billing_email" @input="deliveryMail()"/>
                 <div class="labelInput">{{$t('orderContactForm.email')}}</div>
-               <div v-if="!checkMail && formErrors[4]!='valid' && formErrors[4]" class="error">{{$t('formValidation.email')}}</div>
-               <div v-if="!checkMail && formErrors[4]=='valid' && formErrors[4]" class="error">{{$t('formValidation.validEmail')}}</div>
+               <div v-if="!checkMail && formErrors[4]!='notValid' && formErrors[4]" class="error">{{$t('formValidation.email')}}</div>
+               <div v-if="!checkMail && formErrors[4]=='notValid' && formErrors[4]" class="error">{{$t('formValidation.validEmail')}}</div>
             </div>
         </div>
     </div>
@@ -59,11 +58,10 @@
     </div>
 </div>
 </template>
-
 <script>
-import {ref,reactive,computed,} from "vue";
-import {useRouter} from "vue-router";
-import {useStore} from 'vuex';
+import {ref,reactive,computed} from "vue"
+import {useRouter} from "vue-router"
+import {useStore} from 'vuex'
 import Timer from '../../components/setTimer.vue'
 export default {
     name: 'UserForm',
@@ -84,7 +82,6 @@ export default {
             billing_email: null,
 
         })
-
         const totalPrice = computed(() => {
             return store.state.cart.itemTotalAmount;
         });
@@ -145,7 +142,7 @@ export default {
                 formErrors.value[2] = true;
             }
             else if (!validPhone(data.phone)) {
-                formErrors.value[2] = 'valid';
+                formErrors.value[2] = 'notValid';
             }
             else{
                 return true
@@ -157,7 +154,7 @@ export default {
            if (!data.email) {
                 formErrors.value[3] = true;
             }else if (!validEmail(data.email)) {
-                formErrors.value[3] = 'valid';
+                formErrors.value[3] = 'notValid';
             }else{
                 return true
             } 
@@ -168,7 +165,7 @@ export default {
             if (!checkMail.value && !data.billing_email) {
                 formErrors.value[4] = true;
             } else if (!checkMail.value && !validEmail(data.billing_email)) {
-                formErrors.value[4] = 'valid';
+                formErrors.value[4] = 'notValid';
             }else{
                 return true
             }
@@ -191,9 +188,6 @@ export default {
 
         function backToHome() {
             store.commit("backToHome");
-            // router.push({
-            //     path: '/'
-            // })
             location.reload();
         }
         return {

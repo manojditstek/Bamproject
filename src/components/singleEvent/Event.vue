@@ -15,7 +15,6 @@
         <div class="dateCol" v-if="event.type == 'recurring'">
             <h2>{{ event.occurrence.length }}</h2>
             <h4>{{$t('common.events')}}</h4>
-            <!-- <p class="from">{{$t('common.cart')}}</p> -->
             <p>{{ recurringEventDate }}</p>
         </div>
         <div class="detailsCol">
@@ -55,7 +54,6 @@ export default {
         Tickets,
         TimeSlot,
         VenuAddress,
-        // TotalTicketCalculation,
     },
     setup(props) {
         const store = useStore();

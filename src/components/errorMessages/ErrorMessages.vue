@@ -20,11 +20,6 @@ export default {
         });
         function closeAlert() {
             store.state.errorMsg = null;
-            //store.commit("backToHome");
-            // router.push({
-            //             path: '/'
-            //         })
-            // location.reload();
         }
         return {
             errorMsg,

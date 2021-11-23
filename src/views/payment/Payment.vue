@@ -152,9 +152,6 @@ export default {
                         store.commit('errorMsg', error.response);                      
                     });
                     if (response.paymentIntent.status == 'succeeded') { 
-                        // store.dispatch('downloadTicketPdf', {
-                        //     id: orderID.value.id
-                        // });
                         router.push({
                             path: '/download-ticket'
                         })
@@ -193,10 +190,6 @@ export default {
 
         function backToHome() {
             store.commit("backToHome");
-            // router.push({
-            //     path: '/'
-            // })
-
             location.reload();
         }
 

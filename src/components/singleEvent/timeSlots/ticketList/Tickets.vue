@@ -1,6 +1,5 @@
 <template>
-<div class="ticketToggle ">
-    <!-- <Loader /> -->
+<div class="ticketToggle" :class="toggleButton?'show':''" >
     <div class="cardWrapper d-flex"  v-if="ticketDscount?ticketDscount.length==0:''" >
         <div class="detailsCol">
             <h2>{{ticket?ticket.name:$t('common.ticketNotFound')}} : {{ticket?(ticket.faceValue).toFixed(2):'0.00'}} {{ticket?ticket.currency:'EUR'}}</h2>
@@ -19,7 +18,6 @@
         <div class="buttonWrap d-flex">
             <button class="minusBtn" @click="removeFromCart()">-</button>
             <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>
-            <!-- <button class="plusBtn" :class="ticket.availableTickets==''?'disabled':''" :disabled="ticket.availableTickets==''" @click="addToCart()">+</button> -->
             <button class="plusBtn" :class="perUserQuantity!=''||ticket.availableTickets==''?'disabled':''" :disabled="perUserQuantity!=''||ticket.availableTickets==''" @click="addToCart()">+</button>
         </div>
     </div>
@@ -64,12 +62,10 @@
 <script>
 import {ref, computed} from 'vue'
 import {useStore} from "vuex";
-// import Loader from '../../../loader/Loader'
 import TicketsWithDiscount from '../ticketList/TicketsWithDiscount'
 export default {
     name: 'Tickets',
     components: {
-        // Loader,
         TicketsWithDiscount
     },
     props: {

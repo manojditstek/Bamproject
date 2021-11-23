@@ -1,5 +1,4 @@
 <template>
-<!-- step 1 -->
 <div class="d-flex justify-content-between align-items-end header">
     <h2>
         <router-link to="/shop">
@@ -9,14 +8,12 @@
     </h2>
     <div class="datePicker"></div>
 </div>
-<!---->
 <div class="cardBodyWrapper">
     <div class="innerHeading">
         <h4>{{$t('deliveryMethod.heading')}}</h4>
         <p>{{$t('deliveryMethod.p1')}}</p>
     </div>
     <div class="inputWrapper">
-        <!-- <Loader /> -->
         <div class="inputInnerWrapper" :class="ticketFormat=='BAM' ?'active':''">
             <div class="inputGroup">
                 <input type="radio" id="test1" name="ticketFormat" :value="'BAM'" v-model="ticketFormat" disabled>
@@ -37,21 +34,15 @@
     <div class="footerActionBtn">
         <button @click="createOrder" class="button">{{$t('deliveryMethod.confirm')}}
         </button>
-        <!-- <router-link to="/user-form" class="button"><button type="button"> CONFIRM </button></router-link> -->
     </div>
-    
-
 </div>
-<!---->
 </template>
-
 <script>
 import {ref,computed} from "vue";
 import {useStore} from 'vuex';
 export default {
     name:'ChooseDeliveryMethod',
-    components:{
-       
+    components:{ 
     },
     setup() {
         const ticketFormat = ref('PDF');
@@ -65,15 +56,11 @@ export default {
         });
 
         function createOrder() {
-            let ticketDiscount= null
-            cart.value.cartItems.forEach(element => {
-                ticketDiscount = element.discounts.map((item)=>{return item.id});
-            });
             let cartItems = cart.value.cartItems.map(elementKey => ({
                 ticket_config_id:elementKey.id,
                 quantity:elementKey.quantity,
                 timeslot_id:elementKey.timeSlotId,
-                ticket_discount:ticketDiscount
+                ticket_discount:elementKey.discounts.map((item)=>{return item.id})
             }));
             let format = ticketFormat.value
             store.commit('ticketFormat',ticketFormat.value)

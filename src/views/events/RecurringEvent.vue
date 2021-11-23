@@ -2,12 +2,6 @@
 <div v-if="singleEventData==''">
     <div class="d-flex justify-content-between align-items-end header">
         <h2>
-            <!-- <router-link to="/">
-            <i class="fa fa-angle-left" aria-hidden="true"></i>
-            {{recurringEvent?recurringEvent.name:''}}
-            </router-link> -->
-
-            <!-- <BackButton v-if="totalQuantity" :message="recurringEvent?lengthOfString(recurringEvent.name):''" /> -->
             <a href="javascript:void(0)"  @click="backToHome">
                 <i class="fa fa-angle-left" aria-hidden="true"></i>
                 {{recurringEvent?lengthOfString(recurringEvent.name):''}}
@@ -19,7 +13,6 @@
             </div>
         </div>
     </div>
-
     <div class="innerWraper">
         <div class="cardWrapper d-flex">
             <div class="dateCol">
@@ -97,16 +90,15 @@
 </template>
 
 <script>
-import {useRouter} from "vue-router";
-import {useStore} from 'vuex';
-import {dateFormat,lengthOfString} from "../../common/common";
-import {computed,ref} from '@vue/reactivity';
+import {useRouter} from "vue-router"
+import {useStore} from 'vuex'
+import {dateFormat,lengthOfString} from "../../common/common"
+import {computed,ref} from '@vue/reactivity'
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress.vue"
-import EventDateFormat from "../../components/singleEvent/EventDate.vue";
+import EventDateFormat from "../../components/singleEvent/EventDate.vue"
 import DateRangePicker from "../../components/dateRangePicker/dateRangePicker.vue"
 import Tickets from '../../components/singleEvent/timeSlots/ticketList/Tickets.vue'
 import TotalTicketCalculation from '../../components/cartModule/TotalTicketCalculation.vue'
-// import BackButton from '../../components/backButton/BackButton.vue'
 export default {
     name: 'RecurringEvent',
     data() {
@@ -123,7 +115,6 @@ export default {
         DateRangePicker,
         Tickets,
         TotalTicketCalculation,
-        // BackButton
     },
 
     setup() {
@@ -138,7 +129,6 @@ export default {
         }
 
         function reSet() {
-            //store.commit("backToHome");
             return singleEventData.value = '';
         }
 

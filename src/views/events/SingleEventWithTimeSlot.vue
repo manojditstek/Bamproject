@@ -8,7 +8,6 @@
     </h2>
     <div class="datePicker"></div>
 </div>
-
 <div class="innerWraper">
     <div class="cardWrapper d-flex">      
         <div class="dateCol">
@@ -21,11 +20,9 @@
         </div>
     </div>
 </div>
-<div  class="cardBodyWrapper">
-    <!-- <Loader /> -->
+<div class="cardBodyWrapper">
     <Tickets :ticket="ticket" :venueId="singleEvent.venueId" :startDate="singleEvent.startAt" :endDate="singleEvent.endAt" :ticketDscount="singleEvent.ticketDiscount"  :timeSlotId="timeSlot?timeSlot.id:''" :eventName="singleEvent.name" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
 </div>
-
 <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
     <TotalTicketCalculation />
     <div class="labelBtn">
@@ -33,7 +30,6 @@
     </div>
 </div>
 </template>
-
 <script>
 import {useStore} from 'vuex';
 import {dateFormat,timeFormat,lengthOfString} from "../../common/common";
@@ -68,7 +64,6 @@ export default {
         });
 
         function backButton(){
-            // store.commit("backToHome");
             router.push({
                 path: '/single-event'
             })

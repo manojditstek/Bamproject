@@ -12,7 +12,6 @@
                 {{discount.availableTickets!='' ?'':$t('common.soldOut')}}
             </div>
         </div>
-        <!-- <div>{{perUserQuantity!=''?'Limit Exceeded!':''}}</div> -->
         <div class="buttonWrap d-flex" v-if="ticket.quantity>0">
             <button class="minusBtn" @click="removeFromCart()">-</button>
             <span class="dassedIcon">{{itemQuantity?itemQuantity:0}}</span>

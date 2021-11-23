@@ -72,7 +72,6 @@ export const getEvent = async ({commit}, id) => {
     }
 }
 //end single event
-
 /* This method used for single event with time slots  */
 export const sigleEventWithTimeSlot = async ({commit}, data) => {
     commit('loadingStatus', true)
@@ -152,26 +151,46 @@ export const createOrder = async ({commit}, cartItem) => {
 
 /* This method used for storing ticket holder information  */
 export const ticketHolderInfo = async ({commit}, data) => {
-    commit('loadingStatus', true)
+    let isValidForm=true;
     data.orderItem.forEach(async (element, i) => {
         element.ticket.forEach(async (item, j) => {
-            try {
-                await bam.order.createTicketHolder({
-                    id: item.id
-                }, {
-                    firstName: data.data.first_name[i + '' + j],
-                    lastName: data.data.last_name[i + '' + j],
-                    email: data.data.email[i + '' + j],
-                    phone: data.data.phone[i + '' + j],
-                })
-                commit('loadingStatus', false)
-                router.push('/user-form')
-            } catch (error) {
-                commit('errorMsg', error);
-                commit('loadingStatus', false)
+            if(!data.data.first_name[i + '' + j]){
+                isValidForm=false
+            }
+            if(!data.data.last_name[i + '' + j]){
+                isValidForm=false
+            }
+            if(!data.data.email[i + '' + j]){
+                isValidForm=false
+            }
+            if(!data.data.phone[i + '' + j]){
+                isValidForm=false
             }
         })
     })
+
+    if(isValidForm){
+        commit('loadingStatus', true)
+        data.orderItem.forEach(async (element, i) => {
+            element.ticket.forEach(async (item, j) => {
+                try {
+                    await bam.order.createTicketHolder({
+                        id: item.id
+                    }, {
+                        firstName: data.data.first_name[i + '' + j],
+                        lastName: data.data.last_name[i + '' + j],
+                        email: data.data.email[i + '' + j],
+                        phone: data.data.phone[i + '' + j],
+                    })
+                    commit('loadingStatus', false)
+                    router.push('/user-form')
+                } catch (error) {
+                    commit('errorMsg', error);
+                    commit('loadingStatus', false)
+                }
+            })
+        })
+    }
 }
 // end ticket holder information
 

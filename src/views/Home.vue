@@ -9,9 +9,6 @@
     <div v-if="events != ''">
       <Event :event="event" v-for="event in events" :key="event.id" />
     </div>
-    <!-- <div v-else>
-        <Event :event="event" />
-    </div> -->
   </div>
 
   <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
@@ -55,8 +52,8 @@ export default {
     // START_DATE.setDate(START_DATE.getDate() + 10); used for future 10 days
     const events = computed(() => {
       return store.state.events
-        .filter((s) => new Date(s.startAt) >= START_DATE)
-        .sort((a, b) => new Date(a.startAt) - new Date(b.startAt)); //with filter date
+        //.filter((s) => new Date(s.startAt) >= START_DATE)
+        //.sort((a, b) => new Date(a.startAt) - new Date(b.startAt)); //with filter date
     });
     
     const totalQuantity = computed(() => {
@@ -74,10 +71,6 @@ export default {
         await store.dispatch("getEvents", "");
       }
     });
-
-    // onMounted(async() => {
-    //     await store.dispatch('getEvent');
-    // })
     return {
       events,
       totalQuantity,

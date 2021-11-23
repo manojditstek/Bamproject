@@ -6,7 +6,6 @@
     </div>
 </div>
 <div class="cardBodyWrapper">
-    <!-- <Loader /> -->
     <div class="eventDiscountWrapper">
         <h2>{{ $t('cartTemp.cart') }}</h2>
         <div class="amountWrapper">
@@ -56,17 +55,15 @@
 </template>
 
 <script>
-import {computed,} from 'vue';
+import {computed} from 'vue';
 import {useStore} from "vuex";
 import {useRouter} from "vue-router";
 import TotalTicketCalculation from "./TotalTicketCalculation"
-// import Loader from '../loader/Loader'
 import BackButton from '../backButton/BackButton'
 export default {
     name: "Cart",
     components: {
         TotalTicketCalculation,
-        // Loader,
         BackButton
     },
     setup() {

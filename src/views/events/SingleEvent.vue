@@ -1,7 +1,6 @@
 <template>
 <div class="d-flex justify-content-between align-items-end header">
     <h2>
-        <!-- <BackButton v-if="totalQuantity" :message="singleEvent?lengthOfString(singleEvent.name):''" /> -->
         <a href="javascript:void(0)" @click="backToHome">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
             {{singleEvent?lengthOfString(singleEvent.name):''}}
@@ -9,7 +8,6 @@
     </h2>
     <div class="datePicker"></div>
 </div>
-
 <div class="innerWraper">
     <div class="cardWrapper d-flex">
         <div class="dateCol">
@@ -34,27 +32,17 @@
         <router-link to="/shop" class="button">{{$t('common.cart')}}</router-link>
     </div>
 </div>
-<!-- <div @click="chartResp">{{'ChartKey'}}</div> -->
-<!-- <SeatsioChartManager
-    :secretKey="workSpaceKey.workspaceKey"
-    :chart="singleEvent.chartKey"
-    :mode="singleEvent.rulesetKey"
-    region="eu"
-/> -->
 </template>
-
 <script>
 import {useStore} from 'vuex';
-import {dateFormat,timeFormat,lengthOfString} from "../../common/common";
-import {computed} from '@vue/reactivity';
-import {useRouter} from "vue-router";
+import {dateFormat,timeFormat,lengthOfString} from "@/common/common"
+import {computed} from '@vue/reactivity'
+import {useRouter} from "vue-router"
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress.vue"
-import EventDateFormat from "../../components/singleEvent/EventDate.vue";
+import EventDateFormat from "../../components/singleEvent/EventDate.vue"
 import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets.vue"
 import TotalTicketCalculation from "../../components/cartModule/TotalTicketCalculation.vue"
 import TimeSlot from "../../components/singleEvent/timeSlots/TimeSlot.vue"
-import {SeatsioClient,Region} from 'seatsio'
-
 export default {
     name: 'SingleEvent',
     components: {
@@ -68,7 +56,6 @@ export default {
     setup() {
         const store = useStore();
         const router = useRouter();
-        // const chartList = ref();
         const loaderStatus = computed(() => {
             return store.state.loadingStatus;
         });
@@ -86,15 +73,6 @@ export default {
             return store.state.event;
         })
 
-
-        //seatsio testing
-        
-        async function chartResp() {
-            let client = new SeatsioClient(Region.EU(), workSpaceKey.value.workspaceKey) // Here passing workspaceKey 
-            await client.charts.listFirstPage();
-        }
-
-
         function backToHome() {
             store.commit("backToHome");
             router.push({
@@ -105,8 +83,6 @@ export default {
             singleEvent,
             totalQuantity,
             loaderStatus,
-            chartResp,
-            // chartList,
             backToHome,
             workSpaceKey,
             dateFormat,

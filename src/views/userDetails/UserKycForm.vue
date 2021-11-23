@@ -1,6 +1,5 @@
 <template>
 <div>
-    <!-- step 1 -->
     <div class="d-flex justify-content-between align-items-end header">
         <h2>
             <router-link to="/shop">
@@ -9,24 +8,20 @@
             </router-link>
         </h2>
     </div>
-    <!---->
     <div class="cardBodyWrapper">
         <div class="ticketInfo">
             <h1>{{$t('userKycForm.ticketHolderInfo')}}</h1>
             <p>{{$t('userKycForm.ticketHolderInfoDesc')}}</p>
         </div>
     </div>
-    <!---->
     <div  v-for="(order,i) in ticketID.orderItem" :key="order">
     <div class="cardBodyInner" v-for="(ord,j) in order.ticket" :key="ord">
       <div class="cardBodyWrapper bgLight brdrtop">
-          <!-- <div class="ticketCategory" v-for=" item in cart.cartItems" :key="item.id"> -->
               <div class="ticketNewCategory">
               <h2>{{$t('userKycForm.ticketCategory')}} {{ord.ticketConfig.name}}
                   <div v-if=" ord.ticketDiscount">
                       <span v-for="disc in ord.ticketDiscount" :key="disc.id">{{$t('userKycForm.discountCategory')}} {{disc.name}}</span>
-                  </div>
-                  
+                  </div>            
                </h2>
               <div class="amount">{{ord.ticketConfig.faceValue}} {{ord.ticketConfig.currency}}</div>
           </div>
@@ -47,22 +42,21 @@
                   <input type="text" class="form-control" :class="data.phone[i+''+j] ?'active':formErrors.phone[i+''+j]?' errorInput':''" v-model.trim="data.phone[i+''+j]"/>
                   <div class="labelInput">{{$t('userKycForm.phone')}}</div>
                   <div v-if="!data.phone[i+''+j] && formErrors.phone[i+''+j]!='valid' && formErrors.phone[i+''+j]"  class="error">{{$t('formValidation.phone')}}</div>
-                  <div v-if="formErrors.phone[i+''+j]=='valid' && formErrors.email[i+''+j]" class="error">{{$t('formValidation.validPhone')}}</div>
+                  <div v-else-if="formErrors.phone[i+''+j]=='valid' && formErrors.phone[i+''+j]" class="error">{{$t('formValidation.validPhone')}}</div>
               </div>
               <div class="formGroup">
                   <input type="email" class="form-control" :class="data.email[i+''+j] ?'active':formErrors.email[i+''+j]?' errorInput':''" v-model.trim="data.email[i+''+j]" />
                   <div class="labelInput">{{$t('userKycForm.email')}}</div>
                   <div v-if="!data.email[i+''+j] && formErrors.email[i+''+j] !='valid' && formErrors.email[i+''+j]" class="error">{{$t('formValidation.email')}}</div>
-                   <div v-if=" formErrors.email[i+''+j]=='valid' && formErrors.email[i+''+j]" class="error">{{$t('formValidation.validEmail')}}</div>
+                   <div v-else-if=" formErrors.email[i+''+j]=='valid' && formErrors.email[i+''+j]" class="error">{{$t('formValidation.validEmail')}}</div>
               </div>
           </div>
       </div>
     </div>
     </div>
-     <!---->
     <div class="cardBodyWrapper">
         <div class="footerActionBtn">
-            <button class="button" @click="submit()">{{$t('userKycForm.next')}}</button>
+            <button class="button" @click.prevent="submit()">{{$t('userKycForm.next')}}</button>
         </div>
     </div>
 
@@ -70,12 +64,12 @@
 </template>
 
 <script>
-import {ref,reactive,computed,} from "vue";
+import {reactive,computed,} from "vue";
 import {useStore} from 'vuex';
 export default {
     setup() {
         const store = useStore();
-        const formErrors = ref({
+        const formErrors = reactive({
             first_name: [null],
             last_name: [null],
             phone: [null],
@@ -87,43 +81,42 @@ export default {
             phone: [null],
             email: [null],
         })
-
-        
         const ticketID = computed(()=>{
             return store.state.createdOrder;
         })
 
+
         function submit(){
-            if(ticketHolder() == true){
-                
+            if(ticketHolder() == true){ 
                 store.dispatch('ticketHolderInfo', {orderItem:ticketID.value.orderItem,data})
             }
         }
 
         /* Validation method */
         function ticketHolder() {
-            let temp = null;
+            let isValidForm = null;
            ticketID.value.orderItem.forEach((element,i)=> {
                element.ticket.forEach((el,j)=>{
                 if(!data.first_name[i+''+j]){
-                     formErrors.value.first_name[i+''+j] = true;
+                     formErrors.first_name[i+''+j] = true;
                 } if (!data.last_name[i+''+j]) {
-                    formErrors.value.last_name[i+''+j] = true;
+                    formErrors.last_name[i+''+j] = true;
                 } if(!data.phone[i+''+j]){
-                     formErrors.value.phone[i+''+j] = true;
-                } else if (!validPhone(data.phone[i+''+j])) {
-                    formErrors.value.phone[i+''+j] = 'valid';
+                     formErrors.phone[i+''+j] = true;
+                } else if (!validPhone(data.phone[i+''+j]) || validPhone(data.phone[i+''+j])) {
+                    !validPhone(data.phone[i+''+j])?formErrors.phone[i+''+j] = 'valid': formErrors.phone[i+''+j] = true;
                 }if(!data.email[i+''+j]){
-                    formErrors.value.email[i+''+j] = true;
-                }else if (!validEmail(data.email[i+''+j])) {
-                    formErrors.value.email[i+''+j] = 'valid';
+                    formErrors.email[i+''+j] = true;
+                }else if (!validEmail(data.email[i+''+j]) ) {
+                    formErrors.email[i+''+j] = 'valid';
                 }
-                else{
-                   temp = element.ticket.length-1==j?true:false;
+                else {
+                     formErrors.email[i+''+j] = true
+                   isValidForm = element.ticket.length-1==j && ticketID.value.orderItem.length-1==i ?true:false;
                 }
                 })
             })
-             return temp;
+            return isValidForm
 
         }//end validation
 

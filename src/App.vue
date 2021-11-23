@@ -1,15 +1,9 @@
 <template>
   <div class="mainWrapper">
-     
     <div class="contentWraper">
       <Loader />
-      <!-- <div class="text-center">
-            <switchLanguage />
-        </div> -->
       <div class="contentInnerWraper">
-        <!-- This error component used for display server side error message -->
         <error-message />
-        <!-- end -->
         <router-view />
       </div>
     </div>
@@ -17,11 +11,10 @@
 </template>
 
 <script>
-// import SwitchLanguage from "./views/Localization/SwitchLanguage.vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
 import ErrorMessage from "./components/errorMessages/ErrorMessages.vue";
-import Loader from './components/loader/Loader.vue'
+import Loader from './components/loader/Loader.vue';
 export default {
   name: "app",
   setup() {
@@ -40,10 +33,13 @@ export default {
     };
   },
   components: {
-    // SwitchLanguage,
     ErrorMessage,
     Loader
   },
 };
 </script>
+
+<style>
+
+</style>
 
