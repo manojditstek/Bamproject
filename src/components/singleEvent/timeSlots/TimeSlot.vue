@@ -1,6 +1,6 @@
 <template>
-<div class="cardWrapper d-flex" :class="toggleButton?'active':''" @click="toggleButton=!toggleButton" >
-    <div class="detailsCol" @click="timeSlots(event_id,timeSlot)">
+<div class="cardWrapper d-flex" :class="toggleButton?'active':''" @click="toggleButton=!toggleButton && timeSlots(event_id,timeSlot)" >
+    <div class="detailsCol">
         <h2>{{timeFormat(timeSlot.startAt)}} – {{timeFormat(timeSlot.endAt)}}</h2>
         <h6></h6>
     </div>
