@@ -65,7 +65,7 @@
 
 .cardBodyWrapper {
 	padding: 25px 15px;
-	position: relative;
+    position: relative;
 }
 
 .cardBodyWrapper .cardWrapper {
@@ -140,6 +140,7 @@ time {
 
 .ticketToggle .cardWrapper {
 	margin: 0;
+	padding:15px;
 }
 
 .ticketToggle.show .cardWrapper {
@@ -155,7 +156,24 @@ time {
 	margin: 0;
 	border-radius: 0;
 }
+.thumbHeading {
+	width: 100%;
+	flex-direction: column;
+	display: flex;
+	justify-content: center;
+	margin: 0 0 6px 0;
+}
 
+.thumbHeading h2 {
+	margin-bottom: 2px;
+	font-size: 14px;
+}
+.thumbDesc {
+	width: 100%;
+	flex-direction: column;
+	display: flex;
+	justify-content: center;
+}
 .toggleList .buttonWrap {
 	padding-right: 0;
 }
@@ -165,10 +183,15 @@ time {
 	cursor: no-drop;
 }
 
-.toggleList .cardWrapper .detailsCol {
+/* .toggleList .cardWrapper .detailsCol {
 	border-bottom: 1px solid rgba(57, 57, 57, 0.2);
+} */
+.toggleList .cardWrapper .detailsCol.pad-0 {
+    padding: 0;
 }
-
+.ticketToggle.show .toggleList .cardWrapper{
+	border-bottom: 1px solid rgba(57, 57, 57, 0.2);	
+}
 .collapseArrow {
 	background-color: var(--color);
 	min-width: 22px;
@@ -191,7 +214,7 @@ time {
 
 .buttonWrap {
 	align-items: center;
-	padding-right: 20px;
+	/* padding-right: 20px; */
 }
 
 .singleEventList .cardWrapper .collapseArrow.redBg {
@@ -234,9 +257,12 @@ time {
 	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
 	overflow: hidden;
 }
-
+.ticketToggle:last-child {
+    margin-bottom: 0;
+}
 .ticketToggle .cardWrapper .collapseArrow.lightBg {
 	background-color: transparent;
+	padding-left:20px;
 }
 
 .ticketToggle .cardWrapper .collapseArrow.lightBg.active i {

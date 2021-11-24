@@ -16,4 +16,9 @@
     .cardBodyWrapper .ticketInfo h1 {
         font-size: 24px;
     }
+    .cardWrapper .limitExceeded {
+        position: absolute;
+        left: 15px;
+        bottom: -3px;
+    }
 }

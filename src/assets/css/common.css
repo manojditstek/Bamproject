@@ -155,7 +155,10 @@ a {
 .loaderWrapper img {
 	width: 40px;
 }
-
+.contentInnerWraper {
+    max-height: calc(100vh - 0px);
+    overflow: auto;
+}
 .contentWraper {
 	max-width: 720px;
 	margin: 0 auto;
@@ -175,6 +178,7 @@ a {
 	overflow: hidden;
 	min-height: 70px;
 	border-bottom: 1px solid rgba(57, 57, 57, 0.2);
+    position: relative;
 }
 
 .dateCol {
@@ -336,4 +340,5 @@ a {
 .form-control:focus {
 	border: 1px solid var(--color);
     box-shadow: none!important;
+    outline: none !important;
 }
