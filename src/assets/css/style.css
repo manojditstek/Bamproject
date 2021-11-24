@@ -822,7 +822,7 @@ time {
 	display: inline-block;
 	white-space: nowrap;
 	padding: 6px 18px;
-	font-family: var(--font-family-800);
+	font-family: var(--font-family-700);
 }
 
 .ticketMessageInner.available {
