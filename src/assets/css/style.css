@@ -4,1214 +4,1174 @@
 @import "../css/responsive.css";
 
 body {
-  font-family: var(--font-family-400);
-  margin: 0;
-  background-color: #cbcbcb;
+	font-family: var(--font-family-400);
+	margin: 0;
+	background-color: #cbcbcb;
+	color: var(--color);
 }
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  margin: 0;
-  font-family: var(--font-family-700);
-  color:var(--color);
+	margin: 0;
+	font-family: var(--font-family-700);
+	color: var(--color);
 }
-p{
-color:var(--color);
-font-family: var(--font-family-400);
+
+p {
+	margin: 0;
+	font-size: 14px;
+	line-height: 18.2px;
+	color: var(--color);
+	font-family: var(--font-family-400);
 }
-a{
-  color:var(--color);
+
+a {
+	color: var(--color);
 }
+
 .m-0 {
-  margin: 0 !important;
+	margin: 0 !important;
 }
 
 .mt-1 {
-  margin-top: 5px;
+	margin-top: 5px;
 }
 
 .mb-1 {
-  margin-bottom: 5px;
+	margin-bottom: 5px;
 }
 
 .p-0 {
-  padding: 0 !important;
+	padding: 0 !important;
 }
 
 .align-items-center {
-  align-items: center;
+	align-items: center;
 }
 
 .align-items-end {
-  align-items: flex-end;
+	align-items: flex-end;
 }
 
 .justify-content-center {
-  justify-content: center;
+	justify-content: center;
 }
 
 .justify-content-between {
-  justify-content: space-between;
+	justify-content: space-between;
 }
 
 .d-flex {
-  display: flex;
+	display: flex;
 }
 
 .brdrtop {
-  border-top: 1px solid #d7d7d7;
+	border-top: 1px solid #d7d7d7;
 }
 
 .hr {
-  border-top: 1px solid rgba(57, 57, 57, 0.2);
-  margin: 0 0 20px 0;
+	border-top: 1px solid rgba(57, 57, 57, 0.2);
+	margin: 0 0 20px 0;
 }
 
 .formGroup.w-100 {
-  width: 100% !important;
+	width: 100% !important;
+}
+button,.button {
+	background-color: var(--color);
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 10px;
+	border: none;
+	padding: 6px 12px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-family: var(--font-family-800);
+	white-space: nowrap;
+	text-decoration: none;
+	min-width: 68px;
+	letter-spacing: 1px;
 }
 
 .btnGreen {
-  background-color: var(--color-green) !important;
-  border-radius: 6px !important;
-  border: 1px solid var(--color-green) !important;
-  max-width: 150px;
-  width: 100%;
+	background-color: var(--color-green) !important;
+	border-radius: 6px !important;
+	border: 1px solid var(--color-green) !important;
+	max-width: 150px;
+	width: 100%;
 }
 
 .btnDefault {
-  background-color: var(--color-white) !important;
-  border-radius: 6px !important;
-  border: 1px solid var(--color) !important;
-  max-width: 150px;
-  width: 100%;
-  color: var(--color) !important;
+	background-color: var(--color-white) !important;
+	border-radius: 6px !important;
+	border: 1px solid var(--color) !important;
+	max-width: 150px;
+	width: 100%;
+	color: var(--color) !important;
 }
-
-.contentWraper {
-  max-width: 720px;
-  margin: 0 auto;
-  width: 100%;
-  background-color: var(--color-white);
-}
-
-.mainWrapper {
-  padding: 0 15px;
-  position: relative;
-}
-
-.header {
-  border-bottom: 1px solid #d7d7d7;
-  background-color: #fbfbfb;
-  padding: 15px;
-  margin-bottom: 0;
-}
-
-.header h2 {
-  font-size: 24px;
-}
-
-.header h2 a {
-  text-decoration: none;
-}
-
-.header h2 a i {
-  font-size: 28px;
-  margin: 0 5px 0 0;
-  color: var(--color);
-}
-
 .alert {
-  background-color: var(--color-red);
-  border-bottom: 1px solid var(--color-red);
-  padding: 15px;
-  width: 100%;
-  text-align: center;
+	background-color: var(--color-red);
+	border-bottom: 1px solid var(--color-red);
+	padding: 15px;
+	width: 100%;
+	text-align: center;
 }
 
 .alert p {
-  color: #eeeeee;
-  font-size: 12px;
-  font-family: var(--font-family-700);
-  margin: 0;
+	color: #eeeeee;
+	font-size: 12px;
+	font-family: var(--font-family-700);
+	margin: 0;
 }
 
 .alert p i {
-  padding: 0 5px 0 0;
-}
-
-.datePickerWrapper {
-  border: 1px solid rgba(57, 57, 57, 0.2);
-  padding: 3px 5px;
-  border-radius: 5px;
-  min-height: 34px;
-  display: flex;
-}
-
-.datePickerWrapper .datePicker {
-  max-width: 180px;
-  align-items: center;
-}
-
-.datePickerWrapper .datePicker .w-32 {
-  max-width: 72px;
-}
-
-.datePickerWrapper .datePicker input {
-  width: 100%;
-  border: none !important;
-  background-color: transparent;
-  text-align: center;
-}
-
-.datePickerWrapper .datePicker input:focus {
-  outline: none;
-}
-
-.datePickerWrapper img {
-  width: 18px;
-  margin: 0 0 0 5px;
+	padding: 0 5px 0 0;
 }
 
 .loader {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 9999;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 9999;
 }
 
 .loaderWrapper {
-  text-align: center;
-  z-index: 999;
-  position: absolute;
-  top: 90px;
-  background-color: #fff;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 45px;
-  border-radius: 10px;
+	text-align: center;
+	z-index: 999;
+	position: absolute;
+	top: 90px;
+	background-color: #fff;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 45px;
+	border-radius: 10px;
 }
 
 .loaderWrapper img {
-  width: 40px;
-}
-.cardBodyWrapper {
-  padding: 25px 15px;
-  position: relative;
-  /* max-height: 500px;
-  overflow-y: auto; */
-}
-.cardBodyWrapper .cardWrapper {
-  border-radius: 9px;
-  border-bottom: 0px solid rgba(57, 57, 57, 0.2);
-  margin: 0 0 15px 0;
+	width: 40px;
 }
 
-.cardBodyWrapper .cardWrapper.single .dateCol {
-  background-color: #adadad;
+.datePickerWrapper {
+	border: 1px solid rgba(57, 57, 57, 0.2);
+	padding: 3px 5px;
+	border-radius: 5px;
+	min-height: 34px;
+	display: flex;
 }
 
-.cardBodyWrapper .cardWrapper.recurring .dateCol {
-  background-color: var(--color);
-  color: var(--color-white);
+.datePickerWrapper .datePicker {
+	max-width: 180px;
+	align-items: center;
 }
 
-.innerWraper .cardWrapper {
-  box-shadow: none;
+.datePickerWrapper .datePicker .w-32 {
+	max-width: 72px;
 }
 
-.cardWrapper {
-  background-color: #fbfbfb;
-  box-shadow: 0 6px 5px rgb(0 0 0 / 10%);
-  overflow: hidden;
-  min-height: 70px;
-  border-bottom: 1px solid rgba(57, 57, 57, 0.2);
+.datePickerWrapper .datePicker input {
+	width: 100%;
+	border: none !important;
+	background-color: transparent;
+	text-align: center;
 }
 
-.dateCol {
-  background-color: #eeeeee;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-width: 100px;
-  max-width: 100px;
+.datePickerWrapper .datePicker input:focus {
+	outline: none;
 }
 
-.dateCol h4 {
-  font-size: 10px;
-  text-transform: uppercase;
-  font-family: var(--font-family-800);
-}
-
-.dateCol h2 {
-  font-size: 39px;
-  line-height: 40px;
-}
-
-.dateCol p {
-  line-height: normal;
-  margin: 0;
-  font-family: var(--font-family-400);
-}
-
-.dateCol p.from {
-  margin: 5px 0 0 0;
-}
-
-time {
-  margin: 8px 0 0;
-  font-size: 12px;
-}
-
-.detailsCol {
-  width: 100%;
-  padding: 10px 15px;
-  flex-direction: column;
-  display: flex;
-  justify-content: center;
-}
-
-.detailsCol h2 {
-  margin-bottom: 2px;
-  font-size: 14px;
-}
-
-.detailsCol p {
-  margin: 0;
-  font-size: 14px;
-  line-height: 18.2px;
-}
-
-.detailsCol .priceWrap {
-  text-align: right;
-  font-family: var(--font-family-800);
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.detailsCol .priceWrap p {
-  font-size: 12px;
-}
-
-.limitExceeded {
-  display: flex;
-  align-items: center;
-  padding: 0 15px 0 0;
-}
-
-.limitExceededInner {
-  font-size: 12px;
-  line-height: normal;
-  font-family: var(--font-family-700);
-  white-space: nowrap;
-  color: #ffc700;
-}
-
-.ticketToggle .cardWrapper {
-  margin: 0;
-}
-.ticketToggle.show .cardWrapper {
-  border-radius: 0;
-}
-.ticketToggle .cardWrapper.active {
-  border-radius: 0;
-  border-bottom: 1px solid rgba(57, 57, 57, 0.2);
-}
-
-.toggleList .cardWrapper {
-  margin: 0;
-  border-radius: 0;
-}
-
-.toggleList .buttonWrap {
-  padding-right: 0;
-}
-
-.ticketToggle .buttonWrap .plusBtn.disabled {
-  background-color: #eee !important;
-  cursor: no-drop;
-}
-
-.toggleList .cardWrapper .detailsCol {
-  border-bottom: 1px solid rgba(57, 57, 57, 0.2);
-}
-
-.collapseArrow {
-  background-color: var(--color);
-  min-width: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-
-.collapseArrow i {
-  color: #fff;
-  font-size: 22px;
-}
-
-.collapseArrow.lightBg i {
-  color: var(--color);
-}
-
-.buttonWrap {
-  display: flex;
-  align-items: center;
-  padding-right: 20px;
-}
-
-button,
-.button {
-  background-color: var(--color);
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 10px;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-family: var(--font-family-800);
-  white-space: nowrap;
-  text-decoration: none;
-  min-width: 68px;
-  letter-spacing: 1px;
+.datePickerWrapper img {
+	width: 18px;
+	margin: 0 0 0 5px;
 }
 
 .redBg {
-  background-color: #e94b4f !important;
+	background-color: #e94b4f !important;
+}
+/*----*/
+.contentWraper {
+	max-width: 720px;
+	margin: 0 auto;
+	width: 100%;
+	background-color: var(--color-white);
+}
+
+.mainWrapper {
+	padding: 0 15px;
+	position: relative;
+	min-height: 100vh;
+}
+
+.header {
+	border-bottom: 1px solid #d7d7d7;
+	background-color: #fbfbfb;
+	padding: 15px;
+	margin-bottom: 0;
+}
+
+.header h2 {
+	font-size: 24px;
+}
+
+.header h2 a {
+	text-decoration: none;
+}
+
+.header h2 a i {
+	font-size: 28px;
+	margin: 0 5px 0 0;
+	color: var(--color);
+}
+
+.cardBodyWrapper {
+	padding: 25px 15px;
+	position: relative;
+}
+
+.cardBodyWrapper .cardWrapper {
+	border-radius: 9px;
+	border-bottom: 0px solid rgba(57, 57, 57, 0.2);
+	margin: 0 0 15px 0;
+}
+
+.cardBodyWrapper .cardWrapper.single .dateCol {
+	background-color: #adadad;
+}
+
+.cardBodyWrapper .cardWrapper.recurring .dateCol {
+	background-color: var(--color);
+	color: var(--color-white);
+}
+
+.cardBodyWrapper .cardWrapper.recurring .dateCol h2,
+.cardBodyWrapper .cardWrapper.recurring .dateCol h4,
+.cardBodyWrapper .cardWrapper.recurring .dateCol p {
+	color: var(--color-white);
+}
+
+.innerWraper .cardWrapper {
+	box-shadow: none;
+}
+
+.cardWrapper {
+	background-color: #fbfbfb;
+	box-shadow: 0 6px 5px rgb(0 0 0 / 10%);
+	overflow: hidden;
+	min-height: 70px;
+	border-bottom: 1px solid rgba(57, 57, 57, 0.2);
+}
+
+.dateCol {
+	background-color: #eeeeee;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-width: 100px;
+	max-width: 100px;
+}
+
+.dateCol h4 {
+	font-size: 10px;
+	text-transform: uppercase;
+	font-family: var(--font-family-800);
+}
+
+.dateCol h2 {
+	font-size: 39px;
+	line-height: 40px;
+}
+
+.dateCol p {
+	line-height: normal;
+	margin: 0;
+}
+
+.dateCol p.from {
+	margin: 5px 0 0 0;
+}
+
+time {
+	margin: 8px 0 0;
+	font-size: 12px;
+}
+
+.detailsCol {
+	width: 100%;
+	padding: 10px 15px;
+	flex-direction: column;
+	display: flex;
+	justify-content: center;
+}
+
+.detailsCol h2 {
+	margin-bottom: 2px;
+	font-size: 14px;
+}
+
+.detailsCol .addressDesc {
+	font-size: 14px;
+	color: var(--color);
+}
+
+.detailsCol .addressDesc span {
+	display: block;
+}
+
+.detailsCol .priceWrap {
+	text-align: right;
+	font-family: var(--font-family-800);
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 14px;
+}
+
+.detailsCol .priceWrap p {
+	font-size: 12px;
+}
+
+.limitExceeded {
+	display: flex;
+	align-items: center;
+	padding: 0 15px 0 0;
+}
+
+.limitExceededInner {
+	font-size: 12px;
+	line-height: normal;
+	font-family: var(--font-family-700);
+	white-space: nowrap;
+	color: #ffc700;
+}
+
+.ticketToggle .cardWrapper {
+	margin: 0;
+}
+
+.ticketToggle.show .cardWrapper {
+	border-radius: 0;
+}
+
+.ticketToggle .cardWrapper.active {
+	border-radius: 0;
+	border-bottom: 1px solid rgba(57, 57, 57, 0.2);
+}
+
+.toggleList .cardWrapper {
+	margin: 0;
+	border-radius: 0;
+}
+
+.toggleList .buttonWrap {
+	padding-right: 0;
+}
+
+.ticketToggle .buttonWrap .plusBtn.disabled {
+	background-color: #eee !important;
+	cursor: no-drop;
+}
+
+.toggleList .cardWrapper .detailsCol {
+	border-bottom: 1px solid rgba(57, 57, 57, 0.2);
+}
+
+.collapseArrow {
+	background-color: var(--color);
+	min-width: 22px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.collapseArrow i {
+	color: var(--color);
+	font-size: 22px;
+}
+
+.collapseArrow.lightBg i {
+	color: var(--color);
+}
+
+.buttonWrap {
+	align-items: center;
+	padding-right: 20px;
 }
 
 .singleEventList .cardWrapper .collapseArrow.redBg {
-  min-width: 32px;
+	min-width: 32px;
 }
 
 .eventDiscountWrapper {
-  max-width: 500px;
-  margin: 0 auto;
+	max-width: 500px;
+	margin: 0 auto;
 }
 
 .eventDiscountWrapper h2 {
-  font-size: 26px;
-  line-height: 31.2px;
+	font-size: 26px;
+	line-height: 31.2px;
 }
 
 .amountWrapper {
-  border-bottom: 1px solid rgba(57, 57, 57, 0.3);
-  padding: 5px 0;
+	border-bottom: 1px solid rgba(57, 57, 57, 0.3);
+	padding: 5px 0;
 }
 
 .amountWrapper p {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  margin: 0;
-  line-height: 21px;
+	display: flex;
+	justify-content: space-between;
 }
 
 .totalAmountWrapper p {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  margin: 0;
-  line-height: 21px;
-  font-family: var(--font-family-700);
+	display: flex;
+	justify-content: space-between;
+	font-size: 14px;
+	margin: 0;
+	line-height: 21px;
+	font-family: var(--font-family-700);
 }
 
 .totalAmountWrapper {
-  font-family: var(--font-family-700);
-  padding: 5px 0;
-  margin-bottom: 15px;
+	font-family: var(--font-family-700);
+	padding: 5px 0;
 }
 
 .ticketToggle {
-  margin-bottom: 15px;
-  border-radius: 5px;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
+	margin-bottom: 15px;
+	border-radius: 5px;
+	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+	overflow: hidden;
 }
 
-/* .ticketToggle:last-child {
-  margin-bottom: 0;
-} */
-
 .ticketToggle .cardWrapper .collapseArrow.lightBg {
-  background-color: transparent;
-  width: 40px;
+	background-color: transparent;
 }
 
 .ticketToggle .cardWrapper .collapseArrow.lightBg.active i {
-  transform: rotate(90deg);
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
+	transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
 }
 
 .ticketToggle .eventPrice1 {
-  text-align: left;
+	text-align: left;
 }
 
 .ticketToggle .cardWrapper.active .collapseArrow i {
-  transform: rotate(90deg);
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
+	transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
 }
 
-/* .ticketToggle .buttonWrap{
-  padding: 0;
-} */
 .ticketToggle .buttonWrap span {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  color: #fff;
-  border-radius: 0;
-  padding: 0;
-  min-width: 45px;
-  font-family: var(--font-family-500);
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 20px;
+	color: #fff;
+	border-radius: 0;
+	padding: 0;
+	min-width: 45px;
+	font-family: var(--font-family-500);
 }
 
 .ticketToggle .buttonWrap button {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  color: #fff;
-  border-radius: 0;
-  padding: 0;
-  min-width: auto;
-  font-family: var(--font-family-500);
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 20px;
+	color: #fff;
+	border-radius: 0;
+	padding: 0;
+	min-width: auto;
+	font-family: var(--font-family-500);
 }
 
 .ticketToggle .buttonWrap .minusBtn {
-  background-color: rgba(215, 215, 215, 1);
+	background-color: rgba(215, 215, 215, 1);
 }
 
 .ticketToggle .buttonWrap .plusBtn {
-  background-color: rgba(57, 57, 57, 1);
+	background-color: rgba(57, 57, 57, 1);
 }
 
 .ticketToggle .buttonWrap .dassedIcon {
-  color: rgba(57, 57, 57, 1);
+	color: rgba(57, 57, 57, 1);
 }
 
 .singleTicketTotalAmount {
-  background-color: #fbfbfb;
-  justify-content: space-between;
-  padding: 20px 20px;
-  align-items: center;
-  border-top: 1px solid rgba(57, 57, 57, 0.2);
-  padding-top: 30px;
-  position: relative;
-  border-bottom: 1px solid rgba(57, 57, 57, 0.3);
+	background-color: #fbfbfb;
+	justify-content: space-between;
+	padding: 20px 20px;
+	align-items: center;
+	border-top: 1px solid rgba(57, 57, 57, 0.2);
+	padding-top: 30px;
+	position: relative;
+	border-bottom: 1px solid rgba(57, 57, 57, 0.3);
 }
 
 .singleTicketTotalAmount:before {
-  position: absolute;
-  content: "";
-  width: 32px;
-  height: 5px;
-  background-color: #d7d7d7;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 50px;
+	position: absolute;
+	content: "";
+	width: 32px;
+	height: 5px;
+	background-color: #d7d7d7;
+	top: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+	border-radius: 50px;
 }
 
 .singleTicketTotalAmount .ticketCol,
 .singleTicketTotalAmount .labelBtn {
-  text-align: center;
-  min-width: 80px;
+	text-align: center;
+	min-width: 80px;
 }
 
 .singleTicketTotalAmount h2 {
-  font-size: 14px;
-
-  line-height: 18.2px;
-  letter-spacing: 0.1px;
+	font-size: 14px;
+	line-height: 18.2px;
+	letter-spacing: 0.1px;
 }
 
 .singleTicketTotalAmount h3 {
-  font-size: 10px;
-  margin: 0;
-  line-height: 13px;
-  font-family: var(--font-family-600);
-  letter-spacing: 0.5px;
+	font-size: 10px;
+	line-height: 13px;
+	font-family: var(--font-family-600);
+	letter-spacing: 0.5px;
 }
 
 .singleTicketTotalAmount button {
-  font-size: 16px;
-  padding: 10px 15px;
-  font-family: var(--font-family-700);
+	font-size: 16px;
+	padding: 10px 15px;
+	font-family: var(--font-family-700);
 }
 
 .ticketWrapper {
-  padding: 25px 15px;
-  border-top: 1px solid rgba(57, 57, 57, 0.3);
+	padding: 25px 15px;
+	border-top: 1px solid rgba(57, 57, 57, 0.3);
 }
 
 .ticketWrapper .ticketCategory {
-  background-color: #fbfbfb;
-  box-shadow: 0 0 5px rgb(0 0 0 / 10%);
-  overflow: hidden;
-  margin-bottom: 15px;
-  min-height: 70px;
-  border-radius: 5px;
-  padding: 0;
-  border-bottom: 0;
-}
-
-.ticketWrapper .ticketCategory 
- {
-  min-width: 60px;
-  max-width: 60px;
+	background-color: #fbfbfb;
+	box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+	overflow: hidden;
+	margin-bottom: 15px;
+	min-height: 70px;
+	border-radius: 5px;
+	padding: 0;
+	border-bottom: 0;
 }
 
 .ticketWrapper .ticketCategory .dateCol h2 {
-  font-size: 26px;
-  line-height: 26px;
-  color: var(--color);
+	font-size: 26px;
+	line-height: 26px;
 }
 
 .ticketWrapper .ticketCategory .detailsCol h2 {
-  margin: 0;
+	margin: 0;
 }
 
 .footerActionBtn {
-  max-width: 350px;
-  margin: 0 auto 15px;
+	max-width: 350px;
+	margin: 0 auto 15px;
 }
 
 .footerActionBtn.btns .button {
-  margin: 0 0 15px 0;
+	margin: 0 0 15px 0;
 }
 
 .footerActionBtn.btns {
-  margin-top: 60px;
+	margin-top: 60px;
 }
 
 .footerActionBtn .button,
 .footerActionBtn button {
-  background-color: var(--color);
-  font-size: 15px;
-  padding: 12px;
-  width: 100%;
-  text-align: center;
-  border-radius: 5px;
-  min-height: 40px;
-  font-family: var(--font-family-600);
-  display: block;
-  text-transform: uppercase;
+	background-color: var(--color);
+	font-size: 15px;
+	padding: 12px;
+	width: 100%;
+	text-align: center;
+	border-radius: 5px;
+	min-height: 40px;
+	font-family: var(--font-family-600);
+	display: block;
+	text-transform: uppercase;
 }
 
 .footerActionBtn .button.disabled {
-  background-color: #ddd;
-  cursor: no-drop;
+	background-color: #ddd;
+	cursor: no-drop;
 }
 
 .btnGray {
-  background-color: #fbfbfb !important;
-  border: 1px solid rgba(57, 57, 57, 0.3);
-  color: var(--color) !important;
+	background-color: #fbfbfb !important;
+	border: 1px solid rgba(57, 57, 57, 0.3);
+	color: var(--color) !important;
 }
 
 .sloganText {
-  text-align: center;
-  padding: 0 0 30px 0;
+	text-align: center;
+	padding: 0 0 30px 0;
 }
 
 .sloganText p {
-  font-size: 12px;
-  line-height: 15.6px;
-  font-family: var(--font-family-400);
-  color: var(--color);
-  max-width: 350px;
-  margin: 0 auto;
+	font-size: 12px;
+	line-height: 15.6px;
+	max-width: 350px;
+	margin: 0 auto;
 }
 
 .blankArray {
-  margin: 0px 0 20px;
-  font-size: 12px;
-  color: rgba(233, 75, 79, 1);
+	margin: 0px 0 20px;
+	font-size: 12px;
+	color: rgba(233, 75, 79, 1);
 }
 
 .cardWrapper.active .collapseArrow img {
-  transform: rotate(90deg);
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
+	transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
 }
 
 .ticketToggle .cardWrapper.active .collapseArrow img {
-  transform: rotate(-90deg);
-  -webkit-transform: rotate(-90deg);
-  -moz-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
 }
 
 .actionBtnPlusMinus .btnCol {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 25px;
-  height: 25px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 25px;
+	height: 25px;
 }
 
 .actionBtnPlusMinus .btnCol button {
-  background-color: var(--color);
-  border: none;
-  padding: 0;
-  width: 25px;
-  height: 25px;
+	background-color: var(--color);
+	border: none;
+	padding: 0;
+	width: 25px;
+	height: 25px;
 }
 
 .innerHeading {
-  margin: 0 0 20px 0;
+	margin: 0 0 20px 0;
 }
 
 .innerHeading h4 {
-  color: var(--color);
-  font-size: 26px;
-}
-
-.innerHeading p {
-  color: var(--color);
-  font-style: normal;
-  font-family: var(--font-family-400);
-  font-size: 14px;
-  margin: 0;
+	font-size: 26px;
 }
 
 .inputWrapper {
-  display: flex;
-  margin: 0 0 90px 0;
-  justify-content: space-between;
+	display: flex;
+	margin: 0 0 90px 0;
+	justify-content: space-between;
 }
 
 .inputInnerWrapper {
-  background: #fbfbfb;
-  border: 1px solid rgba(57, 57, 57, 0.2);
-  box-sizing: border-box;
-  border-radius: 8px;
-  padding: 10px 10px 10px 57px;
-  width: 49%;
-  position: relative;
+	background: #fbfbfb;
+	border: 1px solid rgba(57, 57, 57, 0.2);
+	box-sizing: border-box;
+	border-radius: 8px;
+	padding: 10px 10px 10px 57px;
+	width: 49%;
+	position: relative;
 }
 
 .stripeWrapper {
-  background: #fbfbfb;
-  border: 1px solid rgba(57, 57, 57, 0.2);
-  box-sizing: border-box;
-  border-radius: 8px;
-  padding: 10px;
-  position: relative;
+	background: #fbfbfb;
+	border: 1px solid rgba(57, 57, 57, 0.2);
+	box-sizing: border-box;
+	border-radius: 8px;
+	padding: 10px;
+	position: relative;
 }
 
 .stripeWrapper .error-message {
-  position: absolute;
-  bottom: -21px;
-  color: #e94b4f;
-  font-size: 10px;
+	position: absolute;
+	bottom: -21px;
+	color: #e94b4f;
+	font-size: 10px;
 }
 
 .inputInnerWrapper.active {
-  border: 1px solid var(--color);
+	border: 1px solid var(--color);
 }
 
 .inputInnerWrapper:last-child {
-  margin: 0;
+	margin: 0;
 }
 
+.inputInnerWrapper h4 {
+	font-size: 14px;
+	margin: 0 0 5px 0;
+	display: block;
+}
+
+.formInputs {
+	display: flex;
+	justify-content: space-between;
+	flex-flow: wrap;
+}
+
+.formInputs .formGroup {
+	width: 49%;
+	margin: 0 0 25px 0;
+	position: relative;
+}
+
+.formInputs .formGroup .error {
+	position: absolute;
+	color: #e94b4f;
+	font-size: 10px;
+	font-weight: 600;
+}
+
+.formGroup.space {
+	justify-content: space-between;
+	display: flex;
+}
+
+.formGroup.space .formGroup {
+	margin: 0;
+}
+
+.formGroup label {
+	font-family: var(--font-family-700);
+	font-size: 14px;
+	margin: 0 0 10px 0;
+	display: inline-block;
+}
+
+.formGroup .labelInput {
+	position: absolute;
+	left: 12px;
+	color: rgba(57, 57, 57, 0.4);
+	font-size: 14px;
+	top: 50%;
+	transform: translateY(-50%);
+	padding: 0 5px;
+	pointer-events: none;
+}
+
+.formGroup input:focus~.labelInput {
+	transform: scale(0.75) translateY(-39px);
+	background: #fbfbfb;
+	font-family: var(--font-family-700);
+	color: var(--color);
+}
+
+.formGroup input.active {
+	border: 1px solid var(--color);
+}
+
+.formGroup input.errorInput {
+	border: 1px solid #e94b4f;
+}
+
+.formGroup input.errorInput~.labelInput {
+	transform: scale(0.75) translateY(-39px);
+	background: #fbfbfb;
+	font-family: var(--font-family-700);
+	color: #e94b4f;
+}
+
+.formGroup input.active~.labelInput {
+	transform: scale(0.75) translateY(-39px);
+	background: #fbfbfb;
+	font-family: var(--font-family-700);
+	color: var(--color);
+}
+
+.formInputs .formGroup .formLabel {
+	position: relative;
+}
+
+.formInputs .formGroup .checkbox {
+	position: relative;
+	display: inline-block;
+}
+
+.formInputs .formGroup .checkbox input {
+	padding: 0;
+	height: initial;
+	width: initial;
+	margin-bottom: 0;
+	display: none;
+	cursor: pointer;
+}
+
+.formInputs .formGroup .checkbox label {
+	position: relative;
+	cursor: pointer;
+	margin: 0;
+}
+
+.formInputs .formGroup .checkbox label:before {
+	content: "";
+	-webkit-appearance: none;
+	background-color: transparent;
+	border: 2px solid var(--color);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+	padding: 8px;
+	display: inline-block;
+	position: relative;
+	vertical-align: middle;
+	cursor: pointer;
+	margin-right: 10px;
+	border-radius: 6px;
+}
+
+.formInputs .formGroup .checkbox input:checked+label:after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 4px;
+	left: 8px;
+	width: 3px;
+	height: 10px;
+	border: solid var(--color);
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
+}
+
+.inputWrapper.payment {
+	margin: 0 0 20px 0;
+}
+
+.inputWrapper.payment .inputInnerWrapper {
+	padding: 15px 15px 15px 57px;
+}
+
+.inputWrapper.payment .inputInnerWrapper h4 {
+	margin: 0;
+}
+
+.inputWrapper.payment .inputInnerWrapper.active {
+	border: 1px solid var(--color);
+}
+
+.payDesc h1 {
+	font-size: 14px;
+	margin: 0 0 10px 0;
+}
+
+.payDesc p {
+	font-size: 14px;
+	margin: 0 0 18px 0;
+	line-height: normal;
+}
+
+.payDesc .buttons {
+	display: flex;
+	justify-content: space-between;
+}
+
+.cardBodyWrapper.bgLight {
+	background: #fbfbfb;
+	border-bottom: 1px solid #d7d7d7;
+}
+
+.ticketDesc h2 {
+	font-size: 18px;
+	border-bottom: 2px solid var(--color);
+	padding: 0 0 12px 0;
+}
+
+.ticketDesc .eventDetails {
+	padding: 25px 15px;
+}
+
+.ticketDesc .eventInnerDetails {
+	position: relative;
+	padding: 0 0 0 50px;
+	margin: 0 0 20px 0;
+}
+
+.ticketDesc .eventInnerDetails:last-child {
+	margin: 0;
+}
+
+.ticketDesc .eventInnerDetails .eventIcon {
+	position: absolute;
+	left: 0;
+	text-align: center;
+	top: 50%;
+	transform: translatey(-50%);
+	width: 31px;
+}
+
+.ticketDesc .eventInnerDetails .eventIcon i {
+	font-size: 20px;
+}
+
+.ticketDesc .eventInnerDetails .eventDesc label {
+	font-size: 14px;
+	font-weight: normal;
+	display: block;
+}
+
+.ticketCart {
+	margin: 0 0 15px 0;
+}
+
+.ticketCart .table {
+	width: 100%;
+	max-width: 100%;
+	border-collapse: collapse;
+}
+
+.ticketCart .table>thead {
+	max-width: 100%;
+	width: 100%;
+	background: #fbfbfb;
+}
+
+.ticketCart .table>thead>tr>th {
+	padding: 0.75rem;
+	vertical-align: top;
+	border-top: 2px solid var(--color);
+	border-bottom: 2px solid var(--color);
+	font-size: 18px;
+	font-family: var(--font-family-700);
+	text-align: left;
+}
+
+.ticketCart .table>thead>tr>th:last-child {
+	text-align: right;
+}
+
+.ticketCart .table>tbody>tr>td {
+	padding: 0.75rem;
+	vertical-align: top;
+	border-bottom: 1px solid rgba(57, 57, 57, 0.2);
+	font-size: 14px;
+	font-family: var(--font-family-400);
+}
+
+.ticketCart .table>tbody>tr>td:last-child {
+	text-align: right;
+}
+
+.ticketCart .table>tfoot>tr>td {
+	padding: 0.75rem 0;
+	vertical-align: top;
+	border-top: 2px solid var(--color);
+	font-size: 14px;
+	font-family: var(--font-family-400);
+}
+
+.ticketCart .table>tfoot>tr>td:last-child {
+	text-align: right;
+}
+
+.ticketCartDesc {
+	margin: 0 0 40px 0px;
+}
+
+.ticketCartDesc h4 {
+	font-size: 12px;
+	margin: 0 0 4px 0;
+}
+
+.ticketCartDesc p {
+	font-size: 12px;
+	margin: 0;
+}
+
+.alert-danger {
+	color: #721c24;
+	background-color: #f8d7da;
+	border-color: #f5c6cb;
+	padding-right: 4rem;
+	position: relative;
+	padding: 0.75rem 1.25rem;
+	margin-bottom: 0;
+	border: 1px solid transparent;
+}
+
+.alert-dismissible .close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 0.75rem 1.25rem;
+	color: inherit;
+	padding: 10px 12px;
+}
+
+.alert-dismissible button.close {
+	background-color: transparent;
+	border: 0;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+.alert-dismissible .close {
+	float: right;
+	font-size: 1.5rem;
+	font-weight: 700;
+	line-height: 1;
+	color: #000;
+	text-shadow: 0 1px 0 #fff;
+	opacity: 0.5;
+}
+
+.ticketMessage {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 15px 0 0;
+}
+
+.ticketMessageInner {
+	border-radius: 6px;
+	font-size: 10px;
+	color: #fbfbfb;
+	text-align: center;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	width: auto;
+	line-height: normal;
+	display: inline-block;
+	white-space: nowrap;
+	padding: 6px 18px;
+	font-family: var(--font-family-800);
+}
+
+.ticketMessageInner.available {
+	background-color: #393939;
+}
+
+.ticketMessageInner.soldOut {
+	background-color: #e94b4f;
+}
+
+.ticketInfo h1 {
+	font-size: 26px;
+}
+
+.ticketNewCategory {
+	display: flex;
+	justify-content: space-between;
+}
+
+.ticketNewCategory h2 {
+	font-size: 14px;
+}
+
+.ticketNewCategory h2 span {
+	display: block;
+	font-family: var(--font-family-300);
+}
+
+.ticketNewCategory .amount {
+	font-size: 14px;
+}
+
+.vc-popover-content-wrapper .vc-popover-content.direction-bottom {
+	left: -23px !important;
+}
+
+/*-- radio css --*/
+
 .inputGroup {
-  position: absolute;
-  left: 10px;
-  top: 0;
+	position: absolute;
+	left: 10px;
+	top: 0;
 }
 
 .inputGroup [type="radio"]:checked,
 .inputGroup [type="radio"]:not(:checked) {
-  position: absolute;
-  left: -9999px;
+	position: absolute;
+	left: -9999px;
 }
 
-.inputGroup [type="radio"]:checked + label,
-.inputGroup [type="radio"]:not(:checked) + label {
-  position: relative;
-  padding-left: 28px;
-  cursor: pointer;
-  line-height: 20px;
-  display: inline-block;
-  color: #666;
+.inputGroup [type="radio"]:checked+label,
+.inputGroup [type="radio"]:not(:checked)+label {
+	position: relative;
+	padding-left: 28px;
+	cursor: pointer;
+	line-height: 20px;
+	display: inline-block;
+	color: #666;
 }
 
-.inputGroup [type="radio"]:checked + label:before,
-.inputGroup [type="radio"]:not(:checked) + label:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 24px;
-  height: 24px;
-  border-radius: 100%;
-  background: rgba(57, 57, 57, 0.3);
-  opacity: 0.3;
-  border: 1px solid var(--color);
+.inputGroup [type="radio"]:checked+label:before,
+.inputGroup [type="radio"]:not(:checked)+label:before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 24px;
+	height: 24px;
+	border-radius: 100%;
+	background: rgba(57, 57, 57, 0.3);
+	opacity: 0.3;
+	border: 1px solid var(--color);
 }
 
-.inputGroup [type="radio"]:checked + label:after,
-.inputGroup [type="radio"]:not(:checked) + label:after {
-  content: "";
-  width: 20px;
-  height: 20px;
-  background: var(--color);
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  border-radius: 100%;
-  -webkit-transition: all 0.2s ease;
-  transition: all 0.2s ease;
+.inputGroup [type="radio"]:checked+label:after,
+.inputGroup [type="radio"]:not(:checked)+label:after {
+	content: "";
+	width: 20px;
+	height: 20px;
+	background: var(--color);
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	border-radius: 100%;
+	-webkit-transition: all 0.2s ease;
+	transition: all 0.2s ease;
 }
 
-.inputGroup [type="radio"]:not(:checked) + label:after {
-  opacity: 0;
-  -webkit-transform: scale(0);
-  transform: scale(0);
+.inputGroup [type="radio"]:not(:checked)+label:after {
+	opacity: 0;
+	-webkit-transform: scale(0);
+	transform: scale(0);
 }
 
-.inputGroup [type="radio"]:checked + label:after {
-  opacity: 1;
-  -webkit-transform: scale(1);
-  transform: scale(1);
+.inputGroup [type="radio"]:checked+label:after {
+	opacity: 1;
+	-webkit-transform: scale(1);
+	transform: scale(1);
 }
 
-.inputInnerWrapper h4 {
-  color: var(--color);
-  font-size: 14px;
-  margin: 0 0 5px 0;
-  display: block;
-}
 
-.inputInnerWrapper p {
-  color: var(--color);
-  font-size: 14px;
-  margin: 0;
-}
-
-.formInputs {
-  display: flex;
-  justify-content: space-between;
-  flex-flow: wrap;
-}
-
-.formInputs .formGroup {
-  width: 49%;
-  margin: 0 0 25px 0;
-  position: relative;
-}
-
-.formInputs .formGroup .error {
-  position: absolute;
-  color: #e94b4f;
-  font-size: 10px;
-  font-weight: 600;
-}
-
-.formGroup.space {
-  justify-content: space-between;
-  display: flex;
-}
-
-.formGroup.space .formGroup {
-  margin: 0;
-}
-
-.formGroup label {
-  font-family: var(--font-family-700);
-  font-size: 14px;
-  margin: 0 0 10px 0;
-  display: inline-block;
-}
-
-.formGroup .labelInput {
-  position: absolute;
-  left: 12px;
-  color: rgba(57, 57, 57, 0.4);
-  font-size: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 0 5px;
-  pointer-events: none;
-}
-
+/*--input common--*/
 .form-control {
-  background: #fbfbfb;
-  border: 1px solid rgba(57, 57, 57, 0.2);
-  border-radius: 6px;
-  height: 40px;
-  width: 100%;
-  padding: 6px 12px;
-  color: var(--color);
+	background: #fbfbfb;
+	border: 1px solid rgba(57, 57, 57, 0.2);
+	border-radius: 6px;
+	height: 40px;
+	width: 100%;
+	padding: 6px 12px;
+	color: var(--color);
 }
 
 .form-control::placeholder {
-  color: rgba(57, 57, 57, 0.2);
+	color: rgba(57, 57, 57, 0.2);
 }
 
 .form-control:focus {
-  border: 1px solid var(--color);
-}
-
-.formGroup input:focus ~ .labelInput {
-  transform: scale(0.75) translateY(-39px);
-  background: #fbfbfb;
-  font-family: var(--font-family-700);
-  color: var(--color);
-}
-
-.formGroup input.active {
-  border: 1px solid var(--color);
-}
-
-.formGroup input.errorInput {
-  border: 1px solid #e94b4f;
-}
-
-.formGroup input.errorInput ~ .labelInput {
-  transform: scale(0.75) translateY(-39px);
-  background: #fbfbfb;
-  font-family: var(--font-family-700);
-  color: #e94b4f;
-}
-
-.formGroup input.active ~ .labelInput {
-  transform: scale(0.75) translateY(-39px);
-  background: #fbfbfb;
-  font-family: var(--font-family-700);
-  color: var(--color);
-}
-
-.formInputs .formGroup .formLabel {
-  position: relative;
-}
-
-.formInputs .formGroup .checkbox {
-  position: relative;
-  display: inline-block;
-}
-
-.formInputs .formGroup .checkbox input {
-  padding: 0;
-  height: initial;
-  width: initial;
-  margin-bottom: 0;
-  display: none;
-  cursor: pointer;
-}
-
-.formInputs .formGroup .checkbox label {
-  position: relative;
-  cursor: pointer;
-  margin: 0;
-}
-
-.formInputs .formGroup .checkbox label:before {
-  content: "";
-  -webkit-appearance: none;
-  background-color: transparent;
-  border: 2px solid var(--color);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
-  padding: 8px;
-  display: inline-block;
-  position: relative;
-  vertical-align: middle;
-  cursor: pointer;
-  margin-right: 10px;
-  border-radius: 6px;
-}
-
-.formInputs .formGroup .checkbox input:checked + label:after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 4px;
-  left: 8px;
-  width: 3px;
-  height: 10px;
-  border: solid var(--color);
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-
-.inputWrapper.payment {
-  margin: 0 0 20px 0;
-}
-
-.inputWrapper.payment .inputInnerWrapper {
-  padding: 15px 15px 15px 57px;
-}
-
-.inputWrapper.payment .inputInnerWrapper h4 {
-  margin: 0;
-}
-
-.inputWrapper.payment .inputInnerWrapper.active {
-  border: 1px solid var(--color);
-}
-
-.payDesc h1 {
-  color: var(--color);
-  font-size: 14px;
-  margin: 0 0 10px 0;
-}
-
-.payDesc p {
-  color: var(--color);
-  font-size: 14px;
-  margin: 0 0 18px 0;
-  line-height: normal;
-}
-
-.payDesc .buttons {
-  display: flex;
-  justify-content: space-between;
-}
-
-.cardBodyWrapper.bgLight {
-  background: #fbfbfb;
-  border-bottom: 1px solid #d7d7d7;
-}
-
-.ticketDesc h2 {
-  color: var(--color);
-  font-size: 18px;
-  border-bottom: 2px solid var(--color);
-  padding: 0 0 12px 0;
-}
-
-.ticketDesc .eventDetails {
-  padding: 25px 15px;
-}
-
-.ticketDesc .eventInnerDetails {
-  position: relative;
-  padding: 0 0 0 50px;
-  margin: 0 0 20px 0;
-}
-
-.ticketDesc .eventInnerDetails:last-child {
-  margin: 0;
-}
-
-.ticketDesc .eventInnerDetails .eventIcon {
-  position: absolute;
-  left: 0;
-  text-align: center;
-  top: 50%;
-  transform: translatey(-50%);
-  width: 31px;
-}
-
-.ticketDesc .eventInnerDetails .eventIcon i {
-  font-size: 20px;
-}
-
-.ticketDesc .eventInnerDetails .eventDesc label {
-  font-size: 14px;
-  font-weight: normal;
-  display: block;
-}
-
-.ticketCart {
-  margin: 0 0 15px 0;
-}
-
-.ticketCart .table {
-  width: 100%;
-  max-width: 100%;
-  border-collapse: collapse;
-}
-
-.ticketCart .table > thead {
-  max-width: 100%;
-  width: 100%;
-  background: #fbfbfb;
-}
-
-.ticketCart .table > thead > tr > th {
-  padding: 0.75rem;
-  vertical-align: top;
-  border-top: 2px solid var(--color);
-  border-bottom: 2px solid var(--color);
-  font-size: 18px;
-  font-family: var(--font-family-700);
-  text-align: left;
-}
-
-.ticketCart .table > thead > tr > th:last-child {
-  text-align: right;
-}
-
-.ticketCart .table > tbody > tr > td {
-  padding: 0.75rem;
-  vertical-align: top;
-  border-bottom: 1px solid rgba(57, 57, 57, 0.2);
-  font-size: 14px;
-  font-family: var(--font-family-400);
-}
-
-.ticketCart .table > tbody > tr > td:last-child {
-  text-align: right;
-}
-
-.ticketCart .table > tfoot > tr > td {
-  padding: 0.75rem 0;
-  vertical-align: top;
-  border-top: 2px solid var(--color);
-  font-size: 14px;
-  font-family: var(--font-family-400);
-}
-
-.ticketCart .table > tfoot > tr > td:last-child {
-  text-align: right;
-}
-
-.ticketCartDesc {
-  margin: 0 0 40px 0px;
-}
-
-.ticketCartDesc h4 {
-  color: var(--color);
-  font-size: 12px;
-  margin: 0 0 4px 0;
-}
-
-.ticketCartDesc p {
-  color: var(--color);
-  font-size: 12px;
-  margin: 0;
-}
-
-/* 
-::ng-deep .SelectListItem {
-  position: relative;
-  cursor: default!important;
-  padding: 8px 12px!important;
-} */
-.alert-danger {
-  color: #721c24;
-  background-color: #f8d7da;
-  border-color: #f5c6cb;
-  padding-right: 4rem;
-  position: relative;
-  padding: 0.75rem 1.25rem;
-  margin-bottom: 0;
-  border: 1px solid transparent;
-}
-
-.alert-dismissible .close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 0.75rem 1.25rem;
-  color: inherit;
-  padding: 10px 12px;
-}
-
-.alert-dismissible button.close {
-  background-color: transparent;
-  border: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-.alert-dismissible .close {
-  float: right;
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
-  opacity: 0.5;
-}
-
-.ticketMessage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 15px 0 0;
-}
-
-.ticketMessageInner {
-  border-radius: 6px;
-  font-size: 10px;
-  color: #fbfbfb;
-  text-align: center;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  width: auto;
-  line-height: normal;
-  display: inline-block;
-  white-space: nowrap;
-  padding: 6px 18px;
-  font-family: var(--font-family-800);
-}
-
-.ticketMessageInner.available {
-  background-color: #393939;
-}
-
-.ticketMessageInner.soldOut {
-  background-color: #e94b4f;
-}
-
-.ticketInfo h1 {
-  color: var(--color);
-  font-size: 26px;
-  margin: 0;
-}
-
-.ticketInfo p {
-  color: var(--color);
-  font-size: 14px;
-  margin: 0 0 10px 0;
-}
-
-.ticketNewCategory {
-  display: flex;
-  justify-content: space-between;
-}
-
-.ticketNewCategory h2 {
-  font-size: 14px;
-}
-
-.ticketNewCategory h2 span {
-  display: block;
-  font-family: var(--font-family-300);
-}
-
-.ticketNewCategory .amount {
-  color: var(--color);
-  font-family: var(--font-family-400);
-  font-size: 14px;
-}
-
-.vc-popover-content-wrapper .vc-popover-content.direction-bottom {
-  left: -23px !important;
+	border: 1px solid var(--color);
 }
