@@ -10,7 +10,7 @@
         <h1>{{$t('downloadTicket.heading1')}}</h1>
         <p>{{$t('downloadTicket.p1')}}</p>
         <div class="buttons">
-          <button class="button btnGreen" @click="sendMail()">{{$t('downloadTicket.resendEmail')}}</button>
+          <button class="button btnDefault" @click="sendMail()">{{$t('downloadTicket.resendEmail')}}</button>
           <button class="button btnDefault" @click="downloadTkt()">{{$t('downloadTicket.downloadTickets')}}</button>
         </div>
       </div>
@@ -98,7 +98,7 @@
           <h4>{{$t('downloadTicket.hinweis')}} </h4> 
           <p>{{$t('downloadTicket.p2')}} </p>
         </div>
-        <div class="footerActionBtn"><button type="button" class="button"  @click="backButton">{{$t('downloadTicket.backtoShop')}} </button></div>
+        <div class="footerActionBtn"><button type="button" class="button btnBlack"  @click="backButton">{{$t('downloadTicket.backtoShop')}} </button></div>
       </div>
     </div>
   </div>

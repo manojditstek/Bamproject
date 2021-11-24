@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="footerActionBtn">
-        <button @click="createOrder" class="button">{{$t('deliveryMethod.confirm')}}
+        <button @click="createOrder" class="button btnBlack">{{$t('deliveryMethod.confirm')}}
         </button>
     </div>
 </div>

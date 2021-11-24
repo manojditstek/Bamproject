@@ -2,7 +2,7 @@
 <div class="singleTicketTotalAmount d-flex">
     <TotalTicketCalculation />
     <div class="labelBtn">
-        <BackButton :message="'back'" class="button" />
+        <BackButton :message="'back'" class="button btnBlack" />
     </div>
 </div>
 <div class="cardBodyWrapper">
@@ -44,7 +44,7 @@
 </div>
 
 <div class="footerActionBtn">
-    <button class="button" :class="totalQuantity==0?'disabled':''" :disabled="totalQuantity==0" @click="checkout">
+    <button class="button btnBlack" :class="totalQuantity==0?'disabled':''" :disabled="totalQuantity==0" @click="checkout">
         {{ $t('cartTemp.checkout') }}
     </button>
 </div>
