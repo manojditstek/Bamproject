@@ -56,7 +56,7 @@
     </div>
     <div class="cardBodyWrapper">
         <div class="footerActionBtn">
-            <button class="button" @click.prevent="submit()">{{$t('userKycForm.next')}}</button>
+            <button class="button btnBlack" @click.prevent="submit()">{{$t('userKycForm.next')}}</button>
         </div>
     </div>
 

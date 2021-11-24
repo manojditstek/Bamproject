@@ -26,7 +26,7 @@
 <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
     <TotalTicketCalculation />
     <div class="labelBtn">
-        <router-link to="/shop" class="button">{{$t('common.cart')}}</router-link>
+        <router-link to="/shop" class="button btnBlack">{{$t('common.cart')}}</router-link>
     </div>
 </div>
 </template>

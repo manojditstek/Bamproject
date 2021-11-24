@@ -53,7 +53,7 @@
         </div>
     </div>
     <div class="footerActionBtn btns">
-        <button class="button" @click="payMethod()">{{$t('common.pay')}} {{(totalPrice).toFixed(2)}} {{currency}}</button>
+        <button class="button btnBlack" @click="payMethod()">{{$t('common.pay')}} {{(totalPrice).toFixed(2)}} {{currency}}</button>
         <a @click="backToHome()" class="button btnGray">{{$t('common.cancel')}}</a>
     </div>
 </div>

@@ -2,165 +2,9 @@
 @import "../css/fonts.css";
 @import "../css/variable.css";
 @import "../css/responsive.css";
+@import "../css/common.css";
 
-body {
-	font-family: var(--font-family-400);
-	margin: 0;
-	background-color: #cbcbcb;
-	color: var(--color);
-}
-* {
-	box-sizing: border-box;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0;
-	font-family: var(--font-family-700);
-	color: var(--color);
-}
-
-p {
-	margin: 0;
-	font-size: 14px;
-	line-height: 18.2px;
-	color: var(--color);
-	font-family: var(--font-family-400);
-}
-
-a {
-	color: var(--color);
-}
-
-.m-0 {
-	margin: 0 !important;
-}
-
-.mt-1 {
-	margin-top: 5px;
-}
-
-.mb-1 {
-	margin-bottom: 5px;
-}
-
-.p-0 {
-	padding: 0 !important;
-}
-
-.align-items-center {
-	align-items: center;
-}
-
-.align-items-end {
-	align-items: flex-end;
-}
-
-.justify-content-center {
-	justify-content: center;
-}
-
-.justify-content-between {
-	justify-content: space-between;
-}
-
-.d-flex {
-	display: flex;
-}
-
-.brdrtop {
-	border-top: 1px solid #d7d7d7;
-}
-
-.hr {
-	border-top: 1px solid rgba(57, 57, 57, 0.2);
-	margin: 0 0 20px 0;
-}
-
-.formGroup.w-100 {
-	width: 100% !important;
-}
-button,.button {
-	background-color: var(--color);
-	color: #fff;
-	text-transform: uppercase;
-	font-size: 10px;
-	border: none;
-	padding: 6px 12px;
-	border-radius: 5px;
-	cursor: pointer;
-	font-family: var(--font-family-800);
-	white-space: nowrap;
-	text-decoration: none;
-	min-width: 68px;
-	letter-spacing: 1px;
-}
-
-.btnGreen {
-	background-color: var(--color-green) !important;
-	border-radius: 6px !important;
-	border: 1px solid var(--color-green) !important;
-	max-width: 150px;
-	width: 100%;
-}
-
-.btnDefault {
-	background-color: var(--color-white) !important;
-	border-radius: 6px !important;
-	border: 1px solid var(--color) !important;
-	max-width: 150px;
-	width: 100%;
-	color: var(--color) !important;
-}
-.alert {
-	background-color: var(--color-red);
-	border-bottom: 1px solid var(--color-red);
-	padding: 15px;
-	width: 100%;
-	text-align: center;
-}
-
-.alert p {
-	color: #eeeeee;
-	font-size: 12px;
-	font-family: var(--font-family-700);
-	margin: 0;
-}
-
-.alert p i {
-	padding: 0 5px 0 0;
-}
-
-.loader {
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.3);
-	z-index: 9999;
-}
-
-.loaderWrapper {
-	text-align: center;
-	z-index: 999;
-	position: absolute;
-	top: 90px;
-	background-color: #fff;
-	left: 50%;
-	transform: translateX(-50%);
-	padding: 45px;
-	border-radius: 10px;
-}
-
-.loaderWrapper img {
-	width: 40px;
-}
-
+/*--datepicker--*/
 .datePickerWrapper {
 	border: 1px solid rgba(57, 57, 57, 0.2);
 	padding: 3px 5px;
@@ -198,19 +42,6 @@ button,.button {
 	background-color: #e94b4f !important;
 }
 /*----*/
-.contentWraper {
-	max-width: 720px;
-	margin: 0 auto;
-	width: 100%;
-	background-color: var(--color-white);
-}
-
-.mainWrapper {
-	padding: 0 15px;
-	position: relative;
-	min-height: 100vh;
-}
-
 .header {
 	border-bottom: 1px solid #d7d7d7;
 	background-color: #fbfbfb;
@@ -262,41 +93,6 @@ button,.button {
 	box-shadow: none;
 }
 
-.cardWrapper {
-	background-color: #fbfbfb;
-	box-shadow: 0 6px 5px rgb(0 0 0 / 10%);
-	overflow: hidden;
-	min-height: 70px;
-	border-bottom: 1px solid rgba(57, 57, 57, 0.2);
-}
-
-.dateCol {
-	background-color: #eeeeee;
-	padding: 10px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	min-width: 100px;
-	max-width: 100px;
-}
-
-.dateCol h4 {
-	font-size: 10px;
-	text-transform: uppercase;
-	font-family: var(--font-family-800);
-}
-
-.dateCol h2 {
-	font-size: 39px;
-	line-height: 40px;
-}
-
-.dateCol p {
-	line-height: normal;
-	margin: 0;
-}
-
 .dateCol p.from {
 	margin: 5px 0 0 0;
 }
@@ -304,19 +100,6 @@ button,.button {
 time {
 	margin: 8px 0 0;
 	font-size: 12px;
-}
-
-.detailsCol {
-	width: 100%;
-	padding: 10px 15px;
-	flex-direction: column;
-	display: flex;
-	justify-content: center;
-}
-
-.detailsCol h2 {
-	margin-bottom: 2px;
-	font-size: 14px;
 }
 
 .detailsCol .addressDesc {
@@ -330,7 +113,7 @@ time {
 
 .detailsCol .priceWrap {
 	text-align: right;
-	font-family: var(--font-family-800);
+	font-family: var(--font-family-700);
 	width: 100%;
 	justify-content: space-between;
 	align-items: center;
@@ -398,7 +181,7 @@ time {
 }
 
 .collapseArrow i {
-	color: var(--color);
+	color: var(--color-white);
 	font-size: 22px;
 }
 
@@ -438,14 +221,10 @@ time {
 .totalAmountWrapper p {
 	display: flex;
 	justify-content: space-between;
-	font-size: 14px;
-	margin: 0;
-	line-height: 21px;
 	font-family: var(--font-family-700);
 }
 
 .totalAmountWrapper {
-	font-family: var(--font-family-700);
 	padding: 5px 0;
 }
 
@@ -502,6 +281,8 @@ time {
 	padding: 0;
 	min-width: auto;
 	font-family: var(--font-family-500);
+	border:none;
+	cursor: pointer;
 }
 
 .ticketToggle .buttonWrap .minusBtn {
@@ -602,29 +383,15 @@ time {
 	margin-top: 60px;
 }
 
-.footerActionBtn .button,
-.footerActionBtn button {
-	background-color: var(--color);
+.footerActionBtn .button{
 	font-size: 15px;
 	padding: 12px;
 	width: 100%;
-	text-align: center;
-	border-radius: 5px;
-	min-height: 40px;
-	font-family: var(--font-family-600);
-	display: block;
-	text-transform: uppercase;
 }
 
 .footerActionBtn .button.disabled {
 	background-color: #ddd;
 	cursor: no-drop;
-}
-
-.btnGray {
-	background-color: #fbfbfb !important;
-	border: 1px solid rgba(57, 57, 57, 0.3);
-	color: var(--color) !important;
 }
 
 .sloganText {
