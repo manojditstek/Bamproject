@@ -44,7 +44,7 @@ const english = {
     firstName:'First name is required.',
     lastName:'Last name is required.',
     phone:'Phone number is required.',
-    validPhone:'Valid phone number required 10 digits.',
+    validPhone:'Valid phone number required.',
     email:'Email is required.',
     validEmail:'Valid email is required.'
   },

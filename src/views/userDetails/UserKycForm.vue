@@ -129,7 +129,7 @@ export default {
         }
 
         function validPhone(phone) {
-            var re = /^\s*(?:\+?(\d{1,1}))?[- (]*(\d{3})[- )]*(\d{3})[- ]*(\d{4})(?: *[x/#]{1}(\d+))?\s*$/;
+            var re =/^[0-9]*$/;
             return re.test(phone);
         }
 
