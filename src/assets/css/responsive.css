@@ -1,6 +1,9 @@
 
 @media screen and (max-width:575px){
-    .formInputs .formGroup {
+    .cardBodyWrapper .formInputs {
+        display:block;
+    }
+    .cardBodyWrapper .formInputs .formGroup {
         width:100%;
     }
     .cardBodyWrapper .inputWrapper{
@@ -9,5 +12,8 @@
     .cardBodyWrapper .inputWrapper .inputInnerWrapper{
       width:100%;
       margin:0 0 15px 0;
+    }
+    .cardBodyWrapper .ticketInfo h1 {
+        font-size: 24px;
     }
 }
