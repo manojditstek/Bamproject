@@ -20,20 +20,20 @@
             {{ ticket.availableTickets != "" ? "" : $t("common.soldOut") }}
           </div>
         </div>
-        <div class="limitExceeded" v-if="perUserQuantity != ''">
+        <!-- <div class="limitExceeded" v-if="perUserQuantity != ''">
           <div class="limitExceededInner">
             {{ perUserQuantity != "" ? $t("common.userLimit") : "" }}
           </div>
-        </div>
+        </div> -->
         <div class="buttonWrap d-flex">
           <button class="minusBtn" @click="removeFromCart()">-</button>
           <span class="dassedIcon">{{ itemQuantity ? itemQuantity : 0 }}</span>
           <button
             class="plusBtn"
             :class="
-              perUserQuantity != '' || ticket.availableTickets == '' ? 'disabled' : ''
+               ticket.availableTickets == '' ? 'disabled' : ''
             "
-            :disabled="perUserQuantity != '' || ticket.availableTickets == ''"
+            :disabled=" ticket.availableTickets == ''"
             @click="addToCart()"
           >
             +
@@ -65,11 +65,11 @@
             </div>
           </div>
 
-          <div class="limitExceeded" v-if="perUserQuantity != ''">
+          <!-- <div class="limitExceeded" v-if="perUserQuantity != ''">
             <div class="limitExceededInner">
               {{ perUserQuantity != "" ? $t("common.userLimit") : "" }}
             </div>
-          </div>
+          </div> -->
 
           <div class="buttonWrap d-flex">
             <button class="minusBtn" @click="removeFromCart()">-</button>
@@ -77,9 +77,9 @@
             <button
               class="plusBtn"
               :class="
-                perUserQuantity != '' || ticket.availableTickets == '' ? 'disabled' : ''
+                 ticket.availableTickets == '' ? 'disabled' : ''
               "
-              :disabled="perUserQuantity != '' || ticket.availableTickets == ''"
+              :disabled=" ticket.availableTickets == ''"
               @click="addToCart()"
             >
               +

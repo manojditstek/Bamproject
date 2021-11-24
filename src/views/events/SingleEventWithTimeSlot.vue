@@ -25,20 +25,19 @@
 </div>
 <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
     <TotalTicketCalculation />
-    <div class="labelBtn">
-        <router-link to="/shop" class="button btnBlack">{{$t('common.cart')}}</router-link>
-    </div>
+        <CartButton />
 </div>
 </template>
 <script>
-import {useStore} from 'vuex';
-import {dateFormat,timeFormat,lengthOfString} from "../../common/common";
-import {computed} from '@vue/reactivity';
-import {useRouter} from "vue-router";
-import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress.vue"
-import EventDateFormat from "../../components/singleEvent/EventDate.vue";
-import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets.vue"
-import TotalTicketCalculation from "../../components/cartModule/TotalTicketCalculation.vue"
+import {useStore} from 'vuex'
+import {dateFormat,timeFormat,lengthOfString} from "../../common/common"
+import {computed} from 'vue'
+import {useRouter} from "vue-router"
+import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress"
+import EventDateFormat from "../../components/singleEvent/EventDate"
+import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets"
+import TotalTicketCalculation from "../../components/cartModule/TotalTicketCalculation"
+import CartButton from "../../components/cartModule/CartButton"
 export default {
     name: 'SingleEvent',
     components: {
@@ -46,6 +45,7 @@ export default {
         EventDateFormat,
         Tickets,
         TotalTicketCalculation,
+        CartButton
     },
 
     setup() {

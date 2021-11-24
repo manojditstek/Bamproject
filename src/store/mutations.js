@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2'
 /* This block of code set the mutltiple event */
 export const setEvents = (state, events) => {
   state.events = events;
@@ -54,8 +55,25 @@ export const addCartItem = (state, data) => {
   data.item.timeSlotId = data.timeslot_id;
   data.item.quantity = getItemQtyCart(state.cart.cartItems, data.item) + 1;
   data.item.overAllQuantity = getOverAllQtyCart(state.cart.cartItems, data.item) + 1;
+  // toaster start 
   if(data.item.overAllQuantity > data.item.ticketsPerUser){
-    alert("Limit fot this ticket exceeds")
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top',
+      showConfirmButton: false,
+      timer: 5000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
+    Toast.fire({
+      icon: 'error',
+      title: 'Limit fot this ticket exceeds!'
+    })
+    // alert("Limit fot this ticket exceeds")
     return
   }
   data.item.totalPrice = getItemTotalPrice(data.item);
@@ -225,7 +243,6 @@ export const removeDiscountToCart = (state, data) => {
 
 // Checking discount item in cart
 const isItemInDiscountCart = (state,discountItems, item) => {
-  
   let tempId = null;
   state.cart.cartItems.forEach(element => {
     tempId=element.id;

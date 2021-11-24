@@ -26,6 +26,7 @@ export default {
     workSpaceKey:null,
     ticketFormat:null,
     kycLevelId:null,
+    submitting:false
   
 
 }
