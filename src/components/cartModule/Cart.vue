@@ -5,9 +5,9 @@
         <BackButton :message="'back'" class="button btnBlack" />
     </div>
 </div>
-<div class="cardBodyWrapper">
+<div class="cardBodyWrapper cart">
     <div class="eventDiscountWrapper">
-        <h2>{{ $t('cartTemp.cart') }}</h2>
+        <h1>{{ $t('cartTemp.cart') }}</h1>
         <div class="amountWrapper">
             <p>{{totalQuantity}} {{ $t('cartTemp.tickets') }} <span>{{(ticketPrice).toFixed(2)}} {{currency}}</span></p>
             <p>{{ $t('cartTemp.fees') }} <span>0.00 {{ $t('cartTemp.eur') }}</span></p>
@@ -25,16 +25,16 @@
 
 <div class="ticketWrapper">
     <div class="ticketCategory d-flex" v-for=" item in cart.cartItems" :key="item.id">
-        <div class="dateCol">
+        <!-- <div class="dateCol">
             <h2>{{item.quantity}}</h2>
-        </div>
+        </div> -->
         <div class="detailsCol">
             <h2>{{item.name}}</h2>
             <p v-for="disc in item.discounts" :key="disc.id">
                 {{disc.name}}
             </p>
             <div class="priceWrap">
-                {{(item.totalPrice).toFixed(2)}} {{item.currency}}
+                <h6>{{(item.totalPrice).toFixed(2)}} {{item.currency}}</h6>
             </div>
         </div>
         <div class="collapseArrow redBg" @click="removeFromCart(item)">

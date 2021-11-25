@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="d-flex justify-content-between align-items-end header">
-      <h2>
+      <h1>
         <a href="javascript:void(0)" @click="backButton">{{
           $t("downloadTicket.backtoHome")
         }}</a>
-      </h2>
+      </h1>
     </div>
     <div class="cardBodyWrapper bgLight">
       <div class="payDesc">

@@ -9,7 +9,7 @@
   </div>
   <div class="cardBodyWrapper">
     <div class="innerHeading">
-      <h4>{{ $t("payment.payment") }}</h4>
+      <h1>{{ $t("payment.payment") }}</h1>
     </div>
     <div class="inputWrapper payment">
       <div
@@ -61,7 +61,7 @@
       </div>
     </div>
     <div v-if="payMethod == 'epsBank'">
-      <div class="stripeWrapper">
+      <div class="stripeWrappernew">
         <div class="formInputs">
           <div class="formGroup">
             <input
@@ -74,7 +74,7 @@
         </div>
         <div class="formInputs">
           <div class="formGroup w-100">
-            <div class="stripeWrapper">
+            <div class="stripeInner">
               <StripeElement
                 :element="epsElement"
                 @change="event = $event"
@@ -150,10 +150,10 @@ export default {
             style: {
               base: {
                 padding: "8px 10px",
-                color: "#32325d",
-                fontSize: "16px",
+                color: "#393939",
+                fontSize: "14px",
                 "::placeholder": {
-                  color: "#aab7c4",
+                  color: "#39393966",
                 },
               },
             },
@@ -161,7 +161,18 @@ export default {
         },
         {
           type: "card",
-          options: {},
+          options: {
+              style: {
+              base: {
+                iconColor:"#393939",
+                color: "#393939",
+                fontSize: "14px",
+                "::placeholder": {
+                  color: "#39393966",
+                },
+              },
+            },
+          },
         },
       ],
     });

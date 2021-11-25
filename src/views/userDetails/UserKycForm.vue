@@ -1,16 +1,16 @@
 <template>
   <div>
     <div class="d-flex justify-content-between align-items-end header">
-      <h2>
+      <h1>
         <router-link to="/shop">
           <i class="fa fa-angle-left" aria-hidden="true"></i>
           {{ $t("cartTemp.cart") }}
         </router-link>
-      </h2>
+      </h1>
     </div>
     <div class="cardBodyWrapper">
       <div class="ticketInfo">
-        <h1>{{ $t("userKycForm.ticketHolderInfo") }}</h1>
+        <h2>{{ $t("userKycForm.ticketHolderInfo") }}</h2>
         <p>{{ $t("userKycForm.ticketHolderInfoDesc") }}</p>
       </div>
     </div>

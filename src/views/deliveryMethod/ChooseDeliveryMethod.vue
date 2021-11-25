@@ -1,11 +1,11 @@
 <template>
 <div class="d-flex justify-content-between align-items-end header">
-    <h2>
+    <h1>
         <router-link to="/shop">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
             {{$t('common.cart')}}
         </router-link>
-    </h2>
+    </h1>
     <div class="datePicker"></div>
 </div>
 <div class="cardBodyWrapper">

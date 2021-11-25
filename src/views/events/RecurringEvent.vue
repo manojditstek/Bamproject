@@ -1,12 +1,12 @@
 <template>
   <div v-if="singleEventData == ''">
     <div class="d-flex justify-content-between align-items-end header">
-      <h2>
+      <h1>
         <a href="javascript:void(0)" @click="backToHome">
           <i class="fa fa-angle-left" aria-hidden="true"></i>
           {{ recurringEvent ? lengthOfString(recurringEvent.name) : "" }}
         </a>
-      </h2>
+      </h1>
       <div class="datePicker">
         <div class="datePicker">
           <DateRangePicker
