@@ -3,6 +3,7 @@
     <div class="contentWraper">
       <Loader />
       <div class="contentInnerWraper">
+        <p>{{ fields }}</p>
         <error-message />
         <router-view />
       </div>
@@ -17,6 +18,13 @@ import ErrorMessage from "./components/errorMessages/ErrorMessages.vue";
 import Loader from './components/loader/Loader.vue';
 export default {
   name: "app",
+  props: {
+    fields: { type: Object }
+  },
+  
+  mounted() {
+    console.log("===>",this.fields);
+  },
   setup() {
     const store = useStore();
     const errorMsg = computed(() => {

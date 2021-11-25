@@ -10,14 +10,21 @@
                 {{ eventDate ? eventDate[3] : "" }}
             </h4>
             <time>{{ eventDate ? eventDate[4] : "" }}
-                {{ eventDate ? eventDate[5] : "" }}</time>
+                {{ eventDate ? eventDate[5] : "" }}
+            </time>
         </div>
+        <!-- <div class="dateCol" v-if="event.timeslot.length>0?event.timeslot:''">
+            <h2>{{ event.occurrence.length }}</h2>
+            <h4>{{$t('common.events')}}</h4>
+            <p>{{ recurringEventDate }}</p>
+            <p>fddf</p>
+        </div> -->
         <div class="dateCol" v-if="event.type == 'recurring'">
             <h2>{{ event.occurrence.length }}</h2>
             <h4>{{$t('common.events')}}</h4>
             <p>{{ recurringEventDate }}</p>
         </div>
-        <div class="detailsCol">
+        <div class="detailsCol"> 
             <h2>{{ event ? event.name : "" }}</h2>
             <VenuAddress :venue_id="event.venueId" />
             <div class="priceWrap">

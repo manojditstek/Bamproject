@@ -10,10 +10,15 @@
 </div>
 <div class="innerWraper">
     <div class="cardWrapper d-flex">
-        <div class="dateCol">
+        <div class="dateCol" v-if="singleEvent.timeslot?singleEvent.timeslot.length>0:''">
+            <TimeSlotEventDate :eventDate="singleEvent?singleEvent.startAt:''" />
+        </div>
+        <div class="dateCol" v-else>
             <EventDateFormat :eventDate="singleEvent?singleEvent.startAt:''" />
         </div>
+
         <div class="detailsCol">
+             <p>{{timeFormat(singleEvent?singleEvent.startAt:'')}} – {{timeFormat(singleEvent?singleEvent.endAt:'')}}</p>
             <h2>{{singleEvent.name}}</h2>
             <VenuAddress :venue_id="singleEvent.venueId" />
         </div>
@@ -38,6 +43,7 @@ import {computed} from '@vue/reactivity'
 import {useRouter} from "vue-router"
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress"
 import EventDateFormat from "../../components/singleEvent/EventDate"
+import TimeSlotEventDate from "../../components/singleEvent/TimeSlotEventDate"
 import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets"
 import TotalTicketCalculation from "../../components/cartModule/TotalTicketCalculation"
 import TimeSlot from "../../components/singleEvent/timeSlots/TimeSlot"
@@ -50,7 +56,8 @@ export default {
         Tickets,
         TotalTicketCalculation,
         TimeSlot,
-        CartButton
+        CartButton,
+        TimeSlotEventDate
     },
 
     setup() {

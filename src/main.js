@@ -9,12 +9,14 @@ import '@stripe/stripe-js'
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
-
-
-createApp(App).use(vueCustomElement)
 createApp(App)
+    .use(vueCustomElement)
     .use(router)
     .use(i18n)
     .use(store)
     .use(VueSweetalert2)
     .mount('vue-widget', App)
+
+    setTimeout(() => {
+        document.querySelector("vue-widget").fields = { a: "a", b: "b" };
+      }, 1000);
