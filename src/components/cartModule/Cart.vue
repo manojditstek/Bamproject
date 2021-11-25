@@ -1,9 +1,9 @@
 <template>
 <div class="singleTicketTotalAmount">
-    <div class="collapse">
+    <div class="collapse" @click="toggleButton=!toggleButton">
         <div class="collapseInner"></div>
     </div>
-    <div class="expand d-flex">
+    <div class="expand d-flex" v-show="toggleButton">
         <TotalTicketCalculation />
         <div class="labelBtn">
             <BackButton :message="'back'" class="button btnBlack" />
@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import {computed} from 'vue';
+import {computed,ref} from 'vue';
 import {useStore} from "vuex";
 import {useRouter} from "vue-router";
 import TotalTicketCalculation from "./TotalTicketCalculation"
@@ -74,7 +74,7 @@ export default {
     setup() {
         const store = useStore();
         const router = useRouter();
-
+        const toggleButton = ref(true);
         let cart = computed(function () {
             return store.state.cart
         });
@@ -134,7 +134,8 @@ export default {
             event,
             checkout,
             ticketPrice,
-            ticketDiscountPrice
+            ticketDiscountPrice,
+            toggleButton
         }
     }
 }

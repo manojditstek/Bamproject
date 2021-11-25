@@ -18,7 +18,7 @@ export default {
         CartButton
     },
     setup(){
-        const toggleButton = ref(false);
+        const toggleButton = ref(true);
         return{
             toggleButton
         }
