@@ -1,8 +1,6 @@
 <template>
-    <div class="addressDesc">
-        <span>{{venueName ? venueName.name :''}}</span>
-        <span>{{venueName ? venueName.address.city :''}}</span>
-    </div>
+        <p>{{venueName ? venueName.name :''}}</p>
+        <p>{{venueName ? venueName.address.city :''}}</p>
 </template>
 
 <script>
