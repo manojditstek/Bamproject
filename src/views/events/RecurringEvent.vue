@@ -58,6 +58,7 @@
       </div>
     </div>
     <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
+      <span></span>
       <TotalTicketCalculation />
         <CartButton />
     </div>
@@ -105,6 +106,7 @@
       />
     </div>
     <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
+      <span></span>
       <TotalTicketCalculation />
         <CartButton />
     </div>

@@ -38,8 +38,12 @@
 }
 .vc-popover-content-wrapper .vc-popover-content.direction-bottom {
 	left: -23px !important;
+}
+.vc-pane-container .vc-pane-layout .vc-pane .vc-header .vc-title{
 	font-family: var(--font-family-400)!important;
-
+}
+.vc-pane-container .vc-pane-layout .vc-pane .vc-weeks{
+	font-family: var(--font-family-400)!important;
 }
 .datePickerWrapper img {
 	width: 18px;
@@ -342,26 +346,36 @@
 .singleTicketTotalAmount {
 	background-color: #fbfbfb;
 	justify-content: space-between;
-	padding: 20px 20px;
+	padding:10px 20px;
 	align-items: center;
 	border-top: 1px solid rgba(57, 57, 57, 0.2);
-	padding-top: 30px;
 	position: relative;
 	border-bottom: 1px solid rgba(57, 57, 57, 0.3);
 }
 
-.singleTicketTotalAmount:before {
-	position: absolute;
-	content: "";
-	width: 32px;
-	height: 5px;
-	background-color: #d7d7d7;
-	top: 10px;
-	left: 50%;
-	transform: translateX(-50%);
-	border-radius: 50px;
+.singleTicketTotalAmount .collapse {
+	display: block;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
 }
-
+.singleTicketTotalAmount .collapseInner {
+    position: absolute;
+    content: "";
+    width: 32px;
+    height: 5px;
+    background-color: #d7d7d7;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    border-radius: 50px;
+    margin: 0 -20px;
+}
+.singleTicketTotalAmount .expand {
+    justify-content: space-between;
+    width: 100%;
+	margin: 10px 0 0 0;
+}
 .singleTicketTotalAmount .ticketCol,
 .singleTicketTotalAmount .labelBtn {
 	text-align: center;
