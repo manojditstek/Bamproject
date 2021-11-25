@@ -1,108 +1,107 @@
 <template>
-<div class="d-flex justify-content-between align-items-end header">
+  <div class="d-flex justify-content-between align-items-end header">
     <h1>
-        <a href="javascript:void(0)"  @click="backButton">
-            <i class="fa fa-angle-left" aria-hidden="true"></i>
-            {{singleEvent?lengthOfString(singleEvent.name):''}}
-        </a>
+      <a href="javascript:void(0)" @click="backButton">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+        {{ singleEvent ? lengthOfString(singleEvent.name) : "" }}
+      </a>
     </h1>
     <div class="datePicker"></div>
-</div>
-<div class="innerWraper">
-    <div class="cardWrapper d-flex">      
-        <div class="dateCol">
-            <EventDateFormat :eventDate="singleEvent?singleEvent.startAt:''" />
-        </div>
-        <div class="detailsCol">
-            <p>{{timeFormat(timeSlot?timeSlot.startAt:'')}} – {{timeFormat(timeSlot?timeSlot.endAt:'')}}</p>
-            <h2>{{singleEvent.name}}</h2>
-            <VenuAddress :venue_id="singleEvent.venueId" />
-        </div>
+  </div>
+  <div class="innerWraper">
+    <div class="cardWrapper d-flex">
+      <div class="dateCol">
+        <EventDateFormat :eventDate="singleEvent ? singleEvent.startAt : ''" />
+      </div>
+      <div class="detailsCol">
+        <p>
+          {{ timeFormat(timeSlot ? timeSlot.startAt : "") }} –
+          {{ timeFormat(timeSlot ? timeSlot.endAt : "") }}
+        </p>
+        <h2>{{ singleEvent.name }}</h2>
+        <VenuAddress :venue_id="singleEvent.venueId" />
+      </div>
     </div>
-</div>
-<div class="cardBodyWrapper">
-    <Tickets :ticket="ticket" :venueId="singleEvent.venueId" :startDate="singleEvent.startAt" :endDate="singleEvent.endAt" :ticketDscount="singleEvent.ticketDiscount"  :timeSlotId="timeSlot?timeSlot.id:''" :eventName="singleEvent.name" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
-</div>
-<div class="singleTicketTotalAmount" v-if="totalQuantity" >
-     <!-- <div class="collapse" @click="toggleButton=!toggleButton">
-        <div class="collapseInner"></div>
+  </div>
+  <div class="cardBodyWrapper">
+    <Tickets
+      :ticket="ticket"
+      :venueId="singleEvent.venueId"
+      :startDate="singleEvent.startAt"
+      :endDate="singleEvent.endAt"
+      :ticketDscount="singleEvent.ticketDiscount"
+      :timeSlotId="timeSlot ? timeSlot.id : ''"
+      :eventName="singleEvent.name"
+      v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''"
+      :key="ticket.id"
+    />
+  </div>
+  <div class="singleTicketTotalAmount" v-if="totalQuantity">
+    <div class="collapse">
+      <div class="collapseInner"></div>
     </div>
-     <div class="expand d-flex" v-show="toggleButton">
-        <TotalTicketCalculation />
-        <CartButton />
-    </div> -->
-    <CartCalculation />
-</div>
+    <div class="expand d-flex">
+      <TotalTicketCalculation />
+      <CartButton />
+    </div>
+  </div>
 </template>
 <script>
-import {useStore} from 'vuex'
-import {dateFormat,timeFormat,lengthOfString} from "../../common/common"
-import {computed,ref} from 'vue'
-import {useRouter} from "vue-router"
-import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress"
-import EventDateFormat from "../../components/singleEvent/TimeSlotEventDate"
-import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets"
-// import TotalTicketCalculation from "../../components/cartModule/TotalTicketCalculation"
-// import CartButton from "../../components/cartModule/CartButton"
-import CartCalculation from "../ShoppingCart/CartCalculation";
+import { useStore } from "vuex";
+import { dateFormat, timeFormat, lengthOfString } from "../../common/common";
+import { computed } from "vue";
+import { useRouter } from "vue-router";
+import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress";
+import EventDateFormat from "../../components/singleEvent/TimeSlotEventDate";
+import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets";
+import TotalTicketCalculation from "../../components/cartModule/TotalTicketCalculation";
+import CartButton from "../../components/cartModule/CartButton";
 export default {
-    name: 'SingleEvent',
-    components: {
-        VenuAddress,
-        EventDateFormat,
-        Tickets,
-        // TotalTicketCalculation,
-        // CartButton,
-        CartCalculation
-    },
+  name: "SingleEvent",
+  components: {
+    VenuAddress,
+    EventDateFormat,
+    Tickets,
+    TotalTicketCalculation,
+    CartButton,
+  },
 
-    setup() {
-        const store = useStore();
-        const router = useRouter();
-        const toggleButton = ref(false);
-         const loaderStatus = computed(() => {
-            return store.state.loadingStatus;
-        });
+  setup() {
+    const store = useStore();
+    const router = useRouter();
+    const loaderStatus = computed(() => {
+      return store.state.loadingStatus;
+    });
 
-        const timeSlot = computed(() => {
-            return store.state.timeSlot;
-        });
+    const timeSlot = computed(() => {
+      return store.state.timeSlot;
+    });
 
-        const totalQuantity = computed(() => {
-            return store.state.cart.itemsTotalQuantity;
-        });
+    const totalQuantity = computed(() => {
+      return store.state.cart.itemsTotalQuantity;
+    });
 
-        function backButton(){
-            router.push({
-                path: '/single-event'
-            })
-        }
+    function backButton() {
+      router.push({
+        path: "/single-event",
+      });
+    }
 
-        
-
-        const singleEvent = computed(() => {
-            return store.state.event;
-        })
-        return {
-            timeSlot,
-            singleEvent,
-            totalQuantity,
-            loaderStatus,
-            timeFormat,
-            dateFormat,
-            lengthOfString,
-            backButton,
-            toggleButton
-           
-
-        }
-    },
-
-  
-
-}
+    const singleEvent = computed(() => {
+      return store.state.event;
+    });
+    return {
+      timeSlot,
+      singleEvent,
+      totalQuantity,
+      loaderStatus,
+      timeFormat,
+      dateFormat,
+      lengthOfString,
+      backButton,
+    };
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

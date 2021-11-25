@@ -28,6 +28,8 @@ p {
 }
 small{
 	font-family: var(--font-family-400);
+	font-size: 12px;
+	line-height:15.6px
 }
 a {
 	color: var(--color);

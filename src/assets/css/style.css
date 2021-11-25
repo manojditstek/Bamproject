@@ -137,9 +137,7 @@
     letter-spacing: -0.001em;
 }
 .detailsCol .priceWrap small {
-    font-size: 12px;
     display: block;
-	line-height:15.6px
 }
 
 .limitExceeded {
