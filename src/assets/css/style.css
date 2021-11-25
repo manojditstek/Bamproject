@@ -71,7 +71,7 @@
 	text-decoration: none;
 }
 
-.header h2 a i {
+.header h1 a i {
 	font-size: 28px;
 	margin: 0 5px 0 0;
 	color: var(--color);

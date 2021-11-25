@@ -57,21 +57,19 @@
         </div>
       </div>
     </div>
-    <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
-      <span></span>
-      <TotalTicketCalculation />
-        <CartButton />
+    <div class="singleTicketTotalAmount " v-if="totalQuantity">
+        <CartCalculation />
     </div>
   </div>
   <!-- for occurrences -->
   <div v-else>
     <div class="d-flex justify-content-between align-items-end header">
-      <h2>
+      <h1>
         <a href="javascript:void(0)" @click="reSet">
           <i class="fa fa-angle-left" aria-hidden="true"></i>
           {{ recurringEvent ? lengthOfString(recurringEvent.name) : "" }}
         </a>
-      </h2>
+      </h1>
     </div>
 
     <div class="innerWraper">
@@ -105,10 +103,8 @@
         :key="ticket.id"
       />
     </div>
-    <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
-      <span></span>
-      <TotalTicketCalculation />
-        <CartButton />
+    <div class="singleTicketTotalAmount " v-if="totalQuantity">
+        <CartCalculation />
     </div>
   </div>
   <!-- end occurrences -->
@@ -123,8 +119,7 @@ import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress"
 import EventDateFormat from "../../components/singleEvent/EventDate"
 import DateRangePicker from "../../components/dateRangePicker/dateRangePicker"
 import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets"
-import TotalTicketCalculation from "../../components/cartModule/TotalTicketCalculation"
-import CartButton from "../../components/cartModule/CartButton"
+import CartCalculation from "../ShoppingCart/CartCalculation"
 export default{
   name: "RecurringEvent",
   components: {
@@ -132,8 +127,7 @@ export default{
     EventDateFormat,
     DateRangePicker,
     Tickets,
-    TotalTicketCalculation,
-    CartButton
+    CartCalculation
   },
 
   setup() {

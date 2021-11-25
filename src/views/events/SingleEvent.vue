@@ -31,10 +31,8 @@
     <Tickets :ticket="ticket" :venueId="singleEvent.venueId" :startDate="singleEvent.startAt" :endDate="singleEvent.endAt"  :ticketDscount="singleEvent.ticketDiscount" :eventName="singleEvent.name" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
 </div>
 
-<div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
-  <span></span>
-    <TotalTicketCalculation />
-        <CartButton />
+<div class="singleTicketTotalAmount " v-if="totalQuantity">
+    <CartCalculation />
 </div>
 </template>
 <script>
@@ -46,19 +44,17 @@ import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress"
 import EventDateFormat from "../../components/singleEvent/EventDate"
 import TimeSlotEventDate from "../../components/singleEvent/TimeSlotEventDate"
 import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets"
-import TotalTicketCalculation from "../../components/cartModule/TotalTicketCalculation"
 import TimeSlot from "../../components/singleEvent/timeSlots/TimeSlot"
-import CartButton from "../../components/cartModule/CartButton"
+import CartCalculation from "../ShoppingCart/CartCalculation";
 export default {
     name: 'SingleEvent',
     components: {
         VenuAddress,
         EventDateFormat,
         Tickets,
-        TotalTicketCalculation,
         TimeSlot,
-        CartButton,
-        TimeSlotEventDate
+        TimeSlotEventDate,
+        CartCalculation
     },
 
     setup() {

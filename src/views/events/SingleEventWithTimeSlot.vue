@@ -23,39 +23,43 @@
 <div class="cardBodyWrapper">
     <Tickets :ticket="ticket" :venueId="singleEvent.venueId" :startDate="singleEvent.startAt" :endDate="singleEvent.endAt" :ticketDscount="singleEvent.ticketDiscount"  :timeSlotId="timeSlot?timeSlot.id:''" :eventName="singleEvent.name" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
 </div>
-<div class="singleTicketTotalAmount" v-if="totalQuantity">
-     <div class="collapse">
-      <div class="collapseInner"></div>
+<div class="singleTicketTotalAmount" v-if="totalQuantity" >
+     <!-- <div class="collapse" @click="toggleButton=!toggleButton">
+        <div class="collapseInner"></div>
     </div>
-     <div class="expand d-flex">
+     <div class="expand d-flex" v-show="toggleButton">
         <TotalTicketCalculation />
         <CartButton />
-    </div>
+    </div> -->
+    <CartCalculation />
 </div>
 </template>
 <script>
 import {useStore} from 'vuex'
 import {dateFormat,timeFormat,lengthOfString} from "../../common/common"
-import {computed} from 'vue'
+import {computed,ref} from 'vue'
 import {useRouter} from "vue-router"
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress"
 import EventDateFormat from "../../components/singleEvent/TimeSlotEventDate"
 import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets"
-import TotalTicketCalculation from "../../components/cartModule/TotalTicketCalculation"
-import CartButton from "../../components/cartModule/CartButton"
+// import TotalTicketCalculation from "../../components/cartModule/TotalTicketCalculation"
+// import CartButton from "../../components/cartModule/CartButton"
+import CartCalculation from "../ShoppingCart/CartCalculation";
 export default {
     name: 'SingleEvent',
     components: {
         VenuAddress,
         EventDateFormat,
         Tickets,
-        TotalTicketCalculation,
-        CartButton
+        // TotalTicketCalculation,
+        // CartButton,
+        CartCalculation
     },
 
     setup() {
         const store = useStore();
         const router = useRouter();
+        const toggleButton = ref(false);
          const loaderStatus = computed(() => {
             return store.state.loadingStatus;
         });
@@ -87,7 +91,8 @@ export default {
             timeFormat,
             dateFormat,
             lengthOfString,
-            backButton
+            backButton,
+            toggleButton
            
 
         }
