@@ -96,6 +96,9 @@
 	background-color: var(--color);
 	color: var(--color-white);
 }
+.cardBodyWrapper .cardWrapper.recurring .dateCol h4 {
+    margin: 0 0 8px 0;
+}
 
 .cardBodyWrapper .cardWrapper.recurring .dateCol h2,
 .cardBodyWrapper .cardWrapper.recurring .dateCol h4,
@@ -189,10 +192,6 @@
 	flex-direction: column;
 	display: flex;
 	justify-content: center;
-}
-.thumbDesc p {
-    font-size: 12px;
-    line-height: 15.6px;
 }
 
 .toggleList .buttonWrap {

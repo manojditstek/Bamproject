@@ -14,10 +14,10 @@
         <EventDateFormat :eventDate="singleEvent ? singleEvent.startAt : ''" />
       </div>
       <div class="detailsCol">
-        <p>
+        <small>
           {{ timeFormat(timeSlot ? timeSlot.startAt : "") }} –
           {{ timeFormat(timeSlot ? timeSlot.endAt : "") }}
-        </p>
+        </small>
         <h2>{{ singleEvent.name }}</h2>
         <VenuAddress :venue_id="singleEvent.venueId" />
       </div>
@@ -37,13 +37,7 @@
     />
   </div>
   <div class="singleTicketTotalAmount" v-if="totalQuantity">
-    <div class="collapse">
-      <div class="collapseInner"></div>
-    </div>
-    <div class="expand d-flex">
-      <TotalTicketCalculation />
-      <CartButton />
-    </div>
+       <CartCalculation />
   </div>
 </template>
 <script>
@@ -56,14 +50,14 @@ import EventDateFormat from "../../components/singleEvent/TimeSlotEventDate";
 import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets";
 import TotalTicketCalculation from "../../components/cartModule/TotalTicketCalculation";
 import CartButton from "../../components/cartModule/CartButton";
+import CartCalculation from '../ShoppingCart/CartCalculation'
 export default {
   name: "SingleEvent",
   components: {
     VenuAddress,
     EventDateFormat,
     Tickets,
-    TotalTicketCalculation,
-    CartButton,
+    CartCalculation
   },
 
   setup() {

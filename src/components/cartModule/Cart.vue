@@ -1,8 +1,13 @@
 <template>
-<div class="singleTicketTotalAmount d-flex">
-    <TotalTicketCalculation />
-    <div class="labelBtn">
-        <BackButton :message="'back'" class="button btnBlack" />
+<div class="singleTicketTotalAmount">
+    <div class="collapse">
+        <div class="collapseInner"></div>
+    </div>
+    <div class="expand d-flex">
+        <TotalTicketCalculation />
+        <div class="labelBtn">
+            <BackButton :message="'back'" class="button btnBlack" />
+        </div>
     </div>
 </div>
 <div class="cardBodyWrapper cart">

@@ -23,10 +23,10 @@
           <h4>{{ $t("common.events") }}</h4>
         </div>
         <div class="detailsCol">
-          <p>
+          <small>
             {{ dateFormat(recurringEvent ? recurringEvent.startAt : "") }} -
             {{ dateFormat(recurringEvent ? recurringEvent.endAt : "") }}
-          </p>
+          </small>
           <h2>{{ recurringEvent ? recurringEvent.name : "" }}</h2>
           <VenuAddress
             :venue_id="recurringEvent ? recurringEvent.venueId : ''"
@@ -48,8 +48,8 @@
           <h2>{{ recurringEvent ? recurringEvent.name : "" }}</h2>
           <VenuAddress :venue_id="event ? event.venueId : ''" />
           <div class="priceWrap">
-            <p>{{ $t("common.from") }}</p>
-            {{ minPrice(event) }} {{ currency ? currency : "EUR" }}
+            <small>{{ $t("common.from") }}</small>
+            <h5>{{ minPrice(event) }} {{ currency ? currency : "EUR" }}</h5>
           </div>
         </div>
         <div class="collapseArrow">

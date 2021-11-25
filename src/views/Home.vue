@@ -11,10 +11,8 @@
     </div>
   </div>
 
-  <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
-  <span></span>
-    <TotalTicketCalculation />
-      <CartButton />
+  <div class="singleTicketTotalAmount" v-if="totalQuantity">
+      <CartCalculation />
   </div>
 
   <div class="col-md-12">
@@ -31,13 +29,13 @@ import DateRangePicker from "../components/dateRangePicker/dateRangePicker.vue";
 import { computed, reactive, watchEffect } from "vue";
 import { useStore } from "vuex";
 import CartButton from "../components/cartModule/CartButton"
+import CartCalculation from './ShoppingCart/CartCalculation'
 export default {
   name: "Home",
   components: {
     Event,
-    TotalTicketCalculation,
     DateRangePicker,
-    CartButton
+    CartCalculation
   },
 
   setup() {

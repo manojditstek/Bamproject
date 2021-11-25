@@ -18,11 +18,7 @@
         </div>
 
         <div class="detailsCol">
-<<<<<<< Updated upstream
-             <small>{{timeFormat(singleEvent?singleEvent.startAt:'')}} – {{timeFormat(singleEvent?singleEvent.endAt:'')}}</small>
-=======
             <small>{{timeFormat(singleEvent?singleEvent.startAt:'')}} – {{timeFormat(singleEvent?singleEvent.endAt:'')}}</small>
->>>>>>> Stashed changes
             <h2>{{singleEvent.name}}</h2>
             <VenuAddress :venue_id="singleEvent.venueId" />
         </div>

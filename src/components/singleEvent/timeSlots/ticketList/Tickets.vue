@@ -10,7 +10,7 @@
       </div>
       <div class="d-flex">
         <div class="thumbDesc">
-          <p>{{ $t("common.inclFees") }} € 0.00</p>
+          <small>{{ $t("common.inclFees") }} € 0.00</small>
         </div>
         <div class="ticketMessage" v-if="ticket.availableTickets == ''">
           <div
@@ -54,7 +54,7 @@
         </div>
         <div class="d-flex">
           <div class="thumbDesc" @click="toggleButton = !toggleButton">
-            <p>{{ $t("common.inclFees") }} € 0.00</p>
+            <small>{{ $t("common.inclFees") }} € 0.00</small>
           </div>
           <div class="ticketMessage" v-if="ticket.availableTickets == ''">
             <div
