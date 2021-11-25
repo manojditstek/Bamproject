@@ -10,15 +10,15 @@
 </div>
 <div class="innerWraper">
     <div class="cardWrapper d-flex">
-        <div class="dateCol" v-if="singleEvent.timeslot?singleEvent.timeslot.length>0:''">
-            <TimeSlotEventDate :eventDate="singleEvent?singleEvent.startAt:''" />
-        </div>
-        <div class="dateCol" v-else>
-            <EventDateFormat :eventDate="singleEvent?singleEvent.startAt:''" />
+        <!-- <div class="dateCol" v-if="singleEvent.timeslot?singleEvent.timeslot.length>0:''">
+            <EventDateWithoutTime :eventDate="singleEvent?singleEvent.startAt:''" />
+        </div> -->
+        <div class="dateCol">
+            <EventDateWithoutTime :eventDate="singleEvent?singleEvent.startAt:''" />
         </div>
 
         <div class="detailsCol">
-            <small>{{timeFormat(singleEvent?singleEvent.startAt:'')}} – {{timeFormat(singleEvent?singleEvent.endAt:'')}}</small>
+            <small v-if="singleEvent.timeslot?singleEvent.timeslot.length>0:''">{{timeFormat(singleEvent?singleEvent.startAt:'')}} – {{timeFormat(singleEvent?singleEvent.endAt:'')}}</small>
             <h2>{{singleEvent.name}}</h2>
             <VenuAddress :venue_id="singleEvent.venueId" />
         </div>
@@ -41,8 +41,8 @@ import {dateFormat,timeFormat,lengthOfString} from "@/common/common"
 import {computed} from '@vue/reactivity'
 import {useRouter} from "vue-router"
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress"
-import EventDateFormat from "../../components/singleEvent/EventDate"
-import TimeSlotEventDate from "../../components/singleEvent/TimeSlotEventDate"
+// import EventDateFormat from "../../components/singleEvent/EventDate"
+import EventDateWithoutTime from "../../components/singleEvent/EventDateWithoutTime"
 import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets"
 import TimeSlot from "../../components/singleEvent/timeSlots/TimeSlot"
 import CartCalculation from "../ShoppingCart/CartCalculation";
@@ -50,10 +50,10 @@ export default {
     name: 'SingleEvent',
     components: {
         VenuAddress,
-        EventDateFormat,
+        // EventDateFormat,
         Tickets,
         TimeSlot,
-        TimeSlotEventDate,
+        EventDateWithoutTime,
         CartCalculation
     },
 

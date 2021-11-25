@@ -9,7 +9,7 @@ export function timeFormat(value) {
 }
 
 export function lengthOfString(value) {
-    if (value ? value.length > 48 : '') {
+    if (value ? value.length > 22 : '') {
         return value.substring(0, 20) + '...'
     } else {
         return value

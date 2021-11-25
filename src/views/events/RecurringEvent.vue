@@ -79,7 +79,7 @@
           <h4>{{ $t("common.event") }}</h4>
         </div>
         <div class="dateCol" v-else>
-          <EventDateFormat
+          <EventDateWithoutTime
             :eventDate="singleEventData ? singleEventData.startAt : ''"
           />
         </div>
@@ -117,6 +117,7 @@ import { dateFormat, lengthOfString } from "../../common/common"
 import { computed, ref, reactive } from "@vue/reactivity"
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress"
 import EventDateFormat from "../../components/singleEvent/EventDate"
+import EventDateWithoutTime from '../../components/singleEvent/EventDateWithoutTime'
 import DateRangePicker from "../../components/dateRangePicker/dateRangePicker"
 import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets"
 import CartCalculation from "../ShoppingCart/CartCalculation"
@@ -127,7 +128,8 @@ export default{
     EventDateFormat,
     DateRangePicker,
     Tickets,
-    CartCalculation
+    CartCalculation,
+    EventDateWithoutTime
   },
 
   setup() {

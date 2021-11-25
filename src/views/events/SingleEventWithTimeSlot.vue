@@ -46,10 +46,8 @@ import { dateFormat, timeFormat, lengthOfString } from "../../common/common";
 import { computed } from "vue";
 import { useRouter } from "vue-router";
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress";
-import EventDateFormat from "../../components/singleEvent/TimeSlotEventDate";
+import EventDateFormat from "../../components/singleEvent/EventDateWithoutTime";
 import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets";
-import TotalTicketCalculation from "../../components/cartModule/TotalTicketCalculation";
-import CartButton from "../../components/cartModule/CartButton";
 import CartCalculation from '../ShoppingCart/CartCalculation'
 export default {
   name: "SingleEvent",
