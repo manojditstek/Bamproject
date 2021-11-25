@@ -28,8 +28,8 @@
             <h2>{{ event ? event.name : "" }}</h2>
             <VenuAddress :venue_id="event.venueId" />
             <div class="priceWrap">
-                <p>{{$t('common.from')}}</p>
-                {{minPrice?(minPrice).toFixed(2):'0.00'}} {{currency?currency:'EUR'}}
+                <small>{{$t('common.from')}}</small>
+                <h5>{{minPrice?(minPrice).toFixed(2):'0.00'}} {{currency?currency:'EUR'}}</h5>
             </div>
         </div>
         <div class="collapseArrow">
