@@ -9,7 +9,7 @@
     </div>
     <div class="cardBodyWrapper bgLight">
       <div class="payDesc">
-        <h1>{{ $t("downloadTicket.heading1") }}</h1>
+        <h2>{{ $t("downloadTicket.heading1") }}</h2>
         <p>{{ $t("downloadTicket.p1") }}</p>
         <div class="buttons">
           <button class="button btnDefault" @click.prevent="sendMail()">
@@ -34,13 +34,11 @@
                     <i class="fa fa-calendar-o" aria-hidden="true"></i>
                   </div>
                   <div class="eventDesc">
-                    <label>{{
-                      dateFormat(ticket.ticket[0].timeslot.startAt)
-                    }}</label>
-                    <label
-                      >{{ timeFormat(ticket.ticket[0].timeslot.startAt) }} -
-                      {{ timeFormat(ticket.ticket[0].timeslot.endAt) }}</label
-                    >
+                    <p>{{ dateFormat(ticket.ticket[0].timeslot.startAt) }}</p>
+                    <p>
+                      {{ timeFormat(ticket.ticket[0].timeslot.startAt) }} -
+                      {{ timeFormat(ticket.ticket[0].timeslot.endAt) }}
+                    </p>
                   </div>
                 </div>
                 <div class="eventInnerDetails">
@@ -95,10 +93,7 @@
                 <td>
                   {{ ticket.ticket[0].ticketConfig.name }} <br />
                   <div v-if="ticket.ticket[0].ticketDiscount">
-                    <span
-                      v-for="disc in ticket.ticket[0].ticketDiscount"
-                      :key="disc.id"
-                    >
+                    <span v-for="disc in ticket.ticket[0].ticketDiscount" :key="disc.id">
                       {{ disc.name }}</span
                     >
                   </div>
@@ -111,25 +106,25 @@
             </tbody>
             <tfoot>
               <tr>
-                <td colspan="2">
-                  {{ $t("downloadTicket.date") }} {{ toDayDate }}
-                </td>
+                <td colspan="2">{{ $t("downloadTicket.date") }} {{ toDayDate }}</td>
                 <td>{{ $t("downloadTicket.orderID") }} {{ tcktDetails.id }}</td>
               </tr>
             </tfoot>
           </table>
         </div>
-        <div class="ticketCartDesc">
-          <h4>{{ $t("downloadTicket.hinweis") }}</h4>
-          <p>{{ $t("downloadTicket.p2") }}</p>
-        </div>
-        <div class="footerActionBtn">
-          <button type="button" class="button btnBlack" @click="backButton">
-            {{ $t("downloadTicket.backtoShop") }}
-          </button>
-        </div>
       </div>
     </div>
+    <div class="cardBodyWrapper greyBg">
+      <div class="ticketCartDesc">
+        <h4>{{ $t("downloadTicket.hinweis") }}</h4>
+        <p>{{ $t("downloadTicket.p2") }}</p>
+      </div>
+    </div>
+      <div class="footerActionBtn btns">
+        <button type="button" class="button btnBlack" @click="backButton">
+          {{ $t("downloadTicket.backtoShop") }}
+        </button>
+      </div>
   </div>
 </template>
 <script>
@@ -177,19 +172,19 @@ export default {
 
     async function sendMail() {
       setTimeout(async () => {
-      if (!submitting.value) {
-        submitting.value = true;
-        store.commit("loadingStatus", true);
-        try {
-          await bam.order.sendOrderEmail({ id: orderID.value.id });
-        } catch (error) {
-          store.commit("loadingStatus", false);
-          store.commit("errorMsg", error);
-        } finally {
-          submitting.value = false;
+        if (!submitting.value) {
+          submitting.value = true;
+          store.commit("loadingStatus", true);
+          try {
+            await bam.order.sendOrderEmail({ id: orderID.value.id });
+          } catch (error) {
+            store.commit("loadingStatus", false);
+            store.commit("errorMsg", error);
+          } finally {
+            submitting.value = false;
+          }
         }
-      }
-      }, 1000)
+      }, 1000);
     }
 
     function backButton() {
