@@ -7,7 +7,7 @@
           <p>{{ $t("common.fees") }} € 0.00</p>
           <p>{{ $t("common.total") }} € 0.00</p>
         </div>
-        <div class="ticketMessage">
+        <div class="ticketMessage" v-if="ticket.availableTickets == ''">
           <div
             class="ticketMessageInner"
             :class="discount.availableTickets != '' ? '' : 'soldOut'"
