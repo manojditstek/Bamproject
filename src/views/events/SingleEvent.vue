@@ -18,7 +18,7 @@
         </div>
 
         <div class="detailsCol">
-             <p>{{timeFormat(singleEvent?singleEvent.startAt:'')}} – {{timeFormat(singleEvent?singleEvent.endAt:'')}}</p>
+             <small>{{timeFormat(singleEvent?singleEvent.startAt:'')}} – {{timeFormat(singleEvent?singleEvent.endAt:'')}}</small>
             <h2>{{singleEvent.name}}</h2>
             <VenuAddress :venue_id="singleEvent.venueId" />
         </div>
