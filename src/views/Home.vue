@@ -13,9 +13,7 @@
 
   <div class="singleTicketTotalAmount d-flex" v-if="totalQuantity">
     <TotalTicketCalculation />
-    <div class="labelBtn">
-      <router-link to="/shop" class="button btnBlack">{{ $t('common.cart') }}</router-link>
-    </div>
+      <CartButton />
   </div>
 
   <div class="col-md-12">
@@ -31,12 +29,14 @@ import TotalTicketCalculation from "../components/cartModule/TotalTicketCalculat
 import DateRangePicker from "../components/dateRangePicker/dateRangePicker.vue";
 import { computed, reactive, watchEffect } from "vue";
 import { useStore } from "vuex";
+import CartButton from "../components/cartModule/CartButton"
 export default {
   name: "Home",
   components: {
     Event,
     TotalTicketCalculation,
     DateRangePicker,
+    CartButton
   },
 
   setup() {
