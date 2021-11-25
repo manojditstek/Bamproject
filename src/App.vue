@@ -22,9 +22,6 @@ export default {
     fields: { type: Object }
   },
   
-  mounted() {
-    console.log("===>",this.fields);
-  },
   setup() {
     const store = useStore();
     const errorMsg = computed(() => {
