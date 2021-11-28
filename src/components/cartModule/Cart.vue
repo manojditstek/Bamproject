@@ -27,35 +27,34 @@
         </div>
     </div>
 </div>
-
-<div class="ticketWrapper">
-    <div class="ticketCategory d-flex" v-for=" item in cart.cartItems" :key="item.id">
-        <!-- <div class="dateCol">
-            <h2>{{item.quantity}}</h2>
-        </div> -->
-        <div class="detailsCol">
-            <h2>{{item.name}}</h2>
-            <p v-for="disc in item.discounts" :key="disc.id">
-                {{disc.name}}
-            </p>
-            <div class="priceWrap">
-                <h6>{{(item.totalPrice).toFixed(2)}} {{item.currency}}</h6>
+<div class="cardBodyWrapper">
+    <div class="ticketWrapper">
+        <div class="ticketCategory d-flex" v-for=" item in cart.cartItems" :key="item.id">
+            <!-- <div class="dateCol">
+                <h2>{{item.quantity}}</h2>
+            </div> -->
+            <div class="detailsCol">
+                <h2>{{item.name}}</h2>
+                <p v-for="disc in item.discounts" :key="disc.id">
+                    {{disc.name}}
+                </p>
+                <div class="priceWrap">
+                    <h6>{{(item.totalPrice).toFixed(2)}} {{item.currency}}</h6>
+                </div>
+            </div>
+            <div class="collapseArrow redBg" @click="removeFromCart(item)">
+                <img src="assets/images/close-icon.svg" width="10" alt="image">
             </div>
         </div>
-        <div class="collapseArrow redBg" @click="removeFromCart(item)">
-            <img src="assets/images/close-icon.svg" width="10" alt="image">
-        </div>
     </div>
-</div>
-
-<div class="footerActionBtn">
-    <button class="button btnBlack" :class="totalQuantity==0?'disabled':''" :disabled="totalQuantity==0" @click="checkout">
-        {{ $t('cartTemp.checkout') }}
-    </button>
-</div>
-
-<div class="sloganText ">
-    <p>{{ $t('cartTemp.msg') }}</p>
+    <div class="footerActionBtn">
+        <button class="button btnBlack" :class="totalQuantity==0?'disabled':''" :disabled="totalQuantity==0" @click="checkout">
+            {{ $t('cartTemp.checkout') }}
+        </button>
+    </div>
+    <div class="sloganText ">
+        <p>{{ $t('cartTemp.msg') }}</p>
+    </div>
 </div>
 </template>
 

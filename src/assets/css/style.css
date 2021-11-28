@@ -81,6 +81,11 @@
 	padding: 15px 23px;
     position: relative;
 }
+.cardBodyWrapper.greyBg {
+    background: #fbfbfb;
+    border-bottom: 1px solid rgba(57, 57, 57, 0.2);
+    border-top: 1px solid rgba(57, 57, 57, 0.2);
+}
 
 .cardBodyWrapper .cardWrapper {
 	border-radius: 9px;
@@ -394,7 +399,7 @@
 }
 
 .ticketWrapper {
-    padding: 25px 0px;
+	padding: 15px 0 25px 0px;
     max-width: 400px;
     margin: 0 auto;
 }
@@ -409,7 +414,9 @@
 	padding: 0;
 	border-bottom: 0;
 }
-
+.ticketWrapper .ticketCategory:last-child{
+	margin-bottom:0px;	
+}
 .ticketCategory .detailsCol {
     background: #fff;
 }
@@ -425,7 +432,7 @@
 
 .footerActionBtn {
 	max-width: 350px;
-	margin: 0 auto 15px;
+	margin: 0 auto;
 }
 
 .footerActionBtn.btns .button {
@@ -448,8 +455,8 @@
 }
 
 .sloganText {
-	text-align: center;
-	padding: 0 0 30px 0;
+    text-align: center;
+    margin: 20px 0 0 0;
 }
 
 .sloganText p {
@@ -527,7 +534,7 @@
 	position: relative;
 }
 
-.stripeWrapper .error-message {
+.stripeWrapper .error-message ,.stripeInner .error-message {
 	position: absolute;
 	bottom: -21px;
 	color:var(--color-red);
@@ -538,6 +545,7 @@
 	border: 1px solid rgba(57, 57, 57, 0.2);
 	box-sizing: border-box;
 	border-radius: 8px;
+	position: relative;
 }
 .stripeWrappernew .stripeInner .stripe{
  background:transparent;
@@ -600,13 +608,14 @@
 	transform: translateY(-50%);
 	padding: 0 5px;
 	pointer-events: none;
+	line-height:18.2px;
 }
 
 .formGroup input:focus~.labelInput {
 	transform: scale(0.75) translateY(-39px);
 	background: #fbfbfb;
 	color: var(--color);
-	left: -2px;
+	left:0px;
 }
 
 .formGroup input.active {
@@ -703,15 +712,14 @@
 	border: 1px solid var(--color);
 }
 
-.payDesc h1 {
+.payDesc h2 {
 	font-size: 14px;
 	margin: 0 0 10px 0;
+	line-height:18px;
 }
 
 .payDesc p {
-	font-size: 14px;
 	margin: 0 0 18px 0;
-	line-height: normal;
 }
 
 .payDesc .buttons {
@@ -725,9 +733,10 @@
 }
 
 .ticketDesc h2 {
-	font-size: 18px;
-	border-bottom: 2px solid var(--color);
-	padding: 0 0 12px 0;
+    font-size: 18px;
+    border-bottom: 1px solid #d7d7d7;
+    padding: 0 0 12px 0;
+    line-height: 23px;
 }
 
 .ticketDesc .eventDetails {
@@ -757,12 +766,6 @@
 	font-size: 20px;
 }
 
-.ticketDesc .eventInnerDetails .eventDesc label {
-	font-size: 14px;
-	font-weight: normal;
-	display: block;
-}
-
 .ticketCart {
 	margin: 0 0 15px 0;
 }
@@ -782,11 +785,12 @@
 .ticketCart .table>thead>tr>th {
 	padding: 0.75rem;
 	vertical-align: top;
-	border-top: 2px solid var(--color);
-	border-bottom: 2px solid var(--color);
+	border-top: 1px solid #d7d7d7;
+	border-bottom:1px solid #d7d7d7;
 	font-size: 18px;
 	font-family: var(--font-family-700);
 	text-align: left;
+	line-height: 23px;
 }
 
 .ticketCart .table>thead>tr>th:last-child {
@@ -797,7 +801,8 @@
 	padding: 0.75rem;
 	vertical-align: top;
 	border-bottom: 1px solid rgba(57, 57, 57, 0.2);
-	font-size: 14px;
+    font-size: 14px;
+    line-height: 15.6px;
 }
 
 .ticketCart .table>tbody>tr>td:last-child {
@@ -807,16 +812,12 @@
 .ticketCart .table>tfoot>tr>td {
 	padding: 0.75rem 0;
 	vertical-align: top;
-	border-top: 2px solid var(--color);
-	font-size: 14px;
+	border-top:1px solid #d7d7d7;
+	font-size: 12px;
 }
 
 .ticketCart .table>tfoot>tr>td:last-child {
 	text-align: right;
-}
-
-.ticketCartDesc {
-	margin: 0 0 40px 0px;
 }
 
 .ticketCartDesc h4 {
@@ -827,6 +828,7 @@
 .ticketCartDesc p {
 	font-size: 12px;
 	margin: 0;
+	line-height:15.6px;
 }
 
 .ticketMessage {

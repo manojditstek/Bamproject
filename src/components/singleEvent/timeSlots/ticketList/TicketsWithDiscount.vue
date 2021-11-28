@@ -4,8 +4,8 @@
       <h2>{{ discount.name }}:{{ discount.value }} {{ "EUR" }}</h2>
       <div class="priceWrap d-flex">
         <div class="eventPrice1">
-          <p>{{ $t("common.fees") }} € 0.00</p>
-          <p>{{ $t("common.total") }} € 0.00</p>
+          <small>{{ $t("common.fees") }} € 0.00</small>
+          <small>{{ $t("common.total") }} € 0.00</small>
         </div>
         <div class="ticketMessage" v-if="ticket.availableTickets == ''">
           <div
