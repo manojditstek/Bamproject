@@ -17,6 +17,6 @@ createApp(App)
     .use(VueSweetalert2)
     .mount('vue-widget', App)
 
-    setTimeout(() => {
-        document.querySelector("vue-widget").fields = { a: "a", b: "b" };
-      }, 1000);
+    // setTimeout(() => {
+    //     document.querySelector("vue-widget").fields = { a: "a", b: "b" };
+    //   }, 1000);

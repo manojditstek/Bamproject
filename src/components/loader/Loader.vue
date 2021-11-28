@@ -13,13 +13,14 @@ export default {
     name: 'Loader',
     setup() {
         const store = useStore();
+         
         const loaderStatus = computed(() => {
             return store.state.loadingStatus;
         });
         return {
             loaderStatus
-
         }
+        
     }
 }
 </script>

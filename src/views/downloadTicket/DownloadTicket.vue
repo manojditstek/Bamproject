@@ -157,7 +157,7 @@ export default {
       return store.state.cart.itemsTotalQuantity;
     });
 
-    let cart = computed(function () {
+    let cart = computed(()=> {
       return store.state.cart;
     });
 
@@ -165,8 +165,8 @@ export default {
       return store.state.createdOrder;
     });
 
-    let currency = computed(function () {
-      return store.state.currency;
+    let currency = computed(()=> {
+      return store.state.cart.cartItems[0].currency;
     });
 
     function downloadTkt() {
@@ -186,6 +186,7 @@ export default {
           store.commit("loadingStatus", false);
           store.commit("errorMsg", error);
         } finally {
+          store.commit("loadingStatus", false);
           submitting.value = false;
         }
       }

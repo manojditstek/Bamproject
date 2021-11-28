@@ -15,12 +15,12 @@
         <h1>{{ $t('cartTemp.cart') }}</h1>
         <div class="amountWrapper">
             <p>{{totalQuantity}} {{ $t('cartTemp.tickets') }} <span>{{(ticketPrice).toFixed(2)}} {{currency}}</span></p>
-            <p>{{ $t('cartTemp.fees') }} <span>0.00 {{ $t('cartTemp.eur') }}</span></p>
-            <p v-if="ticketDiscountPrice">Discount <span>{{ ticketDiscountPrice }} {{currency}}</span></p>
+            <p>{{ $t('cartTemp.fees') }} <span>0.00 {{ currency }}</span></p>
+            <p v-if="ticketDiscountPrice">Discount <span>{{ (ticketDiscountPrice).toFixed(2) }} {{currency}}</span></p>
         </div>
         <div class="amountWrapper">
-            <p>{{ $t('cartTemp.subtotal') }} <span>0.00 {{ $t('cartTemp.eur') }}</span></p>
-            <p>{{ $t('cartTemp.tax') }} (0%) <span>0.00 {{ $t('cartTemp.eur') }}</span></p>
+            <p>{{ $t('cartTemp.subtotal') }} <span>{{(totalPrice).toFixed(2)}} {{currency}}</span></p>
+            <p>{{ $t('cartTemp.tax') }} (0%) <span>0.00 {{ currency }}</span></p>
         </div>
         <div class="totalAmountWrapper ">
             <p>{{ $t('cartTemp.total') }} <span>{{(totalPrice).toFixed(2)}} {{currency}}</span></p>
@@ -79,7 +79,7 @@ export default {
             return store.state.cart
         });
 
-        let ticketPrice = computed(function(){
+        let ticketPrice = computed(()=>{
             let ticketPrice=0;
             cart.value.cartItems.forEach(element => {
               ticketPrice += element.totalPrice
@@ -87,7 +87,7 @@ export default {
             return ticketPrice
         })
 
-        let ticketDiscountPrice = computed(function(){
+        let ticketDiscountPrice = computed(()=>{
             let ticketPrice=0;
             cart.value.cartItems.forEach(element => {
               ticketPrice += element.totalDiscount;
@@ -95,12 +95,16 @@ export default {
             return ticketPrice;
         })
 
-        let event = computed(function () {
+        let event = computed(()=> {
             return store.state.event
         });
 
-        let currency = computed(function () {
-            return store.state.currency
+        let currency = computed(()=> {
+             let currency=0;
+            cart.value.cartItems.forEach(element => {
+              currency = element.currency;
+            })
+            return currency;
         });
 
         const totalPrice = computed(() => {

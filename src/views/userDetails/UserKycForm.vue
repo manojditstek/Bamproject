@@ -242,7 +242,7 @@ export default {
     }
 
     function validPhone(phone) {
-      var re = /^[0-9]*$/;
+      var re = /^(\+|\d)[0-9]{7,16}$/;
       return re.test(phone);
     }
 

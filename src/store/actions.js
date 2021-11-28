@@ -8,9 +8,7 @@ import bam from '../services/bamSdk'
 /* end header */
 
 /* This method used for multiple events */
-export const getEvents = async ({
-    commit
-}, dateRange) => {
+export const getEvents = async ({commit}, dateRange) => {
     commit('loadingStatus', true)
     let startDateFormat = '';
     let endDateFormat = '';
@@ -60,13 +58,23 @@ export const getEvents = async ({
 
 
 /* This method used for single event */
-export const getEvent = async ({
-    commit
-}, id) => {
+export const getEvent = async ({commit}, id) => {
     commit('loadingStatus', true)
+    if(id){
+        try {
+            let response = await bam.event.getEvent({
+                id: id
+            })
+            commit('setEvent', response)
+            commit('loadingStatus', false)
+        } catch (error) {
+            commit('loadingStatus', false)
+            commit('errorMsg', error);
+        }
+    }else{
     try {
         let response = await bam.event.getEvent({
-            id: id
+            id: process.env.VUE_APP_EVENT_ID
         })
         commit('setEvent', response)
         commit('loadingStatus', false)
@@ -75,11 +83,10 @@ export const getEvent = async ({
         commit('errorMsg', error);
     }
 }
+}
 //end single event
 /* This method used for single event with time slots  */
-export const sigleEventWithTimeSlot = async ({
-    commit
-}, data) => {
+export const sigleEventWithTimeSlot = async ({commit}, data) => {
     commit('loadingStatus', true)
     try {
         let response = await bam.event.getEvent({
@@ -97,15 +104,14 @@ export const sigleEventWithTimeSlot = async ({
 
 
 /* This method used for seated event */
-export const workSpaceKey = async ({
-    commit
-}) => {
+export const workSpaceKey = async ({commit}) => {
     commit('loadingStatus', true)
     try {
         let organizer = await bam.account.getOrganizer({
             id: 'eventspace',
             fields: ['workspace']
         });
+        commit('loadingStatus', false)
         commit('workSpaceKey', organizer)
     } catch (error) {
         commit('loadingStatus', false)
@@ -115,9 +121,7 @@ export const workSpaceKey = async ({
 // end seated event
 
 /* This method used for recurring event*/
-export const recurringEvent = async ({
-    commit
-}, id) => {
+export const recurringEvent = async ({commit}, id) => {
     commit('loadingStatus', true)
     try {
         let response = await bam.event.getEvent({
@@ -137,9 +141,7 @@ export const recurringEvent = async ({
 
 
 /* This method used for create order */
-export const createOrder = async ({
-    commit
-}, cartItem) => {
+export const createOrder = async ({commit}, cartItem) => {
     commit('loadingStatus', true)
     try {
         let response = await bam.order.createOrder({
@@ -162,28 +164,26 @@ export const createOrder = async ({
 // end create order method
 
 /* This method used for storing ticket holder information  */
-export const ticketHolderInfo = async ({
-    commit
-}, data) => {
-    let isValidForm = true;
+export const ticketHolderInfo = async ({commit}, data) => {
+    let isValidForm=true;
     data.orderItem.forEach(async (element, i) => {
         element.ticket.forEach(async (item, j) => {
-            if (!data.data.first_name[i + '' + j]) {
-                isValidForm = false
+            if(!data.data.first_name[i + '' + j]){
+                isValidForm=false
             }
-            if (!data.data.last_name[i + '' + j]) {
-                isValidForm = false
+            if(!data.data.last_name[i + '' + j]){
+                isValidForm=false
             }
-            if (!data.data.email[i + '' + j]) {
-                isValidForm = false
+            if(!data.data.email[i + '' + j]){
+                isValidForm=false
             }
-            if (!data.data.phone[i + '' + j]) {
-                isValidForm = false
+            if(!data.data.phone[i + '' + j]){
+                isValidForm=false
             }
         })
     })
 
-    if (isValidForm) {
+    if(isValidForm){
         commit('loadingStatus', true)
         data.orderItem.forEach(async (element, i) => {
             element.ticket.forEach(async (item, j) => {
@@ -209,9 +209,7 @@ export const ticketHolderInfo = async ({
 // end ticket holder information
 
 /* This method used for storing order contact details  */
-export const orderContact = async ({
-    commit
-}, data) => {
+export const orderContact = async ({commit}, data) => {
     commit('loadingStatus', true)
     if (data.data.billing_email) {
         data.data.email = data.data.billing_email
@@ -237,62 +235,57 @@ export const orderContact = async ({
 
 
 /* This method used for Payment module  */
-export const paymentInitiate = async ({
-    commit,
-    state
-}, data) => {
+export const paymentInitiate = async ({commit,state}, data) => {
     commit('loadingStatus', true)
     if (!state.submitting) {
         state.submitting = true;
-        try {
-            let response = await bam.payment.createPaymentIntent({
-                orderId: data.id,
-                type: data.payMethod
-            })
+    try {
+        let response = await bam.payment.createPaymentIntent({
+            orderId: data.id,
+            type: data.payMethod
+        })
 
-            commit('paymentInitiate', response)
-            commit('loadingStatus', false)
-        } catch (error) {
-            commit('errorMsg', error);
-            commit('loadingStatus', false)
-        } finally {
-            state.submitting = false;
-        }
+        commit('paymentInitiate', response)
+        commit('loadingStatus', false)
+    } catch (error) {
+        commit('errorMsg', error);
+        commit('loadingStatus', false)
     }
+    finally{
+        state.submitting = false;
+    }
+}
 }
 //end Payment module 
 
 /* This method used for set timer  */
-export const startTimer = async ({
-    commit
-}) => {
+export const startTimer = async ({commit}) => {
     commit('timer');
 }
 //end set timer
 
 
 /* This method used for download ticket  */
-export const downloadTicketPdf = async ({
-    commit,
-    state
-}, data) => {
+export const downloadTicketPdf = async ({commit,state}, data) => {
     commit('loadingStatus', true)
     setTimeout(async () => {
         if (!state.submitting) {
             state.submitting = true;
-            try {
-                let ticket = await bam.order.downloadTickets({
-                    id: data.orderId
-                })
-                saveByteArray([ticket], 'ticket.pdf');
-                // await saveStreamToFile(ticket, 'ticket.pdf');
-            } catch (error) {
-                commit('errorMsg', error);
-                commit('loadingStatus', false)
-            } finally {
-                state.submitting = false;
-            }
+        try {
+            let ticket = await bam.order.downloadTickets({
+                id: data.orderId
+            })
+            saveByteArray([ticket], 'ticket.pdf');
+            // await saveStreamToFile(ticket, 'ticket.pdf');
+            commit('loadingStatus', false)
+        } catch (error) {
+            commit('errorMsg', error);
+            commit('loadingStatus', false)
         }
+        finally{
+            state.submitting = false;
+        }
+    }
     }, 3000)
 
 }

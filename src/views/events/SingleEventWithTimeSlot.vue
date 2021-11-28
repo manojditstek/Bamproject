@@ -61,10 +61,6 @@ export default {
   setup() {
     const store = useStore();
     const router = useRouter();
-    const loaderStatus = computed(() => {
-      return store.state.loadingStatus;
-    });
-
     const timeSlot = computed(() => {
       return store.state.timeSlot;
     });
@@ -86,7 +82,6 @@ export default {
       timeSlot,
       singleEvent,
       totalQuantity,
-      loaderStatus,
       timeFormat,
       dateFormat,
       lengthOfString,

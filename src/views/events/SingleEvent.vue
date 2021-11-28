@@ -10,9 +10,6 @@
 </div>
 <div class="innerWraper">
     <div class="cardWrapper d-flex">
-        <!-- <div class="dateCol" v-if="singleEvent.timeslot?singleEvent.timeslot.length>0:''">
-            <EventDateWithoutTime :eventDate="singleEvent?singleEvent.startAt:''" />
-        </div> -->
         <div class="dateCol">
             <EventDateWithoutTime :eventDate="singleEvent?singleEvent.startAt:''" />
         </div>
@@ -41,7 +38,6 @@ import {dateFormat,timeFormat,lengthOfString} from "@/common/common"
 import {computed} from '@vue/reactivity'
 import {useRouter} from "vue-router"
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress"
-// import EventDateFormat from "../../components/singleEvent/EventDate"
 import EventDateWithoutTime from "../../components/singleEvent/EventDateWithoutTime"
 import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets"
 import TimeSlot from "../../components/singleEvent/timeSlots/TimeSlot"
@@ -50,7 +46,6 @@ export default {
     name: 'SingleEvent',
     components: {
         VenuAddress,
-        // EventDateFormat,
         Tickets,
         TimeSlot,
         EventDateWithoutTime,
@@ -60,10 +55,6 @@ export default {
     setup() {
         const store = useStore();
         const router = useRouter();
-        const loaderStatus = computed(() => {
-            return store.state.loadingStatus;
-        });
-
         const totalQuantity = computed(() => {
             return store.state.cart.itemsTotalQuantity;
         });
@@ -73,7 +64,6 @@ export default {
         });
 
         const singleEvent = computed(() => {
-            store.dispatch('workSpaceKey');
             return store.state.event;
         })
 
@@ -86,7 +76,6 @@ export default {
         return {
             singleEvent,
             totalQuantity,
-            loaderStatus,
             backToHome,
             workSpaceKey,
             dateFormat,

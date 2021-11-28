@@ -23,7 +23,7 @@ export default {
         const store = useStore();
 
         let currency = computed(function () {
-            return store.state.currency
+            return store.state.cart.cartItems[0].currency
         });
 
         const totalPrice = computed(() => {

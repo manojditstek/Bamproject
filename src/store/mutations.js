@@ -147,6 +147,7 @@ export const backToHome = (state) =>{
   state.cart.itemsTotalQuantity=0;
   state.cart.itemTotalAmount=0;
   state.errorMsg=null;
+  state = null; 
 }
 
 

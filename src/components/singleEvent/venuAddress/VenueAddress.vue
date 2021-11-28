@@ -18,22 +18,22 @@ export default {
         const venueName = ref();
         
         watchEffect(async () => {
-            store.commit('loadingStatus', true)
-                if (props.venue_id?props.venue_id:'') {
-                    store.commit('loadingStatus', true)
+            // store.commit('loadingStatus', true)
+                if (props.venue_id) {
+                    
                     try{
                     let response = await bam.venue.getVenue({
                         id: props.venue_id
                     })
                         venueName.value = response
-                        store.commit('loadingStatus', false)
+                        // store.commit('loadingStatus', false)
                     }
                     catch(error) {
-                        store.commit('loadingStatus', false)
+                        // store.commit('loadingStatus', false)
                         store.commit('errorMsg', error);
                     }
                 }
-
+                    
                 })
         
 

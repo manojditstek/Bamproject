@@ -104,8 +104,11 @@ export default {
     let perUserQuantity = computed(function () {
       let ticket = props.ticket;
       let perUser = cart.value.filter(
-        (item) => item.quantity == ticket.ticketsPerUser && item.id == ticket.id
-      );
+        (item) =>item.id == ticket.id
+      ).reduce((total, next)=>{
+    return total + next.quantity
+  },0);
+      console.log('t=>',perUser)
       return perUser;
     });
 

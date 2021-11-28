@@ -89,11 +89,7 @@
       </div>
     </div>
     <div class="footerActionBtn btns">
-      <button
-        class="button btnBlack"
-        :class="payMethod == 'epsBank' && name == '' ? 'disabled' : ''"
-        @click="submit"
-      >
+      <button class="button btnBlack" @click="submit">
         {{ $t("common.pay") }} {{ totalPrice.toFixed(2) }} {{ currency }}
       </button>
       <a @click="backToHome()" class="button btnGray">{{
@@ -108,6 +104,7 @@ import { ref, computed } from "vue";
 import { useStripe, StripeElement } from "vue-use-stripe";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import Swal from "sweetalert2";
 export default {
   components: {
     StripeElement,
@@ -131,7 +128,7 @@ export default {
       return store.state.timerDispaly;
     });
     let currency = computed(function () {
-      return store.state.currency;
+      return store.state.cart.cartItems[0].currency;
     });
 
     let orderID = computed(() => {
@@ -162,9 +159,9 @@ export default {
         {
           type: "card",
           options: {
-              style: {
+            style: {
               base: {
-                iconColor:"#393939",
+                iconColor: "#393939",
                 color: "#393939",
                 fontSize: "14px",
                 "::placeholder": {
@@ -203,6 +200,22 @@ export default {
               store.commit("errorMsg", error.response);
             });
           if (response.paymentIntent.status == "succeeded") {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: "top",
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener("mouseenter", Swal.stopTimer);
+                toast.addEventListener("mouseleave", Swal.resumeTimer);
+              },
+            });
+
+            Toast.fire({
+              icon: "success",
+              title: "Payment completed!",
+            });
             router.push({
               path: "/download-ticket",
             });
@@ -255,7 +268,7 @@ export default {
       orderID,
       name,
       cardField,
-      backToHome
+      backToHome,
     };
   },
 };

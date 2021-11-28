@@ -33,7 +33,7 @@ export default {
   components: {
     Event,
     DateRangePicker,
-    CartCalculation
+    CartCalculation,
   },
 
   setup() {
@@ -56,10 +56,7 @@ export default {
     const totalQuantity = computed(() => {
       return store.state.cart.itemsTotalQuantity;
     });
-
-    const loaderStatus = computed(() => {
-      return store.state.loadingStatus;
-    });
+    
 
     watchEffect(async () => {
       if (date.range.start != "" && date.range.end != "") {
@@ -71,7 +68,6 @@ export default {
     return {
       events,
       totalQuantity,
-      loaderStatus,
       date,
     };
   },

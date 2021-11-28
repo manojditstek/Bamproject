@@ -1,7 +1,7 @@
 <template>
   <div class="mainWrapper">
     <div class="contentWraper">
-      <Loader />
+      <Loader/>
       <div class="contentInnerWraper">
         <p>{{ fields }}</p>
         <error-message />
@@ -18,10 +18,6 @@ import ErrorMessage from "./components/errorMessages/ErrorMessages.vue";
 import Loader from './components/loader/Loader.vue';
 export default {
   name: "app",
-  props: {
-    fields: { type: Object }
-  },
-  
   setup() {
     const store = useStore();
     const errorMsg = computed(() => {
@@ -31,7 +27,6 @@ export default {
     function closeAlert() {
       store.state.errorMsg = "";
     }
-
     return {
       errorMsg,
       closeAlert,

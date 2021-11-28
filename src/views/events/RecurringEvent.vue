@@ -151,10 +151,6 @@ export default{
       return (singleEventData.value = "");
     }
 
-    const loaderStatus = computed(() => {
-      return store.state.loadingStatus;
-    });
-
     const recurringEvent = computed(() => {
       return store.state.recurringEvent;
     });
@@ -189,7 +185,6 @@ export default{
     return {
       singleEvent,
       recurringEvent,
-      loaderStatus,
       singleEventData,
       reSet,
       totalQuantity,

@@ -30,7 +30,7 @@ data() {
     attrs: [
         {
           key: 'today',
-          highlight: true,
+          highlight: false,
           dates: new Date(),
         },
       ],

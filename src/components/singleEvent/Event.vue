@@ -22,15 +22,14 @@
         <div class="dateCol" v-if="event.type == 'recurring'">
             <h2>{{ event.occurrence.length }}</h2>
             <h4>{{$t('common.events')}}</h4>
-            <small>from</small>
-            <small>{{ recurringEventDate }}</small>
+            <p>{{ recurringEventDate }}</p>
         </div>
         <div class="detailsCol"> 
             <h2>{{ event ? event.name : "" }}</h2>
             <VenuAddress :venue_id="event.venueId" />
             <div class="priceWrap">
-                <small>{{$t('common.from')}}</small>
-                <h5>{{minPrice?(minPrice).toFixed(2):'0.00'}} {{currency?currency:'EUR'}}</h5>
+                <p>{{$t('common.from')}}</p>
+                {{minPrice?(minPrice).toFixed(2):'0.00'}} {{currency?currency:'EUR'}}
             </div>
         </div>
         <div class="collapseArrow">

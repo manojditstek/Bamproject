@@ -1,7 +1,7 @@
 <template>
 <div class="cardWrapper d-flex" :class="toggleButton?'active':''" @click="toggleButton=!toggleButton && timeSlots(event_id,timeSlot)" >
     <div class="detailsCol">
-        <h2>{{timeFormat(timeSlot.startAt)}} – {{timeFormat(timeSlot.endAt)}}</h2>
+        <!-- <h2>{{timeFormat(timeSlot.startAt)}} – {{timeFormat(timeSlot.endAt)}}</h2> -->
     </div>
     <div class="collapseArrow">
          <i class="fa fa-angle-right"></i>
