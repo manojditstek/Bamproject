@@ -160,7 +160,7 @@ a {
 	width: 40px;
 }
 .contentInnerWraper {
-    max-height: calc(100vh - 0px);
+    height: calc(100vh - 0px);
     overflow: auto;
 }
 .contentWraper {

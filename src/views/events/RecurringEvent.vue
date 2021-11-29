@@ -49,7 +49,7 @@
           <VenuAddress :venue_id="event ? event.venueId : ''" />
           <div class="priceWrap">
             <small>{{ $t("common.from") }}</small>
-            <h5>{{ minPrice(event) }} {{ currency ? currency : "EUR" }}</h5>
+            <h6>{{ minPrice(event) }} {{ currency ? currency : "EUR" }}</h6>
           </div>
         </div>
         <div class="collapseArrow">
