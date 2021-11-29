@@ -24,11 +24,8 @@
     .header {
         display: block !important;
     }
-    .header h1 {
-        margin: 0 0 10px 0;
-    }
     .datePicker {
         max-width: 200px;
-        margin: 0 auto;
+        margin: 10px auto 0;
     }
 }
