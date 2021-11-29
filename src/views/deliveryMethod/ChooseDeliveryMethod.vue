@@ -1,12 +1,11 @@
 <template>
-<div class="d-flex justify-content-between align-items-end header">
+<div class="justify-content-between align-items-end header">
     <h1>
         <router-link to="/shop">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
             {{$t('common.cart')}}
         </router-link>
     </h1>
-    <div class="datePicker"></div>
 </div>
 <div class="cardBodyWrapper">
     <div class="innerHeading">

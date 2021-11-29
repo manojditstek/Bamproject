@@ -1,6 +1,6 @@
 <template>
   <div v-if="singleEventData == ''">
-    <div class="d-flex justify-content-between align-items-end header">
+    <div class="justify-content-between align-items-end header">
       <h1>
         <a href="javascript:void(0)" @click="backToHome">
           <i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -8,12 +8,10 @@
         </a>
       </h1>
       <div class="datePicker">
-        <div class="datePicker">
           <DateRangePicker
             v-model="date.range"
             :disabled="recurringEvent ? recurringEvent.length < 1 : ''"
           />
-        </div>
       </div>
     </div>
     <div class="innerWraper">
@@ -63,7 +61,7 @@
   </div>
   <!-- for occurrences -->
   <div v-else>
-    <div class="d-flex justify-content-between align-items-end header">
+    <div class="justify-content-between align-items-end header">
       <h1>
         <a href="javascript:void(0)" @click="reSet">
           <i class="fa fa-angle-left" aria-hidden="true"></i>

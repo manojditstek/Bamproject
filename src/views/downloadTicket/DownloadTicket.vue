@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="d-flex justify-content-between align-items-end header">
+    <div class="justify-content-between align-items-end header">
       <h1>
         <a href="javascript:void(0)" @click="backButton">{{
           $t("downloadTicket.backtoHome")

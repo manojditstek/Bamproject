@@ -59,6 +59,7 @@
 	background-color: #fbfbfb;
 	padding: 15px 23px;
 	margin-bottom: 0;
+	display:flex;
 }
 
 .header h1 {

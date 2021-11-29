@@ -1,12 +1,11 @@
 <template>
-  <div class="d-flex justify-content-between align-items-end header">
+  <div class="justify-content-between align-items-end header">
     <h1>
       <a href="javascript:void(0)" @click="backButton">
         <i class="fa fa-angle-left" aria-hidden="true"></i>
         {{ singleEvent ? lengthOfString(singleEvent.name) : "" }}
       </a>
     </h1>
-    <div class="datePicker"></div>
   </div>
   <div class="innerWraper">
     <div class="cardWrapper d-flex">

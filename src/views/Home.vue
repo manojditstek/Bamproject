@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-between align-items-end header">
+  <div class="justify-content-between align-items-end header">
     <h1>{{ $t('common.events') }}</h1>
     <div class="datePicker">
       <DateRangePicker v-model="date.range" :disabled="events.length < 1" />
