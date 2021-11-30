@@ -21,4 +21,11 @@
         left: 15px;
         bottom: -3px;
     }
+    .header {
+        display: block !important;
+    }
+    .datePicker {
+        max-width: 200px;
+        margin: 10px auto 0;
+    }
 }

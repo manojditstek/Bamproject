@@ -22,7 +22,8 @@
         <div class="dateCol" v-if="event.type == 'recurring'">
             <h2>{{ event.occurrence.length }}</h2>
             <h4>{{$t('common.events')}}</h4>
-            <p>{{ recurringEventDate }}</p>
+            <small>from</small>
+            <small>{{ recurringEventDate }}</small>
         </div>
         <div class="detailsCol" > 
             <h2>{{ event ? event.name : "" }}</h2>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="d-flex justify-content-between align-items-end header">
+    <div class="justify-content-between align-items-end header">
       <h1>
         <router-link to="/shop">
           <i class="fa fa-angle-left" aria-hidden="true"></i>
