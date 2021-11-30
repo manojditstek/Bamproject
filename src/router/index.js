@@ -1,5 +1,6 @@
 import { createRouter ,createMemoryHistory } from 'vue-router' // for url router createWebHashHistory
 import Home from '../views/Home.vue'
+import single from "../views/events/SingleEvent.vue"
 
 const routes = [
   {
@@ -30,7 +31,7 @@ const routes = [
   {
     path: '/single-event',
     name: 'SingleEvent',
-    component: () => import("../views/events/SingleEvent.vue")
+    component: single
   },
 
   {

@@ -1,14 +1,14 @@
 <template>
 <div class="cardWrapper d-flex" :class="toggleButton?'active':''" @click="toggleButton=!toggleButton && timeSlots(event_id,timeSlot)" >
     <div class="detailsCol">
-        <!-- <h2>{{timeFormat(timeSlot.startAt)}} – {{timeFormat(timeSlot.endAt)}}</h2> -->
+        <h2>{{timeFormat(timeSlot.startAt)}} – {{timeFormat(timeSlot.endAt)}}</h2>
     </div>
     <div class="collapseArrow">
          <i class="fa fa-angle-right"></i>
     </div>
 </div>
 <div class=" active" v-show="toggleButton">
-    <div v-if="tickets.ticketConfig" >
+    <div v-if="tickets" >
         <Tickets :ticket="ticket" :eventName="eventName" :timeSlotId="timeSlot.id" v-for="ticket in tickets.ticketConfig" :key="ticket.id" />
     </div>
     
@@ -31,7 +31,7 @@ import Tickets from '../timeSlots/ticketList/Tickets.vue'
 
 export default {
   components: { 
-      Tickets 
+    //   Tickets 
       },
     name: 'TimeSlot',
     props: {

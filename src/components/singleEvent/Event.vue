@@ -24,8 +24,9 @@
             <h4>{{$t('common.events')}}</h4>
             <p>{{ recurringEventDate }}</p>
         </div>
-        <div class="detailsCol"> 
+        <div class="detailsCol" > 
             <h2>{{ event ? event.name : "" }}</h2>
+           
             <VenuAddress :venue_id="event.venueId" />
             <div class="priceWrap">
                 <small>{{$t('common.from')}}</small>
@@ -37,7 +38,7 @@
         </div>
     </div>
     <div v-show="showTicket" class="singleEventWrap">
-        <TimeSlot :timeSlot="timeSlot" v-for="timeSlot in event ? event.timeslot : ''" :key="timeSlot.id" />
+        <TimeSlot  :timeSlot="timeSlot" v-for="timeSlot in event ? event.timeslot : ''" :key="timeSlot.id"  />
         <Tickets :ticket="ticket" :eventName="event.name" :venueId="event.venueId" v-for="ticket in event ? event.ticketConfig: ''" :key="ticket.id" />
     </div>
 </div>
@@ -63,6 +64,7 @@ export default {
         VenuAddress,
     },
     setup(props) {
+        console.log('props-event',props.event)
         const store = useStore();
         const router = useRouter();
         const eventCollection = ref(null);

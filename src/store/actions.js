@@ -56,23 +56,9 @@ export const getEvents = async ({commit}, dateRange) => {
     }
 } /* end multiple evets */
 
-
-/* This method used for single event */
-export const getEvent = async ({commit}, id) => {
-    commit('loadingStatus', true)
-    if(id){
-        try {
-            let response = await bam.event.getEvent({
-                id: id
-            })
-            commit('setEvent', response)
-            commit('loadingStatus', false)
-        } catch (error) {
-            commit('loadingStatus', false)
-            commit('errorMsg', error);
-        }
-    }else{
+export const getCustomEvent = async ({commit}) => {
     try {
+        
         let response = await bam.event.getEvent({
             id: process.env.VUE_APP_EVENT_ID
         })
@@ -83,6 +69,21 @@ export const getEvent = async ({commit}, id) => {
         commit('errorMsg', error);
     }
 }
+
+/* This method used for single event */
+export const getEvent = async ({commit}, id) => {
+    commit('loadingStatus', true)
+        try {
+            let response = await bam.event.getEvent({
+                id: id
+            })
+            commit('setEvent', response)
+            console.log(response)
+            commit('loadingStatus', false)
+        } catch (error) {
+            commit('loadingStatus', false)
+            commit('errorMsg', error);
+        }
 }
 //end single event
 /* This method used for single event with time slots  */

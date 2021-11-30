@@ -35,7 +35,7 @@
 <script>
 import {useStore} from 'vuex'
 import {dateFormat,timeFormat,lengthOfString} from "@/common/common"
-import {computed} from '@vue/reactivity'
+import {computed,watch} from 'vue'
 import {useRouter} from "vue-router"
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress"
 import EventDateWithoutTime from "../../components/singleEvent/EventDateWithoutTime"
@@ -63,6 +63,7 @@ export default {
             return store.state.workSpaceKey;
         });
 
+        
         const singleEvent = computed(() => {
             return store.state.event;
         })

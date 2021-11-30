@@ -3,7 +3,6 @@
     <div class="contentWraper">
       <Loader/>
       <div class="contentInnerWraper">
-        <p>{{ fields }}</p>
         <error-message />
         <router-view />
       </div>
