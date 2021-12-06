@@ -55,16 +55,47 @@ export default {
         });
 
         function createOrder() {
-            let cartItems = cart.value.cartItems.map(elementKey => ({
-                ticket_config_id:elementKey.id,
-                quantity:elementKey.quantity,
-                timeslot_id:elementKey.timeSlotId,
-                ticket_discount:elementKey.discounts.map((item)=>{return item.id})
-            }));
+            let ticketDiscount =null
+            let orderData = []
+            let cartItems = cart.value.cartItems.map(elementKey => {
+                if(elementKey.isDiscountItem){
+                    if(orderData[elementKey.ticketId]){
+                        orderData[elementKey.ticketId] = {
+                            ticket_config_id: elementKey.ticketId,
+                            quantity: elementKey.quantity,
+                            timeslot_id: elementKey.timeSlotId,
+                            ticket_discount: [...orderData[elementKey.ticketId].ticket_discount, elementKey.id],
+                        }
+                    }else{
+                        orderData[elementKey.ticketId] = {
+                            ticket_config_id: elementKey.ticketId,
+                            quantity: elementKey.quantity,
+                            timeslot_id: elementKey.timeSlotId,
+                            ticket_discount: [elementKey.id],
+                        }
+                    }
+                }else{
+                    orderData[elementKey.id] = {
+                        ticket_config_id: elementKey.id,
+                        quantity: elementKey.quantity,
+                        timeslot_id: elementKey.timeSlotId,
+                        ticket_discount: orderData[elementKey.id] ?  orderData[elementKey.id].ticket_discount : [],
+                    }
+    
+                }
+                // ticket_config_id:elementKey.isDiscountItem==true?elementKey.ticketId:elementKey.id,
+                // quantity:elementKey.quantity,
+                // timeslot_id:elementKey.timeSlotId,
+                // ticket_discount:elementKey.isDiscountItem==true?cart.value.cartItems.map((item)=>{
+                //         return item.isDiscountItem==true?item.id:null
+                //     }):[]
+            });
+            orderData = orderData.filter(x => x)
+            // console.log("orderData", orderData);
             let format = ticketFormat.value
             store.commit('ticketFormat',ticketFormat.value)
             store.dispatch('createOrder', {
-                cartItems,
+                order_item:orderData,
                 format,
                 kycLevelId:kycLevelId.value,
             })

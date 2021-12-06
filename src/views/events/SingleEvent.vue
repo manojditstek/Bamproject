@@ -24,6 +24,7 @@
     <TimeSlot :timeSlot="timeSlot" :eventName="singleEvent.name" :event_id="singleEvent.id" :tickets="singleEvent?singleEvent:''" v-for="timeSlot in singleEvent ? singleEvent.timeslot : ''" :key="timeSlot.id" />
 </div>
 <div v-else class="cardBodyWrapper">
+
     <Tickets :ticket="ticket" :venueId="singleEvent.venueId" :startDate="singleEvent.startAt" :endDate="singleEvent.endAt"  :ticketDscount="singleEvent.ticketDiscount" :eventName="singleEvent.name" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
 </div>
 
@@ -33,8 +34,8 @@
 </template>
 <script>
 import {useStore} from 'vuex'
-import {dateFormat,timeFormat,lengthOfString} from "@/common/common"
-import {computed,watch} from 'vue'
+import {dateFormat,timeFormat,lengthOfString,updateEvent} from "@/common/common"
+import {computed,onUnmounted} from 'vue'
 import {useRouter} from "vue-router"
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress"
 import EventDateWithoutTime from "../../components/singleEvent/EventDateWithoutTime"
@@ -54,17 +55,21 @@ export default {
     setup() {
         const store = useStore();
         const router = useRouter();
+        
         const totalQuantity = computed(() => {
             return store.state.cart.itemsTotalQuantity;
         });
 
-        const workSpaceKey = computed(() => {
-            return store.state.workSpaceKey;
-        });
-
         
         const singleEvent = computed(() => {
-            return store.state.event;
+            // console.log("=>",store.state.event)s
+            return updateEvent(store.state.event);
+        })
+
+        
+
+        onUnmounted(()=>{
+            store.state.event
         })
 
         function backToHome() {
@@ -77,10 +82,10 @@ export default {
             singleEvent,
             totalQuantity,
             backToHome,
-            workSpaceKey,
             dateFormat,
             timeFormat,
-            lengthOfString
+            lengthOfString,
+            updateEvent
 
 
         }

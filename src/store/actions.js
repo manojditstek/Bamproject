@@ -78,7 +78,7 @@ export const getEvent = async ({commit}, id) => {
                 id: id
             })
             commit('setEvent', response)
-            console.log(response)
+            router.push('/single-event')
             commit('loadingStatus', false)
         } catch (error) {
             commit('loadingStatus', false)
@@ -129,6 +129,8 @@ export const recurringEvent = async ({commit}, id) => {
             id: id
         })
         commit('setRecurringEvent', response)
+        router.push('/recurring-event')
+        // router.push('/recurring-events')
         commit('loadingStatus', false)
     } catch (error) {
         commit('loadingStatus', false)
@@ -146,7 +148,7 @@ export const createOrder = async ({commit}, cartItem) => {
     commit('loadingStatus', true)
     try {
         let response = await bam.order.createOrder({
-            orderItem: cartItem.cartItems,
+            orderItem: cartItem.order_item,
             format: cartItem.format
         })
         commit('loadingStatus', false)

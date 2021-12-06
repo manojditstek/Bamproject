@@ -1,13 +1,13 @@
 <template>
   <div class="d-flex justify-content-between align-items-end header">
-    <h1 v-if="events.length>0">{{ $t('common.events') }}</h1>
-    <h1 v-if="event?event.type =='single':''">{{ $t('common.event') }}</h1>
-    <div class="datePicker" v-if="event?event.type !='single':''">
+    <h1 v-if="event">{{ $t('common.event') }}</h1>
+    <h1 v-else>{{ $t('common.events') }}</h1>
+    <div class="datePicker" v-if="events.length>0">
       <DateRangePicker v-model="date.range" :disabled="events.length < 1" />
     </div>
-    <div class="datePicker" v-else-if="events.length>0">
+    <!-- <div class="datePicker" v-else>
       <DateRangePicker v-model="date.range" :disabled="events.length < 1" />
-    </div>
+    </div> -->
   </div>
   <div class="cardBodyWrapper">
     <div v-if="events.length>0">
@@ -61,29 +61,20 @@ export default {
         //.sort((a, b) => new Date(a.startAt) - new Date(b.startAt)); //with filter date
     });
 
-    
-    // const event=computed(() => {
-    //   return store.state.event
-    // });
-
-   
-    
     const totalQuantity = computed(() => {
       return store.state.cart.itemsTotalQuantity;
     });
     
-
     watchEffect(async () => {
       if (date.range.start != "" && date.range.end != "") {
         await store.dispatch("getEvents", date.range);
       } 
-      else if(date.range.start == "" && date.range.end == "") {
+      else if(process.env.VUE_APP_EVENT_ID=='') {
         await store.dispatch("getEvents", "");
       }else{
       await store.dispatch("getCustomEvent");
       event.value=store.state.event;
       }
-      
     });
 
     return {

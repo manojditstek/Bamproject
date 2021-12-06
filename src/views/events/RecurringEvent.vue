@@ -111,7 +111,7 @@
 <script>
 import { useRouter } from "vue-router"
 import { useStore } from "vuex"
-import { dateFormat, lengthOfString } from "../../common/common"
+import { dateFormat, lengthOfString,updateEvent } from "../../common/common"
 import { computed, ref, reactive } from "@vue/reactivity"
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress"
 import EventDateFormat from "../../components/singleEvent/EventDate"
@@ -150,7 +150,7 @@ export default{
     }
 
     const recurringEvent = computed(() => {
-      return store.state.recurringEvent;
+      return updateEvent(store.state.recurringEvent);
     });
 
     const totalQuantity = computed(() => {

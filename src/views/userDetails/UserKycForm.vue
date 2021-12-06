@@ -35,17 +35,12 @@
         <div class="cardBodyWrapper">
           <div class="formInputs">
             <div class="formGroup">
-              <input
-                type="text"
-                class="form-control"
-                :class="
+              <input type="text" class="form-control" :class="
                   data.first_name[i + '' + j]
                     ? 'active '
                     : formErrors.first_name[i + '' + j]
                     ? ' errorInput'
-                    : ''
-                "
-                v-model.trim="data.first_name[i + '' + j]"
+                    : ''" v-model.trim="data.first_name[i + '' + j]"
               />
               <div class="labelInput">{{ $t("userKycForm.firstName") }}</div>
               <div
@@ -255,7 +250,7 @@ export default {
       ticketID,
       validEmail,
       validPhone,
-      submit
+      submit,
     };
   },
 };

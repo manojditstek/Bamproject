@@ -65,7 +65,6 @@ export default {
         VenuAddress,
     },
     setup(props) {
-        console.log('props-event',props.event)
         const store = useStore();
         const router = useRouter();
         const eventCollection = ref(null);
@@ -108,15 +107,13 @@ export default {
             if (event == "recurring") {
                 store.dispatch('recurringEvent', id);
                 store.commit('kycStatusLevel',kycStatus)
-                router.push({
-                    path: "/recurring-event"
-                });
+                //  router.push({
+                //     path:'/recurring-event'
+                // })
             } else {
                 store.dispatch('getEvent', id);
                 store.commit('kycStatusLevel',kycStatus)
-                router.push({
-                    path: "/single-event"
-                });
+                // s
             }
         }
 

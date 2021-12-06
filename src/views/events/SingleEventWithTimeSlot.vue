@@ -41,7 +41,7 @@
 </template>
 <script>
 import { useStore } from "vuex";
-import { dateFormat, timeFormat, lengthOfString } from "../../common/common";
+import { dateFormat, timeFormat, lengthOfString,updateEvent } from "../../common/common";
 import { computed } from "vue";
 import { useRouter } from "vue-router";
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress";
@@ -75,7 +75,7 @@ export default {
     }
 
     const singleEvent = computed(() => {
-      return store.state.event;
+      return updateEvent(store.state.event);
     });
     return {
       timeSlot,
