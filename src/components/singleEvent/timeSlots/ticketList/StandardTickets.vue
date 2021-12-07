@@ -1,7 +1,7 @@
 <template>
   <div class="cardWrapper d-flex">
     <div class="detailsCol pad-0">
-      <h2>{{ "Standard" }}: {{ticket.faceValue}} {{ "EUR" }}</h2>
+      <h2>{{ ticket.name }}: {{ticket.faceValue}} {{ "EUR" }}</h2>
       <div class="priceWrap d-flex">
         <div class="eventPrice1">
           <small>{{ $t("common.fees") }} € 0.00</small>

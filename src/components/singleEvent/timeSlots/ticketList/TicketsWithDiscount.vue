@@ -60,6 +60,7 @@ export default {
                 item: {
                     ...props.discount,
                     ticketsPerUser: props.ticketsPerUser,
+                    currency:props.ticket.currency
                 },
                 ticketId: props.ticket.id,
                 timeSlotId: props.timeSlotId,

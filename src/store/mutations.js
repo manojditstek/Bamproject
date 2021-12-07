@@ -75,7 +75,7 @@ export const addCartItem = (state, data) => {
     
     Toast.fire({
       icon: 'error',
-      title: 'Limit fot this ticket exceeds!'
+      title: 'Limit for this ticket exceeds!'
     })
     // alert("Limit fot this ticket exceeds")
     return

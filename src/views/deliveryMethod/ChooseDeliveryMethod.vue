@@ -1,10 +1,12 @@
 <template>
 <div class="justify-content-between align-items-end header">
     <h1>
-        <router-link to="/shop">
+        <!-- <router-link to="/shop"> -->
+        <a href="javascript:void(0)" @click="back">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
             {{$t('common.cart')}}
-        </router-link>
+        </a>
+        <!-- </router-link> -->
     </h1>
 </div>
 <div class="cardBodyWrapper">
@@ -39,6 +41,7 @@
 <script>
 import {ref,computed} from "vue";
 import {useStore} from 'vuex';
+import {useRouter} from "vue-router"
 export default {
     name:'ChooseDeliveryMethod',
     components:{ 
@@ -46,6 +49,7 @@ export default {
     setup() {
         const ticketFormat = ref('PDF');
         const store = useStore();
+        const router = useRouter();
         let cart = computed(function () {
             return store.state.cart
         });
@@ -100,11 +104,20 @@ export default {
                 kycLevelId:kycLevelId.value,
             })
         }
+
+        function back() {
+            store.state.errorMsg=null;
+            router.push({
+                path: '/shop'
+            })
+        }
         return {
             ticketFormat,
             createOrder,
             cart,
-            kycLevelId
+            kycLevelId,
+            router,
+            back
         };
     }
 
