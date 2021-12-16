@@ -79,7 +79,7 @@
 }
 
 .cardBodyWrapper {
-	padding: 15px 23px;
+    padding: 15px 23px;
     position: relative;
 }
 .cardBodyWrapper.greyBg {
@@ -346,7 +346,11 @@
 	position: relative;
 	border-bottom: 1px solid rgba(57, 57, 57, 0.3);
 }
-
+.singleTicketTotalAmount.bottom{
+ position:absolute;
+ width:100%;
+ bottom:0;
+}
 .singleTicketTotalAmount .collapse {
 	display: block;
     height: 20px;

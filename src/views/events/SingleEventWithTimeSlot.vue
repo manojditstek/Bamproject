@@ -22,10 +22,12 @@
         </div>
     </div>
 </div>
-<div class="cardBodyWrapper">
-    <Tickets :ticket="ticket" :venueId="singleEvent.venueId" :startDate="singleEvent.startAt" :endDate="singleEvent.endAt" :ticketDscount="singleEvent.ticketDiscount" :timeSlotId="timeSlot ? timeSlot.id : ''" :eventName="singleEvent.name" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
+ <div class="bodyScroll timeSlot" :class="totalQuantity?'cart': ''">
+  <div class="cardBodyWrapper">
+      <Tickets :ticket="ticket" :venueId="singleEvent.venueId" :startDate="singleEvent.startAt" :endDate="singleEvent.endAt" :ticketDscount="singleEvent.ticketDiscount" :timeSlotId="timeSlot ? timeSlot.id : ''" :eventName="singleEvent.name" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
+  </div>
 </div>
-<div class="singleTicketTotalAmount" v-if="totalQuantity">
+<div class="singleTicketTotalAmount bottom" v-if="totalQuantity">
     <CartCalculation />
 </div>
 </template>

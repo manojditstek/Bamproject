@@ -5,20 +5,18 @@
     <div class="datePicker" v-if="events.length>0">
       <DateRangePicker v-model="date.range" :disabled="events.length < 1" />
     </div>
-    <!-- <div class="datePicker" v-else>
-      <DateRangePicker v-model="date.range" :disabled="events.length < 1" />
-    </div> -->
   </div>
-  <div class="cardBodyWrapper">
-    <div v-if="events.length>0">
-      <Event :event="event" v-for="event in events" :key="event.id" />
-    </div>
-    <div v-else-if="event">
-      <Event :event="event"  />
-    </div>
-  </div>
-
-  <div class="singleTicketTotalAmount" v-if="totalQuantity">
+  <div class="bodyScroll">
+      <div class="cardBodyWrapper">
+        <div v-if="events.length>0">
+          <Event :event="event" v-for="event in events" :key="event.id" />
+        </div>
+        <div v-else-if="event">
+          <Event :event="event"  />
+        </div>
+      </div>
+</div>
+  <div class="singleTicketTotalAmount bottom" v-if="totalQuantity">
       <CartCalculation />
   </div>
 
@@ -63,8 +61,8 @@ export default {
     // START_DATE.setDate(START_DATE.getDate() + 10); used for future 10 days
     const events = computed(() => {
       return store.state.events
-        .filter((s) => new Date(s.startAt) >= START_DATE)
-        .sort((a, b) => new Date(a.startAt) - new Date(b.startAt)); //with filter date
+        //.filter((s) => new Date(s.startAt) >= START_DATE)
+        //.sort((a, b) => new Date(a.startAt) - new Date(b.startAt)); //with filter date
     });
 
     const totalQuantity = computed(() => {
