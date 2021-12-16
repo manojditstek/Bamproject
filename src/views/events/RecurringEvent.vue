@@ -38,8 +38,7 @@
           class="cardWrapper d-flex"
           @click="singleEvent(event)"
           v-for="event in recurringEvent ? recurringEvent.occurrence : ''"
-          :key="event.id"
-        >
+          :key="event.id">
           <div class="dateCol">
             <EventDateFormat :eventDate="event ? event.startAt : ''" />
           </div>
@@ -62,7 +61,7 @@
     </div>
   </div>
   <!-- for occurrences -->
-  <div v-else class="recurringEvent">>
+  <div v-else class="recurringEvent">
     <div class="justify-content-between align-items-end header">
       <h1>
         <a href="javascript:void(0)" @click="reSet">
