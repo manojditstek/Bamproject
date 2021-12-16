@@ -1,6 +1,6 @@
 
 body {
-	font-family: var(--font-family-400);
+	/* font-family: var(--font-family-400); */
 	margin: 0;
 	background-color: #cbcbcb;
 }
@@ -8,25 +8,25 @@ body {
 	box-sizing: border-box;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+.contentInnerWraper h1,
+.contentInnerWraper h2,
+.contentInnerWraper h3,
+.contentInnerWraper h4,
+.contentInnerWraper h5,
+.contentInnerWraper h6 {
 	margin: 0;
 	font-family: var(--font-family-700);
 	color: var(--color);
 }
 
-p {
+.contentInnerWraper p {
 	margin: 0;
 	font-size: 14px;
 	line-height: 18.2px;
 	color: var(--color);
 	font-family: var(--font-family-400);
 }
-small{
+.contentInnerWraper small{
 	font-family: var(--font-family-400);
 	font-size: 12px;
 	line-height:15.6px
@@ -155,23 +155,39 @@ a {
 	padding: 45px;
 	border-radius: 10px;
 }
-
-.loaderWrapper img {
-	width: 40px;
+.loaderWrapper .loaderInner{
+    border: 1px solid #000;
+    border-radius: 50%;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    width: 50px;
+    height: 50px;
+    animation-name: loading;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
+@keyframes loading{
+	from {
+	  transform: rotate(0deg);
+	}
+	to {
+	  transform: rotate(360deg);
+	}
+  }
 .contentInnerWraper {
     height: calc(100vh - 0px);
     overflow: auto;
 }
 .contentWraper {
-	max-width: 720px;
+	max-width:100%;
 	margin: 0 auto;
 	width: 100%;
 	background-color: var(--color-white);
 }
 
 .mainWrapper {
-	padding: 0 15px;
+	/* padding: 0 15px; */
 	position: relative;
 	min-height: 100vh;
 }
@@ -208,7 +224,9 @@ a {
 	line-height: 40px;
 	letter-spacing: -0.02em;
 }
-
+.dateCol h2 a{
+ color: var(--color-black);
+}
 .dateCol p {
 	line-height: normal;
 	margin: 0;
@@ -273,9 +291,10 @@ time {
 /*-- radio css --*/
 
 .inputGroup {
-	position: absolute;
-	left: 10px;
-	top: 0;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .inputGroup [type="radio"]:checked,
@@ -311,11 +330,11 @@ time {
 .inputGroup [type="radio"]:checked+label:after,
 .inputGroup [type="radio"]:not(:checked)+label:after {
 	content: "";
-	width: 20px;
-	height: 20px;
+	width:18px;
+	height:18px;
 	background: var(--color);
 	position: absolute;
-	top: 3px;
+	top: -7px !important;;
 	left: 3px;
 	border-radius: 100%;
 	-webkit-transition: all 0.2s ease;

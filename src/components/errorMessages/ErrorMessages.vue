@@ -5,30 +5,25 @@
 </div>
 </template>
 <script>
-import {
-    computed
-} from 'vue'
-import {
-    useStore
-} from "vuex";
+import { computed } from "vue";
+import { useStore } from "vuex";
 export default {
-    name: "ErrorMessages",
-    setup() {
-        const store = useStore();
-        const errorMsg = computed(() => {
-            return store.state.errorMsg;
-        });
-        function closeAlert() {
-            store.state.errorMsg = null;
-        }
-        return {
-            errorMsg,
-            closeAlert
-        }
-    },
-
+  name: "ErrorMessages",
+  setup() {
+    const store = useStore();
+    const errorMsg = computed(() => {
+      return store.state.errorMsg;
+    });
+    function closeAlert() {
+      store.state.errorMsg = null;
+    }
+    return {
+      errorMsg,
+      closeAlert,
+    };
+  },
 };
 </script>
 
-<style> 
+<style>
 </style>

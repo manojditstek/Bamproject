@@ -1,8 +1,8 @@
-@import "../css/font-awesome.min.css";
+/* @import "../css/font-awesome.min.css";
 @import "../css/fonts.css";
 @import "../css/variable.css";
 @import "../css/responsive.css";
-@import "../css/common.css";
+@import "../css/common.css"; */
 
 /*--datepicker--*/
 .datePickerWrapper {
@@ -766,7 +766,6 @@
 .ticketDesc .eventInnerDetails .eventIcon i {
 	font-size: 20px;
 }
-
 .ticketCart {
 	margin: 0 0 15px 0;
 }

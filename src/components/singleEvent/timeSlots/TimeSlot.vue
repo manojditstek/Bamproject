@@ -11,57 +11,41 @@
     <div v-if="tickets" >
         <Tickets :ticket="ticket" :eventName="eventName" :timeSlotId="timeSlot.id" v-for="ticket in tickets.ticketConfig" :key="ticket.id" />
     </div>
-    
 </div>
-
 </template>
-
 <script>
-import {timeFormat} from '../../../common/common'
-import {
-    ref
-} from 'vue'
-import {
-    useRouter
-} from "vue-router";
-import {
-    useStore
-} from "vuex";
-import Tickets from '../timeSlots/ticketList/Tickets.vue'
-
+import { timeFormat } from "../../../common/common";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 export default {
-  components: { 
-    //   Tickets 
-      },
-    name: 'TimeSlot',
-    props: {
-        timeSlot: Object,
-        tickets: Object,
-        eventName:String,
-        event_id:Number
-    },
-    setup() {
-        const toggleButton = ref(false)
-        const router = useRouter();
-        const store = useStore();
+  name: "TimeSlot",
+  props: {
+    timeSlot: Object,
+    tickets: Object,
+    eventName: String,
+    event_id: Number,
+  },
+  setup() {
+    const toggleButton = ref(false);
+    const router = useRouter();
+    const store = useStore();
 
-        function timeSlots(event_id,timeSlot) {
-            store.dispatch('sigleEventWithTimeSlot',{event_id,timeSlot});
-            router.push({
-                path: '/single-event-with-time-slots'
-            })
-        }
-        return {
-            toggleButton,
-            timeSlots,
-            router,
-            timeFormat
-        }
-    },
-   
-}
+    function timeSlots(event_id, timeSlot) {
+      store.dispatch("sigleEventWithTimeSlot", { event_id, timeSlot });
+      router.push({
+        path: "/single-event-with-time-slots",
+      });
+    }
+    return {
+      toggleButton,
+      timeSlots,
+      router,
+      timeFormat,
+    };
+  },
+};
 </script>
 
 <style>
-
 </style>

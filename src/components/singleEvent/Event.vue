@@ -13,12 +13,6 @@
                 {{ eventDate ? eventDate[5] : "" }}
             </time>
         </div>
-        <!-- <div class="dateCol" v-if="event.timeslot.length>0?event.timeslot:''">
-            <h2>{{ event.occurrence.length }}</h2>
-            <h4>{{$t('common.events')}}</h4>
-            <p>{{ recurringEventDate }}</p>
-            <p>fddf</p>
-        </div> -->
         <div class="dateCol" v-if="event.type == 'recurring'">
             <h2>{{ event.occurrence.length }}</h2>
             <h4>{{$t('common.events')}}</h4>
@@ -35,7 +29,8 @@
             </div>
         </div>
         <div class="collapseArrow">
-            <img src="assets/images/white-icon.svg" width="8" alt="image" />
+            <!-- <img src="@/assets/images/white-icon.svg" width="8" alt="image" /> -->
+             <i class="fa fa-angle-right"></i>
         </div>
     </div>
     <div v-show="showTicket" class="singleEventWrap">
@@ -53,7 +48,6 @@ import {useStore} from "vuex";
 import TimeSlot from "../singleEvent/timeSlots/TimeSlot.vue";
 import VenuAddress from "../singleEvent/venuAddress/VenueAddress.vue"
 import {ref,computed} from "vue";
-import {useRouter} from "vue-router";
 export default {
     name: "Event",
     props: {
@@ -66,7 +60,6 @@ export default {
     },
     setup(props) {
         const store = useStore();
-        const router = useRouter();
         const eventCollection = ref(null);
         const eventDate = ref(null);
         const recurringEventDate = ref(null);
@@ -107,13 +100,9 @@ export default {
             if (event == "recurring") {
                 store.dispatch('recurringEvent', id);
                 store.commit('kycStatusLevel',kycStatus)
-                //  router.push({
-                //     path:'/recurring-event'
-                // })
             } else {
                 store.dispatch('getEvent', id);
                 store.commit('kycStatusLevel',kycStatus)
-                // s
             }
         }
 

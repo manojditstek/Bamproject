@@ -1,60 +1,56 @@
 <template>
-  <div class="justify-content-between align-items-end header">
+<div class="justify-content-between align-items-end header">
     <h1>
-      <a href="javascript:void(0)" @click="backButton">
-        <i class="fa fa-angle-left" aria-hidden="true"></i>
-        {{ singleEvent ? lengthOfString(singleEvent.name) : "" }}
-      </a>
+        <a href="javascript:void(0)" @click="backButton">
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+            {{ singleEvent ? lengthOfString(singleEvent.name) : "" }}
+        </a>
     </h1>
-  </div>
-  <div class="innerWraper">
+</div>
+<div class="innerWraper">
     <div class="cardWrapper d-flex">
-      <div class="dateCol">
-        <EventDateFormat :eventDate="singleEvent ? singleEvent.startAt : ''" />
-      </div>
-      <div class="detailsCol">
-        <small>
-          {{ timeFormat(timeSlot ? timeSlot.startAt : "") }} –
-          {{ timeFormat(timeSlot ? timeSlot.endAt : "") }}
-        </small>
-        <h2>{{ singleEvent.name }}</h2>
-        <VenuAddress :venue_id="singleEvent.venueId" />
-      </div>
+        <div class="dateCol">
+            <EventDateFormat :eventDate="singleEvent ? singleEvent.startAt : ''" />
+        </div>
+        <div class="detailsCol">
+            <small>
+                {{ timeFormat(timeSlot ? timeSlot.startAt : "") }} –
+                {{ timeFormat(timeSlot ? timeSlot.endAt : "") }}
+            </small>
+            <h2>{{ singleEvent.name }}</h2>
+            <VenuAddress :venue_id="singleEvent.venueId" />
+        </div>
     </div>
-  </div>
-  <div class="cardBodyWrapper">
-    <Tickets
-      :ticket="ticket"
-      :venueId="singleEvent.venueId"
-      :startDate="singleEvent.startAt"
-      :endDate="singleEvent.endAt"
-      :ticketDscount="singleEvent.ticketDiscount"
-      :timeSlotId="timeSlot ? timeSlot.id : ''"
-      :eventName="singleEvent.name"
-      v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''"
-      :key="ticket.id"
-    />
-  </div>
-  <div class="singleTicketTotalAmount" v-if="totalQuantity">
-       <CartCalculation />
-  </div>
+</div>
+<div class="cardBodyWrapper">
+    <Tickets :ticket="ticket" :venueId="singleEvent.venueId" :startDate="singleEvent.startAt" :endDate="singleEvent.endAt" :ticketDscount="singleEvent.ticketDiscount" :timeSlotId="timeSlot ? timeSlot.id : ''" :eventName="singleEvent.name" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
+</div>
+<div class="singleTicketTotalAmount" v-if="totalQuantity">
+    <CartCalculation />
+</div>
 </template>
+
 <script>
 import { useStore } from "vuex";
-import { dateFormat, timeFormat, lengthOfString,updateEvent } from "../../common/common";
+import {
+  dateFormat,
+  timeFormat,
+  lengthOfString,
+  updateEvent,
+} from "../../common/common";
 import { computed } from "vue";
 import { useRouter } from "vue-router";
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress";
 import EventDateFormat from "../../components/singleEvent/EventDateWithoutTime";
 import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets";
-import CartCalculation from '../ShoppingCart/CartCalculation'
+import CartCalculation from "../ShoppingCart/CartCalculation";
 export default {
   name: "SingleEvent",
   components: {
     VenuAddress,
     EventDateFormat,
     Tickets,
-    CartCalculation
+    CartCalculation,
   },
 
   setup() {

@@ -29,7 +29,6 @@ export default {
         confirmButtonText: "Yes",
       }).then((result) => {
         if (result.isConfirmed) {
-          // store.commit("backToHome");
           store.state.cart.cartItems = [];
           store.state.cart.itemsTotalQuantity = 0;
           store.state.cart.itemTotalAmount = 0;

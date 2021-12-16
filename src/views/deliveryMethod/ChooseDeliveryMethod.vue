@@ -59,19 +59,18 @@ export default {
         });
 
         function createOrder() {
-            let ticketDiscount =null
             let orderData = []
-            let cartItems = cart.value.cartItems.map(elementKey => {
+            cart.value.cartItems.map((elementKey,i) => {
                 if(elementKey.isDiscountItem){
                     if(orderData[elementKey.ticketId]){
-                        orderData[elementKey.ticketId] = {
+                        orderData[i] = {
                             ticket_config_id: elementKey.ticketId,
                             quantity: elementKey.quantity,
                             timeslot_id: elementKey.timeSlotId,
                             ticket_discount: [...orderData[elementKey.ticketId].ticket_discount, elementKey.id],
                         }
                     }else{
-                        orderData[elementKey.ticketId] = {
+                        orderData[i] = {
                             ticket_config_id: elementKey.ticketId,
                             quantity: elementKey.quantity,
                             timeslot_id: elementKey.timeSlotId,
@@ -79,7 +78,7 @@ export default {
                         }
                     }
                 }else{
-                    orderData[elementKey.id] = {
+                    orderData[i] = {
                         ticket_config_id: elementKey.id,
                         quantity: elementKey.quantity,
                         timeslot_id: elementKey.timeSlotId,
@@ -87,15 +86,9 @@ export default {
                     }
     
                 }
-                // ticket_config_id:elementKey.isDiscountItem==true?elementKey.ticketId:elementKey.id,
-                // quantity:elementKey.quantity,
-                // timeslot_id:elementKey.timeSlotId,
-                // ticket_discount:elementKey.isDiscountItem==true?cart.value.cartItems.map((item)=>{
-                //         return item.isDiscountItem==true?item.id:null
-                //     }):[]
             });
+            
             orderData = orderData.filter(x => x)
-            // console.log("orderData", orderData);
             let format = ticketFormat.value
             store.commit('ticketFormat',ticketFormat.value)
             store.dispatch('createOrder', {

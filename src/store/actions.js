@@ -1,9 +1,11 @@
 /* Including headers file */
-import router from "../router/";
-import moment from "moment";
-import bam from '../services/bamSdk'
+import router from "../router/"
+import moment from "moment"
+import bam from '../main'
+import Swal from 'sweetalert2'
 // import {saveStreamToFile} from 'bam-ticketing-sdk';
-// import download from "downloadjs";
+// import download from "downloadjs"
+
 
 /* end header */
 
@@ -130,7 +132,6 @@ export const recurringEvent = async ({commit}, id) => {
         })
         commit('setRecurringEvent', response)
         router.push('/recurring-event')
-        // router.push('/recurring-events')
         commit('loadingStatus', false)
     } catch (error) {
         commit('loadingStatus', false)
@@ -170,6 +171,7 @@ export const createOrder = async ({commit}, cartItem) => {
 export const ticketHolderInfo = async ({commit}, data) => {
     let isValidForm=true;
     data.orderItem.forEach(async (element, i) => {
+       
         element.ticket.forEach(async (item, j) => {
             if(!data.data.first_name[i + '' + j]){
                 isValidForm=false
@@ -180,7 +182,7 @@ export const ticketHolderInfo = async ({commit}, data) => {
             if(!data.data.email[i + '' + j]){
                 isValidForm=false
             }
-            if(!data.data.phone[i + '' + j]){
+            if(!data.data.phone[i + '' + j] || isNaN(data.data.phone[i + '' + j]) || (data.data.phone[i + '' + j]).length<7 || (data.data.phone[i + '' + j]).length>18){
                 isValidForm=false
             }
         })
@@ -225,7 +227,6 @@ export const orderContact = async ({commit}, data) => {
             last_name: data.data.last_name,
             phone: data.data.phone,
             email: data.data.email,
-            // billing_email: data.data.billing_email,
         })
 
         commit('loadingStatus', false)
@@ -278,8 +279,25 @@ export const downloadTicketPdf = async ({commit,state}, data) => {
             let ticket = await bam.order.downloadTickets({
                 id: data.orderId
             })
+            // download(ticket, "ticket.pdf", "application/pdf")
             saveByteArray([ticket], 'ticket.pdf');
             // await saveStreamToFile(ticket, 'ticket.pdf');
+            // console.log('ticketResp',ticket);
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                timer: 5000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+              })
+              Toast.fire({
+                icon: 'success',
+                title: 'Ticket Downloaded!'
+              })
             commit('loadingStatus', false)
         } catch (error) {
             commit('errorMsg', error);
@@ -302,7 +320,7 @@ var saveByteArray = (function () {
     a.style = "display: none";
     return function (data, name) {
         var blob = new Blob([data], {
-                type: "application/pdf"
+                type: "application/octet-stream"
             }),
             url = window.URL.createObjectURL(blob);
         a.href = url;

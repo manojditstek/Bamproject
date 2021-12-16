@@ -20,7 +20,6 @@ export default {
     props: {
         eventDate: Date
     },
-
     setup(props) {
         const eventDateFormat = ref();
         watchEffect(() => {
@@ -28,7 +27,6 @@ export default {
                 .format("ddd DD MMM YY HH:mm a")
                 .split(" ");
         })
-
         return {
             eventDateFormat
 

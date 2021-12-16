@@ -27,7 +27,10 @@ export default {
     ticketFormat:null,
     kycLevelId:null,
     submitting:false,
-    disabled:false
-  
-
+    disabled:false,
+    organizerID:null,
+    domainURL:null,
+    eventID:null,
+    successMsg:null
 }
+

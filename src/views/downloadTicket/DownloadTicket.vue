@@ -60,10 +60,10 @@
                 <i class="fa fa-calendar-o" aria-hidden="true"></i>
               </div>
               <div class="eventDesc">
-                <label>{{ dateFormat(cart.cartItems[0].startDate) }}</label>
-                <label
+                <p>{{ dateFormat(cart.cartItems[0].startDate) }}</p>
+                <p
                   >{{ timeFormat(cart.cartItems[0].startDate) }} -
-                  {{ timeFormat(cart.cartItems[0].endDate) }}</label
+                  {{ timeFormat(cart.cartItems[0].endDate) }}</p
                 >
               </div>
             </div>
@@ -84,7 +84,7 @@
               <tr>
                 <th>{{ totalQuantity }}</th>
                 <th></th>
-                <th>{{ tcktDetails.total }} {{ currency }}</th>
+                <th>{{ (tcktDetails.total).toFixed(2) }} {{ currency }}</th>
               </tr>
             </thead>
             <tbody v-for="ticket in tcktDetails.orderItem" :key="ticket.id">
@@ -99,7 +99,7 @@
                   </div>
                 </td>
                 <td>
-                  {{ ticket.ticket[0].ticketConfig.faceValue }}
+                  {{ (ticket.ticket[0].ticketConfig.faceValue).toFixed(2) }}
                   {{ ticket.ticket[0].ticketConfig.currency }}
                 </td>
               </tr>
@@ -132,7 +132,7 @@ import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { dateFormat, timeFormat } from "../../common/common";
 import moment from "moment";
-import bam from "../../services/bamSdk";
+import bam from "../../main";
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress.vue";
 export default {
   name: "DownloadTicket",
@@ -176,7 +176,8 @@ export default {
         submitting.value = true;
         store.commit("loadingStatus", true);
         try {
-          await bam.order.sendOrderEmail({ id: orderID.value.id });
+          let resp = await bam.order.sendOrderEmail({ id: orderID.value.id });
+          store.commit('successMsg',resp)
         } catch (error) {
           store.commit("loadingStatus", false);
           store.commit("errorMsg", error);

@@ -6,18 +6,17 @@
 <script>
 import {watchEffect,ref} from "vue"
 import {useStore} from "vuex";
-import bam from '../../../services/bamSdk'
+import bam from '../../../main'
 export default {
     name: 'VenuAddress',
     props: {
-        venue_id: Number,
+        venue_id: String,
     },
 
     setup(props) {
         const store = useStore();
         const venueName = ref();
-        watchEffect(async () => {
-            
+        watchEffect(async () => {  
             if (props.venue_id) {
                 store.commit('loadingStatus', true)
                 try {
@@ -32,10 +31,14 @@ export default {
                 }
             }
         })
-
         return {
             venueName,
         }
     },
 }
 </script>
+<style >
+.collapseArrow i {
+ font-size: 14px!important;
+}
+</style>

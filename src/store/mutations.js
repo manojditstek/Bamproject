@@ -382,6 +382,26 @@ export const downloadTicketPdf = (state, resp)=>{
   state.downloadTicketPdf = resp;
 }
 
+// set Success messages
+export const successMsg = (state, resp)=>{
+  state.successMsg = resp;
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 5000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+  Toast.fire({
+    icon: 'success',
+    title: 'Mail Sent!'
+  })
+}
+
 // set error messages
 export const errorMsg = (state, resp)=>{
   state.errorMsg = resp;
@@ -398,4 +418,16 @@ export const ticketFormat = (state, data)=>{
 }
 export const kycStatusLevel = (state, data)=>{
   state.kycLevelId=data;
+}
+
+export const organizerID = (state,data)=>{
+  state.organizerID = data;
+}
+
+export const domainURL = (state,data)=>{
+  state.domainURL = data;
+}
+
+export const eventID = (state,data)=>{
+  state.eventID = data;
 }

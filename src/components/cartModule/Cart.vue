@@ -30,9 +30,6 @@
 <div class="cardBodyWrapper">
     <div class="ticketWrapper">
         <div class="ticketCategory d-flex" v-for=" item in cart.cartItems" :key="item.id">
-            <!-- <div class="dateCol">
-                <h2>{{item.quantity}}</h2>
-            </div> -->
             <div class="detailsCol">
                 <h2>{{item.name}}</h2>
                 <p v-for="disc in item.discounts" :key="disc.id">
@@ -43,7 +40,8 @@
                 </div>
             </div>
             <div class="collapseArrow redBg" @click="removeFromCart(item)">
-                <img src="assets/images/close-icon.svg" width="10" alt="image">
+                <!-- <img src="assets/images/close-icon.svg" width="10" alt="image"> -->
+                <i class="fa fa-times" aria-hidden="true"></i>
             </div>
         </div>
     </div>

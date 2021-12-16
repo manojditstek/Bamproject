@@ -32,11 +32,14 @@
 <script>
 import Event from "../components/singleEvent/Event.vue";
 import DateRangePicker from "../components/dateRangePicker/dateRangePicker.vue";
-import { computed, reactive, watchEffect,ref } from "vue";
+import { computed, reactive, watchEffect,ref, inject } from "vue";
 import { useStore } from "vuex";
 import CartCalculation from './ShoppingCart/CartCalculation'
 export default {
   name: "Home",
+  props:{
+    event_id:Number
+  },
   components: {
     Event,
     DateRangePicker,
@@ -52,6 +55,9 @@ export default {
         end: "",
       },
     });
+
+    const eventID = inject('eventID')
+    // console.log('=>',eventID)
 
     const START_DATE = new Date();
     // START_DATE.setDate(START_DATE.getDate() + 10); used for future 10 days
@@ -69,7 +75,7 @@ export default {
       if (date.range.start != "" && date.range.end != "") {
         await store.dispatch("getEvents", date.range);
       } 
-      else if(process.env.VUE_APP_EVENT_ID=='') {
+      else if(eventID =='') {
         await store.dispatch("getEvents", "");
       }else{
       await store.dispatch("getCustomEvent");

@@ -12,7 +12,6 @@
         <div class="dateCol">
             <EventDateWithoutTime :eventDate="singleEvent?singleEvent.startAt:''" />
         </div>
-
         <div class="detailsCol">
             <small v-if="singleEvent.timeslot?singleEvent.timeslot.length>0:''">{{timeFormat(singleEvent?singleEvent.startAt:'')}} – {{timeFormat(singleEvent?singleEvent.endAt:'')}}</small>
             <h2>{{singleEvent.name}}</h2>
@@ -24,10 +23,8 @@
     <TimeSlot :timeSlot="timeSlot" :eventName="singleEvent.name" :event_id="singleEvent.id" :tickets="singleEvent?singleEvent:''" v-for="timeSlot in singleEvent ? singleEvent.timeslot : ''" :key="timeSlot.id" />
 </div>
 <div v-else class="cardBodyWrapper">
-
     <Tickets :ticket="ticket" :venueId="singleEvent.venueId" :startDate="singleEvent.startAt" :endDate="singleEvent.endAt"  :ticketDscount="singleEvent.ticketDiscount" :eventName="singleEvent.name" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
 </div>
-
 <div class="singleTicketTotalAmount " v-if="totalQuantity">
     <CartCalculation />
 </div>
@@ -55,19 +52,12 @@ export default {
     setup() {
         const store = useStore();
         const router = useRouter();
-        
         const totalQuantity = computed(() => {
             return store.state.cart.itemsTotalQuantity;
-        });
-
-        
+        });       
         const singleEvent = computed(() => {
-            // console.log("=>",store.state.event)s
             return updateEvent(store.state.event);
         })
-
-        
-
         onUnmounted(()=>{
             store.state.event
         })
@@ -86,8 +76,6 @@ export default {
             timeFormat,
             lengthOfString,
             updateEvent
-
-
         }
     },
 
