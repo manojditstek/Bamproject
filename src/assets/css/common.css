@@ -31,6 +31,9 @@ body {
 	font-size: 12px;
 	line-height:15.6px
 }
+.contentInnerWraper {
+    background: #fff;
+}
 a {
 	color: var(--color);
 }
@@ -98,6 +101,11 @@ a {
     display: block;
 }
 .btnBlack{
+    background-color: var(--color);   
+    color:var(--color-white);
+    border: none;
+}
+.btnBlack:hover{
     background-color: var(--color);   
     color:var(--color-white);
     border: none;
@@ -176,20 +184,22 @@ a {
 	}
   }
 .contentInnerWraper {
-    height: calc(100vh - 0px);
-    overflow: auto;
+    /* height: calc(100vh - 0px); */
+    /* overflow: auto; */
 }
 .contentWraper {
 	max-width:100%;
 	margin: 0 auto;
 	width: 100%;
 	background-color: var(--color-white);
+	height: 100%;
 }
 
 .mainWrapper {
 	/* padding: 0 15px; */
 	position: relative;
-	min-height: 100vh;
+	/* min-height: 100vh; */
+	height: 100%;
 }
 
 .cardWrapper {
@@ -293,7 +303,7 @@ time {
 .inputGroup {
     position: absolute;
     left: 10px;
-    top: 50%;
+    top:40%;
     transform: translateY(-50%);
 }
 
@@ -334,7 +344,7 @@ time {
 	height:18px;
 	background: var(--color);
 	position: absolute;
-	top: -7px !important;;
+	top: 3px;
 	left: 3px;
 	border-radius: 100%;
 	-webkit-transition: all 0.2s ease;

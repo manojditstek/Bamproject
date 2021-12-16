@@ -14,12 +14,12 @@
 }
 
 .datePickerWrapper .datePicker {
-	max-width: 180px;
+	max-width:200px;
 	align-items: center;
 }
 
 .datePickerWrapper .datePicker .w-32 {
-	max-width: 72px;
+	max-width: 90px;
 }
 
 .datePickerWrapper .datePicker input {
@@ -460,7 +460,7 @@
     margin: 20px 0 0 0;
 }
 
-.sloganText p {
+.contentInnerWraper .cardBodyWrapper .sloganText p {
 	font-size: 12px;
 	line-height: 15.6px;
 	max-width: 350px;
@@ -686,7 +686,7 @@
 	position: absolute;
 	top: 4px;
 	left: 8px;
-	width: 3px;
+	width:5px;
 	height: 10px;
 	border: solid var(--color);
 	border-width: 0 2px 2px 0;
@@ -696,13 +696,19 @@
 .inputWrapper.payment {
 	margin: 0 0 20px 0;
 }
+.inputWrapper.payment .inputInnerWrapper .inputGroup.cards {
+    position: absolute;
+    left: 10px;
+    top: -2px;
+    transform: translateY(0);
+}
 
-.inputWrapper.payment .inputInnerWrapper .inputGroup [type="radio"]:not(:checked)+label:before,
-.inputWrapper.payment .inputInnerWrapper .inputGroup [type="radio"]:checked+label:before
+.inputWrapper.payment .inputInnerWrapper .inputGroup .cards [type="radio"]:not(:checked)+label:before,
+.inputWrapper.payment .inputInnerWrapper .inputGroup .cards [type="radio"]:checked+label:before
 {
   top:-10px
 }
-.inputWrapper.payment .inputInnerWrapper .inputGroup [type="radio"]:checked+label:after{
+.inputWrapper.payment .inputInnerWrapper .inputGroup .cards [type="radio"]:checked+label:after{
   top:-7px;
 }
 .inputWrapper.payment .inputInnerWrapper h4 {
@@ -715,12 +721,12 @@
 
 .payDesc h2 {
 	font-size: 14px;
-	margin: 0 0 10px 0;
+	margin: 0 0 10px 0!important;
 	line-height:18px;
 }
 
 .payDesc p {
-	margin: 0 0 18px 0;
+	margin: 0 0 18px 0!important;
 }
 
 .payDesc .buttons {
@@ -820,15 +826,15 @@
 	text-align: right;
 }
 
-.ticketCartDesc h4 {
+.contentInnerWraper .cardBodyWrapper .ticketCartDesc h4 {
 	font-size: 12px;
-	margin: 0 0 4px 0;
+	margin: 0 0 4px 0!important;
 }
 
-.ticketCartDesc p {
-	font-size: 12px;
-	margin: 0;
-	line-height:15.6px;
+.contentInnerWraper .cardBodyWrapper .ticketCartDesc p {
+	font-size: 12px!important;
+	margin:0px!important;
+	line-height:15.6px!important;
 }
 
 .ticketMessage {
