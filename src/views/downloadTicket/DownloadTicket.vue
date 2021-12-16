@@ -7,37 +7,64 @@
         }}</a>
       </h1>
     </div>
-    <div class="cardBodyWrapper bgLight">
-      <div class="payDesc">
-        <h2>{{ $t("downloadTicket.heading1") }}</h2>
-        <p>{{ $t("downloadTicket.p1") }}</p>
-        <div class="buttons">
-          <button class="button btnDefault" @click.prevent="sendMail()">
-            {{ $t("downloadTicket.resendEmail") }}
-          </button>
-          <button class="button btnDefault" @click.prevent="downloadTkt()">
-            {{ $t("downloadTicket.downloadTickets") }}
-          </button>
+    <div class="bodyScroll">
+        <div class="cardBodyWrapper bgLight">
+          <div class="payDesc">
+            <h2>{{ $t("downloadTicket.heading1") }}</h2>
+            <p>{{ $t("downloadTicket.p1") }}</p>
+            <div class="buttons">
+              <button class="button btnDefault" @click.prevent="sendMail()">
+                {{ $t("downloadTicket.resendEmail") }}
+              </button>
+              <button class="button btnDefault" @click.prevent="downloadTkt()">
+                {{ $t("downloadTicket.downloadTickets") }}
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="cardBodyWrapper">
-      <div class="ticketDesc">
-        <div>
-          <h2>{{ cart.cartItems[0].eventName }}</h2>
-          <!-- for time slot -->
-          <div v-if="tcktDetails.orderItem[0].ticket[0].timeslot">
-            <div v-for="ticket in tcktDetails.orderItem" :key="ticket.id">
-              <div class="eventDetails">
+        <div class="cardBodyWrapper">
+          <div class="ticketDesc">
+            <div>
+              <h2>{{ cart.cartItems[0].eventName }}</h2>
+              <!-- for time slot -->
+              <div v-if="tcktDetails.orderItem[0].ticket[0].timeslot">
+                <div v-for="ticket in tcktDetails.orderItem" :key="ticket.id">
+                  <div class="eventDetails">
+                    <div class="eventInnerDetails">
+                      <div class="eventIcon">
+                        <i class="fa fa-calendar-o" aria-hidden="true"></i>
+                      </div>
+                      <div class="eventDesc">
+                        <p>{{ dateFormat(ticket.ticket[0].timeslot.startAt) }}</p>
+                        <p>
+                          {{ timeFormat(ticket.ticket[0].timeslot.startAt) }} -
+                          {{ timeFormat(ticket.ticket[0].timeslot.endAt) }}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="eventInnerDetails">
+                      <div class="eventIcon">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                      </div>
+                      <div class="eventDesc">
+                        <VenuAddress :venue_id="cart.cartItems[0].venueId" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end time slot -->
+              <!-- without time slot -->
+              <div class="eventDetails" v-else>
                 <div class="eventInnerDetails">
                   <div class="eventIcon">
                     <i class="fa fa-calendar-o" aria-hidden="true"></i>
                   </div>
                   <div class="eventDesc">
-                    <p>{{ dateFormat(ticket.ticket[0].timeslot.startAt) }}</p>
+                    <p>{{ dateFormat(cart.cartItems[0].startDate) }}</p>
                     <p>
-                      {{ timeFormat(ticket.ticket[0].timeslot.startAt) }} -
-                      {{ timeFormat(ticket.ticket[0].timeslot.endAt) }}
+                      {{ timeFormat(cart.cartItems[0].startDate) }} -
+                      {{ timeFormat(cart.cartItems[0].endDate) }}
                     </p>
                   </div>
                 </div>
@@ -50,82 +77,57 @@
                   </div>
                 </div>
               </div>
+              <!-- end without time slot -->
+            </div>
+            <div class="ticketCart">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>{{ totalQuantity }}</th>
+                    <th></th>
+                    <th>{{ tcktDetails.total.toFixed(2) }} {{ currency }}</th>
+                  </tr>
+                </thead>
+                <tbody v-for="ticket in tcktDetails.orderItem" :key="ticket.id">
+                  <tr>
+                    <td>{{ ticket.ticket.length }}</td>
+                    <td>
+                      {{ ticket.ticket[0].ticketConfig.name }} <br />
+                      <div v-if="ticket.ticket[0].ticketDiscount">
+                        <span v-for="disc in ticket.ticket[0].ticketDiscount" :key="disc.id">
+                          {{ disc.name }}</span
+                        >
+                      </div>
+                    </td>
+                    <td>
+                      {{ ticket.ticket[0].ticketConfig.faceValue.toFixed(2) }}
+                      {{ ticket.ticket[0].ticketConfig.currency }}
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="2">{{ $t("downloadTicket.date") }} {{ toDayDate }}</td>
+                    <td>{{ $t("downloadTicket.orderID") }} {{ tcktDetails.id }}</td>
+                  </tr>
+                </tfoot>
+              </table>
             </div>
           </div>
-          <!-- end time slot -->
-          <!-- without time slot -->
-          <div class="eventDetails" v-else>
-            <div class="eventInnerDetails">
-              <div class="eventIcon">
-                <i class="fa fa-calendar-o" aria-hidden="true"></i>
-              </div>
-              <div class="eventDesc">
-                <p>{{ dateFormat(cart.cartItems[0].startDate) }}</p>
-                <p>
-                  {{ timeFormat(cart.cartItems[0].startDate) }} -
-                  {{ timeFormat(cart.cartItems[0].endDate) }}
-                </p>
-              </div>
-            </div>
-            <div class="eventInnerDetails">
-              <div class="eventIcon">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-              </div>
-              <div class="eventDesc">
-                <VenuAddress :venue_id="cart.cartItems[0].venueId" />
-              </div>
-            </div>
+        </div>
+        <div class="cardBodyWrapper greyBg">
+          <div class="ticketCartDesc">
+            <h4>{{ $t("downloadTicket.hinweis") }}</h4>
+            <p>{{ $t("downloadTicket.p2") }}</p>
           </div>
-          <!-- end without time slot -->
         </div>
-        <div class="ticketCart">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>{{ totalQuantity }}</th>
-                <th></th>
-                <th>{{ tcktDetails.total.toFixed(2) }} {{ currency }}</th>
-              </tr>
-            </thead>
-            <tbody v-for="ticket in tcktDetails.orderItem" :key="ticket.id">
-              <tr>
-                <td>{{ ticket.ticket.length }}</td>
-                <td>
-                  {{ ticket.ticket[0].ticketConfig.name }} <br />
-                  <div v-if="ticket.ticket[0].ticketDiscount">
-                    <span v-for="disc in ticket.ticket[0].ticketDiscount" :key="disc.id">
-                      {{ disc.name }}</span
-                    >
-                  </div>
-                </td>
-                <td>
-                  {{ ticket.ticket[0].ticketConfig.faceValue.toFixed(2) }}
-                  {{ ticket.ticket[0].ticketConfig.currency }}
-                </td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="2">{{ $t("downloadTicket.date") }} {{ toDayDate }}</td>
-                <td>{{ $t("downloadTicket.orderID") }} {{ tcktDetails.id }}</td>
-              </tr>
-            </tfoot>
-          </table>
+        <div class="cardBodyWrapper">
+          <div class="footerActionBtn btns">
+            <button type="button" class="button btnBlack" @click="backButton">
+              {{ $t("downloadTicket.backtoShop") }}
+            </button>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="cardBodyWrapper greyBg">
-      <div class="ticketCartDesc">
-        <h4>{{ $t("downloadTicket.hinweis") }}</h4>
-        <p>{{ $t("downloadTicket.p2") }}</p>
-      </div>
-    </div>
-    <div class="cardBodyWrapper">
-      <div class="footerActionBtn btns">
-        <button type="button" class="button btnBlack" @click="backButton">
-          {{ $t("downloadTicket.backtoShop") }}
-        </button>
-      </div>
     </div>
   </div>
 </template>

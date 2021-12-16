@@ -5,20 +5,18 @@
     <div class="datePicker" v-if="events.length>0">
       <DateRangePicker v-model="date.range" :disabled="events.length < 1" />
     </div>
-    <!-- <div class="datePicker" v-else>
-      <DateRangePicker v-model="date.range" :disabled="events.length < 1" />
-    </div> -->
   </div>
-  <div class="cardBodyWrapper">
-    <div v-if="events.length>0">
-      <Event :event="event" v-for="event in events" :key="event.id" />
-    </div>
-    <div v-else-if="event">
-      <Event :event="event"  />
-    </div>
-  </div>
-
-  <div class="singleTicketTotalAmount" v-if="totalQuantity">
+  <div class="bodyScroll">
+      <div class="cardBodyWrapper">
+        <div v-if="events.length>0">
+          <Event :event="event" v-for="event in events" :key="event.id" />
+        </div>
+        <div v-else-if="event">
+          <Event :event="event"  />
+        </div>
+      </div>
+</div>
+  <div class="singleTicketTotalAmount bottom" v-if="totalQuantity">
       <CartCalculation />
   </div>
 

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="singleEventData == ''">
+  <div v-if="singleEventData == ''" class="recurringEvent">
     <div class="justify-content-between align-items-end header">
       <h1>
         <a href="javascript:void(0)" @click="backToHome">
@@ -32,26 +32,28 @@
         </div>
       </div>
     </div>
-    <div class="cardBodyWrapper">
-      <div
-        class="cardWrapper d-flex"
-        @click="singleEvent(event)"
-        v-for="event in recurringEvent ? recurringEvent.occurrence : ''"
-        :key="event.id"
-      >
-        <div class="dateCol">
-          <EventDateFormat :eventDate="event ? event.startAt : ''" />
-        </div>
-        <div class="detailsCol">
-          <h2>{{ recurringEvent ? recurringEvent.name : "" }}</h2>
-          <VenuAddress :venue_id="event ? event.venueId : ''" />
-          <div class="priceWrap">
-            <small>{{ $t("common.from") }}</small>
-            <h6>{{ minPrice(event) }} {{ currency ? currency : "EUR" }}</h6>
+     <div class="bodyScroll timeSlot">
+      <div class="cardBodyWrapper">
+        <div
+          class="cardWrapper d-flex"
+          @click="singleEvent(event)"
+          v-for="event in recurringEvent ? recurringEvent.occurrence : ''"
+          :key="event.id"
+        >
+          <div class="dateCol">
+            <EventDateFormat :eventDate="event ? event.startAt : ''" />
           </div>
-        </div>
-        <div class="collapseArrow">
-          <i class="fa fa-angle-right"></i>
+          <div class="detailsCol">
+            <h2>{{ recurringEvent ? recurringEvent.name : "" }}</h2>
+            <VenuAddress :venue_id="event ? event.venueId : ''" />
+            <div class="priceWrap">
+              <small>{{ $t("common.from") }}</small>
+              <h6>{{ minPrice(event) }} {{ currency ? currency : "EUR" }}</h6>
+            </div>
+          </div>
+          <div class="collapseArrow">
+            <i class="fa fa-angle-right"></i>
+          </div>
         </div>
       </div>
     </div>
@@ -60,7 +62,7 @@
     </div>
   </div>
   <!-- for occurrences -->
-  <div v-else>
+  <div v-else class="recurringEvent">>
     <div class="justify-content-between align-items-end header">
       <h1>
         <a href="javascript:void(0)" @click="reSet">
@@ -89,17 +91,19 @@
         </div>
       </div>
     </div>
-    <div class="cardBodyWrapper">
-      <Tickets
-        :ticket="ticket"
-        :venueId="recurringEvent.venueId"
-        :startDate="singleEventData.startAt"
-        :endDate="singleEventData.endAt"
-        :ticketDscount="recurringEvent.ticketDiscount"
-        :eventName="recurringEvent.name"
-        v-for="ticket in singleEventData ? singleEventData.ticketConfig : ''"
-        :key="ticket.id"
-      />
+     <div class="bodyScroll timeSlot">
+      <div class="cardBodyWrapper">
+        <Tickets
+          :ticket="ticket"
+          :venueId="recurringEvent.venueId"
+          :startDate="singleEventData.startAt"
+          :endDate="singleEventData.endAt"
+          :ticketDscount="recurringEvent.ticketDiscount"
+          :eventName="recurringEvent.name"
+          v-for="ticket in singleEventData ? singleEventData.ticketConfig : ''"
+          :key="ticket.id"
+        />
+      </div>
     </div>
     <div class="singleTicketTotalAmount " v-if="totalQuantity">
         <CartCalculation />
