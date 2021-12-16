@@ -1,5 +1,5 @@
 <template>
-  <div v-if="singleEventData == ''">
+  <div v-if="singleEventData == ''" class="recurringEvent">
     <div class="justify-content-between align-items-end header">
       <h1>
         <a href="javascript:void(0)" @click="backToHome">
@@ -8,10 +8,10 @@
         </a>
       </h1>
       <div class="datePicker">
-        <DateRangePicker
-          v-model="date.range"
-          :disabled="recurringEvent ? recurringEvent.length < 1 : ''"
-        />
+          <DateRangePicker
+            v-model="date.range"
+            :disabled="recurringEvent ? recurringEvent.length < 1 : ''"
+          />
       </div>
     </div>
     <div class="innerWraper">
@@ -26,7 +26,9 @@
             {{ dateFormat(recurringEvent ? recurringEvent.endAt : "") }}
           </small>
           <h2>{{ recurringEvent ? recurringEvent.name : "" }}</h2>
-          <VenuAddress :venue_id="recurringEvent ? recurringEvent.venueId : ''" />
+          <VenuAddress
+            :venue_id="recurringEvent ? recurringEvent.venueId : ''"
+          />
         </div>
       </div>
     </div>
@@ -55,12 +57,12 @@
         </div>
       </div>
     </div>
-    <div class="singleTicketTotalAmount bottom" v-if="totalQuantity">
-      <CartCalculation />
+    <div class="singleTicketTotalAmount " v-if="totalQuantity">
+        <CartCalculation />
     </div>
   </div>
   <!-- for occurrences -->
-  <div v-else>
+  <div v-else class="recurringEvent">>
     <div class="justify-content-between align-items-end header">
       <h1>
         <a href="javascript:void(0)" @click="reSet">
@@ -83,11 +85,13 @@
         </div>
         <div class="detailsCol">
           <h2>{{ recurringEvent ? recurringEvent.name : "" }}</h2>
-          <VenuAddress :venue_id="recurringEvent ? recurringEvent.venueId : ''" />
+          <VenuAddress
+            :venue_id="recurringEvent ? recurringEvent.venueId : ''"
+          />
         </div>
       </div>
     </div>
-    <div class="bodyScroll timeSlot">
+     <div class="bodyScroll timeSlot">
       <div class="cardBodyWrapper">
         <Tickets
           :ticket="ticket"
@@ -101,25 +105,25 @@
         />
       </div>
     </div>
-    <div class="singleTicketTotalAmount bottom" v-if="totalQuantity">
-      <CartCalculation />
+    <div class="singleTicketTotalAmount " v-if="totalQuantity">
+        <CartCalculation />
     </div>
   </div>
   <!-- end occurrences -->
 </template>
 
 <script>
-import { useRouter } from "vue-router";
-import { useStore } from "vuex";
-import { dateFormat, lengthOfString, updateEvent } from "../../common/common";
-import { computed, ref, reactive } from "@vue/reactivity";
-import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress";
-import EventDateFormat from "../../components/singleEvent/EventDate";
-import EventDateWithoutTime from "../../components/singleEvent/EventDateWithoutTime";
-import DateRangePicker from "../../components/dateRangePicker/dateRangePicker";
-import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets";
-import CartCalculation from "../ShoppingCart/CartCalculation";
-export default {
+import { useRouter } from "vue-router"
+import { useStore } from "vuex"
+import { dateFormat, lengthOfString,updateEvent } from "../../common/common"
+import { computed, ref, reactive } from "@vue/reactivity"
+import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress"
+import EventDateFormat from "../../components/singleEvent/EventDate"
+import EventDateWithoutTime from '../../components/singleEvent/EventDateWithoutTime'
+import DateRangePicker from "../../components/dateRangePicker/dateRangePicker"
+import Tickets from "../../components/singleEvent/timeSlots/ticketList/Tickets"
+import CartCalculation from "../ShoppingCart/CartCalculation"
+export default{
   name: "RecurringEvent",
   components: {
     VenuAddress,
@@ -127,7 +131,7 @@ export default {
     DateRangePicker,
     Tickets,
     CartCalculation,
-    EventDateWithoutTime,
+    EventDateWithoutTime
   },
 
   setup() {
@@ -139,7 +143,7 @@ export default {
       range: {
         start: "",
         end: "",
-      },
+      }
     });
     function singleEvent(evntData) {
       singleEventData.value = evntData;
@@ -191,9 +195,10 @@ export default {
       dateFormat,
       minPrice,
       currency,
-      date,
-    };
-  },
-};
+      date
+    }
+  }
+}
 </script>
-<style></style>
+<style>
+</style>

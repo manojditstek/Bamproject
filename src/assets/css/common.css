@@ -7,7 +7,16 @@ body {
 * {
 	box-sizing: border-box;
 }
-
+.contentInnerWraper {
+	background: #fff;
+    max-height: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 100%;
+}
+.contentInnerWraper .recurringEvent {
+    height: 100%;
+}
 .contentInnerWraper h1,
 .contentInnerWraper h2,
 .contentInnerWraper h3,
@@ -195,15 +204,6 @@ a {
 	  transform: rotate(360deg);
 	}
   }
-.contentInnerWraper {
-    /* height: calc(100vh - 0px); */
-    /* overflow: auto; */
-	background: #fff;
-    max-height: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    height: 100%;
-}
 .contentWraper {
 	/* max-width:100%;
 	margin: 0 auto;

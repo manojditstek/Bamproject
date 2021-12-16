@@ -1,6 +1,6 @@
 <template>
 <!-- This block display single event  -->
-<div @click="eventDetails(event.type,event.id,event.kycLevelId)">
+   <div @click="eventDetails(event.type,event.id,event.kycLevelId)">
     <div class="cardWrapper d-flex" :class="event.type == 'recurring' ? 'recurring' : ''">
         <div class="dateCol" v-if="event.type == 'single'">
             <h4>{{ eventDate ? eventDate[0] : "" }}</h4>
