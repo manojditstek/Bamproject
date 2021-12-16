@@ -13,6 +13,15 @@
                 {{ eventDate ? eventDate[5] : "" }}
             </time>
         </div>
+
+        <!-- <div class="dateCol" v-if="event.type == 'single' && event.timeSlot.length>0">
+            <h4>{{ eventDate ? eventDate[0] : "" }}</h4>
+            <h2>{{ eventDate ? eventDate[1] : "" }}</h2>
+            <h4>
+                {{ eventDate ? eventDate[2] : "" }}
+                {{ eventDate ? eventDate[3] : "" }}
+            </h4>
+        </div> -->
         <div class="dateCol" v-if="event.type == 'recurring'">
             <h2>{{ event.occurrence.length }}</h2>
             <h4>{{$t('common.events')}}</h4>

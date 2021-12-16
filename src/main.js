@@ -15,6 +15,8 @@ import "@/assets/css/variable.css";
 import "@/assets/css/responsive.css";
 import "@/assets/css/common.css";
 
+import 'document-register-element/build/document-register-element'
+
 
 let el= document.querySelector("vue-widget");
 createApp(App,{...el.dataset})
