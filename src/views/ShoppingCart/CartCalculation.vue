@@ -1,5 +1,5 @@
 <template>
-    <div class="collapse" @click="toggleButton=!toggleButton">
+    <div class="collapse" @click="toggle()">
         <div class="collapseInner"></div>
     </div>
      <div class="expand d-flex" v-show="toggleButton">
@@ -19,8 +19,12 @@ export default {
     },
     setup(){
         const toggleButton = ref(true);
+        function toggle(){
+            return toggleButton.value=!toggleButton.value
+        }
         return{
-            toggleButton
+            toggleButton,
+            toggle
         }
     }
 }
