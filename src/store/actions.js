@@ -58,11 +58,11 @@ export const getEvents = async ({commit}, dateRange) => {
     }
 } /* end multiple evets */
 
-export const getCustomEvent = async ({commit}) => {
+export const getCustomEvent = async ({commit,state}) => {
     try {
         
         let response = await bam.event.getEvent({
-            id: process.env.VUE_APP_EVENT_ID
+            id: state.eventID
         })
         commit('setEvent', response)
         commit('loadingStatus', false)

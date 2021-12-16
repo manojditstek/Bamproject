@@ -22,7 +22,7 @@ export default {
     organizer_id:{type:String},
     domain:{type:String}
   },
-  setup(props,{attrs}) {
+  setup(props) {
     const store = useStore();
     provide('eventID', props.event_id)
     store.commit('eventID',props.event_id)
