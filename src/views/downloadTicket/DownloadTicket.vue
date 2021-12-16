@@ -61,10 +61,10 @@
               </div>
               <div class="eventDesc">
                 <p>{{ dateFormat(cart.cartItems[0].startDate) }}</p>
-                <p
-                  >{{ timeFormat(cart.cartItems[0].startDate) }} -
-                  {{ timeFormat(cart.cartItems[0].endDate) }}</p
-                >
+                <p>
+                  {{ timeFormat(cart.cartItems[0].startDate) }} -
+                  {{ timeFormat(cart.cartItems[0].endDate) }}
+                </p>
               </div>
             </div>
             <div class="eventInnerDetails">
@@ -84,7 +84,7 @@
               <tr>
                 <th>{{ totalQuantity }}</th>
                 <th></th>
-                <th>{{ (tcktDetails.total).toFixed(2) }} {{ currency }}</th>
+                <th>{{ tcktDetails.total.toFixed(2) }} {{ currency }}</th>
               </tr>
             </thead>
             <tbody v-for="ticket in tcktDetails.orderItem" :key="ticket.id">
@@ -99,7 +99,7 @@
                   </div>
                 </td>
                 <td>
-                  {{ (ticket.ticket[0].ticketConfig.faceValue).toFixed(2) }}
+                  {{ ticket.ticket[0].ticketConfig.faceValue.toFixed(2) }}
                   {{ ticket.ticket[0].ticketConfig.currency }}
                 </td>
               </tr>
@@ -120,11 +120,13 @@
         <p>{{ $t("downloadTicket.p2") }}</p>
       </div>
     </div>
+    <div class="cardBodyWrapper">
       <div class="footerActionBtn btns">
         <button type="button" class="button btnBlack" @click="backButton">
           {{ $t("downloadTicket.backtoShop") }}
         </button>
       </div>
+    </div>
   </div>
 </template>
 <script>
@@ -152,7 +154,7 @@ export default {
       return store.state.cart.itemsTotalQuantity;
     });
 
-    let cart = computed(()=> {
+    let cart = computed(() => {
       return store.state.cart;
     });
 
@@ -160,7 +162,7 @@ export default {
       return store.state.createdOrder;
     });
 
-    let currency = computed(()=> {
+    let currency = computed(() => {
       return store.state.cart.cartItems[0].currency;
     });
 
@@ -172,20 +174,20 @@ export default {
 
     async function sendMail() {
       setTimeout(async () => {
-      if (!submitting.value) {
-        submitting.value = true;
-        store.commit("loadingStatus", true);
-        try {
-          let resp = await bam.order.sendOrderEmail({ id: orderID.value.id });
-          store.commit('successMsg',resp)
-        } catch (error) {
-          store.commit("loadingStatus", false);
-          store.commit("errorMsg", error);
-        } finally {
-          store.commit("loadingStatus", false);
-          submitting.value = false;
+        if (!submitting.value) {
+          submitting.value = true;
+          store.commit("loadingStatus", true);
+          try {
+            let resp = await bam.order.sendOrderEmail({ id: orderID.value.id });
+            store.commit("successMsg", resp);
+          } catch (error) {
+            store.commit("loadingStatus", false);
+            store.commit("errorMsg", error);
+          } finally {
+            store.commit("loadingStatus", false);
+            submitting.value = false;
+          }
         }
-      }
       }, 1000);
     }
 

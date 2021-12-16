@@ -16,7 +16,7 @@
         class="inputInnerWrapper"
         :class="payMethod == 'card' ? 'active' : ''"
       >
-        <div class="inputGroup">
+        <div class="inputGroup cards">
           <input
             type="radio"
             id="test1"
@@ -32,7 +32,7 @@
         class="inputInnerWrapper"
         :class="payMethod == 'epsBank' ? 'active' : ''"
       >
-        <div class="inputGroup">
+        <div class="inputGroup cards">
           <input
             type="radio"
             id="test2"
