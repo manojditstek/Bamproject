@@ -1,8 +1,8 @@
 <template>
-    <div class="collapse" @click="toggle()">
+    <div class="collapse" @click.prevent="toggle()">
         <div class="collapseInner"></div>
     </div>
-     <div class="expand d-flex" v-show="toggleButton">
+     <div class="expand d-flex" v-if="toggleButton">
         <TotalTicketCalculation />
         <CartButton />
     </div>
