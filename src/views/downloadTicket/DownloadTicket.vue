@@ -138,6 +138,7 @@ import { useStore } from "vuex";
 import { dateFormat, timeFormat } from "../../common/common";
 import moment from "moment";
 import bam from "../../main";
+import { useRouter } from "vue-router";
 import VenuAddress from "../../components/singleEvent/venuAddress/VenueAddress.vue";
 export default {
   name: "DownloadTicket",
@@ -147,6 +148,7 @@ export default {
   setup() {
     const store = useStore();
     const toDayDate = ref();
+    const router = useRouter();
     const submitting = ref();
     toDayDate.value = moment().format(" DD MMM YYYY ");
     const tcktDetails = computed(() => {
@@ -199,6 +201,7 @@ export default {
     function backButton() {
       // location.reload();
       store.commit("backToHome");
+      router.push({path: "/",});
     }
     return {
       tcktDetails,
