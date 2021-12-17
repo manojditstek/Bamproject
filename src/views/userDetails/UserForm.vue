@@ -134,7 +134,7 @@ export default {
       return store.state.cart.itemTotalAmount;
     });
     let currency = computed(() => {
-      return store.state.cart.cartItems[0].currency;
+      return store.state.cart.cartItems[0]?store.state.cart.cartItems[0].currency:'';
     });
 
     let orderID = computed(() => {
@@ -268,7 +268,8 @@ export default {
 
     function backToHome() {
       store.commit("backToHome");
-      location.reload();
+      // location.reload();
+      router.push({path: "/",});
     }
     return {
       data,

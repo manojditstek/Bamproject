@@ -153,14 +153,47 @@ export const removeCartItemComplete = (state, item) => {
   }
 }
 
+/* start timer*/
+export const timer = (state) => {
+  let flag=0
+  state.intervalData = setInterval(() => {
+    if(state.timerOut>0){
+      let setTimeFormate =state.timerOut -=1000
+      state.timerDispaly=remainingTime(setTimeFormate);
+      if(flag==state.timerOut){
+        // router.go();
+        // location.reload();
+        clearInterval(state.intervalData);
+      }
+    }else {
+      state.timerOut =0;
+    }
+    
+  }, 1000)
+
+console.log('tate.intervalDataS',state.intervalData)
+
+}
+
 // cart back button 
-export const backToHome = (state) =>{
+export const backToHome =(state) =>{
   state.cart.cartItems = [];
   state.cart.itemsTotalQuantity=0;
   state.cart.itemTotalAmount=0;
   state.errorMsg=null;
-  state = null; 
+  console.log("state.intervalData",state.intervalData)
+  if(state.intervalData){
+  clearInterval(state.intervalData);
+  state.intervalData=0;
+  state.timerOut=10*60000;
+  state.timerDispaly=null;
+  state.createdOrder=null;
+  state.kycLevelId=null;
+
+  }
 }
+
+
 
 
 // This block of code used for get single item  
@@ -335,24 +368,7 @@ const getItemQtyDiscount = (state,discountItems, item) => {
 /*end cart module */
 
 
-/* start timer*/
-export const timer = (state) => {
-  let flag=0
-  setInterval(() => {
-    if(state.timerOut>0){
-      let setTimeFormate =state.timerOut -=1000
-      state.timerDispaly=remainingTime(setTimeFormate);
-      if(flag==state.timerOut){
-        // router.go();
-        location.reload();
-      }
-    }else {
-      state.timerOut =0;
-    }
-    
-  }, 1000)
 
-}
 
 // Helper method for timer 
 const remainingTime = (value) => {

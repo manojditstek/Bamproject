@@ -19,6 +19,7 @@
               <button class="button btnDefault" @click.prevent="downloadTkt()">
                 {{ $t("downloadTicket.downloadTickets") }}
               </button>
+              
             </div>
           </div>
         </div>
@@ -172,7 +173,9 @@ export default {
       store.dispatch("downloadTicketPdf", {
         orderId: orderID.value.id,
       });
+      
     }
+
 
     async function sendMail() {
       setTimeout(async () => {
@@ -194,7 +197,8 @@ export default {
     }
 
     function backButton() {
-      location.reload();
+      // location.reload();
+      store.commit("backToHome");
     }
     return {
       tcktDetails,
@@ -207,7 +211,7 @@ export default {
       dateFormat,
       timeFormat,
       totalQuantity,
-      submitting,
+      submitting
     };
   },
 };

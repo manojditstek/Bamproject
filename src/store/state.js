@@ -13,7 +13,6 @@ export default {
     },
     recurringEvent:null,
     loadingStatus:false,
-    countDownTimer : 20,
     timerOut:10*60000,
     timerDispaly:null,
     createdOrder:null,
@@ -31,6 +30,7 @@ export default {
     organizerID:null,
     domainURL:null,
     eventID:null,
-    successMsg:null
+    successMsg:null,
+    intervalData:0
 }
 

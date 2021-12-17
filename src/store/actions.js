@@ -4,7 +4,7 @@ import moment from "moment"
 import bam from '../main'
 import Swal from 'sweetalert2'
 // import {saveStreamToFile} from 'bam-ticketing-sdk';
-// import download from "downloadjs"
+import download from "downloadjs"
 
 
 /* end header */
@@ -279,10 +279,9 @@ export const downloadTicketPdf = async ({commit,state}, data) => {
             let ticket = await bam.order.downloadTickets({
                 id: data.orderId
             })
-            // download(ticket, "ticket.pdf", "application/pdf")
-            saveByteArray([ticket], 'ticket.pdf');
+            download(ticket, "ticket.pdf", "application/pdf")
+            // saveByteArray([ticket], 'ticket.pdf');
             // await saveStreamToFile(ticket, 'ticket.pdf');
-            // console.log('ticketResp',ticket);
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'top',
