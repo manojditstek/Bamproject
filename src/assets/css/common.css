@@ -55,6 +55,9 @@ body {
     height: calc(100% - 400px);
     overflow: auto;
 }
+.bodyScroll.ticket {
+    height: calc(100% - 484px);
+}
 a {
 	color: var(--color);
 }
@@ -397,7 +400,7 @@ time {
 .form-control {
 	background: #fbfbfb;
 	border: 1px solid rgba(57, 57, 57, 0.2);
-	border-radius: 6px;
+	border-radius: 6px!important;
 	height: 40px;
 	width: 100%;
 	padding: 6px 12px;

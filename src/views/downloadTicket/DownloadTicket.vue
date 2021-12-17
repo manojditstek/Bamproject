@@ -1,32 +1,33 @@
 <template>
-  <div>
-    <div class="justify-content-between align-items-end header">
-      <h1>
-        <a href="javascript:void(0)" @click="backButton">{{
-          $t("downloadTicket.backtoHome")
-        }}</a>
-      </h1>
-    </div>
-    <div class="bodyScroll">
-        <div class="cardBodyWrapper bgLight">
-          <div class="payDesc">
-            <h2>{{ $t("downloadTicket.heading1") }}</h2>
-            <p>{{ $t("downloadTicket.p1") }}</p>
-            <div class="buttons">
-              <button class="button btnDefault" @click.prevent="sendMail()">
-                {{ $t("downloadTicket.resendEmail") }}
-              </button>
-              <button class="button btnDefault" @click.prevent="downloadTkt()">
-                {{ $t("downloadTicket.downloadTickets") }}
-              </button>
-              
-            </div>
-          </div>
+  <div class="justify-content-between align-items-end header">
+    <h1>
+      <a href="javascript:void(0)" @click="backButton">{{
+        $t("downloadTicket.backtoHome")
+      }}</a>
+    </h1>
+  </div>
+    <div class="cardBodyWrapper bgLight">
+      <div class="payDesc">
+        <h2>{{ $t("downloadTicket.heading1") }}</h2>
+        <p>{{ $t("downloadTicket.p1") }}</p>
+        <div class="buttons">
+          <button class="button btnDefault" @click.prevent="sendMail()">
+            {{ $t("downloadTicket.resendEmail") }}
+          </button>
+          <button class="button btnDefault" @click.prevent="downloadTkt()">
+            {{ $t("downloadTicket.downloadTickets") }}
+          </button>
         </div>
+      </div>
+    </div>
+    <div class="cardBodyWrapper">
+      <div class="ticketDesc">
+          <h2>{{ cart.cartItems[0].eventName }}</h2>
+        </div>
+    </div>
+     <div class="bodyScroll ticket">
         <div class="cardBodyWrapper">
           <div class="ticketDesc">
-            <div>
-              <h2>{{ cart.cartItems[0].eventName }}</h2>
               <!-- for time slot -->
               <div v-if="tcktDetails.orderItem[0].ticket[0].timeslot">
                 <div v-for="ticket in tcktDetails.orderItem" :key="ticket.id">
@@ -79,7 +80,6 @@
                 </div>
               </div>
               <!-- end without time slot -->
-            </div>
             <div class="ticketCart">
               <table class="table">
                 <thead>
@@ -116,21 +116,20 @@
             </div>
           </div>
         </div>
-        <div class="cardBodyWrapper greyBg">
-          <div class="ticketCartDesc">
-            <h4>{{ $t("downloadTicket.hinweis") }}</h4>
-            <p>{{ $t("downloadTicket.p2") }}</p>
-          </div>
-        </div>
-        <div class="cardBodyWrapper">
-          <div class="footerActionBtn btns">
-            <button type="button" class="button btnBlack" @click="backButton">
-              {{ $t("downloadTicket.backtoShop") }}
-            </button>
-          </div>
-        </div>
     </div>
-  </div>
+    <div class="cardBodyWrapper greyBg">
+      <div class="ticketCartDesc">
+        <h4>{{ $t("downloadTicket.hinweis") }}</h4>
+        <p>{{ $t("downloadTicket.p2") }}</p>
+      </div>
+    </div>
+    <div class="cardBodyWrapper">
+      <div class="footerActionBtn btns" style="margin-top: 15px;">
+        <button type="button" class="button btnBlack" @click="backButton">
+          {{ $t("downloadTicket.backtoShop") }}
+        </button>
+      </div>
+    </div>
 </template>
 <script>
 import { computed, ref } from "vue";

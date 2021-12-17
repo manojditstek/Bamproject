@@ -71,7 +71,9 @@
 .header h1 a {
 	text-decoration: none;
 }
-
+.header h1 a:hover{
+	color: var(--color);
+}
 .header h1 a i {
 	font-size: 28px;
 	margin: 0 5px 0 0;
@@ -332,7 +334,9 @@
 .ticketToggle .buttonWrap .plusBtn {
 	background-color: rgba(57, 57, 57, 1);
 }
-
+.ticketToggle .buttonWrap .plusBtn:focus{
+ outline:none;
+}
 .ticketToggle .buttonWrap .dassedIcon {
 	color: rgba(57, 57, 57, 1);
 }
@@ -598,10 +602,11 @@
 
 .formGroup label {
 	font-family: var(--font-family-700);
-	font-size: 14px;
+	font-size: 12px;
 	margin: 0 0 10px 0;
 	display: inline-block;
 	line-height:18.2px;
+	padding: 0px!important;
 }
 
 .formGroup .labelInput {
@@ -652,6 +657,7 @@
 .formInputs .formGroup .checkbox {
 	position: relative;
 	display: inline-block;
+	margin: 0px!important;
 }
 
 .formInputs .formGroup .checkbox input {
