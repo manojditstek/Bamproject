@@ -56,7 +56,6 @@
             </div>
           </div>
           <div class="collapseArrow redBg" @click="removeFromCart(item)">
-            <!-- <img src="assets/images/close-icon.svg" width="10" alt="image"> -->
             <i class="fa fa-times" aria-hidden="true"></i>
           </div>
         </div>

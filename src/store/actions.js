@@ -10,7 +10,7 @@ import download from "downloadjs"
 /* end header */
 
 /* This method used for multiple events */
-export const getEvents = async ({commit}, dateRange) => {
+export const getEvents = async ({ commit }, dateRange) => {
     commit('loadingStatus', true)
     let startDateFormat = '';
     let endDateFormat = '';
@@ -58,9 +58,9 @@ export const getEvents = async ({commit}, dateRange) => {
     }
 } /* end multiple evets */
 
-export const getCustomEvent = async ({commit,state}) => {
+export const getCustomEvent = async ({ commit, state }) => {
     try {
-        
+
         let response = await bam.event.getEvent({
             id: state.eventID
         })
@@ -73,23 +73,23 @@ export const getCustomEvent = async ({commit,state}) => {
 }
 
 /* This method used for single event */
-export const getEvent = async ({commit}, id) => {
+export const getEvent = async ({ commit }, id) => {
     commit('loadingStatus', true)
-        try {
-            let response = await bam.event.getEvent({
-                id: id
-            })
-            commit('setEvent', response)
-            router.push('/single-event')
-            commit('loadingStatus', false)
-        } catch (error) {
-            commit('loadingStatus', false)
-            commit('errorMsg', error);
-        }
+    try {
+        let response = await bam.event.getEvent({
+            id: id
+        })
+        commit('setEvent', response)
+        router.push('/single-event')
+        commit('loadingStatus', false)
+    } catch (error) {
+        commit('loadingStatus', false)
+        commit('errorMsg', error);
+    }
 }
 //end single event
 /* This method used for single event with time slots  */
-export const sigleEventWithTimeSlot = async ({commit}, data) => {
+export const sigleEventWithTimeSlot = async ({ commit }, data) => {
     commit('loadingStatus', true)
     try {
         let response = await bam.event.getEvent({
@@ -107,7 +107,7 @@ export const sigleEventWithTimeSlot = async ({commit}, data) => {
 
 
 /* This method used for seated event */
-export const workSpaceKey = async ({commit}) => {
+export const workSpaceKey = async ({ commit }) => {
     commit('loadingStatus', true)
     try {
         let organizer = await bam.account.getOrganizer({
@@ -124,7 +124,7 @@ export const workSpaceKey = async ({commit}) => {
 // end seated event
 
 /* This method used for recurring event*/
-export const recurringEvent = async ({commit}, id) => {
+export const recurringEvent = async ({ commit }, id) => {
     commit('loadingStatus', true)
     try {
         let response = await bam.event.getEvent({
@@ -145,7 +145,7 @@ export const recurringEvent = async ({commit}, id) => {
 
 
 /* This method used for create order */
-export const createOrder = async ({commit}, cartItem) => {
+export const createOrder = async ({ commit }, cartItem) => {
     commit('loadingStatus', true)
     try {
         let response = await bam.order.createOrder({
@@ -168,27 +168,27 @@ export const createOrder = async ({commit}, cartItem) => {
 // end create order method
 
 /* This method used for storing ticket holder information  */
-export const ticketHolderInfo = async ({commit}, data) => {
-    let isValidForm=true;
+export const ticketHolderInfo = async ({ commit }, data) => {
+    let isValidForm = true;
     data.orderItem.forEach(async (element, i) => {
-       
+
         element.ticket.forEach(async (item, j) => {
-            if(!data.data.first_name[i + '' + j]){
-                isValidForm=false
+            if (!data.data.first_name[i + '' + j]) {
+                isValidForm = false
             }
-            if(!data.data.last_name[i + '' + j]){
-                isValidForm=false
+            if (!data.data.last_name[i + '' + j]) {
+                isValidForm = false
             }
-            if(!data.data.email[i + '' + j]){
-                isValidForm=false
+            if (!data.data.email[i + '' + j]) {
+                isValidForm = false
             }
-            if(!data.data.phone[i + '' + j] || isNaN(data.data.phone[i + '' + j]) || (data.data.phone[i + '' + j]).length<7 || (data.data.phone[i + '' + j]).length>18){
-                isValidForm=false
+            if (!data.data.phone[i + '' + j] || isNaN(data.data.phone[i + '' + j]) || (data.data.phone[i + '' + j]).length < 7 || (data.data.phone[i + '' + j]).length > 18) {
+                isValidForm = false
             }
         })
     })
 
-    if(isValidForm){
+    if (isValidForm) {
         commit('loadingStatus', true)
         data.orderItem.forEach(async (element, i) => {
             element.ticket.forEach(async (item, j) => {
@@ -214,7 +214,7 @@ export const ticketHolderInfo = async ({commit}, data) => {
 // end ticket holder information
 
 /* This method used for storing order contact details  */
-export const orderContact = async ({commit}, data) => {
+export const orderContact = async ({ commit }, data) => {
     commit('loadingStatus', true)
     if (data.data.billing_email) {
         data.data.email = data.data.billing_email
@@ -239,93 +239,75 @@ export const orderContact = async ({commit}, data) => {
 
 
 /* This method used for Payment module  */
-export const paymentInitiate = async ({commit,state}, data) => {
+export const paymentInitiate = async ({ commit, state }, data) => {
     commit('loadingStatus', true)
     if (!state.submitting) {
         state.submitting = true;
-    try {
-        let response = await bam.payment.createPaymentIntent({
-            orderId: data.id,
-            type: data.payMethod
-        })
+        try {
+            let response = await bam.payment.createPaymentIntent({
+                orderId: data.id,
+                type: data.payMethod
+            })
 
-        commit('paymentInitiate', response)
-        commit('loadingStatus', false)
-    } catch (error) {
-        commit('errorMsg', error);
-        commit('loadingStatus', false)
+            commit('paymentInitiate', response)
+            commit('loadingStatus', false)
+        } catch (error) {
+            commit('errorMsg', error);
+            commit('loadingStatus', false)
+        }
+        finally {
+            state.submitting = false;
+        }
     }
-    finally{
-        state.submitting = false;
-    }
-}
 }
 //end Payment module 
 
 /* This method used for set timer  */
-export const startTimer = async ({commit}) => {
+export const startTimer = async ({ commit }) => {
     commit('timer');
 }
 //end set timer
 
 
 /* This method used for download ticket  */
-export const downloadTicketPdf = async ({commit,state}, data) => {
+export const downloadTicketPdf = async ({ commit, state }, data) => {
     commit('loadingStatus', true)
     setTimeout(async () => {
         if (!state.submitting) {
             state.submitting = true;
-        try {
-            let ticket = await bam.order.downloadTickets({
-                id: data.orderId
-            })
-            download(ticket, "ticket.pdf", "application/pdf")
-            // saveByteArray([ticket], 'ticket.pdf');
-            // await saveStreamToFile(ticket, 'ticket.pdf');
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top',
-                showConfirmButton: false,
-                timer: 5000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                  toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-              })
-              Toast.fire({
-                icon: 'success',
-                title: 'Ticket Downloaded!'
-              })
-            commit('loadingStatus', false)
-        } catch (error) {
-            commit('errorMsg', error);
-            commit('loadingStatus', false)
+            try {
+                let ticket = await bam.order.downloadTickets({
+                    id: data.orderId
+                })
+                download(ticket, "ticket.pdf", "application/pdf")
+                // await saveStreamToFile(ticket, 'ticket.pdf');
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 5000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Ticket Downloaded!'
+                })
+                commit('loadingStatus', false)
+            } catch (error) {
+                commit('errorMsg', error);
+                commit('loadingStatus', false)
+            }
+            finally {
+                state.submitting = false;
+            }
         }
-        finally{
-            state.submitting = false;
-        }
-    }
     }, 3000)
 
 }
 
 //end download ticket
 
-/* This is helper method for downloading ticket  */
-var saveByteArray = (function () {
-    var a = document.createElement("a");
-    document.body.appendChild(a);
-    a.style = "display: none";
-    return function (data, name) {
-        var blob = new Blob([data], {
-                type: "application/octet-stream"
-            }),
-            url = window.URL.createObjectURL(blob);
-        a.href = url;
-        a.download = name;
-        a.click();
-        window.URL.revokeObjectURL(url);
-    };
-}());
-//end 

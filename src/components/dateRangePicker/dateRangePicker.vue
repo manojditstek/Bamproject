@@ -6,7 +6,6 @@
                 <input :placeholder="$t('dateRange.start')" :value="inputValue.start" class="border px-2 py-1 w-32 rounded focus:outline-none focus:border-indigo-300" />
                 -
                 <input :placeholder="$t('dateRange.end')" :value="inputValue.end" class="border px-2 py-1 w-32 rounded focus:outline-none focus:border-indigo-300" />
-                <!-- <img src="@/assets/images/date_icon.svg" alt="Image"> -->
                 <i class="fa fa-calendar-o" aria-hidden="true"></i>
             </div>
         </div>

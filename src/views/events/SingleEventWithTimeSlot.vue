@@ -67,9 +67,13 @@ export default {
     });
 
     function backButton() {
+      store.commit('loadingStatus', true)
+      setTimeout(async () => {
       router.push({
         path: "/single-event",
       });
+      store.commit('loadingStatus', false)
+      },2000);
     }
 
     const singleEvent = computed(() => {

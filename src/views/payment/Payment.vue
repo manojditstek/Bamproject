@@ -252,7 +252,6 @@ export default {
     function backToHome() {
       store.commit("backToHome");
       router.push({path: "/",});
-      // location.reload();
     }
 
     return {

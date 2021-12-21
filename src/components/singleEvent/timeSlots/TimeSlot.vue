@@ -33,9 +33,15 @@ export default {
 
     function timeSlots(event_id, timeSlot) {
       store.dispatch("sigleEventWithTimeSlot", { event_id, timeSlot });
+      store.commit('loadingStatus', true)
+      setTimeout(async () => {
       router.push({
         path: "/single-event-with-time-slots",
       });
+      store.commit('loadingStatus', false)
+      },1000);
+      
+
     }
     return {
       toggleButton,

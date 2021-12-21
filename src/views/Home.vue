@@ -55,7 +55,6 @@ export default {
     });
 
     const eventID = inject('eventID')
-    // console.log('=>',eventID)
 
     const START_DATE = new Date();
     // START_DATE.setDate(START_DATE.getDate() + 10); used for future 10 days
