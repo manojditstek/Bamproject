@@ -12,6 +12,11 @@
                     {{ discount.availableTickets != "" ? "" : $t("common.soldOut") }}
                 </div>
             </div>
+             <div class="ticketMessage" v-if="saleStart(ticket.startSaleAt,ticket.endSaleAt) == false">
+                 <div class="ticketMessageInner" :class="saleStart(ticket.startSaleAt,ticket.endSaleAt) == false ? 'soldOut':''">
+                    {{ saleStart(ticket.startSaleAt,ticket.endSaleAt) == false? $t("common.notStart"):'' }}
+                </div>
+            </div>
             <div class="buttonWrap d-flex">
                 <button class="plusBtn" :class="itemQuantity>0?'':'disabled'" @click="removeFromCart()">-</button>
                 <span class="dassedIcon">{{ itemQuantity ? itemQuantity : 0 }}</span>
@@ -44,7 +49,6 @@ export default {
     const toggleButton = ref(false);
     const discountTicket = ref();
     const store = useStore();
-
     let cart = computed(() => {
       return store.state.cart.cartItems;
     });

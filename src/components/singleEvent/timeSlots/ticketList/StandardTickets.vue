@@ -12,6 +12,11 @@
                     {{ ticket.availableTickets != "" ? "" : $t("common.soldOut") }}
                 </div>
             </div>
+             <div class="ticketMessage" v-if="saleStart(ticket.startSaleAt,ticket.endSaleAt) == true">
+                 <div class="ticketMessageInner" :class="saleStart(ticket.startSaleAt,ticket.endSaleAt) == true ? 'soldOut':''">
+                    {{ saleStart(ticket.startSaleAt,ticket.endSaleAt) == true? $t("common.notStart"):'' }}
+                </div>
+            </div>
             <div class="buttonWrap d-flex" v-if="ticket.quantity > 0">
                 <button class="plusBtn" :class="itemQuantity>0?'':'disabled'" @click="removeFromCart()">-</button>
                 <span class="dassedIcon">{{ itemQuantity ? itemQuantity : 0 }}</span>
