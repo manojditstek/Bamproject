@@ -71,7 +71,7 @@
                       : formErrors.phone[i + '' + j]
                       ? ' errorInput'
                       : ''
-                  " v-model.trim="data.phone[i + '' + j]" />
+                  " v-model.trim="data.phone[i + '' + j]" @keypress="NumbersOnly"/>
                           <div class="labelInput">{{ $t("userKycForm.phone") }}</div>
                           <div v-if="
                     !data.phone[i + '' + j] &&
@@ -207,6 +207,16 @@ export default {
       return re.test(phone);
     }
 
+    function NumbersOnly(evt) {
+      evt = (evt) ? evt : window.event;
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+        evt.preventDefault()
+      } else {
+        return true
+      }
+    }
+
     //end regx
 
     return {
@@ -217,6 +227,7 @@ export default {
       validEmail,
       validPhone,
       submit,
+      NumbersOnly
     };
   },
 };
