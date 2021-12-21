@@ -1,5 +1,4 @@
 <template>
-<div>
     <div class="justify-content-between align-items-end header">
         <h1>
             <router-link to="/shop">
@@ -122,7 +121,6 @@
             </button>
         </div>
     </div>
-</div>
 </template>
 
 <script>

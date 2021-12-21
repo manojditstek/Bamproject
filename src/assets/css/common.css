@@ -58,6 +58,10 @@ body {
 .bodyScroll.ticket {
     height: calc(100% - 484px);
 }
+.bodyScroll.user {
+    height: calc(100% - 236px);
+    overflow: auto;
+}
 a {
 	color: var(--color);
 }
