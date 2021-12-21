@@ -180,7 +180,7 @@ a {
 	text-align: center;
 	z-index: 999;
 	position: absolute;
-	top:120px;
+	top:50%;
 	background-color: #fff;
 	left: 50%;
 	transform: translateX(-50%);
