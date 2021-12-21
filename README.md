@@ -22,3 +22,9 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+### Add this line in .htaccess file on server 
+```
+Header add Access-Control-Allow-Origin "*"
+```
