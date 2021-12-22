@@ -1,4 +1,4 @@
-<template>
+<template id="my-template">
   <div class="d-flex justify-content-between align-items-end">
     <div class="alert">
       <p>
@@ -89,7 +89,7 @@
       </div>
     </div>
     <div class="footerActionBtn btns">
-      <button class="button btnBlack" @click="submit">
+      <button class="button btnBlack" @click="submit" data-swal-toast-template="#my-template">
         {{ $t("common.pay") }} {{ totalPrice.toFixed(2) }} {{ currency }}
       </button>
       <a @click="backToHome()" class="button btnGray">{{
@@ -204,7 +204,7 @@ export default {
               toast: true,
               position: "top",
               showConfirmButton: false,
-              timer: 312000,
+              timer: 3000,
               timerProgressBar: true,
               didOpen: (toast) => {
                 toast.addEventListener("mouseenter", Swal.stopTimer);
@@ -215,7 +215,7 @@ export default {
             Toast.fire({
               icon: "success",
               title: "Payment completed!",
-            });
+            }).bindClickHandler('data-swal-toast-template');
             router.push({
               path: "/download-ticket",
             });
