@@ -24,9 +24,9 @@ export default {
                         id: props.venue_id
                     })
                     venueName.value = response
-                    store.commit('loadingStatus', true)
+                    store.commit('loadingStatus', false)
                 } catch (error) {
-                    store.commit('loadingStatus', true)
+                    store.commit('loadingStatus', false)
                     store.commit('errorMsg', error);
                 }
             }
