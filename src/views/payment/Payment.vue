@@ -89,7 +89,7 @@
       </div>
     </div>
     <div class="footerActionBtn btns">
-      <button class="button btnBlack" @click="submit" data-swal-toast-template="#my-template">
+      <button class="button btnBlack" @click="submit" >
         {{ $t("common.pay") }} {{ totalPrice.toFixed(2) }} {{ currency }}
       </button>
       <a @click="backToHome()" class="button btnGray">{{
@@ -200,6 +200,7 @@ export default {
               store.commit("errorMsg", error.response);
             });
           if (response.paymentIntent.status == "succeeded") {
+            Swal.bindClickHandler()
             const Toast = Swal.mixin({
               toast: true,
               position: "top",
@@ -215,10 +216,12 @@ export default {
             Toast.fire({
               icon: "success",
               title: "Payment completed!",
-            }).bindClickHandler('data-swal-toast-template');
+            })
+            setTimeout(async () => {
             router.push({
               path: "/download-ticket",
             });
+            },2000)
           }
         } //End card
 
