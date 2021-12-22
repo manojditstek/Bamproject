@@ -55,7 +55,7 @@ body {
 	overflow: auto;
 }
 .bodyScroll.ticket {
-	height: calc(100% - 484px);
+	height: calc(100% - 460px);
 }
 .bodyScroll.user {
 	height: calc(100% - 236px);
@@ -432,4 +432,10 @@ body.swal2-toast-shown .swal2-container.swal2-center.payment-card {
 	top: -10px !important;
 	bottom: auto;
 	transform: translateX(-50%);
+}
+body.swal2-shown .swal2-container.cart-card {
+	position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
 }

@@ -6,7 +6,7 @@
       }}</a>
     </h1>
   </div>
-    <div class="cardBodyWrapper bgLight" id="custom-target">
+    <div class="cardBodyWrapper bgLight">
       <div class="payDesc">
         <h2>{{ $t("downloadTicket.heading1") }}</h2>
         <p>{{ $t("downloadTicket.p1") }}</p>

@@ -7,7 +7,7 @@
       </p>
     </div>
   </div>
-  <div class="cardBodyWrapper" id="custom-target">
+  <div class="cardBodyWrapper">
     <div class="innerHeading">
       <h1>{{ $t("payment.payment") }}</h1>
     </div>
