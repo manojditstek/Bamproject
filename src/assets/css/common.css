@@ -1,3 +1,4 @@
+
 body {
 	/* font-family: var(--font-family-400); */
 	margin: 0;
@@ -8,13 +9,13 @@ body {
 }
 .contentInnerWraper {
 	background: #fff;
-	max-height: 100%;
-	overflow-x: auto;
-	overflow-y: hidden;
-	height: 100%;
+    max-height: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 100%;
 }
 .contentInnerWraper .recurringEvent {
-	height: 100%;
+    height: 100%;
 }
 .contentInnerWraper h1,
 .contentInnerWraper h2,
@@ -35,31 +36,31 @@ body {
 	color: var(--color);
 	font-family: var(--font-family-400);
 }
-.contentInnerWraper small {
+.contentInnerWraper small{
 	font-family: var(--font-family-400);
 	font-size: 12px;
-	line-height: 15.6px;
+	line-height:15.6px
 }
-.bodyScroll {
+.bodyScroll{
 	height: calc(100% - 50px);
-	overflow: auto;
+    overflow: auto;	
 }
 .bodyScroll.timeSlot {
-	height: calc(100% - 154px);
+    height: calc(100% - 154px);
 }
 .bodyScroll.timeSlot.cart {
-	height: calc(100% - 238px);
+    height: calc(100% - 238px);
 }
 .bodyScroll.cartpage {
-	height: calc(100% - 400px);
-	overflow: auto;
+    height: calc(100% - 400px);
+    overflow: auto;
 }
 .bodyScroll.ticket {
-	height: calc(100% - 460px);
+    height: calc(100% - 484px);
 }
 .bodyScroll.user {
-	height: calc(100% - 236px);
-	overflow: auto;
+    height: calc(100% - 236px);
+    overflow: auto;
 }
 a {
 	color: var(--color);
@@ -117,29 +118,29 @@ a {
 	text-transform: uppercase;
 	font-size: 10px;
 	padding: 6px 12px;
-	border-radius: 6px;
+	border-radius:6px;
 	cursor: pointer;
 	font-family: var(--font-family-600);
 	white-space: nowrap;
 	text-decoration: none;
 	min-width: 68px;
 	letter-spacing: 1px;
-	text-align: center;
-	display: block;
+    text-align: center;
+    display: block;
 }
-.btnBlack {
-	background-color: var(--color);
-	color: var(--color-white);
-	border: none;
+.btnBlack{
+    background-color: var(--color);   
+    color:var(--color-white);
+    border: none;
 }
-.btnBlack:hover {
-	background-color: var(--color);
-	color: var(--color-white);
-	border: none;
+.btnBlack:hover{
+    background-color: var(--color);   
+    color:var(--color-white);
+    border: none;
 }
 .btnDefault {
 	background-color: var(--color-white) !important;
-	border: 2px solid var(--color) !important;
+	border:2px solid var(--color) !important;
 	max-width: 150px;
 	width: 100%;
 	color: var(--color) !important;
@@ -176,41 +177,41 @@ a {
 	width: 100%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.3);
-	z-index: 1;
+	z-index:1;
 }
 
 .loaderWrapper {
-	text-align: center;
-	z-index: 2;
-	position: absolute;
-	top: 50%;
-	background-color: #fff;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	padding: 25px;
-	border-radius: 10px;
-	border: 0;
+    text-align: center;
+    z-index:2;
+    position: absolute;
+    top: 50%;
+    background-color: #fff;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    padding: 25px;
+    border-radius: 10px;
+    border: 0;
 }
-.loaderWrapper .loaderInner {
-	border: 1px solid #000;
-	border-radius: 50%;
-	border-right-color: transparent;
-	border-bottom-color: transparent;
-	width: 50px;
-	height: 50px;
-	animation-name: loading;
-	animation-duration: 1000ms;
-	animation-iteration-count: infinite;
-	animation-timing-function: linear;
+.loaderWrapper .loaderInner{
+    border: 1px solid #000;
+    border-radius: 50%;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    width: 50px;
+    height: 50px;
+    animation-name: loading;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
-@keyframes loading {
+@keyframes loading{
 	from {
-		transform: rotate(0deg);
+	  transform: rotate(0deg);
 	}
 	to {
-		transform: rotate(360deg);
+	  transform: rotate(360deg);
 	}
-}
+  }
 .contentWraper {
 	/* max-width:100%;
 	margin: 0 auto;
@@ -218,11 +219,11 @@ a {
 	background-color: var(--color-white);
 	height: 100%; */
 	max-width: 100%;
-	margin: 0 auto;
-	width: 100%;
-	background-color: var(--color-white);
-	height: 100%;
-	position: unset;
+    margin: 0 auto;
+    width: 100%;
+    background-color: var(--color-white);
+    height: 100%;
+    position: unset;
 }
 
 .mainWrapper {
@@ -230,12 +231,12 @@ a {
 	/* position: relative; */
 	/* min-height: 100vh; */
 	/* height: 100%; */
-	position: relative;
-	min-height: unset;
-	height: 100%;
-	max-width: 100%;
-	max-height: 100%;
-	overflow-y: auto;
+    position: relative;
+    min-height: unset;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    overflow-y: auto;
 }
 
 .cardWrapper {
@@ -244,7 +245,7 @@ a {
 	overflow: hidden;
 	min-height: 70px;
 	border-bottom: 1px solid rgba(57, 57, 57, 0.2);
-	position: relative;
+    position: relative;
 }
 
 .dateCol {
@@ -270,8 +271,8 @@ a {
 	line-height: 40px;
 	letter-spacing: -0.02em;
 }
-.dateCol h2 a {
-	color: var(--color-black);
+.dateCol h2 a{
+ color: var(--color-black);
 }
 .dateCol p {
 	line-height: normal;
@@ -289,7 +290,7 @@ a {
 .detailsCol h2 {
 	margin-bottom: 2px;
 	font-size: 14px;
-	line-height: 18.2px;
+    line-height: 18.2px;
 	letter-spacing: -0.001em;
 }
 
@@ -328,19 +329,19 @@ time {
 
 .alert-dismissible .close {
 	float: right;
-	font-size: 20px;
+    font-size: 20px;
 	line-height: 1;
-	color: var(--color);
+	color:var(--color);
 	text-shadow: 0 1px 0 #fff;
 	opacity: 0.5;
 }
 /*-- radio css --*/
 
 .inputGroup {
-	position: absolute;
-	left: 10px;
-	top: 40%;
-	transform: translateY(-50%);
+    position: absolute;
+    left: 10px;
+    top:40%;
+    transform: translateY(-50%);
 }
 
 .inputGroup [type="radio"]:checked,
@@ -349,8 +350,8 @@ time {
 	left: -9999px;
 }
 
-.inputGroup [type="radio"]:checked + label,
-.inputGroup [type="radio"]:not(:checked) + label {
+.inputGroup [type="radio"]:checked+label,
+.inputGroup [type="radio"]:not(:checked)+label {
 	position: relative;
 	padding-left: 28px;
 	cursor: pointer;
@@ -359,8 +360,8 @@ time {
 	color: #666;
 }
 
-.inputGroup [type="radio"]:checked + label:before,
-.inputGroup [type="radio"]:not(:checked) + label:before {
+.inputGroup [type="radio"]:checked+label:before,
+.inputGroup [type="radio"]:not(:checked)+label:before {
 	content: "";
 	position: absolute;
 	left: 0;
@@ -373,11 +374,11 @@ time {
 	border: 1px solid var(--color);
 }
 
-.inputGroup [type="radio"]:checked + label:after,
-.inputGroup [type="radio"]:not(:checked) + label:after {
+.inputGroup [type="radio"]:checked+label:after,
+.inputGroup [type="radio"]:not(:checked)+label:after {
 	content: "";
-	width: 18px;
-	height: 18px;
+	width:18px;
+	height:18px;
 	background: var(--color);
 	position: absolute;
 	top: 3px;
@@ -387,23 +388,24 @@ time {
 	transition: all 0.2s ease;
 }
 
-.inputGroup [type="radio"]:not(:checked) + label:after {
+.inputGroup [type="radio"]:not(:checked)+label:after {
 	opacity: 0;
 	-webkit-transform: scale(0);
 	transform: scale(0);
 }
 
-.inputGroup [type="radio"]:checked + label:after {
+.inputGroup [type="radio"]:checked+label:after {
 	opacity: 1;
 	-webkit-transform: scale(1);
 	transform: scale(1);
 }
 
+
 /*--input common--*/
 .form-control {
 	background: #fbfbfb;
 	border: 1px solid rgba(57, 57, 57, 0.2);
-	border-radius: 6px !important;
+	border-radius: 6px!important;
 	height: 40px;
 	width: 100%;
 	padding: 6px 12px;
@@ -417,25 +419,6 @@ time {
 
 .form-control:focus {
 	border: 1px solid var(--color);
-	box-shadow: none !important;
-	outline: none !important;
-}
-
-#custom-target {
-	position: relative;
-}
-
-body.swal2-toast-shown .swal2-container.swal2-center.payment-card {
-	height: auto !important;
-	position: absolute !important;
-	left: 50% !important;
-	top: -10px !important;
-	bottom: auto;
-	transform: translateX(-50%);
-}
-body.swal2-shown .swal2-container.cart-card {
-	position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 2;
+    box-shadow: none!important;
+    outline: none !important;
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="singleTicketTotalAmount">
-    <div class="collapse" @click="toggleButton = !toggleButton">
+    <div class="collapse" @click="toggle()">
       <div class="collapseInner"></div>
     </div>
     <div class="expand d-flex" v-show="toggleButton">
@@ -149,6 +149,10 @@ export default {
       });
     }
 
+      function toggle(){
+            return toggleButton.value=!toggleButton.value
+      }
+
     return {
       cart,
       totalPrice,
@@ -160,6 +164,7 @@ export default {
       ticketPrice,
       ticketDiscountPrice,
       toggleButton,
+      toggle
     };
   },
 };

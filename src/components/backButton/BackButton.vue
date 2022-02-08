@@ -27,10 +27,6 @@ export default {
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes",
-        target: "#custom-target",
-        customClass: {
-          container: "cart-card",
-        },
       }).then((result) => {
         if (result.isConfirmed) {
           store.state.cart.cartItems = [];

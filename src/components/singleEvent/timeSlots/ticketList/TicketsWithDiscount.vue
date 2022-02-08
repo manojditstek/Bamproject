@@ -12,9 +12,9 @@
                     {{ discount.availableTickets != "" ? "" : $t("common.soldOut") }}
                 </div>
             </div>
-             <div class="ticketMessage" v-if="saleStart(ticket.startSaleAt,ticket.endSaleAt) == false">
-                 <div class="ticketMessageInner" :class="saleStart(ticket.startSaleAt,ticket.endSaleAt) == false ? 'soldOut':''">
-                    {{ saleStart(ticket.startSaleAt,ticket.endSaleAt) == false? $t("common.notStart"):'' }}
+             <div class="ticketMessage" v-if="saleStart(ticket.startSaleAt,ticket.endSaleAt) == true">
+                 <div class="ticketMessageInner" :class="saleStart(ticket.startSaleAt,ticket.endSaleAt) == true ? 'soldOut':''">
+                    {{ saleStart(ticket.startSaleAt,ticket.endSaleAt) == true? $t("common.notStart"):'' }}
                 </div>
             </div>
             <div class="buttonWrap d-flex">

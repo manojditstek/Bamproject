@@ -283,7 +283,7 @@ export const downloadTicketPdf = async ({ commit, state }, data) => {
                 // await saveStreamToFile(ticket, 'ticket.pdf');
                 const Toast = Swal.mixin({
                     toast: true,
-                    // position: 'top',
+                    position: 'top',
                     showConfirmButton: false,
                     timer: 5000,
                     timerProgressBar: true,
@@ -294,11 +294,7 @@ export const downloadTicketPdf = async ({ commit, state }, data) => {
                 })
                 Toast.fire({
                     icon: 'success',
-                    title: 'Ticket Downloaded!',
-                    target: "#custom-target",
-                    customClass: {
-                        container: "payment-card ",
-                    },
+                    title: 'Ticket Downloaded!'
                 })
                 commit('loadingStatus', false)
             } catch (error) {
@@ -314,4 +310,5 @@ export const downloadTicketPdf = async ({ commit, state }, data) => {
 }
 
 //end download ticket
+
 

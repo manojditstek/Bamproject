@@ -2,7 +2,7 @@
   <div class="mainWrapper">
     <div class="contentWraper">
       <Loader/>
-      <div class="contentInnerWraper" id="custom-target">
+      <div class="contentInnerWraper">
         <error-message />
         <router-view />
       </div>

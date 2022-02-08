@@ -1,5 +1,5 @@
-<template id="my-template">
-  <div class="d-flex justify-content-between align-items-end">
+<template >
+  <div class="d-flex justify-content-between align-items-end" >
     <div class="alert">
       <p>
         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
@@ -7,12 +7,15 @@
       </p>
     </div>
   </div>
-  <div class="cardBodyWrapper">
+  <div class="cardBodyWrapper" id="custom-target">
     <div class="innerHeading">
       <h1>{{ $t("payment.payment") }}</h1>
     </div>
     <div class="inputWrapper payment">
-      <div class="inputInnerWrapper" :class="payMethod == 'card' ? 'active' : ''">
+      <div
+        class="inputInnerWrapper"
+        :class="payMethod == 'card' ? 'active' : ''"
+      >
         <div class="inputGroup cards">
           <input
             type="radio"
@@ -25,7 +28,10 @@
         </div>
         <h4>{{ $t("payment.creditCard") }}</h4>
       </div>
-      <div class="inputInnerWrapper" :class="payMethod == 'epsBank' ? 'active' : ''">
+      <div
+        class="inputInnerWrapper"
+        :class="payMethod == 'epsBank' ? 'active' : ''"
+      >
         <div class="inputGroup cards">
           <input
             type="radio"
@@ -42,7 +48,11 @@
     <div class="hr"></div>
 
     <div v-if="payMethod == 'card'" class="stripeWrapper">
-      <StripeElement :element="cardElement" @change="event = $event" class="stripe" />
+      <StripeElement
+        :element="cardElement"
+        @change="event = $event"
+        class="stripe"
+      />
       <div class="error-message" v-if="event && event.error">
         {{ event.error.message }}
       </div>
@@ -82,7 +92,9 @@
       <button class="button btnBlack" @click="submit" >
         {{ $t("common.pay") }} {{ totalPrice.toFixed(2) }} {{ currency }}
       </button>
-      <a @click="backToHome()" class="button btnGray">{{ $t("common.cancel") }}</a>
+      <a @click="backToHome()" class="button btnGray">{{
+        $t("common.cancel")
+      }}</a>
     </div>
   </div>
 </template>
@@ -188,9 +200,10 @@ export default {
               store.commit("errorMsg", error.response);
             });
           if (response.paymentIntent.status == "succeeded") {
+            Swal.bindClickHandler()
             const Toast = Swal.mixin({
               toast: true,
-
+              
               showConfirmButton: false,
               timer: 3000,
               timerProgressBar: true,
@@ -203,16 +216,16 @@ export default {
             Toast.fire({
               icon: "success",
               title: "Payment completed!",
-              target: "#custom-target",
-              customClass: {
-                container: "payment-card ",
-              },
-            });
+              target: '#custom-target',
+              customClass: {                 
+              container: 'position-absolute'
+            },
+            })
             setTimeout(async () => {
-              router.push({
-                path: "/download-ticket",
-              });
-            }, 2000);
+            router.push({
+              path: "/download-ticket",
+            });
+            },2000)
           }
         } //End card
 
@@ -245,7 +258,7 @@ export default {
 
     function backToHome() {
       store.commit("backToHome");
-      router.push({ path: "/" });
+      router.push({path: "/",});
     }
 
     return {
@@ -271,5 +284,12 @@ export default {
 <style scoped>
 .stripe {
   background-color: rgb(254, 254, 255);
+}
+#custom-target {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute !important;
 }
 </style>

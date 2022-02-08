@@ -77,8 +77,7 @@
 <script>
 import {
     ref,
-    computed,
-    onMounted
+    computed
 } from "vue";
 import {
     useStore
