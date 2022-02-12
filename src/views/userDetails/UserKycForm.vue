@@ -205,6 +205,8 @@ export default {
       return re.test(phone);
     }
 
+     //end regx
+     
     function NumbersOnly(evt) {
       evt = (evt) ? evt : window.event;
       var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -215,7 +217,7 @@ export default {
       }
     }
 
-    //end regx
+   
 
     return {
       data,

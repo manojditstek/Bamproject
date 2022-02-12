@@ -22,10 +22,10 @@
         </div>
     </div>
 </div>
- <div class="bodyScroll timeSlot" :class="totalQuantity?'cart': ''">
-  <div class="cardBodyWrapper">
-      <Tickets :ticket="ticket" :venueId="singleEvent.venueId" :startDate="singleEvent.startAt" :endDate="singleEvent.endAt" :ticketDscount="singleEvent.ticketDiscount" :timeSlotId="timeSlot ? timeSlot.id : ''" :eventName="singleEvent.name" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
-  </div>
+<div class="bodyScroll timeSlot" :class="totalQuantity?'cart': ''">
+    <div class="cardBodyWrapper">
+        <Tickets :ticket="ticket" :venueId="singleEvent.venueId" :startDate="singleEvent.startAt" :endDate="singleEvent.endAt" :ticketDscount="singleEvent.ticketDiscount" :timeSlotId="timeSlot ? timeSlot.id : ''" :eventName="singleEvent.name" v-for="ticket in singleEvent ? singleEvent.ticketConfig : ''" :key="ticket.id" />
+    </div>
 </div>
 <div class="singleTicketTotalAmount bottom" v-if="totalQuantity">
     <CartCalculation />
@@ -67,13 +67,13 @@ export default {
     });
 
     function backButton() {
-      store.commit('loadingStatus', true)
+      store.commit("loadingStatus", true);
       setTimeout(async () => {
-      router.push({
-        path: "/single-event",
-      });
-      store.commit('loadingStatus', false)
-      },2000);
+        router.push({
+          path: "/single-event",
+        });
+        store.commit("loadingStatus", false);
+      }, 2000);
     }
 
     const singleEvent = computed(() => {

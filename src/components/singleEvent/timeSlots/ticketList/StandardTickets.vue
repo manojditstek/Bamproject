@@ -39,6 +39,7 @@ export default {
   props: {
     ticket: Object,
     eventName: String,
+     venueId: String,
     timeSlotId: String,
     discount: Object,
     eventChartKey: String,
@@ -58,6 +59,8 @@ export default {
           ...props.ticket,
         },
         ticketId: props.ticket.id,
+        eventName: props.eventName,
+        venueId: props.venueId,
         timeSlotId: props.timeSlotId,
       };
       store.commit("addCartItem", ticket);
@@ -66,6 +69,8 @@ export default {
     function removeFromCart() {
       let ticket = {
         ...props.ticket,
+        eventName: props.eventName,
+        venueId: props.venueId,
         ticketId: props.ticket.id,
         timeSlotId: props.timeSlotId,
       };

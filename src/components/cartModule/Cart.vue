@@ -1,6 +1,6 @@
 <template>
   <div class="singleTicketTotalAmount">
-    <div class="collapse" @click="toggleButton = !toggleButton">
+    <div class="collapse" @click="toggle()">
       <div class="collapseInner"></div>
     </div>
     <div class="expand d-flex" v-show="toggleButton">
@@ -10,7 +10,7 @@
       </div>
     </div>
   </div>
-  <div class="cardBodyWrapper cart">
+  <div class="cardBodyWrapper cart" id="custom-target">
     <div class="eventDiscountWrapper">
       <h1>{{ $t("cartTemp.cart") }}</h1>
       <div class="amountWrapper">
@@ -149,6 +149,10 @@ export default {
       });
     }
 
+      function toggle(){
+            return toggleButton.value=!toggleButton.value
+      }
+
     return {
       cart,
       totalPrice,
@@ -160,6 +164,7 @@ export default {
       ticketPrice,
       ticketDiscountPrice,
       toggleButton,
+      toggle
     };
   },
 };

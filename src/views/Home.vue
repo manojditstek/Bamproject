@@ -78,6 +78,8 @@ export default {
       await store.dispatch("getCustomEvent");
       event.value=store.state.event;
       }
+
+      date.range=null
     });
 
     return {

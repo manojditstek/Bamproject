@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2'
+import router from "../router/"
 /* This block of code set the mutltiple event */
 export const setEvents = (state, events) => {
   state.events = events;
@@ -74,7 +75,12 @@ export const addCartItem = (state, data) => {
     
     Toast.fire({
       icon: 'error',
-      title: 'Limit for this ticket exceeds!'
+      title: 'Limit for this ticket exceeds!',
+      target: '#custom-target',
+      customClass: {                 
+        container: 'position-absolute'
+      },
+
     })
     // alert("Limit fot this ticket exceeds")
     return
@@ -155,6 +161,22 @@ export const timer = (state) => {
       state.timerDispaly=remainingTime(setTimeFormate);
       if(flag==state.timerOut){
         clearInterval(state.intervalData);
+        
+        state.cart.cartItems = [];
+        state.cart.itemsTotalQuantity=0;
+        state.cart.itemTotalAmount=0;
+        state.errorMsg=null;
+        state.timerOut=10*60000;
+        // if(state.intervalData){
+        // clearInterval(state.intervalData);
+        // state.intervalData=0;
+        // state.timerOut=10*60000;
+        // state.timerDispaly=null;
+        // state.createdOrder=null;
+        // state.kycLevelId=null;
+      
+        // }
+        router.push('/')
       }
     }else {
       state.timerOut =0;
@@ -219,13 +241,13 @@ const updateItemsOverAllQuantity = (cartItems, item) => {
 const getOverAllQtyCartItem = (cartItems, item) => {
   let qty=null
   let ticketId  = ""
-  let timeslotId  = ""
+  // let timeslotId  = ""
   if(item.isDiscountItem){
     ticketId = item.ticketId
     
   }else{
     ticketId = item.id
-    timeslotId = item.timeslotId
+    // timeslotId = item.timeslotId
   }
   qty =  cartItems.filter(x => {
     if(x.isDiscountItem){
@@ -305,7 +327,11 @@ export const successMsg = (state, resp)=>{
   })
   Toast.fire({
     icon: 'success',
-    title: 'Mail Sent!'
+    title: 'Mail Sent!',
+    target: '#custom-target',
+    customClass: {                 
+      container: 'position-absolute'
+    },
   })
 }
 

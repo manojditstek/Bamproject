@@ -1,5 +1,5 @@
-<template id="my-template">
-  <div class="d-flex justify-content-between align-items-end">
+<template >
+  <div class="d-flex justify-content-between align-items-end" >
     <div class="alert">
       <p>
         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
@@ -203,7 +203,7 @@ export default {
             Swal.bindClickHandler()
             const Toast = Swal.mixin({
               toast: true,
-              position: "top",
+              position: 'top',
               showConfirmButton: false,
               timer: 3000,
               timerProgressBar: true,
@@ -216,6 +216,10 @@ export default {
             Toast.fire({
               icon: "success",
               title: "Payment completed!",
+              target: '#custom-target',
+              customClass: {                 
+              container: 'position-absolute'
+            },
             })
             setTimeout(async () => {
             router.push({

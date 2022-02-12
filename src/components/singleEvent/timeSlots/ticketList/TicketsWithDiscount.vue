@@ -12,9 +12,9 @@
                     {{ discount.availableTickets != "" ? "" : $t("common.soldOut") }}
                 </div>
             </div>
-             <div class="ticketMessage" v-if="saleStart(ticket.startSaleAt,ticket.endSaleAt) == false">
-                 <div class="ticketMessageInner" :class="saleStart(ticket.startSaleAt,ticket.endSaleAt) == false ? 'soldOut':''">
-                    {{ saleStart(ticket.startSaleAt,ticket.endSaleAt) == false? $t("common.notStart"):'' }}
+             <div class="ticketMessage" v-if="saleStart(ticket.startSaleAt,ticket.endSaleAt) == true">
+                 <div class="ticketMessageInner" :class="saleStart(ticket.startSaleAt,ticket.endSaleAt) == true ? 'soldOut':''">
+                    {{ saleStart(ticket.startSaleAt,ticket.endSaleAt) == true? $t("common.notStart"):'' }}
                 </div>
             </div>
             <div class="buttonWrap d-flex">
@@ -40,6 +40,7 @@ export default {
     ticket: Object,
     eventName: String,
     timeSlotId: String,
+    venueId: String,
     discount: Object,
     eventChartKey: String,
     ticketsPerUser: Number,
@@ -61,6 +62,8 @@ export default {
           currency: props.ticket.currency,
         },
         ticketId: props.ticket.id,
+        eventName: props.eventName,
+        venueId: props.venueId,
         timeSlotId: props.timeSlotId,
       };
 
@@ -71,7 +74,9 @@ export default {
       let ticket = {
         ...props.discount,
         ticketsPerUser: props.ticketsPerUser,
+        eventName: props.eventName,
         ticketId: props.ticket.id,
+        venueId: props.venueId,
         timeSlotId: props.timeSlotId,
       };
       store.commit("removeCartItem", ticket);

@@ -66,8 +66,8 @@
         </div>
         <div v-if="ticketDscount ? ticketDscount.length > 0 : ''" v-show="toggleButton" class="toggleList">
             <div v-if="ticketDscount ? ticketDscount.length > 0 : ''">
-                <StandardTicket :ticket="ticket" />
-                <TicketsWithDiscount :ticket="ticket" :ticketsPerUser="ticket.ticketsPerUser" :discount="discount" v-for="discount in ticket.ticketDiscount" :key="discount.id" />
+                <StandardTicket :ticket="ticket" :venueId="venueId" :eventName="eventName" />
+                <TicketsWithDiscount :ticket="ticket" :venueId="venueId" :eventName="eventName" :ticketsPerUser="ticket.ticketsPerUser" :discount="discount" v-for="discount in ticket.ticketDiscount" :key="discount.id" />
             </div>
         </div>
     </div>
@@ -77,8 +77,7 @@
 <script>
 import {
     ref,
-    computed,
-    onMounted
+    computed
 } from "vue";
 import {
     useStore

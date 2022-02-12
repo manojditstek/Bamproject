@@ -27,10 +27,40 @@ export const getEvents = async ({ commit }, dateRange) => {
                 start_at: dateRng,
             })
             if (response == '') {
-                let msg = {
-                    message: 'Event Not found !'
-                }
-                commit('errorMsg', msg);
+                // let msg = {
+                //     message: 'Event Not found !'
+                // }
+                // commit('errorMsg', msg);
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Event Not found !',
+                    target: '#custom-target',
+                    customClass: {                 
+                        container: 'position-absolute'
+                      },
+                })
+                setTimeout(async () => {
+                  commit('loadingStatus', true)
+                    let response = await bam.event.listEvents({
+                        with: {
+                            ticket_config: true,
+                            occurrence: true,
+                        },
+                    })
+                    commit('setEvents', response)
+                    commit('loadingStatus', false)
+                },3000)
             } else {
 
                 commit('errorMsg', null);
@@ -294,7 +324,11 @@ export const downloadTicketPdf = async ({ commit, state }, data) => {
                 })
                 Toast.fire({
                     icon: 'success',
-                    title: 'Ticket Downloaded!'
+                    title: 'Ticket Downloaded!',
+                    target: '#custom-target',
+                    customClass: {                 
+                        container: 'position-absolute'
+                      },
                 })
                 commit('loadingStatus', false)
             } catch (error) {
@@ -310,4 +344,5 @@ export const downloadTicketPdf = async ({ commit, state }, data) => {
 }
 
 //end download ticket
+
 
