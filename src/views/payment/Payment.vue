@@ -7,7 +7,7 @@
       </p>
     </div>
   </div>
-  <div class="cardBodyWrapper">
+  <div class="cardBodyWrapper" id="custom-target">
     <div class="innerHeading">
       <h1>{{ $t("payment.payment") }}</h1>
     </div>
@@ -284,5 +284,12 @@ export default {
 <style scoped>
 .stripe {
   background-color: rgb(254, 254, 255);
+}
+#custom-target {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute !important;
 }
 </style>
